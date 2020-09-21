@@ -4,26 +4,16 @@
 //- colors
 
 //* text, borders, etc
-$primary-color: #4E4E4E;
-$secondary-color:#373737;
-$accent-color:#fff;
+$primary-color: #4e4e4e;
+$secondary-color: #373737;
+$accent-color: #fff;
 
 //* theme colors
-$primary-theme-color: #00AFDB;
-$secondary-theme-color: #009CC2;
-
-$primary-gradient: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));//картинка главная
-$secondary-gradient: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)); //footer
+$primary-theme-color: #00afdb;
+$secondary-theme-color: #009cc2;
 
 //* types
-$primary-type: "Roboto", Arial, sans-serif;
-
-//! outlines - REMOVE!!
-$red: 1px solid red;
-$blue: 1px solid rgb(4, 4, 99);
-$green: 1px solid rgb(3, 107, 17);
-$viola: 1px solid rgb(183, 0, 255);
-$orange: 1px solid rgb(255, 145, 0);
+$primary-type: 'Roboto', Arial, sans-serif;
 
 //* базовые размеры шрифтов
 $font-body: 14rem;
@@ -31,19 +21,12 @@ $font-h1: 32rem;
 $font-h2: 24rem;
 $font-h3: 16rem;
 
-
-/* брейкпоинты
-$media-maxW: 1223px; // уменьшается только второстепенный шрифт и высота строки в футере
-$media-midW: 1023px; // уменьшается весь шрифт, мобильное меню и футер
-$media-minW: 760px; // убираем бриф справа, центрируем карточку
-$media-sMinW: 560px; // убираем логотип
-$media-uMinW: 410px; // под узкие мобильные экраны - сужаем карточку*/
-
 @mixin head1 {
   font-family: $primary-type;
 }
 
-h1, .head1 {
+h1,
+.head1 {
   @include head1;
 }
 
@@ -58,7 +41,8 @@ h1, .head1 {
   color: $secondary-color;
 }
 
-h2, .head2 {
+h2,
+.head2 {
   @include head2;
 }
 
@@ -72,7 +56,8 @@ h2, .head2 {
   color: $secondary-color;
 }
 
-h3, .head3 {
+h3,
+.head3 {
   @include head3;
 }
 
@@ -87,32 +72,3 @@ h3, .head3 {
 body {
   @include regular;
 }
-
-/* миксины для медиазапросов
-
-@mixin widthMax {
-  @media (max-width: $media-maxW) {
-    font-size: #{$font-h3/$font-body}rem;
-  }
-}*/
-
-//! общие стили макета
-
-/*html {
-  //width: 1600px; //убрать для прода
-  /*@media (max-width: $media-midW) {
-    font-size: 12px;
-  }
-}
-
-/*.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-
-  /*
-    @media (max-width: $media-uMinW) {
-    width: 100vw;
-    padding: 0 5vw;
-  }
-}*/

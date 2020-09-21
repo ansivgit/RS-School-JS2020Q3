@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 html {
   background-color: #ffffff;
@@ -11,7 +10,32 @@ body {
           box-sizing: border-box;
 }
 
-html, body, section, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td, img {
+html,
+body,
+section,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+textarea,
+p,
+blockquote,
+th,
+td,
+img {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   margin: 0;
@@ -38,22 +62,23 @@ img {
   display: block;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-size: 100%;
   font-weight: normal;
 }
 
-/* брейкпоинты
-$media-maxW: 1223px; // уменьшается только второстепенный шрифт и высота строки в футере
-$media-midW: 1023px; // уменьшается весь шрифт, мобильное меню и футер
-$media-minW: 760px; // убираем бриф справа, центрируем карточку
-$media-sMinW: 560px; // убираем логотип
-$media-uMinW: 410px; // под узкие мобильные экраны - сужаем карточку*/
-h1, .head1 {
+h1,
+.head1 {
   font-family: "Roboto", Arial, sans-serif;
 }
 
-h2, .head2 {
+h2,
+.head2 {
   font-family: "Roboto", Arial, sans-serif;
   font-style: normal;
   font-weight: bold;
@@ -64,7 +89,8 @@ h2, .head2 {
   color: #373737;
 }
 
-h3, .head3 {
+h3,
+.head3 {
   font-family: "Roboto", Arial, sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -79,34 +105,9 @@ body {
   font-style: normal;
   font-weight: normal;
   font-size: 1rem;
-  color: #4E4E4E;
+  color: #4e4e4e;
 }
 
-/* миксины для медиазапросов
-
-@mixin widthMax {
-  @media (max-width: $media-maxW) {
-    font-size: 1.14286rem;
-  }
-}*/
-/*html {
-  //width: 1600px; //убрать для прода
-  /*@media (max-width: $media-midW) {
-    font-size: 12px;
-  }
-}
-
-/*.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-
-  /*
-    @media (max-width: $media-uMinW) {
-    width: 100vw;
-    padding: 0 5vw;
-  }
-}*/
 body {
   width: 1600px;
   margin: 0 auto;
@@ -137,7 +138,7 @@ body {
 
 .btn {
   text-align: center;
-  background-color: #00AFDB;
+  background-color: #00afdb;
   border: none;
   text-decoration: none;
   font-weight: bold;
@@ -147,7 +148,7 @@ body {
 }
 
 .btn:hover, .btn:focus {
-  background-color: #009CC2;
+  background-color: #009cc2;
   outline: none;
 }
 
@@ -201,7 +202,7 @@ body {
   width: 59px;
   height: 46px;
   text-align: center;
-  background-color: #009CC2;
+  background-color: #009cc2;
 }
 
 .btn__download--apple::before {
@@ -562,7 +563,7 @@ body {
   font-style: normal;
   font-weight: normal;
   font-size: 1rem;
-  color: #4E4E4E;
+  color: #4e4e4e;
 }
 
 .sign-up__input::-webkit-input-placeholder {
@@ -682,7 +683,7 @@ body {
   top: 2px;
   left: -22px;
   font-size: 10px;
-  color: #4E4E4E;
+  color: #4e4e4e;
 }
 
 .footer-content__menu__item:first-child::before {
@@ -696,7 +697,7 @@ body {
 }
 
 .footer-content__menu__link:hover, .footer-content__menu__link:active {
-  border-bottom: 1px solid #4E4E4E;
+  border-bottom: 1px solid #4e4e4e;
   opacity: 1;
   outline: none;
 }
