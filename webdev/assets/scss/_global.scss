@@ -1,0 +1,35 @@
+//-сброс стилей и подключение шрифтов и файла с: переменными с цветами и базовыми параметрами шрифтов h1-h3, body;
+html {
+  background-color: #ffffff;
+  font-size: 14px;
+}
+
+body {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+html,body,section,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,img {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding-block-start: 0;
+  padding-block-end: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+}
+
+img {
+  display: block;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+@import '_variables-types.scss'; // подключаем базовые текстовые стили и цвета

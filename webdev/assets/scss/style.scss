@@ -1,0 +1,475 @@
+@import '_global.scss';
+
+body {
+  width: 1600px;
+}
+
+.wrapper--desktop {
+  width: 1062px;
+  margin: 0 auto;
+}
+
+.main-nav {
+  display: flex;
+  height: 95px;
+  margin: 0 auto;
+
+  &__list {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__item {
+    list-style: none;
+
+    &:nth-child(2) {
+      margin-left: 85px;
+    }
+
+    &:nth-child(4) {
+      margin-right: 83px;
+    }
+
+    &:nth-child(5) {
+      margin-right: 15px;
+    }
+  }
+
+  &__link {
+    display: inline-block;
+    line-height: 140%;
+    text-decoration: none;
+    color: $accent-color;
+    opacity: 0.8;
+
+    &:hover,
+    &:active,
+    &.active {
+      border-bottom: 1px solid $accent-color;
+      opacity: 1;
+      outline: none;
+    }
+
+    &--logo {
+      margin-left: 101px;
+      margin-right: 100px;
+    }
+  }
+}
+
+.promo {
+  display: flex;
+  flex-direction: column;
+  margin-top: 134px;
+  align-items: center;
+  color: $accent-color;
+
+  &__title {
+    font-size: 64px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 4.5px;
+  }
+
+  &__motto {
+    max-width: 504px;
+    margin-top: 21px;
+    margin-bottom: 29px;
+    font-size: 18px;
+    line-height: 140%;
+    text-align: center;
+  }
+
+  &__social {
+    margin-top: 183px;
+    margin-bottom: 89px;
+
+    &__list {
+      display: flex;
+      justify-content: space-between;
+      width: 170px;
+    }
+
+    &__item {
+      list-style: none;
+    }
+
+    &__link {
+      display: block;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      background-color: transparent;
+
+      &:hover,
+      &:active {
+        -webkit-box-shadow: 0px 0px 15px 0px rgba(255,255,255,.75);
+        -moz-box-shadow:    0px 0px 15px 0px rgba(255,255,255,.75);
+        box-shadow:         0px 0px 15px 0px rgba(255,255,255,.75);
+      }
+
+      &--mail {
+        background-image: url(/assets/img/icons/icon_mail.svg);
+      }
+      &--fb {
+        background-image: url(/assets/img/icons/icon_facebook.svg);
+      }
+      &--insta {
+        background-image: url(/assets/img/icons/icon_insta.svg);
+      }
+      &--utube {
+        background-image: url(/assets/img/icons/icon_utube.svg);
+      }
+    }
+  }
+}
+
+.benefits {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 120px;
+  margin-bottom: 140px;
+
+  &--left {
+    justify-content: start;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 407px;
+    margin-bottom: 5px;
+
+    &--left {
+      margin-left: 139px;
+    }
+  }
+
+  &__title {
+    margin-top: 6px;
+    margin-bottom: 22px;
+  }
+
+  &__description {
+    margin-bottom: 29px;
+    line-height: 20px;
+  }
+}
+
+.community {
+  padding: 80px 0 140px 269px;
+  overflow: hidden;
+
+  &__nav {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    margin-right: 269px;
+
+    &__btn {
+      width: 10px;
+      height: 19px;
+      border: none;
+      background: transparent url(/assets/img/icons/icon_arrow_left.svg) 50% no-repeat;
+      cursor: pointer;
+
+      &--right {
+        transform: scale(-1, 1);
+      }
+    }
+
+    &__count {
+      margin: 0 9px;
+      text-align: center;
+      font-size: 18px;
+      line-height: 20px;
+    }
+  }
+
+  &__content {
+    display: flex;
+  }
+
+  &__comment {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    align-items: center;
+    width: 298px;
+    margin-top: 35px;
+    margin-right: 124px;
+  }
+
+  &__title {
+    margin: 20px 0 12px 0;
+  }
+
+  &__avatar {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    background-image: url(/assets/img/avatar.png);
+  }
+
+  &__description {
+    text-align: center;
+    line-height: 20px;
+  }
+
+  &__slider {
+    display: flex;
+
+    &__image {
+      margin: 0 15px;
+    }
+  }
+}
+
+.sign-up {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    margin-top: 217px;
+    margin-bottom: 30px;
+    color: $accent-color;
+  }
+
+  &__form {
+    display: flex;
+    width: 406px;
+    margin-bottom: 277px;
+  }
+
+  &__input {
+    flex: 0 10 auto;
+    width: 100%;
+    padding: 14px 0 12px 24px;
+    border: none;
+    @include regular;
+
+    &::-moz-placeholder {
+      color: $secondary-color;
+    }
+    &::-webkit-input-placeholder {
+      color: $secondary-color;
+    }
+    &::-ms-input-placeholder {
+      color: $secondary-color;
+    }
+    &::placeholder {
+      color: $secondary-color;
+    }
+  }
+}
+
+.download {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    margin-top: 120px;
+    margin-bottom: 21px;
+  }
+
+  &__discription {
+    width: 483px;
+    margin-bottom: 29px;
+    line-height: 20px;
+    text-align: center;
+  }
+
+  &__buttons {
+    margin-bottom: 180px;
+  }
+}
+
+.footer--desktop {
+  padding: 60px 160px 91px 160px;
+  background-color: #000;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+
+  &__menu {
+    display: flex;
+    margin-top: 15px;
+
+    &__item {
+      position: relative;
+      margin-right: 41px;
+      list-style: none;
+
+      &::before {
+        content: "\007C";
+        position: absolute;
+        top: 2px;
+        left: -22px;
+        font-size: 10px;
+        color: $primary-color;
+      }
+
+      &:first-child::before {
+        content: "";
+      }
+    }
+
+    &__link {
+      text-decoration: none;
+      color: $accent-color;
+      opacity: 0.8;
+
+      &:hover,
+      &:active {
+        border-bottom: 1px solid $primary-color;
+        opacity: 1;
+        outline: none;
+      }
+    }
+  }
+
+  &__logo {
+    position: absolute;
+    right: 50%;
+    margin-right: -22px;
+  }
+
+  &__copyright {
+    margin-top: 15px;
+    color: #818181;
+  }
+}
+
+//- общие стили макета
+
+.bolder {
+  font-weight: bolder;
+}
+
+.logo {
+  display: block;
+  width: 44px;
+  height: 44px;
+  background: url(/assets/img/logo.svg);
+  border-radius: 50%;
+  background-color: transparent;
+
+  &:hover,
+  &:active {
+    -webkit-box-shadow: 0px 0px 20px 0px rgba(255,255,255,.75);
+    -moz-box-shadow:    0px 0px 20px 0px rgba(255,255,255,.75);
+    box-shadow:         0px 0px 20px 0px rgba(255,255,255,.75);
+  }
+}
+
+.btn {
+  text-align: center;
+  background-color: $primary-theme-color;
+  border: none;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #fff;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background-color: $secondary-theme-color;
+    outline: none;
+  }
+
+  &__main {
+    display: block;
+    width: fit-content;
+    padding: 16px 47px 14px 47px;
+    line-height: 16px;
+  }
+
+  &__icon {
+    &--check {
+      width: 67px;
+      height: 46px;
+
+      &::after {
+        content: url(/assets/img/icons/icon_check.svg);
+      }
+    }
+  }
+
+  &__download {
+    display: inline-block;
+    position: relative;
+    padding-top: 17px;
+    padding-bottom: 16px;
+    text-align: left;
+
+    &:first-child {
+      width: 188px-19px;
+      margin-right: 27px;
+      padding-left: 19px;
+    }
+    &:last-child {
+      width: 188px-17px;
+      padding-left: 17px;
+    }
+
+    &::after {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 60px;
+      height: 50px;
+      text-align: center;
+      background-color: $secondary-theme-color;
+    }
+
+    &--apple::before {
+      content: url(/assets/img/icons/icon_apple.svg);
+      z-index: 10;
+      position: absolute;
+      top: 15px;
+      right: 21px;
+    }
+
+    &--google::before {
+      content: url(/assets/img/icons/icon_android.svg);
+      z-index: 10;
+      position: absolute;
+      top: 13px;
+      right: 20px;
+    }
+  }
+}
+
+.h1-hide {
+  font-size: 0px;
+  line-height: 0px;
+}
+
+.container__bg {
+  margin: 0 auto;
+
+  &--header {
+    background-image: url(/assets/img/bg-image_header.svg);
+    background-size: cover;
+  }
+
+  &--BGcolor {
+    background: #f5f6f7;
+  }
+
+  &--sign-up {
+    background-image: url(/assets/img/bg-image_sign-up.svg);
+    background-size: cover;
+  }
+}
