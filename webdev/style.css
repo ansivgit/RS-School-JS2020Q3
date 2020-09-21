@@ -146,11 +146,11 @@ body {
 }
 
 .main-nav__item:nth-child(4) {
-  margin-right: 83px;
+  margin-right: 85px;
 }
 
 .main-nav__item:nth-child(5) {
-  margin-right: 15px;
+  margin-right: 14px;
 }
 
 .main-nav__link {
@@ -168,7 +168,7 @@ body {
 }
 
 .main-nav__link--logo {
-  margin-left: 101px;
+  margin-left: 100px;
   margin-right: 100px;
 }
 
@@ -309,8 +309,7 @@ body {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
-  margin-bottom: 20px;
-  margin-right: 269px;
+  margin: 1px 269px 19px 0;
 }
 
 .community__nav__btn {
@@ -321,13 +320,17 @@ body {
   cursor: pointer;
 }
 
+.community__nav__btn:hover {
+  opacity: .5;
+}
+
 .community__nav__btn--right {
   -webkit-transform: scale(-1, 1);
           transform: scale(-1, 1);
 }
 
 .community__nav__count {
-  margin: 0 9px;
+  margin: 0 11px;
   text-align: center;
   font-size: 18px;
   line-height: 20px;
@@ -398,7 +401,7 @@ body {
 }
 
 .sign-up__title {
-  margin-top: 217px;
+  margin-top: 200px;
   margin-bottom: 30px;
   color: #fff;
 }
@@ -408,7 +411,7 @@ body {
   display: -ms-flexbox;
   display: flex;
   width: 406px;
-  margin-bottom: 277px;
+  margin-bottom: 220px;
 }
 
 .sign-up__input {
@@ -416,7 +419,7 @@ body {
       -ms-flex: 0 10 auto;
           flex: 0 10 auto;
   width: 100%;
-  padding: 14px 0 12px 24px;
+  padding: 13px 0 13px 24px;
   border: none;
   font-family: "Roboto", Arial, sans-serif;
   font-style: normal;
@@ -427,18 +430,56 @@ body {
 
 .sign-up__input::-webkit-input-placeholder {
   color: #373737;
+  opacity: .5;
+}
+
+.sign-up__input::-webkit-input-placeholder:hover, .sign-up__input::-webkit-input-placeholder:focus, .sign-up__input::-webkit-input-placeholder:active {
+  opacity: 1;
 }
 
 .sign-up__input::-ms-input-placeholder {
   color: #373737;
+  opacity: .5;
+}
+
+.sign-up__input::-ms-input-placeholder:hover, .sign-up__input::-ms-input-placeholder:focus, .sign-up__input::-ms-input-placeholder:active {
+  opacity: 1;
+}
+
+.sign-up__input::-webkit-input-placeholder {
+  color: #373737;
+  opacity: .5;
 }
 
 .sign-up__input:-ms-input-placeholder {
   color: #373737;
+  opacity: .5;
+}
+
+.sign-up__input::-ms-input-placeholder {
+  color: #373737;
+  opacity: .5;
 }
 
 .sign-up__input::placeholder {
   color: #373737;
+  opacity: .5;
+}
+
+.sign-up__input::-webkit-input-placeholder:hover, .sign-up__input::-webkit-input-placeholder:focus, .sign-up__input::-webkit-input-placeholder:active {
+  opacity: 1;
+}
+
+.sign-up__input:-ms-input-placeholder:hover, .sign-up__input:-ms-input-placeholder:focus, .sign-up__input:-ms-input-placeholder:active {
+  opacity: 1;
+}
+
+.sign-up__input::-ms-input-placeholder:hover, .sign-up__input::-ms-input-placeholder:focus, .sign-up__input::-ms-input-placeholder:active {
+  opacity: 1;
+}
+
+.sign-up__input::placeholder:hover, .sign-up__input::placeholder:focus, .sign-up__input::placeholder:active {
+  opacity: 1;
 }
 
 .download {
@@ -589,19 +630,20 @@ body {
 .btn__download {
   display: inline-block;
   position: relative;
-  padding-top: 17px;
-  padding-bottom: 16px;
+  padding-top: 16px;
+  padding-bottom: 14px;
+  line-height: 16px;
   text-align: left;
 }
 
 .btn__download:first-child {
-  width: 169px;
+  width: 167px;
   margin-right: 27px;
   padding-left: 19px;
 }
 
 .btn__download:last-child {
-  width: 171px;
+  width: 169px;
   padding-left: 17px;
 }
 
@@ -611,8 +653,8 @@ body {
   position: absolute;
   right: 0;
   top: 0;
-  width: 60px;
-  height: 50px;
+  width: 59px;
+  height: 46px;
   text-align: center;
   background-color: #009CC2;
 }
@@ -621,7 +663,7 @@ body {
   content: url(./assets/img/icons/icon_apple.svg);
   z-index: 10;
   position: absolute;
-  top: 15px;
+  top: 13px;
   right: 21px;
 }
 
@@ -629,7 +671,7 @@ body {
   content: url(./assets/img/icons/icon_android.svg);
   z-index: 10;
   position: absolute;
-  top: 13px;
+  top: 12px;
   right: 20px;
 }
 

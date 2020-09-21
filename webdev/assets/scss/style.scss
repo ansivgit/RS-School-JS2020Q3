@@ -29,11 +29,11 @@ body {
     }
 
     &:nth-child(4) {
-      margin-right: 83px;
+      margin-right: 85px;
     }
 
     &:nth-child(5) {
-      margin-right: 15px;
+      margin-right: 14px;
     }
   }
 
@@ -53,7 +53,7 @@ body {
     }
 
     &--logo {
-      margin-left: 101px;
+      margin-left: 100px;
       margin-right: 100px;
     }
   }
@@ -166,8 +166,7 @@ body {
   &__nav {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 20px;
-    margin-right: 269px;
+    margin: 1px 269px 19px 0;
 
     &__btn {
       width: 10px;
@@ -176,13 +175,17 @@ body {
       background: transparent url(./assets/img/icons/icon_arrow_left.svg) 50% no-repeat;
       cursor: pointer;
 
+      &:hover {
+        opacity: .5;
+      }
+
       &--right {
         transform: scale(-1, 1);
       }
     }
 
     &__count {
-      margin: 0 9px;
+      margin: 0 11px;
       text-align: center;
       font-size: 18px;
       line-height: 20px;
@@ -234,7 +237,7 @@ body {
   align-items: center;
 
   &__title {
-    margin-top: 217px;
+    margin-top: 200px;
     margin-bottom: 30px;
     color: $accent-color;
   }
@@ -242,27 +245,51 @@ body {
   &__form {
     display: flex;
     width: 406px;
-    margin-bottom: 277px;
+    margin-bottom: 220px;
   }
 
   &__input {
     flex: 0 10 auto;
     width: 100%;
-    padding: 14px 0 12px 24px;
+    padding: 13px 0 13px 24px;
     border: none;
     @include regular;
 
     &::-moz-placeholder {
       color: $secondary-color;
+      opacity: .5;
+      &:hover,
+      &:focus,
+      &:active {
+        opacity: 1;
+      }
     }
     &::-webkit-input-placeholder {
       color: $secondary-color;
+      opacity: .5;
+      &:hover,
+      &:focus,
+      &:active {
+        opacity: 1;
+      }
     }
     &::-ms-input-placeholder {
       color: $secondary-color;
+      opacity: .5;
+      &:hover,
+      &:focus,
+      &:active {
+        opacity: 1;
+      }
     }
     &::placeholder {
       color: $secondary-color;
+      opacity: .5;
+      &:hover,
+      &:focus,
+      &:active {
+        opacity: 1;
+      }
     }
   }
 }
@@ -407,17 +434,18 @@ body {
   &__download {
     display: inline-block;
     position: relative;
-    padding-top: 17px;
-    padding-bottom: 16px;
+    padding-top: 16px;
+    padding-bottom: 14px;
+    line-height: 16px;
     text-align: left;
 
     &:first-child {
-      width: 188px-19px;
+      width: 186px-19px;
       margin-right: 27px;
       padding-left: 19px;
     }
     &:last-child {
-      width: 188px-17px;
+      width: 186px-17px;
       padding-left: 17px;
     }
 
@@ -427,8 +455,8 @@ body {
       position: absolute;
       right: 0;
       top: 0;
-      width: 60px;
-      height: 50px;
+      width: 59px;
+      height: 46px;
       text-align: center;
       background-color: $secondary-theme-color;
     }
@@ -437,7 +465,7 @@ body {
       content: url(./assets/img/icons/icon_apple.svg);
       z-index: 10;
       position: absolute;
-      top: 15px;
+      top: 13px;
       right: 21px;
     }
 
@@ -445,7 +473,7 @@ body {
       content: url(./assets/img/icons/icon_android.svg);
       z-index: 10;
       position: absolute;
-      top: 13px;
+      top: 12px;
       right: 20px;
     }
   }
