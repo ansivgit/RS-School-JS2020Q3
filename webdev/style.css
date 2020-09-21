@@ -236,19 +236,19 @@ body {
 }
 
 .promo__social__link--mail {
-  background-image: url(/assets/img/icons/icon_mail.svg);
+  background-image: url(./assets/img/icons/icon_mail.svg);
 }
 
 .promo__social__link--fb {
-  background-image: url(/assets/img/icons/icon_facebook.svg);
+  background-image: url(./assets/img/icons/icon_facebook.svg);
 }
 
 .promo__social__link--insta {
-  background-image: url(/assets/img/icons/icon_insta.svg);
+  background-image: url(./assets/img/icons/icon_insta.svg);
 }
 
 .promo__social__link--utube {
-  background-image: url(/assets/img/icons/icon_utube.svg);
+  background-image: url(./assets/img/icons/icon_utube.svg);
 }
 
 .benefits {
@@ -317,7 +317,7 @@ body {
   width: 10px;
   height: 19px;
   border: none;
-  background: transparent url(/assets/img/icons/icon_arrow_left.svg) 50% no-repeat;
+  background: transparent url(./assets/img/icons/icon_arrow_left.svg) 50% no-repeat;
   cursor: pointer;
 }
 
@@ -366,7 +366,7 @@ body {
   height: 45px;
   width: 45px;
   border-radius: 50%;
-  background-image: url(/assets/img/avatar.png);
+  background-image: url(./assets/img/avatar.png);
 }
 
 .community__description {
@@ -542,7 +542,7 @@ body {
   display: block;
   width: 44px;
   height: 44px;
-  background: url(/assets/img/logo.svg);
+  background: url(./assets/img/logo.svg);
   border-radius: 50%;
   background-color: transparent;
 }
@@ -583,7 +583,7 @@ body {
 }
 
 .btn__icon--check::after {
-  content: url(/assets/img/icons/icon_check.svg);
+  content: url(./assets/img/icons/icon_check.svg);
 }
 
 .btn__download {
@@ -618,7 +618,7 @@ body {
 }
 
 .btn__download--apple::before {
-  content: url(/assets/img/icons/icon_apple.svg);
+  content: url(./assets/img/icons/icon_apple.svg);
   z-index: 10;
   position: absolute;
   top: 15px;
@@ -626,7 +626,7 @@ body {
 }
 
 .btn__download--google::before {
-  content: url(/assets/img/icons/icon_android.svg);
+  content: url(./assets/img/icons/icon_android.svg);
   z-index: 10;
   position: absolute;
   top: 13px;
@@ -643,7 +643,7 @@ body {
 }
 
 .container__bg--header {
-  background-image: url(/assets/img/bg-image_header.svg);
+  background-image: url(./assets/img/bg-image_header.svg);
   background-size: cover;
 }
 
@@ -652,6 +652,6 @@ body {
 }
 
 .container__bg--sign-up {
-  background-image: url(/assets/img/bg-image_sign-up.svg);
+  background-image: url(./assets/img/bg-image_sign-up.svg);
   background-size: cover;
 }
