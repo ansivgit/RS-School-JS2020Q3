@@ -107,3 +107,4 @@ dist
 rsschool_repo.code-workspace
 .gitignore
 shelter/pages-in-jpg
+calculator/00script.js
