@@ -2,8 +2,8 @@ class Calculator {
   constructor(prevOperandTextElem, currentOperandTextElem) {
     this.prevOperandTextElem = prevOperandTextElem;
     this.currentOperandTextElem = currentOperandTextElem;
-    this.clear();
     this.readyToReset = false;
+    this.clear();
   }
 
   clear() {
@@ -18,15 +18,15 @@ class Calculator {
 
   appendNumber(number) {
     if (number === '.' && this.currentOperand.includes('.')) return;
-    this.currentOperand = this.currentOperandTextElem.innerText + number.toString();
+    this.currentOperand = this.currentOperand.toString() + number.toString();
   }
 
   chooseOperation(operation) {
     if (!this.currentOperand && !this.prevOperand) return;
-    this.operation = operation;
     if (this.currentOperand && this.prevOperand) {
       this.compute();
     }
+    this.operation = operation;
     this.prevOperand = (this.prevOperand) ? this.prevOperand : this.currentOperand;
     this.currentOperand = '';
   }
@@ -60,9 +60,30 @@ class Calculator {
     this.operation = '';
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  digitsSeparate(number) {
+    const strNumber = number.toString();
+    const intDigits = parseInt(strNumber.split('.')[0], 10);
+    const decimalDigits = strNumber.split('.')[1];
+
+    const digitsDisplay = (!Number.isNaN(intDigits))
+      ? intDigits.toLocaleString('ru-RU')
+      : '';
+
+    if (decimalDigits != null) {
+      return `${digitsDisplay}.${decimalDigits}`;
+    }
+    return digitsDisplay;
+  }
+
   updateDisplay() {
-    this.currentOperandTextElem.innerText = this.currentOperand;
-    this.prevOperandTextElem.innerText = `${this.prevOperand.toString()} ${this.operation}`;
+    this.currentOperandTextElem.innerText = this.digitsSeparate(this.currentOperand);
+
+    if (this.operation != null) {
+      this.prevOperandTextElem.innerText = `${this.digitsSeparate(this.prevOperand)} ${this.operation}`;
+    } else {
+      this.prevOperandTextElem.innerText = '';
+    }
   }
 }
 
@@ -78,7 +99,6 @@ const calculator = new Calculator(prevOperandTextElem, currentOperandTextElem);
 
 numberButtons.forEach((button) => {
   button.addEventListener('click', () => {
-
     if (calculator.currentOperand && !calculator.prevOperand && calculator.readyToReset) {
       calculator.currentOperand = '';
       calculator.readyToReset = false;
@@ -86,7 +106,6 @@ numberButtons.forEach((button) => {
 
     calculator.appendNumber(button.innerText);
     calculator.updateDisplay();
-
   });
 });
 
