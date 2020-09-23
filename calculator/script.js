@@ -21,6 +21,23 @@ class Calculator {
     this.currentOperand = this.currentOperand.toString() + number.toString();
   }
 
+  changeSign() {
+    this.currentOperand = (this.currentOperand !== '') ? -this.currentOperand : '-';
+  }
+
+  fraction() {
+    this.readyToReset = true;
+    this.currentOperand = (this.currentOperand !== '' && parseFloat(this.currentOperand) !== 0)
+      ? 1 / parseFloat(this.currentOperand) : '0';
+  }
+
+  sqrt() {
+    this.readyToReset = true;
+    this.currentOperand = (parseFloat(this.currentOperand) >= 0)
+      ? Math.sqrt(parseFloat(this.currentOperand))
+      : this.currentOperand;
+  }
+
   chooseOperation(operation) {
     if (!this.currentOperand && !this.prevOperand) return;
     if (this.currentOperand && this.prevOperand) {
@@ -50,6 +67,9 @@ class Calculator {
         break;
       case '÷':
         result = prev / current;
+        break;
+      case '^':
+        result = prev ** current;
         break;
       default:
         return;
@@ -92,6 +112,9 @@ const operationButtons = document.querySelectorAll('[data-operation]');
 const allClearBtn = document.querySelector('[data-all-clear]');
 const deleteBtn = document.querySelector('[data-delete]');
 const equalsBtn = document.querySelector('[data-equals]');
+const minusBtn = document.querySelector('[data-minus]');
+const fractionBtn = document.querySelector('[data-fraction]');
+const sqrtBtn = document.querySelector('[data-sqrt]');
 const prevOperandTextElem = document.querySelector('[data-previous-operand]');
 const currentOperandTextElem = document.querySelector('[data-current-operand]');
 
@@ -111,7 +134,8 @@ numberButtons.forEach((button) => {
 
 operationButtons.forEach((button) => {
   button.addEventListener('click', () => {
-    calculator.chooseOperation(button.innerText);
+    const operation = (button.innerText === 'xn') ? '^' : button.innerText;
+    calculator.chooseOperation(operation);
     calculator.updateDisplay();
   });
 });
@@ -123,6 +147,21 @@ allClearBtn.addEventListener('click', () => {
 
 deleteBtn.addEventListener('click', () => {
   calculator.delete();
+  calculator.updateDisplay();
+});
+
+minusBtn.addEventListener('click', () => {
+  calculator.changeSign();
+  calculator.updateDisplay();
+});
+
+fractionBtn.addEventListener('click', () => {
+  calculator.fraction();
+  calculator.updateDisplay();
+});
+
+sqrtBtn.addEventListener('click', () => {
+  calculator.sqrt();
   calculator.updateDisplay();
 });
 
