@@ -10,6 +10,7 @@ class Calculator {
     this.prevOperand = '';
     this.currentOperand = '';
     this.operation = '';
+    this.readyToReset = false;
   }
 
   delete() {
@@ -26,16 +27,18 @@ class Calculator {
   }
 
   fraction() {
-    this.readyToReset = true;
-    this.currentOperand = (this.currentOperand !== '' && parseFloat(this.currentOperand) !== 0)
-      ? 1 / parseFloat(this.currentOperand) : '0';
+    if (this.currentOperand !== '' && parseFloat(this.currentOperand) !== 0) {
+      this.currentOperand = 1 / parseFloat(this.currentOperand);
+    } else if (parseFloat(this.currentOperand) === 0) {
+      this.currentOperand = NaN;
+    }
   }
 
   sqrt() {
     this.readyToReset = true;
     this.currentOperand = (parseFloat(this.currentOperand) >= 0)
       ? Math.sqrt(parseFloat(this.currentOperand))
-      : this.currentOperand;
+      : NaN;
   }
 
   chooseOperation(operation) {
@@ -66,7 +69,7 @@ class Calculator {
         result = prev * current;
         break;
       case '÷':
-        result = prev / current;
+        result = (current !== 0) ? prev / current : NaN;
         break;
       case '^':
         result = prev ** current;
@@ -75,7 +78,7 @@ class Calculator {
         return;
     }
     this.readyToReset = true;
-    this.currentOperand = result;
+    this.currentOperand = Math.round(result * 1000000000000) / 1000000000000;
     this.prevOperand = '';
     this.operation = '';
   }
@@ -97,6 +100,12 @@ class Calculator {
   }
 
   updateDisplay() {
+    if (Number.isNaN(this.currentOperand)) {
+      this.currentOperandTextElem.innerText = 'error';
+      this.prevOperandTextElem.innerText = '';
+      this.clear();
+      return;
+    }
     this.currentOperandTextElem.innerText = this.digitsSeparate(this.currentOperand);
 
     if (this.operation != null) {
