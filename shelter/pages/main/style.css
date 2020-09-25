@@ -1,0 +1,119 @@
+html {
+  background-color: #ffffff;
+  font-size: 15px;
+}
+
+body {
+  width: 100%;
+}
+
+html,
+body,
+section,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+textarea,
+p,
+blockquote,
+th,
+td,
+img {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-margin-before: 0;
+          margin-block-start: 0;
+  -webkit-margin-after: 0;
+          margin-block-end: 0;
+  -webkit-margin-start: 0;
+          margin-inline-start: 0;
+  -webkit-margin-end: 0;
+          margin-inline-end: 0;
+  -webkit-padding-before: 0;
+          padding-block-start: 0;
+  -webkit-padding-after: 0;
+          padding-block-end: 0;
+  -webkit-padding-start: 0;
+          padding-inline-start: 0;
+  -webkit-padding-end: 0;
+          padding-inline-end: 0;
+}
+
+img {
+  display: block;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+h1,
+.head1 {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+h2,
+.head2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 2.93333rem;
+  color: #545454;
+}
+
+h3,
+.head3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 2.33333rem;
+  color: #545454;
+}
+
+h4,
+.head4 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.33333rem;
+  color: #545454;
+}
+
+h4,
+.head5 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  color: #545454;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  color: #4c4c4c;
+}

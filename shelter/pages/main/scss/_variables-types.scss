@@ -1,0 +1,136 @@
+//- colors
+
+//* text, borders, etc
+$primary-color: #4c4c4c;
+$secondary-color: #545454;
+$light-color: #b2b2b2;
+$lightest-color: #fafafa;
+
+//* theme colors
+$primary-theme-color: #f1cdb3;
+$secondary-theme-color: #fddcc4;
+$light-theme-color: #cdcdcd;
+
+//* types
+$primary-type: Arial, sans-serif;
+$secondary-type: Georgia, "Times New Roman", serif;
+
+//* gradients
+$header-background: radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%),
+                    linear-gradient(0deg, #211F20, #211F20);
+$footer-background: radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%),
+                    linear-gradient(0deg, #211F20, #211F20);
+
+
+//* базовые размеры шрифтов
+$font-body: 15rem;
+$font-h1: 32rem;
+$font-h2: 44rem;
+$font-h3: 35rem;
+$font-h4: 20rem;
+$font-h5: 15rem;
+$font-button: 17rem;
+$font-s: 12rem;
+
+@mixin head1 {
+  font-family: $secondary-type;
+}
+
+h1,
+.head1 {
+  @include head1;
+}
+
+@mixin head2 {
+  font-family: $secondary-type;
+  font-style: normal;
+  font-weight: normal;
+  font-size: #{$font-h2/$font-body}rem;
+  //line-height: 28px;
+  //letter-spacing: 1px;
+  color: $secondary-color;
+}
+
+h2,
+.head2 {
+  @include head2;
+}
+
+@mixin head3 {
+  font-family: $secondary-type;
+  font-style: normal;
+  font-weight: normal;
+  font-size: #{$font-h3/$font-body}rem;
+  //letter-spacing: 2.4px;
+  color: $secondary-color;
+}
+
+h3,
+.head3 {
+  @include head3;
+}
+
+@mixin head4 {
+  font-family: $secondary-type;
+  font-style: normal;
+  font-weight: normal;
+  font-size: #{$font-h4/$font-body}rem;
+  //letter-spacing: 2.4px;
+  color: $secondary-color;
+}
+
+h4,
+.head4 {
+  @include head4;
+}
+
+@mixin head5 {
+  font-family: $secondary-type;
+  font-style: normal;
+  font-weight: normal;
+  font-size: #{$font-h5/$font-body}rem;
+  //letter-spacing: 2.4px;
+  color: $secondary-color;
+}
+
+h4,
+.head5 {
+  @include head5;
+}
+
+@mixin regular {
+  font-family: $primary-type;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  color: $primary-color;
+}
+
+body {
+  @include regular;
+}
+
+@mixin buttonTitle {
+  font-family: $secondary-type;
+  font-style: normal;
+  font-weight: normal;
+  font-size: #{$font-button/$font-body}rem;
+  color: #292929;
+}
+
+@mixin pLight {
+  font-family: $primary-type;
+  font-style: italic;
+  font-weight: normal;
+  font-size: #{$font-s/$font-body}rem;
+  color: $light-color;
+}
+
+@mixin links {
+  font-family: $primary-type;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 160%;
+  color: $light-theme-color;
+}
