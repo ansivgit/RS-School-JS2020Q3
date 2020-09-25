@@ -102,3 +102,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+
+rsschool_repo.code-workspace
+.gitignore
