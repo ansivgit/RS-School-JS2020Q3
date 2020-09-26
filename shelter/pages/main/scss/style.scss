@@ -1,1 +1,137 @@
 @import '_global.scss';
+
+.h1-hide {
+  font-size: 0px;
+  line-height: 0px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.btn {
+  @include buttonTitle;
+  display: inline-block;
+  padding: 1rem 3rem;
+  border-radius: 6.67rem;
+
+  &:hover {
+    background-color: $secondary-theme-color;
+  }
+
+  &--main {
+    background-color: $primary-theme-color;
+  }
+}
+
+.wrapper--main {
+  width: 1920px; //! заменить на 100%
+  &--top {
+    background: url(../../../assets/icons/noise_transparent.svg), $header-background;
+  }
+}
+
+.container-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  outline: $red;
+}
+
+.header--desktop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 4rem;
+}
+
+.logo__title {
+  font-family: $secondary-type;
+  font-size: 32px;
+  letter-spacing: 0.06em;
+  color: $primary-theme-color;
+}
+
+.logo__subtitle {
+  display: block;
+  margin-top: 9px;
+  font-family: $primary-type;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.main-menu {
+  display: flex;
+
+  &__item {
+    margin-right: 2.4rem;
+    list-style: none;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__link {
+    display: block;
+    font-size: #{$font-h5/$font-body}rem;
+    line-height: 160%;
+    color: $light-theme-color;
+
+    &:active,
+    &:hover,
+    &:focus,
+    &--active {
+      border-bottom: 3px solid $primary-theme-color;
+      color: $lightest-color;
+    }
+  }
+}
+
+.promo {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 60px;
+  gap: 3.5%;
+
+  &__content {
+    margin-top: 163px;
+  }
+
+  &__title {
+    width: 310px;
+    margin-bottom: 2.8rem;
+    line-height: 130%;
+    color: #FFFFFF;
+  }
+
+  &__description {
+    margin-bottom: calc(2.8rem - 1px);
+    line-height: 160%;
+    color: $light-theme-color;
+  }
+}
+
+.about {
+  display: flex;
+  justify-content: space-between;
+  padding: 5.33rem 11.67rem 6.67rem 11.67rem;
+  gap: 8rem;
+
+  &__content {
+    margin: 1rem 0;
+
+    &__title {
+      margin-bottom: 1.67rem;
+    }
+
+    &__description {
+      margin-bottom: 1.67rem;
+      line-height: 160%;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
