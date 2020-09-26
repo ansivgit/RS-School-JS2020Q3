@@ -23,7 +23,7 @@ class Calculator {
   }
 
   changeSign() {
-    this.currentOperand = (this.currentOperand !== '') ? -this.currentOperand : '-';
+    this.currentOperand = (this.currentOperand !== '' && this.currentOperand !== '-') ? -this.currentOperand : '-';
   }
 
   fraction() {
@@ -43,6 +43,7 @@ class Calculator {
 
   chooseOperation(operation) {
     if (!this.currentOperand && !this.prevOperand) return;
+    if (this.currentOperand === '-') return;
     if (this.currentOperand && this.prevOperand) {
       this.compute();
     }
@@ -85,18 +86,9 @@ class Calculator {
 
   // eslint-disable-next-line class-methods-use-this
   digitsSeparate(number) {
-    const strNumber = number.toString();
-    const intDigits = parseInt(strNumber.split('.')[0], 10);
-    const decimalDigits = strNumber.split('.')[1];
-
-    const digitsDisplay = (!Number.isNaN(intDigits))
-      ? intDigits.toLocaleString('ru-RU')
-      : '';
-
-    if (decimalDigits != null) {
-      return `${digitsDisplay}.${decimalDigits}`;
-    }
-    return digitsDisplay;
+    const strNumberParts = number.toString().split('.');
+    return strNumberParts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+      + ((strNumberParts[1] || number.toString().includes('.')) ? '.' + strNumberParts[1] : '');
   }
 
   updateDisplay() {
@@ -131,7 +123,7 @@ const calculator = new Calculator(prevOperandTextElem, currentOperandTextElem);
 
 numberButtons.forEach((button) => {
   button.addEventListener('click', () => {
-    if (calculator.currentOperand && !calculator.prevOperand && calculator.readyToReset) {
+    if (calculator.currentOperand !== null && !calculator.prevOperand && calculator.readyToReset) {
       calculator.currentOperand = '';
       calculator.readyToReset = false;
     }
