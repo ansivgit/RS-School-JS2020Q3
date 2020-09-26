@@ -6,7 +6,6 @@ html {
 
 body {
   width: 100%;
-  //box-sizing: border-box;
 }
 
 html,
@@ -50,6 +49,8 @@ img {
 
 img {
   display: block;
+  height: 100%;
+  width: 100%;
 }
 
 h1,
