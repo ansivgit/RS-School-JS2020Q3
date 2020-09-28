@@ -12,22 +12,74 @@ a {
 .btn {
   @include buttonTitle;
   display: inline-block;
-  padding: 1rem 3rem;
+  padding: calc(1rem - 2px) calc(3rem - 2px);
+  border: 2px solid transparent;
   border-radius: 6.67rem;
+  cursor: pointer;
 
   &:hover {
+    border-color: transparent;
     background-color: $secondary-theme-color;
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
   }
 
   &--main {
     background-color: $primary-theme-color;
   }
+
+  &--secondary {
+    border-color: $primary-theme-color;
+
+    &--slider {
+      position: relative;
+      width: 52px;
+      height: 52px;
+      padding: 0;
+      border-radius: 50%;
+      background-color: inherit;
+      background-image: url(/assets/icons/arrow_left.svg);
+      color: red;
+
+
+      &:disabled {
+        border-color: $light-theme-color;
+        fill: $light-theme-color;
+      }
+
+      &--back::before,
+      &--forward::before {
+        content: url(/assets/icons/arrow_left.svg);
+        position: absolute;
+        top: 21px;
+        left: 17px;
+        line-height: 0;
+      }
+
+      &--forward::before {
+        transform: rotate(180deg);
+      }
+    }
+  }
 }
 
 .wrapper--main {
-  width: 1920px; //! заменить на 100%
+  width: 1280px; //! заменить на 100%
+  margin: 0 auto;
+
   &--top {
     background: url(../../../assets/icons/noise_transparent.svg), $header-background;
+  }
+
+  &--color {
+    background-color: #F6F6F6;
+  }
+
+  &--footer {
+    background: url(../../../assets/icons/noise_transparent.svg), $footer-background;
   }
 }
 
@@ -63,14 +115,11 @@ a {
 
 .main-menu {
   display: flex;
+  justify-content: space-between;
+  width: 443px;
 
   &__item {
-    margin-right: 2.4rem;
     list-style: none;
-
-    &:last-child {
-      margin-right: 0;
-    }
   }
 
   &__link {
@@ -96,7 +145,7 @@ a {
   gap: 3.5%;
 
   &__content {
-    margin-top: 163px;
+    margin-top: 164px;
   }
 
   &__title {
@@ -123,15 +172,234 @@ a {
     margin: 1rem 0;
 
     &__title {
-      margin-bottom: 1.67rem;
+      margin-bottom: 1.6rem;
     }
 
     &__description {
       margin-bottom: 1.67rem;
       line-height: 160%;
+
       &:last-child {
         margin-bottom: 0;
       }
     }
   }
+}
+
+.pets {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5.33rem 0 6.67rem 0;
+
+  &__title {
+    max-width: 400px;
+    text-align: center;
+  }
+}
+
+.slider {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 4rem 0;
+
+  &__wrapper {
+    display: flex;
+    list-style: none;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 3rem;
+    padding: 2rem 2.33rem;
+    background-color: $lightest-color;
+    border-radius: 9px;
+
+    &:hover {
+      background-color: #FFFFFF;
+      box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
+    }
+
+    &__img {
+      height: 240px;
+      width: auto;
+      margin: 0 auto;
+      line-height: 100%;
+      overflow: hidden;
+    }
+
+    &__name {
+      margin: 2rem 0;
+    }
+  }
+}
+
+.help {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5.33rem 0 6.67rem 0;
+
+  &__title {
+    max-width: 310px;
+    text-align: center;
+  }
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 3.67rem;
+    margin-top: 4rem;
+    list-style: none;
+
+    &__item {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      height: 7.53rem;
+      margin: 0 4rem;
+      word-wrap: normal;
+    }
+
+    &__icon {
+      width: 4rem;
+      height: 4rem;
+      background-repeat: no-repeat;
+      background-position: center;
+
+      &--food {
+        background-image: url(/assets/icons/help_icons_food.svg);
+      }
+      &--transportation {
+        background-image: url(/assets/icons/help_icon_transportation.svg);
+      }
+      &--toys {
+        background-image: url(/assets/icons/help_icon_toys.svg);
+      }
+      &--bowls {
+        background-image: url(/assets/icons/help_icon_bowls-and-cups.svg);
+      }
+      &--shampoos {
+        background-image: url(/assets/icons/help_icon_shampoos.svg);
+      }
+      &--vitamins {
+        background-image: url(/assets/icons/help_icon_vitamins.svg);
+      }
+      &--medicines {
+        background-image: url(/assets/icons/help_icon_medicines.svg);
+      }
+      &--collars {
+        background-image: url(/assets/icons/help_icon_collars-leashes.svg);
+      }
+      &--sleeping {
+        background-image: url(/assets/icons/help_icon_sleeping-area.svg);
+      }
+    }
+  }
+}
+
+.donation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5.5rem 9.47rem 6.77rem 9.47rem;
+  column-gap: 2rem;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.33rem;
+
+    &__title {
+      width: 20rem;
+    }
+
+    &__card-number {
+      position: relative;
+      padding: 0.67rem 1rem 0.67rem 4rem;
+      width: fit-content;
+      word-wrap: normal;
+      background-color: $primary-theme-color;
+      border-radius: 9px;
+
+      &::before {
+        content: url(/assets/icons/credit-card.svg);
+        position: absolute;
+        left: 1rem;
+      }
+    }
+
+    &__legal-info {
+      @include pLight;
+    }
+  }
+}
+
+.footer {
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 2.67rem;
+
+    &__block {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 16rem;
+      margin: 1.4rem 10.67rem 4rem 0;
+      outline: $green;
+    }
+
+    &__title {
+      max-width: 302px;
+      margin-bottom: -6px;
+      line-height: 130%;
+      color: #FFFFFF;
+    }
+
+    &__contacts {
+      position: relative;
+      padding-left: 4rem;
+      min-height: 32px;
+      color: $primary-theme-color;
+
+      &--address {
+        padding-left: 2.8rem;
+      }
+
+      &--email::before,
+      &--phone::before,
+      &--address::before {
+        position: absolute;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-position: center left;
+      }
+
+      &--email::before {
+        background-image: url(/assets/icons/footer_mail.svg);
+        //top: -2px;
+      }
+      &--phone::before {
+        background-image: url(/assets/icons/footer_phone.svg);
+        top: -6px;
+      }
+      &--address::before {
+        background-image: url(/assets/icons/footer_marker.svg);
+      }
+    }
+  }
+  &__img {
+    width: 25%;
+  }
+
 }

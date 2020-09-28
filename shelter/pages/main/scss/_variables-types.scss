@@ -37,23 +37,23 @@ $font-h5: 15rem;
 $font-button: 17rem;
 $font-s: 12rem;
 
-@mixin head1 {
+@mixin head {
   font-family: $secondary-type;
+  font-style: normal;
+  font-weight: normal;
+  color: $secondary-color;
 }
 
 h1,
 .head1 {
-  @include head1;
+  @include head;
 }
 
 @mixin head2 {
-  font-family: $secondary-type;
-  font-style: normal;
-  font-weight: normal;
+  @include head;
   font-size: #{$font-h2/$font-body}rem;
   //line-height: 28px;
   //letter-spacing: 1px;
-  color: $secondary-color;
 }
 
 h2,
@@ -62,13 +62,10 @@ h2,
 }
 
 @mixin head3 {
-  font-family: $secondary-type;
-  font-style: normal;
-  font-weight: normal;
+  @include head;
   font-size: #{$font-h3/$font-body}rem;
   line-height: 130%;
   letter-spacing: 0.06em;
-  color: $secondary-color;
 }
 
 h3,
@@ -77,12 +74,9 @@ h3,
 }
 
 @mixin head4 {
-  font-family: $secondary-type;
-  font-style: normal;
-  font-weight: normal;
+  @include head;
   font-size: #{$font-h4/$font-body}rem;
-  //letter-spacing: 2.4px;
-  color: $secondary-color;
+  letter-spacing: 0.06em;
 }
 
 h4,
@@ -91,15 +85,13 @@ h4,
 }
 
 @mixin head5 {
-  font-family: $secondary-type;
-  font-style: normal;
-  font-weight: normal;
+  @include head;
   font-size: #{$font-h5/$font-body}rem;
-  //letter-spacing: 2.4px;
-  color: $secondary-color;
+  line-height: 110%;
+  letter-spacing: 0.06em;
 }
 
-h4,
+h5,
 .head5 {
   @include head5;
 }
@@ -131,6 +123,7 @@ body {
   font-style: italic;
   font-weight: normal;
   font-size: #{$font-s/$font-body}rem;
+  line-height: 150%;
   color: $light-color;
 }
 
