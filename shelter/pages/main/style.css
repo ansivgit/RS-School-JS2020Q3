@@ -204,8 +204,8 @@ a {
 }
 
 .wrapper--main--top {
-  background: url(../../../assets/icons/noise_transparent.svg), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), -webkit-gradient(linear, left bottom, left top, from(#211F20), to(#211F20));
-  background: url(../../../assets/icons/noise_transparent.svg), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), linear-gradient(0deg, #211F20, #211F20);
+  background: url(/assets/icons/noise_transparent@2x.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), -webkit-gradient(linear, left bottom, left top, from(#211F20), to(#211F20));
+  background: url(/assets/icons/noise_transparent@2x.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), linear-gradient(0deg, #211F20, #211F20);
 }
 
 .wrapper--main--color {
@@ -213,8 +213,8 @@ a {
 }
 
 .wrapper--main--footer {
-  background: url(../../../assets/icons/noise_transparent.svg), radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), -webkit-gradient(linear, left bottom, left top, from(#211F20), to(#211F20));
-  background: url(../../../assets/icons/noise_transparent.svg), radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), linear-gradient(0deg, #211F20, #211F20);
+  background: url(../../../assets/icons/noise_transparent@2x.svg), radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), -webkit-gradient(linear, left bottom, left top, from(#211F20), to(#211F20));
+  background: url(../../../assets/icons/noise_transparent@2x.svg), radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), linear-gradient(0deg, #211F20, #211F20);
 }
 
 .container-content {
@@ -296,7 +296,7 @@ a {
 
 .promo__title {
   width: 310px;
-  margin-bottom: 2.8rem;
+  margin-bottom: 2.7rem;
   line-height: 130%;
   color: #FFFFFF;
 }
@@ -387,7 +387,7 @@ a {
       -ms-flex-align: center;
           align-items: center;
   margin: 0 3rem;
-  padding: 2rem 2.33rem;
+  padding-bottom: 2rem;
   background-color: #FAFAFA;
   border-radius: 9px;
 }
@@ -399,7 +399,7 @@ a {
 }
 
 .slider__card__img {
-  height: 240px;
+  height: 270px;
   width: auto;
   margin: 0 auto;
   line-height: 100%;
@@ -583,7 +583,7 @@ a {
       -ms-flex-pack: justify;
           justify-content: space-between;
   height: 16rem;
-  margin: 1.4rem 10.67rem 4rem 0;
+  margin: 1.13rem 10.67rem 4rem 0;
   outline: 1px solid green;
 }
 

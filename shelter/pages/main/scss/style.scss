@@ -71,7 +71,7 @@ a {
   margin: 0 auto;
 
   &--top {
-    background: url(../../../assets/icons/noise_transparent.svg), $header-background;
+    background: url(/assets/icons/noise_transparent@2x.png), $header-background;
   }
 
   &--color {
@@ -79,7 +79,7 @@ a {
   }
 
   &--footer {
-    background: url(../../../assets/icons/noise_transparent.svg), $footer-background;
+    background: url(../../../assets/icons/noise_transparent@2x.svg), $footer-background;
   }
 }
 
@@ -150,7 +150,7 @@ a {
 
   &__title {
     width: 310px;
-    margin-bottom: 2.8rem;
+    margin-bottom: 2.7rem;
     line-height: 130%;
     color: #FFFFFF;
   }
@@ -215,7 +215,7 @@ a {
     flex-direction: column;
     align-items: center;
     margin: 0 3rem;
-    padding: 2rem 2.33rem;
+    padding-bottom: 2rem;
     background-color: $lightest-color;
     border-radius: 9px;
 
@@ -225,7 +225,7 @@ a {
     }
 
     &__img {
-      height: 240px;
+      height: 270px;
       width: auto;
       margin: 0 auto;
       line-height: 100%;
@@ -352,7 +352,7 @@ a {
       flex-direction: column;
       justify-content: space-between;
       height: 16rem;
-      margin: 1.4rem 10.67rem 4rem 0;
+      margin: 1.13rem 10.67rem 4rem 0;
       outline: $green;
     }
 
