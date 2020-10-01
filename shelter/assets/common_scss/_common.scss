@@ -34,14 +34,13 @@ a {
   &--secondary {
     border-color: $primary-theme-color;
 
-    &--slider {
+    &--arrow {
       position: relative;
       width: 52px;
       height: 52px;
       padding: 0;
       border-radius: 50%;
       background-color: inherit;
-      background-image: url(/assets/icons/arrow_left.svg);
       background-repeat: no-repeat;
       background-position: center center;
 
@@ -51,7 +50,20 @@ a {
 
       &:disabled {
         border-color: $light-theme-color;
-        background-image: url(/assets/icons/arrow_left_disabled.svg);
+      }
+
+      &--spear {
+        background-image: url(/assets/icons/arrow_left.svg);
+        &:disabled {
+          background-image: url(/assets/icons/arrow_left_disabled.svg);
+        }
+      }
+
+      &--switch {
+        background-image: url(/assets/icons/switch.svg);
+        &:disabled {
+          background-image: url(/assets/icons/switch_disabled.svg);
+        }
       }
     }
   }
