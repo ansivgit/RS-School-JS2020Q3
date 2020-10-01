@@ -185,8 +185,10 @@ a {
           transform: rotate(180deg);
 }
 
-.btn--secondary--arrow:disabled {
+.btn--secondary--arrow:disabled, .btn--secondary--arrow:disabled:hover {
   border-color: #CDCDCD;
+  background-color: transparent;
+  cursor: default;
 }
 
 .btn--secondary--arrow--spear {

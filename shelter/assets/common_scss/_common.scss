@@ -48,8 +48,11 @@ a {
         transform: rotate(180deg);
       }
 
-      &:disabled {
+      &:disabled,
+      &:disabled:hover {
         border-color: $light-theme-color;
+        background-color: transparent;
+        cursor: default;
       }
 
       &--spear {
