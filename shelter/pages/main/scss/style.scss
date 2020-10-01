@@ -1,4 +1,4 @@
-@import '_global.scss';
+@import '../../../assets/common_scss/_global.scss';
 
 .h1-hide {
   font-size: 0px;
@@ -42,32 +42,23 @@ a {
       border-radius: 50%;
       background-color: inherit;
       background-image: url(/assets/icons/arrow_left.svg);
-      color: red;
+      background-repeat: no-repeat;
+      background-position: center center;
 
+      &--forward {
+        transform: rotate(180deg);
+      }
 
       &:disabled {
         border-color: $light-theme-color;
-        fill: $light-theme-color;
-      }
-
-      &--back::before,
-      &--forward::before {
-        content: url(/assets/icons/arrow_left.svg);
-        position: absolute;
-        top: 21px;
-        left: 17px;
-        line-height: 0;
-      }
-
-      &--forward::before {
-        transform: rotate(180deg);
+        background-image: url(/assets/icons/arrow_left_disabled.svg);
       }
     }
   }
 }
 
 .wrapper--main {
-  width: 1280px; //! заменить на 100%
+  width: 100%;
   margin: 0 auto;
 
   &--top {
@@ -75,18 +66,17 @@ a {
   }
 
   &--color {
-    background-color: #F6F6F6;
+    background-color: #f6f6f6;
   }
 
   &--footer {
-    background: url(../../../assets/icons/noise_transparent@2x.svg), $footer-background;
+    background: url(/assets/icons/noise_transparent@2x.svg), $footer-background;
   }
 }
 
 .container-content {
   max-width: 1200px;
   margin: 0 auto;
-  outline: $red;
 }
 
 .header--desktop {
@@ -110,7 +100,7 @@ a {
   font-size: 13px;
   letter-spacing: 0.1em;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .main-menu {
@@ -152,7 +142,7 @@ a {
     width: 310px;
     margin-bottom: 2.7rem;
     line-height: 130%;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 
   &__description {
@@ -220,7 +210,7 @@ a {
     border-radius: 9px;
 
     &:hover {
-      background-color: #FFFFFF;
+      background-color: #ffffff;
       box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
     }
 
@@ -322,7 +312,7 @@ a {
 
     &__card-number {
       position: relative;
-      padding: 0.67rem 1rem 0.67rem 4rem;
+      padding: 0.67rem 1rem 0.68rem 4rem;
       width: fit-content;
       word-wrap: normal;
       background-color: $primary-theme-color;
@@ -351,22 +341,19 @@ a {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 16rem;
-      margin: 1.13rem 10.67rem 4rem 0;
-      outline: $green;
+      margin: 1.13rem 10.67rem 4.33rem 0;
     }
 
     &__title {
       max-width: 302px;
-      margin-bottom: -6px;
+      margin-bottom: -5px;
       line-height: 130%;
-      color: #FFFFFF;
+      color: #ffffff;
     }
 
     &__contacts {
       position: relative;
       padding-left: 4rem;
-      min-height: 32px;
       color: $primary-theme-color;
 
       &--address {
@@ -378,28 +365,29 @@ a {
       &--address::before {
         position: absolute;
         left: 0;
-        content: "";
+        top: -5px;
+        content: '';
         width: 100%;
-        height: 100%;
+        min-height: 32px;
         background-repeat: no-repeat;
         background-position: center left;
       }
 
       &--email::before {
         background-image: url(/assets/icons/footer_mail.svg);
-        //top: -2px;
       }
       &--phone::before {
         background-image: url(/assets/icons/footer_phone.svg);
-        top: -6px;
       }
       &--address::before {
         background-image: url(/assets/icons/footer_marker.svg);
+      }
+      &--address--1::before {
+        top: 6px;
       }
     }
   }
   &__img {
     width: 25%;
   }
-
 }
