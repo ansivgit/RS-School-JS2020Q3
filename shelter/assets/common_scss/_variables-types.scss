@@ -8,6 +8,7 @@ $green: 1px solid green;
 //* text, borders, etc
 $primary-color: #4C4C4C;
 $secondary-color: #545454;
+$dark-color: #292929;
 $light-color: #B2B2B2;
 $lightest-color: #FAFAFA;
 
@@ -115,7 +116,7 @@ body {
   font-size: #{$font-button/$font-body}rem;
   line-height: 130%;
   letter-spacing: 0.06em;
-  color: #292929;
+  color: $dark-color;
 }
 
 @mixin pLight {
