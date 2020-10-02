@@ -17,13 +17,11 @@ a {
   border-radius: 6.67rem;
   cursor: pointer;
 
-  &:hover {
-    border-color: transparent;
-    background-color: $secondary-theme-color;
-  }
-
+  &:hover,
   &:active,
   &:focus {
+    border-color: transparent;
+    background-color: $secondary-theme-color;
     outline: none;
   }
 
@@ -39,8 +37,9 @@ a {
       width: 52px;
       height: 52px;
       padding: 0;
+      font-size: 1.33rem;
       border-radius: 50%;
-      background-color: inherit;
+      background-color: transparent;
       background-repeat: no-repeat;
       background-position: center center;
 
@@ -55,6 +54,12 @@ a {
         cursor: default;
       }
 
+      &--active {
+        border-color: transparent;
+        background-color: $primary-theme-color;
+        outline: none;
+      }
+
       &--spear {
         background-image: url(/assets/icons/arrow_left.svg);
         &:disabled {
@@ -64,8 +69,17 @@ a {
 
       &--switch {
         background-image: url(/assets/icons/switch.svg);
+        background-position: 48% 48%;
         &:disabled {
           background-image: url(/assets/icons/switch_disabled.svg);
+        }
+      }
+
+      &--switch--dbl {
+        background-image: url(/assets/icons/switch-dbl.svg);
+        background-position: 48% 48%;
+        &:disabled {
+          background-image: url(/assets/icons/switch-dbl_disabled.svg);
         }
       }
     }
@@ -99,6 +113,11 @@ a {
   justify-content: space-between;
   align-items: center;
   padding-top: 4rem;
+
+  &--regular {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
 }
 
 .logo__title {
@@ -106,6 +125,10 @@ a {
   font-size: 32px;
   letter-spacing: 0.06em;
   color: $primary-theme-color;
+
+  &--regular {
+    color: $secondary-color;
+  }
 }
 
 .logo__subtitle {
@@ -116,14 +139,17 @@ a {
   letter-spacing: 0.1em;
   text-align: center;
   color: #ffffff;
+
+  &--regular {
+    color: $dark-color;
+  }
 }
 
 .main-menu {
   display: flex;
-  justify-content: space-between;
-  width: 443px;
 
   &__item {
+    margin-left: 2.4rem;
     list-style: none;
   }
 
@@ -139,6 +165,18 @@ a {
     &--active {
       border-bottom: 3px solid $primary-theme-color;
       color: $lightest-color;
+    }
+
+    &--regular {
+      color: $secondary-color;
+
+      &:active,
+      &:hover,
+      &:focus,
+      &--active {
+        border-bottom: 3px solid $primary-theme-color;
+        color: $dark-color;
+      }
     }
   }
 }
