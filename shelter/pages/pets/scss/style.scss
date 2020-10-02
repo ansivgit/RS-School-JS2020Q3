@@ -3,37 +3,21 @@
 .cards {
   display: flex;
   flex-direction: column;
+  //justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding-top: 5.33rem;
-  padding-bottom: 6.67rem;
+  margin: 4rem 0;
 
   &__wrapper {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     list-style: none;
-  }
-
-  &__title {
-    max-width: 26.67rem;
-    text-align: center;
-  }
-
-  &__list__container {
-    display: flex;
-    min-height: 900px;
-    column-gap: 2.6667rem;
-    row-gap: 2rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 4rem auto;
   }
 
   &__item {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0 3rem;
     padding-bottom: 2rem;
     background-color: $lightest-color;
     border-radius: 9px;
@@ -54,11 +38,5 @@
     &__name {
       margin: 2rem 0;
     }
-  }
-
-  &__btn__container {
-    display: flex;
-    justify-content: center;
-    column-gap: 1.33rem;
   }
 }
