@@ -196,29 +196,29 @@ a {
 }
 
 .btn--secondary--arrow--spear {
-  background-image: url(/assets/icons/arrow_left.svg);
+  background-image: url(../../assets/icons/arrow_left.svg);
 }
 
 .btn--secondary--arrow--spear:disabled {
-  background-image: url(/assets/icons/arrow_left_disabled.svg);
+  background-image: url(../../assets/icons/arrow_left_disabled.svg);
 }
 
 .btn--secondary--arrow--switch {
-  background-image: url(/assets/icons/switch.svg);
+  background-image: url(../../assets/icons/switch.svg);
   background-position: 48% 48%;
 }
 
 .btn--secondary--arrow--switch:disabled {
-  background-image: url(/assets/icons/switch_disabled.svg);
+  background-image: url(../../assets/icons/switch_disabled.svg);
 }
 
 .btn--secondary--arrow--switch--dbl {
-  background-image: url(/assets/icons/switch-dbl.svg);
+  background-image: url(../../assets/icons/switch-dbl.svg);
   background-position: 48% 48%;
 }
 
 .btn--secondary--arrow--switch--dbl:disabled {
-  background-image: url(/assets/icons/switch-dbl_disabled.svg);
+  background-image: url(../../assets/icons/switch-dbl_disabled.svg);
 }
 
 .wrapper--main {
@@ -227,8 +227,8 @@ a {
 }
 
 .wrapper--main--top {
-  background: url(/assets/icons/noise_transparent@2x.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), -webkit-gradient(linear, left bottom, left top, from(#211F20), to(#211F20));
-  background: url(/assets/icons/noise_transparent@2x.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), linear-gradient(0deg, #211F20, #211F20);
+  background: url(../../assets/icons/noise_transparent@2x.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), -webkit-gradient(linear, left bottom, left top, from(#211F20), to(#211F20));
+  background: url(../../assets/icons/noise_transparent@2x.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), linear-gradient(0deg, #211F20, #211F20);
 }
 
 .wrapper--main--color {
@@ -236,8 +236,8 @@ a {
 }
 
 .wrapper--main--footer {
-  background: url(/assets/icons/noise_transparent@2x.svg), radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), -webkit-gradient(linear, left bottom, left top, from(#211F20), to(#211F20));
-  background: url(/assets/icons/noise_transparent@2x.svg), radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), linear-gradient(0deg, #211F20, #211F20);
+  background: url(../../assets/icons/noise_transparent@2x.svg), radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), -webkit-gradient(linear, left bottom, left top, from(#211F20), to(#211F20));
+  background: url(../../assets/icons/noise_transparent@2x.svg), radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), linear-gradient(0deg, #211F20, #211F20);
 }
 
 .container-content {
@@ -373,15 +373,15 @@ a {
 }
 
 .footer__content__contacts--email::before {
-  background-image: url(/assets/icons/footer_mail.svg);
+  background-image: url(../../assets/icons/footer_mail.svg);
 }
 
 .footer__content__contacts--phone::before {
-  background-image: url(/assets/icons/footer_phone.svg);
+  background-image: url(../../assets/icons/footer_phone.svg);
 }
 
 .footer__content__contacts--address::before {
-  background-image: url(/assets/icons/footer_marker.svg);
+  background-image: url(../../assets/icons/footer_marker.svg);
 }
 
 .footer__content__contacts--address--1::before {
@@ -583,39 +583,39 @@ a {
 }
 
 .help__content__icon--food {
-  background-image: url(/assets/icons/help_icons_food.svg);
+  background-image: url(../../assets/icons/help_icons_food.svg);
 }
 
 .help__content__icon--transportation {
-  background-image: url(/assets/icons/help_icon_transportation.svg);
+  background-image: url(../../assets/icons/help_icon_transportation.svg);
 }
 
 .help__content__icon--toys {
-  background-image: url(/assets/icons/help_icon_toys.svg);
+  background-image: url(../../assets/icons/help_icon_toys.svg);
 }
 
 .help__content__icon--bowls {
-  background-image: url(/assets/icons/help_icon_bowls-and-cups.svg);
+  background-image: url(../../assets/icons/help_icon_bowls-and-cups.svg);
 }
 
 .help__content__icon--shampoos {
-  background-image: url(/assets/icons/help_icon_shampoos.svg);
+  background-image: url(../../assets/icons/help_icon_shampoos.svg);
 }
 
 .help__content__icon--vitamins {
-  background-image: url(/assets/icons/help_icon_vitamins.svg);
+  background-image: url(../../assets/icons/help_icon_vitamins.svg);
 }
 
 .help__content__icon--medicines {
-  background-image: url(/assets/icons/help_icon_medicines.svg);
+  background-image: url(../../assets/icons/help_icon_medicines.svg);
 }
 
 .help__content__icon--collars {
-  background-image: url(/assets/icons/help_icon_collars-leashes.svg);
+  background-image: url(../../assets/icons/help_icon_collars-leashes.svg);
 }
 
 .help__content__icon--sleeping {
-  background-image: url(/assets/icons/help_icon_sleeping-area.svg);
+  background-image: url(../../assets/icons/help_icon_sleeping-area.svg);
 }
 
 .donation {
@@ -660,7 +660,7 @@ a {
 }
 
 .donation__content__card-number::before {
-  content: url(/assets/icons/credit-card.svg);
+  content: url(../../assets/icons/credit-card.svg);
   position: absolute;
   left: 1rem;
 }

@@ -136,31 +136,31 @@
       background-position: center;
 
       &--food {
-        background-image: url(/assets/icons/help_icons_food.svg);
+        background-image: url(../../assets/icons/help_icons_food.svg);
       }
       &--transportation {
-        background-image: url(/assets/icons/help_icon_transportation.svg);
+        background-image: url(../../assets/icons/help_icon_transportation.svg);
       }
       &--toys {
-        background-image: url(/assets/icons/help_icon_toys.svg);
+        background-image: url(../../assets/icons/help_icon_toys.svg);
       }
       &--bowls {
-        background-image: url(/assets/icons/help_icon_bowls-and-cups.svg);
+        background-image: url(../../assets/icons/help_icon_bowls-and-cups.svg);
       }
       &--shampoos {
-        background-image: url(/assets/icons/help_icon_shampoos.svg);
+        background-image: url(../../assets/icons/help_icon_shampoos.svg);
       }
       &--vitamins {
-        background-image: url(/assets/icons/help_icon_vitamins.svg);
+        background-image: url(../../assets/icons/help_icon_vitamins.svg);
       }
       &--medicines {
-        background-image: url(/assets/icons/help_icon_medicines.svg);
+        background-image: url(../../assets/icons/help_icon_medicines.svg);
       }
       &--collars {
-        background-image: url(/assets/icons/help_icon_collars-leashes.svg);
+        background-image: url(../../assets/icons/help_icon_collars-leashes.svg);
       }
       &--sleeping {
-        background-image: url(/assets/icons/help_icon_sleeping-area.svg);
+        background-image: url(../../assets/icons/help_icon_sleeping-area.svg);
       }
     }
   }
@@ -191,7 +191,7 @@
       border-radius: 9px;
 
       &::before {
-        content: url(/assets/icons/credit-card.svg);
+        content: url(../../assets/icons/credit-card.svg);
         position: absolute;
         left: 1rem;
       }

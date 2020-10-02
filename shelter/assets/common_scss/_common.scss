@@ -61,25 +61,25 @@ a {
       }
 
       &--spear {
-        background-image: url(/assets/icons/arrow_left.svg);
+        background-image: url(../../assets/icons/arrow_left.svg);
         &:disabled {
-          background-image: url(/assets/icons/arrow_left_disabled.svg);
+          background-image: url(../../assets/icons/arrow_left_disabled.svg);
         }
       }
 
       &--switch {
-        background-image: url(/assets/icons/switch.svg);
+        background-image: url(../../assets/icons/switch.svg);
         background-position: 48% 48%;
         &:disabled {
-          background-image: url(/assets/icons/switch_disabled.svg);
+          background-image: url(../../assets/icons/switch_disabled.svg);
         }
       }
 
       &--switch--dbl {
-        background-image: url(/assets/icons/switch-dbl.svg);
+        background-image: url(../../assets/icons/switch-dbl.svg);
         background-position: 48% 48%;
         &:disabled {
-          background-image: url(/assets/icons/switch-dbl_disabled.svg);
+          background-image: url(../../assets/icons/switch-dbl_disabled.svg);
         }
       }
     }
@@ -91,7 +91,7 @@ a {
   margin: 0 auto;
 
   &--top {
-    background: url(/assets/icons/noise_transparent@2x.png), $header-background;
+    background: url(../../assets/icons/noise_transparent@2x.png), $header-background;
   }
 
   &--color {
@@ -99,7 +99,7 @@ a {
   }
 
   &--footer {
-    background: url(/assets/icons/noise_transparent@2x.svg), $footer-background;
+    background: url(../../assets/icons/noise_transparent@2x.svg), $footer-background;
   }
 }
 
@@ -224,13 +224,13 @@ a {
       }
 
       &--email::before {
-        background-image: url(/assets/icons/footer_mail.svg);
+        background-image: url(../../assets/icons/footer_mail.svg);
       }
       &--phone::before {
-        background-image: url(/assets/icons/footer_phone.svg);
+        background-image: url(../../assets/icons/footer_phone.svg);
       }
       &--address::before {
-        background-image: url(/assets/icons/footer_marker.svg);
+        background-image: url(../../assets/icons/footer_marker.svg);
       }
       &--address--1::before {
         top: 6px;
