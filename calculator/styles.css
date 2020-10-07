@@ -1,4 +1,6 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   font-family: Gotham Rounded, sans-serif;
   font-weight: normal;
@@ -14,20 +16,22 @@ body {
   display: grid;
   justify-content: center;
   align-content: center;
-  min-height: 100vh;
-  grid-template-columns: repeat(4, 100px);
-  grid-template-rows: minmax(120px, auto) repeat(6, 100px);
+  min-height: min(100vh, 625px);
+  max-width: 350px;
+  margin: 0 auto;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: minmax(120px, auto) repeat(6, 1fr);
 }
 
-.calculator-grid > button {
+.calculator-grid>button {
   cursor: pointer;
-  font-size: 2rem;
+  font-size: 1.6rem;
   border: 1px solid white;
   outline: none;
   background-color: rgba(255, 255, 255, .75);
 }
 
-.calculator-grid > button:hover {
+.calculator-grid>button:hover {
   background-color: rgba(255, 255, 255, .9);
 }
 
@@ -55,4 +59,24 @@ body {
 .output .current-operand {
   color: white;
   font-size: 2.5rem;
+}
+
+.calculator-instructions {
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  max-width: 30vw;
+  padding-right: 10px;
+  background-color: rgba(255, 255, 255, .75);
+  border-radius: 10px;
+}
+
+.instructions-item {
+  margin-bottom: 10px;
+  font-family: Gotham Rounded, sans-serif;
+  font-weight: normal;
+}
+
+code {
+  font-weight: bold;
 }
