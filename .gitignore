@@ -107,3 +107,6 @@ dist
 rsschool_repo.code-workspace
 .gitignore
 shelter/pages-in-jpg
+.eslintrc.json
+package-lock.json
+package.json
