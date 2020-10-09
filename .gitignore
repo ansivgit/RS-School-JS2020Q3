@@ -106,3 +106,7 @@ dist
 .gitignore
 shelter/pages-in-jpg
 shelter/assets/images/clear_images/
+.eslintrc.json
+package-lock.json
+package.json
+.gitignore
