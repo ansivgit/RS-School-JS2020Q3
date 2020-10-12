@@ -27,8 +27,12 @@
 .about {
   display: flex;
   justify-content: space-between;
-  padding: 5.33rem 11.67rem 6.67rem 11.67rem;
+  padding: 5.33rem 14.33rem 6.6rem 14.33rem;
   gap: 8rem;
+
+  &__img-wrapper {
+    max-height: 408px;
+  }
 
   &__content {
     margin: 1rem 0;
@@ -52,7 +56,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5.33rem 0 6.67rem 0;
+  padding: 5.4rem 0 6.67rem 0;
 
   &__title {
     max-width: 400px;
@@ -62,13 +66,16 @@
 
 .slider {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
   margin: 4rem 0;
+  padding: 0 2.81%;
 
   &__wrapper {
     display: flex;
+    justify-content: space-around;
+    width: 1080px;
     list-style: none;
   }
 
@@ -76,7 +83,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 3rem;
     padding-bottom: 2rem;
     background-color: $lightest-color;
     border-radius: 9px;
@@ -170,13 +176,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5.5rem 9.47rem 6.77rem 9.47rem;
+  max-width: 915px;
+  margin: 0 auto;
+  padding: 5.5rem 0 6.77rem 0;
   column-gap: 2rem;
 
   &__content {
     display: flex;
     flex-direction: column;
     row-gap: 1.33rem;
+    max-width: 380px;
 
     &__title {
       width: 20rem;

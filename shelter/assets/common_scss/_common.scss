@@ -9,6 +9,30 @@ a {
   text-decoration: none;
 }
 
+.wrapper--main {
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+
+  &--top {
+    background: url(../../assets/icons/noise_transparent@2x.png), $header-background;
+  }
+
+  &--color {
+    background-color: #f6f6f6;
+  }
+
+  &--footer {
+    background: url(../../assets/icons/noise_transparent@2x.png), $footer-background;
+  }
+}
+
+.container-content {
+  max-width: 1280px;
+  padding: 0 40px;
+  margin: 0 auto;
+}
+
 .btn {
   @include buttonTitle;
   display: inline-block;
@@ -34,6 +58,7 @@ a {
 
     &--arrow {
       position: relative;
+      flex: 0 0 auto;
       width: 52px;
       height: 52px;
       padding: 0;
@@ -86,28 +111,6 @@ a {
   }
 }
 
-.wrapper--main {
-  width: 100%;
-  margin: 0 auto;
-
-  &--top {
-    background: url(../../assets/icons/noise_transparent@2x.png), $header-background;
-  }
-
-  &--color {
-    background-color: #f6f6f6;
-  }
-
-  &--footer {
-    background: url(../../assets/icons/noise_transparent@2x.svg), $footer-background;
-  }
-}
-
-.container-content {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
 .header--desktop {
   display: flex;
   justify-content: space-between;
@@ -147,10 +150,10 @@ a {
 
 .main-menu {
   display: flex;
+  list-style: none;
 
   &__item {
     margin-left: 2.4rem;
-    list-style: none;
   }
 
   &__link {
@@ -191,11 +194,13 @@ a {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      margin: 1.13rem 10.67rem 4.33rem 0;
+      max-width: 302px;
+      margin: 1.13rem 0 4.33rem 0;
     }
 
     &__title {
-      max-width: 302px;
+      flex: 0 0 auto;
+
       margin-bottom: -5px;
       line-height: 130%;
       color: #ffffff;
@@ -237,7 +242,9 @@ a {
       }
     }
   }
-  &__img {
-    width: 25%;
+  &__img-wrapper {
+    flex: 0 2 auto;
+    margin-left: 23px;
+    overflow: hidden;
   }
 }

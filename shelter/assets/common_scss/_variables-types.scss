@@ -53,8 +53,6 @@ h1,
 @mixin head2 {
   @include head;
   font-size: #{$font-h2/$font-body}rem;
-  //line-height: 28px;
-  //letter-spacing: 1px;
 }
 
 h2,
