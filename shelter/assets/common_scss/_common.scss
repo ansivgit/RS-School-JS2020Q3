@@ -31,6 +31,16 @@ a {
   max-width: 1280px;
   padding: 0 40px;
   margin: 0 auto;
+
+  @media (max-width: $media-midW) {
+    //max-width: 1023px;
+    padding: 0 30px;
+  }
+
+  @media (max-width: $media-minW) {
+    //max-width: 1023px;
+    padding: 0 10px;
+  }
 }
 
 .btn {
@@ -61,6 +71,7 @@ a {
       flex: 0 0 auto;
       width: 52px;
       height: 52px;
+      margin: 0 8px;
       padding: 0;
       font-size: 1.33rem;
       border-radius: 50%;
@@ -116,6 +127,10 @@ a {
   justify-content: space-between;
   align-items: center;
   padding-top: 4rem;
+
+  @media (max-width: $media-midW) {
+    padding-top: 2rem;
+  }
 
   &--regular {
     padding-top: 2rem;
@@ -190,17 +205,27 @@ a {
     justify-content: space-between;
     padding-top: 2.67rem;
 
+    @media (max-width: $media-midW) {
+      flex-wrap: wrap;
+      padding: 2rem 2.27rem 0 2.27rem;
+    }
+
     &__block {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       max-width: 302px;
       margin: 1.13rem 0 4.33rem 0;
+
+      @media (max-width: $media-midW) {
+        height: 229px;
+        margin-top: 0;
+        margin-bottom: 4.67rem;
+      }
     }
 
     &__title {
       flex: 0 0 auto;
-
       margin-bottom: -5px;
       line-height: 130%;
       color: #ffffff;
@@ -246,5 +271,10 @@ a {
     flex: 0 2 auto;
     margin-left: 23px;
     overflow: hidden;
+
+    @media (max-width: $media-midW) {
+      margin: 0 auto;
+      //margin-top: 0;
+    }
   }
 }

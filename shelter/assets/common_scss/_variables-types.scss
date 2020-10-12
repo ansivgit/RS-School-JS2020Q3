@@ -38,6 +38,13 @@ $font-h5: 15rem;
 $font-button: 17rem;
 $font-s: 12rem;
 
+//* брейкпоинты
+//$media-maxW: 1223px; // уменьшается только второстепенный шрифт и высота строки в футере
+$media-midW: 1023px; // переключаемся на планшетную версию
+$media-minW: 767px; // переключаемся на мобильную версию
+//$media-sMinW: 560px; // убираем логотип
+//$media-uMinW: 410px; // под узкие мобильные экраны - сужаем карточку
+
 @mixin head {
   font-family: $secondary-type;
   font-style: normal;
