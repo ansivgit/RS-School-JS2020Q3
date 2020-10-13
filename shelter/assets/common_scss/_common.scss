@@ -231,6 +231,12 @@ a {
     transition: all 0.3s;
   }
 
+  &__decorate--light,
+  &__decorate--light::before,
+  &__decorate--light::after {
+    background: #000000;
+  }
+
   &__decorate {
     position: relative;
 
