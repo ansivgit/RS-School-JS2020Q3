@@ -29,14 +29,16 @@ $footer-background: radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1
 
 
 //* базовые размеры шрифтов
-$font-body: 15rem;
-$font-h1: 32rem;
-$font-h2: 44rem;
-$font-h3: 35rem;
-$font-h4: 20rem;
-$font-h5: 15rem;
-$font-button: 17rem;
-$font-s: 12rem;
+$font-body: 15;
+$font-h1: 32;
+$font-h2: 44;
+$font-h2mob: 25;
+$font-h3: 35;
+$font-h3mob: 25;
+$font-h4: 20;
+$font-h5: 15;
+$font-button: 17;
+$font-s: 12;
 
 //* брейкпоинты
 //$media-maxW: 1223px; // уменьшается только второстепенный шрифт и высота строки в футере
@@ -65,6 +67,12 @@ h1,
 h2,
 .head2 {
   @include head2;
+
+  @media (max-width: $media-minW) {
+    font-size: #{$font-h2mob/$font-body}rem;
+    text-align: center;
+    letter-spacing: 0.06em;
+  }
 }
 
 @mixin head3 {
@@ -72,6 +80,11 @@ h2,
   font-size: #{$font-h3/$font-body}rem;
   line-height: 130%;
   letter-spacing: 0.06em;
+
+  @media (max-width: $media-minW) {
+    font-size: #{$font-h3mob/$font-body}rem;
+    text-align: center;
+  }
 }
 
 h3,
