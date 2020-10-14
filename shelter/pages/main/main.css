@@ -178,6 +178,14 @@ a {
   background: url(../../assets/icons/noise_transparent@2x.png), radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), linear-gradient(0deg, #211F20, #211F20);
 }
 
+.wrapper--main--sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #ffffff;
+}
+
 .container-content {
   max-width: 1280px;
   padding: 0 40px;
@@ -242,6 +250,12 @@ a {
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: center center;
+}
+
+@media (max-width: 767px) {
+  .btn--secondary--arrow {
+    margin: 0 3px;
+  }
 }
 
 .btn--secondary--arrow--forward {
@@ -459,7 +473,7 @@ a {
             flex-direction: column;
     -ms-flex-line-pack: center;
         align-content: center;
-    padding: 2rem 0 0 0;
+    padding: 2.05rem 0 0 0;
   }
 }
 
@@ -934,7 +948,7 @@ a {
 @media (max-width: 767px) {
   .help {
     padding-top: 2.8rem;
-    padding-bottom: 2.8rem;
+    padding-bottom: 2.75rem;
   }
 }
 

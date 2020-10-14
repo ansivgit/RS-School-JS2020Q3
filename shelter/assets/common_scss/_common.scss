@@ -29,6 +29,13 @@ a {
   &--footer {
     background: url(../../assets/icons/noise_transparent@2x.png), $footer-background;
   }
+
+  &--sticky {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #ffffff;
+  }
 }
 
 .container-content {
@@ -83,6 +90,10 @@ a {
       background-color: transparent;
       background-repeat: no-repeat;
       background-position: center center;
+
+      @media (max-width: $media-minW) {
+        margin: 0 3px;
+      }
 
       &--forward {
         transform: rotate(180deg);
@@ -278,7 +289,7 @@ a {
     @media (max-width: $media-minW) {
       flex-direction: column;
       align-content: center;
-      padding: 2rem 0 0 0;
+      padding: 2.05rem 0 0 0;
     }
 
     &__block {

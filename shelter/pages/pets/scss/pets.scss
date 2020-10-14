@@ -8,6 +8,14 @@
   padding-top: 5.33rem;
   padding-bottom: 6.67rem;
 
+  @media (max-width: $media-midW) {
+    padding-bottom: 5.1rem;
+  }
+  @media (max-width: $media-minW) {
+    padding-top: 2.8rem;
+    padding-bottom: 2.8rem;
+  }
+
   &__wrapper {
     display: flex;
     flex-direction: column;
@@ -18,16 +26,28 @@
   &__title {
     max-width: 26.67rem;
     text-align: center;
+
+    @media (max-width: $media-minW) {
+      max-width: 20rem;
+    }
   }
 
   &__list__container {
     display: flex;
     min-height: 900px;
     column-gap: 2.6667rem;
-    row-gap: 2rem;
+    row-gap: 2.07rem;
     flex-wrap: wrap;
     justify-content: center;
     margin: 4rem auto;
+
+    @media (max-width: $media-midW) {
+      justify-content: space-evenly;
+      margin: 2rem auto 2.7rem auto;
+    }
+    @media (max-width: $media-minW) {
+      margin: 2.8rem auto 2.85rem auto;
+    }
   }
 
   &__item {
@@ -37,6 +57,17 @@
     padding-bottom: 2rem;
     background-color: $lightest-color;
     border-radius: 9px;
+
+    &:nth-child(n + 7) {
+      @media (max-width: $media-midW) {
+        display: none;
+      }
+    }
+    &:nth-child(n + 4) {
+      @media (max-width: $media-minW) {
+        display: none;
+      }
+    }
 
     &:hover {
       background-color: #ffffff;
@@ -59,6 +90,6 @@
   &__btn__container {
     display: flex;
     justify-content: center;
-    column-gap: 1.33rem;
+    column-gap: 0.27rem;
   }
 }
