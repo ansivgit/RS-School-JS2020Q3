@@ -110,3 +110,5 @@ shelter/pages-in-jpg
 .eslintrc.json
 package-lock.json
 package.json
+virtual-keyboard/script0.js
+
