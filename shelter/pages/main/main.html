@@ -30,7 +30,7 @@
                 <a class="main-menu__link" href="/some-address/change-me" role="menuitem">Contacts</a>
               </li>
             </ul>
-            <button class="menu-mobile">
+            <button class="menu-mobile__btn">
               <span class="menu-mobile__decorate"></span>
             </button>
           </nav>
@@ -43,7 +43,7 @@
               We offer to give a chance to a little and nice puppy with an extremely wide and open heart. He or she will
               love you more than anybody else in the world, you will see!
             </div>
-            <a class="btn btn--main" href="/some-address/change-me">Make a friend</a>
+            <a class="btn btn--main" href="../pets/pets.html">Make a friend</a>
           </div>
           <div class="img-wrapper promo__img-wrapper">
             <img class="promo__img" src="../../assets/images/start-screen-puppy.png" alt="Sweet puppy" />
@@ -106,7 +106,7 @@
               value="forward"
             ></button>
           </div>
-          <a class="btn btn--main" href="/some-address/change-me">Get to know the rest</a>
+          <a class="btn btn--main" href="../pets/pets.html">Get to know the rest</a>
         </section>
       </div>
 
@@ -173,6 +173,38 @@
           </div>
         </section>
       </div>
+
+      <div class="modal hide">
+        <div class="modal__content">
+          <button class="btn btn--secondary btn--secondary--arrow btn--secondary--arrow--cross"></button>
+          <div class="img-wrapper modal__img-wrapper">
+            <img class="modal__img" src="../../assets/images/slider_photo02.png" alt="Pets photo" />
+          </div>
+          <div class="modal__description">
+            <h3 class="modal__description__name"><!--pet's name--></h3>
+            <h4 class="modal__description__breed"><!--pet's breed--></h4>
+            <p class="head5 modal__description__content"><!--pet's description--></p>
+            <ul class="head5 modal__description__list">
+              <li class="modal__description__list__item">
+                <span class="modal__description__list__item--title">Age: </span>
+                <span class="modal__description__list__item--content" data-age></span>
+              </li>
+              <li class="modal__description__list__item">
+                <span class="modal__description__list__item--title">Inoculations: </span>
+                <span class="modal__description__list__item--content" data-inoculations></span>
+              </li>
+              <li class="modal__description__list__item">
+                <span class="modal__description__list__item--title">Diseases: </span>
+                <span class="modal__description__list__item--content" data-diseases></span>
+              </li>
+              <li class="modal__description__list__item">
+                <span class="modal__description__list__item--title">Parasites: </span>
+                <span class="modal__description__list__item--content" data-parasites></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </main>
 
     <div class="wrapper--main wrapper--main--footer">
@@ -216,5 +248,6 @@
         </footer>
       </div>
     </div>
+    <script src="./main.js"></script>
   </body>
 </html>
