@@ -515,7 +515,6 @@ a {
 
 @media (max-width: 767px) {
   .modal__content {
-    height: 341px;
     width: 240px;
   }
 }
