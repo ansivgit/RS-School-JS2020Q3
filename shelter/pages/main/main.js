@@ -2,8 +2,11 @@ const menuMobileBtn = document.querySelector('.menu-mobile__btn');
 const mainNav = document.querySelector('.main-nav');
 const sliderCards = document.querySelectorAll('.slider__card');
 const modal = document.querySelector('.modal');
+const slider = document.querySelector('.slider');
+const sliderButtons = document.querySelectorAll('.btn--secondary--arrow--spear');
 
 let petsData = [];
+let sliderData = [];
 
 const getData = async function(url) {
   const response = await fetch(url);
@@ -15,14 +18,20 @@ const getData = async function(url) {
 };
 
 function init() {
-  getData('../../assets/pets.json').then(function (data) {
+  getData('../../assets/pets.json').then(function(data) {
+    //console.log(data);
     petsData.push(...data);
-    console.log(petsData);
-
-    return petsData;
+    //console.log(petsData);
   });
+  //console.log(petsData[0]);
+  //console.log(sliderData);
+  //return petsData;
 };
 
+
+//const currentSlide = sliderData.push(randomGen(3, petsData));
+//console.log(currentSlide);
+//console.log(randomGen(2, [{ a: 1 }, { b: 2 }, { c: 3 }, { d: 4 }]))
 //! menu-burger
 menuMobileBtn.addEventListener('click', () => {
   menuMobileBtn.classList.toggle('menu-mobile__btn--active')
@@ -68,9 +77,44 @@ function openModal(event) {
   modalParasites.textContent = parasites;
 };
 
+// slider
+//* функция, которая генерит заданное кол-во случайных элементов из массива, который подается на вход
+function randomGen(quantity = 1, array = []) {
+  if (array.length === 0) return array;
+
+  const unical = new Set();
+
+  while (unical.size < quantity) {
+    let indexRandom = Math.round(Math.random() * (array.length - 1));
+    unical.add(array[indexRandom]);
+  }
+  const randomArray = Array.from(unical);
+  //console.log(randomArray);
+  return randomArray;
+};
+
+function slideChange(event) {
+  //const leftBtn = slider.querySelector('[data-left]');
+  //const rightBtn = slider.querySelector('[data-right]');
+  //const target = event.target.closest('.btn--secondary--arrow--spear');
+  const sliderCards = slider.querySelectorAll('.slider__card');
+  const randomSlide = randomGen(8, petsData);
+
+  sliderCards.forEach((item, index) => {
+    item.querySelector('.slider__card__img').setAttribute('src', randomSlide[index].img);
+    item.querySelector('.slider__card__name').textContent = randomSlide[index].name;
+  });
+}
+
+
+//* event listeners
 sliderCards.forEach((item) => {
   item.addEventListener('click', openModal);
 });
+
+sliderButtons.forEach((item) => {
+  item.addEventListener('click', slideChange)
+})
 
 modal.addEventListener('click', (event) => {
   console.log(event.target)
