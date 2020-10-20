@@ -154,6 +154,10 @@ body {
   display: none;
 }
 
+.locked {
+  overflow-y: hidden;
+}
+
 a {
   text-decoration: none;
 }
@@ -204,6 +208,16 @@ a {
   }
 }
 
+.modal:hover .btn--secondary--arrow--cross {
+  border-color: transparent;
+  background-color: #FDDCC4;
+}
+
+.modal__content:hover .btn--secondary--arrow--cross {
+  background-color: transparent;
+  border-color: #F1CDB3;
+}
+
 .btn {
   font-family: Georgia, "Times New Roman", serif;
   font-style: normal;
@@ -223,8 +237,8 @@ a {
 }
 
 .btn:hover, .btn:active, .btn:focus {
-  border-color: transparent;
-  background-color: #FDDCC4;
+  border-color: transparent !important;
+  background-color: #FDDCC4 !important;
   outline: none;
 }
 
@@ -408,8 +422,11 @@ a {
 }
 
 .main-menu__link:active, .main-menu__link:hover, .main-menu__link:focus, .main-menu__link--active {
-  border-bottom: 3px solid #F1CDB3;
   color: #FAFAFA;
+}
+
+.main-menu__link--active {
+  border-bottom: 3px solid #F1CDB3;
 }
 
 .main-menu__link--regular {
@@ -417,8 +434,11 @@ a {
 }
 
 .main-menu__link--regular:active, .main-menu__link--regular:hover, .main-menu__link--regular:focus, .main-menu__link--regular--active {
-  border-bottom: 3px solid #F1CDB3;
   color: #292929;
+}
+
+.main-menu__link--regular--active {
+  border-bottom: 3px solid #F1CDB3;
 }
 
 .menu-mobile__btn {

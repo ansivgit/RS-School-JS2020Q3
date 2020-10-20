@@ -9,6 +9,10 @@
   display: none;
 }
 
+.locked {
+  overflow-y: hidden;
+}
+
 a {
   text-decoration: none;
 }
@@ -54,6 +58,16 @@ a {
   }
 }
 
+.modal:hover .btn--secondary--arrow--cross {
+    border-color: transparent;
+    background-color: $secondary-theme-color;
+  }
+
+.modal__content:hover .btn--secondary--arrow--cross {
+  background-color: transparent;
+  border-color: $primary-theme-color;
+}
+
 .btn {
   @include buttonTitle;
   display: inline-block;
@@ -66,8 +80,9 @@ a {
   &:hover,
   &:active,
   &:focus {
-    border-color: transparent;
-    background-color: $secondary-theme-color;
+    //! костыли, но как решить иначе - не знаю
+    border-color: transparent !important;
+    background-color: $secondary-theme-color !important;
     outline: none;
   }
 
@@ -209,7 +224,6 @@ a {
 
   @media (max-width: $media-minW) {
     flex-direction: column;
-
   }
 
   &__item {
@@ -226,8 +240,10 @@ a {
     &:hover,
     &:focus,
     &--active {
-      border-bottom: 3px solid $primary-theme-color;
       color: $lightest-color;
+    }
+    &--active {
+      border-bottom: 3px solid $primary-theme-color;
     }
 
     &--regular {
@@ -237,8 +253,10 @@ a {
       &:hover,
       &:focus,
       &--active {
-        border-bottom: 3px solid $primary-theme-color;
         color: $dark-color;
+      }
+      &--active {
+        border-bottom: 3px solid $primary-theme-color;
       }
     }
   }

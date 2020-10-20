@@ -1,3 +1,4 @@
+const body = document.querySelector('body');
 const menuMobileBtn = document.querySelector('.menu-mobile__btn');
 const mainNav = document.querySelector('.main-nav');
 const sliderCards = document.querySelectorAll('.slider__card');
@@ -66,6 +67,7 @@ function openModal(event) {
   modalParasites.textContent = '';
 
   modal.classList.remove('hide');
+  body.classList.add('locked');
 
   modalImg.setAttribute('src', img);
   modalName.textContent = name;
@@ -82,21 +84,17 @@ function openModal(event) {
 function randomGen(quantity = 1, array = []) {
   if (array.length === 0) return array;
 
-  const unical = new Set();
+  const unique = new Set();
 
-  while (unical.size < quantity) {
+  while (unique.size < quantity) {
     let indexRandom = Math.round(Math.random() * (array.length - 1));
-    unical.add(array[indexRandom]);
+    unique.add(array[indexRandom]);
   }
-  const randomArray = Array.from(unical);
-  //console.log(randomArray);
+  const randomArray = Array.from(unique);
   return randomArray;
 };
 
 function slideChange(event) {
-  //const leftBtn = slider.querySelector('[data-left]');
-  //const rightBtn = slider.querySelector('[data-right]');
-  //const target = event.target.closest('.btn--secondary--arrow--spear');
   const sliderCards = slider.querySelectorAll('.slider__card');
   const randomSlide = randomGen(8, petsData);
 
@@ -119,6 +117,7 @@ sliderButtons.forEach((item) => {
 modal.addEventListener('click', (event) => {
   console.log(event.target)
   if (event.target.closest('.btn--secondary--arrow--cross') || event.target.classList.contains('modal')) {
+    body.classList.remove('locked');
     modal.classList.add('hide');
   }
 });
