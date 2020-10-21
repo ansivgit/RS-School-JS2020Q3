@@ -48,42 +48,42 @@
               <li class="cards__item">
                 <img class="cards__item__img" src="../../assets/images/slider_photo01.png" alt="Сat Katrine" />
                 <h4 class="cards__item__name">Katrine</h4>
-                <a class="btn btn--secondary" href="/some-address/change-me">Learn more</a>
+                <a class="btn btn--secondary" href="/some-address/change-me" target="_blanc">Learn more</a>
               </li>
               <li class="cards__item">
                 <img class="cards__item__img" src="../../assets/images/slider_photo02.png" alt="Puppy Jennifer" />
                 <h4 class="cards__item__name">Jennifer</h4>
-                <a class="btn btn--secondary" href="/some-address/change-me">Learn more</a>
+                <a class="btn btn--secondary" href="/some-address/change-me" target="_blanc">Learn more</a>
               </li>
               <li class="cards__item">
                 <img class="cards__item__img" src="../../assets/images/slider_photo03.png" alt="Dog Woody" />
                 <h4 class="cards__item__name">Woody</h4>
-                <a class="btn btn--secondary" href="/some-address/change-me">Learn more</a>
+                <a class="btn btn--secondary" href="/some-address/change-me" target="_blanc">Learn more</a>
               </li>
               <li class="cards__item">
                 <img class="cards__item__img" src="../../assets/images/looking_04.png" alt="Puppy Sophia" />
                 <h4 class="cards__item__name">Sophia</h4>
-                <a class="btn btn--secondary" href="/some-address/change-me">Learn more</a>
+                <a class="btn btn--secondary" href="/some-address/change-me" target="_blanc">Learn more</a>
               </li>
               <li class="cards__item">
                 <img class="cards__item__img" src="../../assets/images/looking_05.png" alt="Cat Timmy" />
                 <h4 class="cards__item__name">Timmy</h4>
-                <a class="btn btn--secondary" href="/some-address/change-me">Learn more</a>
+                <a class="btn btn--secondary" href="/some-address/change-me" target="_blanc">Learn more</a>
               </li>
               <li class="cards__item">
                 <img class="cards__item__img" src="../../assets/images/looking_06.png" alt="Dog Charly" />
                 <h4 class="cards__item__name">Charly</h4>
-                <a class="btn btn--secondary" href="/some-address/change-me">Learn more</a>
+                <a class="btn btn--secondary" href="/some-address/change-me" target="_blanc">Learn more</a>
               </li>
               <li class="cards__item">
                 <img class="cards__item__img" src="../../assets/images/looking_07.png" alt="Puppy Scarlett" />
                 <h4 class="cards__item__name">Scarlett</h4>
-                <a class="btn btn--secondary" href="/some-address/change-me">Learn more</a>
+                <a class="btn btn--secondary" href="/some-address/change-me" target="_blanc">Learn more</a>
               </li>
               <li class="cards__item">
                 <img class="cards__item__img" src="../../assets/images/looking_08.png" alt="Cat Freddie" />
                 <h4 class="cards__item__name">Freddie</h4>
-                <a class="btn btn--secondary" href="/some-address/change-me">Learn more</a>
+                <a class="btn btn--secondary" href="/some-address/change-me" target="_blanc">Learn more</a>
               </li>
             </ul>
             <div class="cards__btn__container">
@@ -106,9 +106,40 @@
                 value="forward"
               ></button>
             </div>
-
           </div>
         </section>
+      </div>
+
+      <div class="modal hide">
+        <div class="modal__content">
+          <button class="btn btn--secondary btn--secondary--arrow btn--secondary--arrow--cross"></button>
+          <div class="img-wrapper modal__img-wrapper">
+            <img class="modal__img" src="../../assets/images/slider_photo02.png" alt="Pets photo" />
+          </div>
+          <div class="modal__description">
+            <h3 class="modal__description__name"><!--pet's name--></h3>
+            <h4 class="modal__description__breed"><!--pet's breed--></h4>
+            <p class="head5 modal__description__content"><!--pet's description--></p>
+            <ul class="head5 modal__description__list">
+              <li class="modal__description__list__item">
+                <span class="modal__description__list__item--title">Age: </span>
+                <span class="modal__description__list__item--content" data-age></span>
+              </li>
+              <li class="modal__description__list__item">
+                <span class="modal__description__list__item--title">Inoculations: </span>
+                <span class="modal__description__list__item--content" data-inoculations></span>
+              </li>
+              <li class="modal__description__list__item">
+                <span class="modal__description__list__item--title">Diseases: </span>
+                <span class="modal__description__list__item--content" data-diseases></span>
+              </li>
+              <li class="modal__description__list__item">
+                <span class="modal__description__list__item--title">Parasites: </span>
+                <span class="modal__description__list__item--content" data-parasites></span>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </main>
 
@@ -153,6 +184,6 @@
         </footer>
       </div>
     </div>
-    <script src="../script.js"></script>
+    <script src="./pets.js"></script>
   </body>
 </html>
