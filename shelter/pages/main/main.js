@@ -96,7 +96,7 @@ function randomGen(quantity = 1, array = []) {
 
 function slideChange(event) {
   const sliderCards = slider.querySelectorAll('.slider__card');
-  const randomSlide = randomGen(8, petsData);
+  const randomSlide = randomGen(petsData.length, petsData);
 
   sliderCards.forEach((item, index) => {
     item.querySelector('.slider__card__img').setAttribute('src', randomSlide[index].img);
