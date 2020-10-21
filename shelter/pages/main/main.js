@@ -115,7 +115,6 @@ sliderButtons.forEach((item) => {
 })
 
 modal.addEventListener('click', (event) => {
-  console.log(event.target)
   if (event.target.closest('.btn--secondary--arrow--cross') || event.target.classList.contains('modal')) {
     body.classList.remove('locked');
     modal.classList.add('hide');
