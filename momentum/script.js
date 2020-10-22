@@ -1,4 +1,5 @@
 const time = document.querySelector('.time');
+const day = document.querySelector('.day');
 const greeting = document.querySelector('.greeting');
 const name = document.querySelector('.name');
 const focus = document.querySelector('.focus');
@@ -16,6 +17,15 @@ function showTime() {
 
 function addZero(num) {
   return ((parseInt(num, 10) < 10) ? '0' : '') + num;
+};
+
+function showDate() {
+  let today = new Date();
+  const options = { weekday: 'long', month: 'long', day: 'numeric' };
+
+  day.textContent = today.toLocaleDateString('en-EN', options);
+
+  setTimeout(showDate, 8640000)
 };
 
 function setBgGreetings() {
@@ -67,6 +77,14 @@ function setName(event) {
   }
 };
 
+function clearField(event) {
+  let currentContent = event.target.textContent;
+  event.target.textContent = '';
+  if (event.target.textContent.length === 0) {
+    event.target.textContent = currentContent;
+  }
+}
+
 function getFocus() {
   focus.textContent = (localStorage.getItem('focus') === null)
     ? '[Enter Focus]'
@@ -84,12 +102,14 @@ function setFocus(event) {
   }
 };
 
+//name.addEventListener('click', clearField);
 name.addEventListener('keydown', setName);
 name.addEventListener('blur', setName);
 focus.addEventListener('keydown', setFocus);
 focus.addEventListener('blur', setFocus);
 
 showTime();
+showDate();
 setBgGreetings();
 getName();
 getFocus();
