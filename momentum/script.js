@@ -1,113 +1,95 @@
-// DOM Elements
-const time = document.querySelector('.time'),
-  greeting = document.querySelector('.greeting'),
-  name = document.querySelector('.name'),
-  focus = document.querySelector('.focus');
+const time = document.querySelector('.time');
+const greeting = document.querySelector('.greeting');
+const name = document.querySelector('.name');
+const focus = document.querySelector('.focus');
 
-// Options
-const showAmPm = true;
-
-// Show Time
 function showTime() {
-  let today = new Date(),
-    hour = today.getHours(),
-    min = today.getMinutes(),
-    sec = today.getSeconds();
+  let today = new Date();
+  let hour = today.getHours();
+  let minute = today.getMinutes();
+  let second = today.getSeconds();
 
-  // Set AM or PM
-  const amPm = hour >= 12 ? 'PM' : 'AM';
+  time.textContent = `${hour}:${addZero(minute)}:${addZero(second)}`;
 
-  // 12hr Format
-  hour = hour % 12 || 12;
+  setTimeout(showTime, 1000)
+};
 
-  // Output Time
-  time.innerHTML = `${hour}<span>:</span>${addZero(min)}<span>:</span>${addZero(
-    sec
-  )} ${showAmPm ? amPm : ''}`;
+function addZero(num) {
+  return ((parseInt(num, 10) < 10) ? '0' : '') + num;
+};
 
-  setTimeout(showTime, 1000);
-}
+function setBgGreetings() {
+  let today = new Date();
+  let hour = today.getHours();
 
-// Add Zeros
-function addZero(n) {
-  return (parseInt(n, 10) < 10 ? '0' : '') + n;
-}
+  switch (true) {
+    case (hour < 6):
+      document.body.style.backgroundImage = "url('./assets/images/night/01.jpg')";
+      greeting.textContent = 'Good Night, ';
+      break;
 
-// Set Background and Greeting
-function setBgGreet() {
-  let today = new Date(),
-    hour = today.getHours();
+    case (hour < 12):
+      document.body.style.backgroundImage = "url('./assets/images/morning/01.jpg')";
+      greeting.textContent = 'Good Morning, ';
+      break;
 
-  if (hour < 12) {
-    // Morning
-    document.body.style.backgroundImage =
-      "url('https://i.ibb.co/7vDLJFb/morning.jpg')";
-    greeting.textContent = 'Good Morning, ';
-  } else if (hour < 18) {
-    // Afternoon
-    document.body.style.backgroundImage =
-      "url('https://i.ibb.co/3mThcXc/afternoon.jpg')";
-    greeting.textContent = 'Good Afternoon, ';
-  } else {
-    // Evening
-    document.body.style.backgroundImage =
-      "url('https://i.ibb.co/924T2Wv/night.jpg')";
-    greeting.textContent = 'Good Evening, ';
-    document.body.style.color = 'white';
+    case (hour < 18):
+      document.body.style.backgroundImage = "url('./assets/images/day/01.jpg')";
+      greeting.textContent = 'Good Afternoon, ';
+      break;
+
+    case (hour < 24):
+      document.body.style.backgroundImage = "url('./assets/images/evening/01.jpg')";
+      greeting.textContent = 'Good Evening, ';
+      break;
+
+    default:
+      document.body.style.backgroundImage = "url('./assets/images/flag.jpg')";
+      greeting.textContent = 'Hola, ';
+      break;
   }
-}
+};
 
-// Get Name
 function getName() {
-  if (localStorage.getItem('name') === null) {
-    name.textContent = '[Enter Name]';
-  } else {
-    name.textContent = localStorage.getItem('name');
-  }
-}
+  name.textContent = (localStorage.getItem('name') === null)
+    ? '[Enter Name]'
+    : name.textContent = localStorage.getItem('name');
+};
 
-// Set Name
-function setName(e) {
-  if (e.type === 'keypress') {
-    // Make sure enter is pressed
-    if (e.which == 13 || e.keyCode == 13) {
-      localStorage.setItem('name', e.target.innerText);
+function setName(event) {
+  if (event.type === 'keydown') {
+    if (event.key === 'Enter') {
+      localStorage.setItem('name', event.target.textContent);
       name.blur();
     }
   } else {
-    localStorage.setItem('name', e.target.innerText);
+    localStorage.setItem('name', event.target.textContent);
   }
-}
+};
 
-// Get Focus
 function getFocus() {
-  if (localStorage.getItem('focus') === null) {
-    focus.textContent = '[Enter Focus]';
-  } else {
-    focus.textContent = localStorage.getItem('focus');
-  }
-}
+  focus.textContent = (localStorage.getItem('focus') === null)
+    ? '[Enter Focus]'
+    : focus.textContent = localStorage.getItem('focus');
+};
 
-// Set Focus
-function setFocus(e) {
-  if (e.type === 'keypress') {
-    // Make sure enter is pressed
-    if (e.which == 13 || e.keyCode == 13) {
-      localStorage.setItem('focus', e.target.innerText);
+function setFocus(event) {
+  if (event.type === 'keydown') {
+    if (event.key === 'Enter') {
+      localStorage.setItem('focus', event.target.textContent);
       focus.blur();
     }
   } else {
-    localStorage.setItem('focus', e.target.innerText);
+    localStorage.setItem('focus', event.target.textContent);
   }
-}
+};
 
-name.addEventListener('keypress', setName);
+name.addEventListener('keydown', setName);
 name.addEventListener('blur', setName);
-focus.addEventListener('keypress', setFocus);
+focus.addEventListener('keydown', setFocus);
 focus.addEventListener('blur', setFocus);
 
-// Run
 showTime();
-setBgGreet();
+setBgGreetings();
 getName();
 getFocus();
