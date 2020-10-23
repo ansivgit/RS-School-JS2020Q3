@@ -83,6 +83,8 @@ function setBgGreetings() {
     case (hour < 6):
       //currentDayTime = 'night'; //! , возможно. эта переменная не нужна
       //document.body.style.backgroundImage = `url('./assets/images/${dayImages[hour]}')`;
+      document.body.style.color = 'white';
+      document.body.style.textShadow = 'black 0 0 5px';
       greeting.textContent = 'Good Night, ';
       break;
 
@@ -100,6 +102,8 @@ function setBgGreetings() {
     case (hour < 24):
       //currentDayTime = 'evening';
       //document.body.style.backgroundImage = `url('./assets/images/${dayImages[hour]}')`;
+      document.body.style.color = 'white';
+      document.body.style.textShadow = 'black 0 0 5px';
       greeting.textContent = 'Good Evening, ';
       break;
 
@@ -180,7 +184,27 @@ async function getQuote() {
   figcaption.textContent = data.quote.author;
 };
 
+
+function getCity() {
+  city.textContent = (localStorage.getItem('city') === null)
+  ? '[Enter City]'
+  : city.textContent = localStorage.getItem('city');
+};
+
+function setCity(event) {
+  if (event.type === 'keydown') {
+    if (event.key === 'Enter') {
+      localStorage.setItem('city', event.target.textContent);
+      city.blur();
+    }
+  } else {
+    localStorage.setItem('city', event.target.textContent);
+  }
+  getWeather();
+};
+
 async function getWeather() {
+  if (localStorage.getItem('city') === null) { return; }
   const weatherIcon = document.querySelector('.weather-icon');
   const weather = document.querySelector('.weather');
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.textContent}&lang=ru&appid=${API_KEY}&units=metric`;
@@ -194,31 +218,14 @@ async function getWeather() {
   weather.textContent = `${data.main.temp}°C, ${data.main.humidity}%, ${data.wind.speed}m/sec`;
 };
 
-function getCity() {
-  city.textContent = (localStorage.getItem('city') === null)
-    ? '[Enter City]'
-    : city.textContent = localStorage.getItem('city');
-};
-
-function setCity(event) {
-  if (event.type === 'keydown') {
-    if (event.key === 'Enter') {
-      localStorage.setItem('city', event.target.textContent);
-      city.blur();
-    }
-  } else {
-    localStorage.setItem('city', event.target.textContent);
-  }
-};
-
 //name.addEventListener('click', clearField);
 name.addEventListener('keydown', setName);
 name.addEventListener('blur', setName);
 myFocus.addEventListener('keydown', setFocus);
 myFocus.addEventListener('blur', setFocus);
-document.addEventListener('DOMContentLoaded', getWeather);
 city.addEventListener('keydown', setCity);
 city.addEventListener('blur', setCity);
+document.addEventListener('DOMContentLoaded', getWeather);
 changeImgBtn.addEventListener('click', changeBgImage);
 document.addEventListener('DOMContentLoaded', getQuote);
 changeQuoteBtn.addEventListener('click', getQuote);
