@@ -17,8 +17,8 @@ const greeting = document.querySelector('.greeting');
 const name = document.querySelector('.name');
 const focus = document.querySelector('.focus');
 const changeImgBtn = document.querySelector('.btn--bgImg-change');
-//const changeImgBtn = document.querySelector('.btn--bgImg-change');
-//const changeImgBtn = document.querySelector('.btn--bgImg-change');
+const blockquote = document.querySelector('blockquote');
+const figcaption = document.querySelector('figcaption');
 const btnQuoteChange = document.querySelector('.btn--quote-change');
 
 function showTime() {
@@ -156,12 +156,36 @@ function changeBgImage() {
   document.body.style.backgroundImage = `url('./assets/images/${dayImages[currentImgIndex]}')`;
 };
 
+// если в ссылке заменить lang=en на lang=ru, цитаты будут на русском языке
+// префикс https://cors-anywhere.herokuapp.com используем для доступа к данным с других сайтов,
+//если браузер возвращает ошибку Cross - Origin Request Blocked
+async function getQuote() {
+  console.log('0000');
+  //префикс https://cors-anywhere.herokuapp.com//
+  const url = `https://favqs.com/api/qotd`;
+  //const url = `https://https://type.fit/api/quotes`;
+  //const url = `https://api.adviceslip.com/advice`;
+  //const url = `https://api.chucknorris.io/jokes/random`;
+  //const url = `https://programming-quotes-api.herokuapp.com/quotes`;
+  //const url = `https://quote-garden.herokuapp.com/api/v2/quotes/random`;
+  //const url = `https://quotesondesign.com/wp-json/wp/v2/posts/?orderby=rand`;
+
+  const res = await fetch(url);
+  const data = await res.json();
+  console.log(data);
+  blockquote.textContent = `"${data.quote.body}"`;
+  figcaption.textContent = data.quote.author;
+  console.log('1111');
+}
+
 //name.addEventListener('click', clearField);
 name.addEventListener('keydown', setName);
 name.addEventListener('blur', setName);
 focus.addEventListener('keydown', setFocus);
 focus.addEventListener('blur', setFocus);
 changeImgBtn.addEventListener('click', changeBgImage);
+document.addEventListener('DOMContentLoaded', getQuote);
+btnQuoteChange.addEventListener('click', getQuote);
 
 showTime();
 showDate();
