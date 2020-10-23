@@ -1,18 +1,38 @@
+const imagesAll = {
+  night: ['01.jpg', '02.jpg', '03.jpg', '04.jpg', '05.jpg', '06.jpg', '07.jpg', '08.jpg', '09.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpg', '19.jpg', '20.jpg'],
+  morning: ['01.jpg', '02.jpg', '03.jpg', '04.jpg', '05.jpg', '06.jpg', '07.jpg', '08.jpg', '09.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpg', '19.jpg', '20.jpg'],
+  day: ['01.jpg', '02.jpg', '03.jpg', '04.jpg', '05.jpg', '06.jpg', '07.jpg', '08.jpg', '09.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpg', '19.jpg', '20.jpg'],
+  evening: ['01.jpg', '02.jpg', '03.jpg', '04.jpg', '05.jpg', '06.jpg', '07.jpg', '08.jpg', '09.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpg', '19.jpg', '20.jpg'],
+};
+const imgPerDayTime = 6;
+const dayImages = [];
+let hour = new Date().getHours();
+let minute = new Date().getMinutes();
+let currentImgIndex = hour;
+let currentDayTime = '';
+
 const time = document.querySelector('.time');
 const day = document.querySelector('.day');
 const greeting = document.querySelector('.greeting');
 const name = document.querySelector('.name');
 const focus = document.querySelector('.focus');
+const changeImgBtn = document.querySelector('.btn--bgImg-change');
+//const changeImgBtn = document.querySelector('.btn--bgImg-change');
+//const changeImgBtn = document.querySelector('.btn--bgImg-change');
+const btnQuoteChange = document.querySelector('.btn--quote-change');
 
 function showTime() {
   let today = new Date();
-  let hour = today.getHours();
-  let minute = today.getMinutes();
+  hour = today.getHours();
+  minute = today.getMinutes();
   let second = today.getSeconds();
 
   time.textContent = `${hour}:${addZero(minute)}:${addZero(second)}`;
-
-  setTimeout(showTime, 1000)
+  if (parseInt(minute) + second === 0) {
+    setBgGreetings();
+    showDate();
+  }
+  setTimeout(showTime, 1000);
 };
 
 function addZero(num) {
@@ -24,32 +44,61 @@ function showDate() {
   const options = { weekday: 'long', month: 'long', day: 'numeric' };
 
   day.textContent = today.toLocaleDateString('en-EN', options);
-
-  setTimeout(showDate, 8640000)
 };
 
+function randomGen(quantity = 1, array = []) {
+  if (array.length === 0) return array;
+
+  const unique = new Set();
+
+  while (unique.size < quantity) {
+    let indexRandom = Math.round(Math.random() * (array.length - 1));
+    unique.add(array[indexRandom]);
+  }
+  const randomArray = Array.from(unique);
+  return randomArray;
+};
+
+(function randomImg() {
+  const dayTime = Object.keys(imagesAll);
+
+  dayTime.forEach((key) => {
+    let imagesDayTime = randomGen(imgPerDayTime, imagesAll[key]);
+    let src = '';
+    imagesDayTime.forEach((img) => {
+      src = `${key}/${img}`;
+      dayImages.push(src);
+    })
+  });
+})();
+
 function setBgGreetings() {
-  let today = new Date();
-  let hour = today.getHours();
+  let hour = new Date().getHours();
+  console.log('hola at ', new Date());
+
+  document.body.style.backgroundImage = `url('./assets/images/${dayImages[hour]}')`;
 
   switch (true) {
     case (hour < 6):
-      document.body.style.backgroundImage = "url('./assets/images/night/01.jpg')";
+      //currentDayTime = 'night'; //! , возможно. эта переменная не нужна
+      //document.body.style.backgroundImage = `url('./assets/images/${dayImages[hour]}')`;
       greeting.textContent = 'Good Night, ';
       break;
 
     case (hour < 12):
-      document.body.style.backgroundImage = "url('./assets/images/morning/01.jpg')";
+      //currentDayTime = 'morning';
       greeting.textContent = 'Good Morning, ';
       break;
 
     case (hour < 18):
-      document.body.style.backgroundImage = "url('./assets/images/day/01.jpg')";
+      //currentDayTime = 'day';
+      //document.body.style.backgroundImage = `url('./assets/images/${dayImages[hour]}')`;
       greeting.textContent = 'Good Afternoon, ';
       break;
 
     case (hour < 24):
-      document.body.style.backgroundImage = "url('./assets/images/evening/01.jpg')";
+      //currentDayTime = 'evening';
+      //document.body.style.backgroundImage = `url('./assets/images/${dayImages[hour]}')`;
       greeting.textContent = 'Good Evening, ';
       break;
 
@@ -102,11 +151,17 @@ function setFocus(event) {
   }
 };
 
+function changeBgImage() {
+  currentImgIndex = (currentImgIndex !== 23) ? currentImgIndex += 1 : 0;
+  document.body.style.backgroundImage = `url('./assets/images/${dayImages[currentImgIndex]}')`;
+};
+
 //name.addEventListener('click', clearField);
 name.addEventListener('keydown', setName);
 name.addEventListener('blur', setName);
 focus.addEventListener('keydown', setFocus);
 focus.addEventListener('blur', setFocus);
+changeImgBtn.addEventListener('click', changeBgImage);
 
 showTime();
 showDate();
