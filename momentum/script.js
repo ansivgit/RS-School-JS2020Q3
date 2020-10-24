@@ -12,6 +12,7 @@ let hour = new Date().getHours();
 let minute = new Date().getMinutes();
 let currentImgIndex = hour;
 let currentDayTime = '';
+let currentCity = '';
 
 const time = document.querySelector('.time');
 const day = document.querySelector('.day');
@@ -29,7 +30,7 @@ function showTime() {
   minute = today.getMinutes();
 
   time.textContent = `${hour}:${addZero(minute)}:${addZero(second)}`;
-  if (parseInt(minute) + second === 0) {
+  if (minute + second === 0) {
     setBgGreetings();
     showDate();
   }
@@ -115,45 +116,43 @@ function setBgGreetings() {
 };
 
 function getName() {
-  name.textContent = (localStorage.getItem('name') === null)
-    ? '[Enter Name]'
-    : name.textContent = localStorage.getItem('name');
+  name.textContent = localStorage.getItem('name') || '[Enter Name]';
 };
 
 function setName(event) {
-  if (event.type === 'keydown') {
-    if (event.key === 'Enter') {
-      localStorage.setItem('name', event.target.textContent);
-      name.blur();
-    }
-  } else {
-    localStorage.setItem('name', event.target.textContent);
+  if (event.type === 'keydown' && event.key !== 'Enter') { return; }
+
+  if (event.target.textContent.trim().length === 0 || event.target.textContent === '[Enter Name]') {
+    event.target.textContent = localStorage.getItem('name') || '[Enter Name]';
+    name.blur();
+
+    return;
   }
+
+  localStorage.setItem('name', event.target.textContent);
+  name.blur();
 };
 
-function clearField(event) {
-  let currentContent = event.target.textContent;
-  event.target.textContent = '';
-  if (event.target.textContent.length === 0) {
-    event.target.textContent = currentContent;
-  }
-}
-
 function getFocus() {
-  myFocus.textContent = (localStorage.getItem('myFocus') === null)
-    ? '[Enter Focus]'
-    : myFocus.textContent = localStorage.getItem('myFocus');
+  myFocus.textContent = localStorage.getItem('myFocus') || '[Enter Focus]';
 };
 
 function setFocus(event) {
-  if (event.type === 'keydown') {
-    if (event.key === 'Enter') {
-      localStorage.setItem('myFocus', event.target.textContent);
-      myFocus.blur();
-    }
-  } else {
-    localStorage.setItem('myFocus', event.target.textContent);
+  if (event.type === 'keydown' && event.key !== 'Enter') { return; }
+
+  if (event.target.textContent.trim().length === 0 || event.target.textContent === '[Enter Focus]') {
+    event.target.textContent = localStorage.getItem('myFocus') || '[Enter Focus]';
+    myFocus.blur();
+
+    return;
   }
+
+  localStorage.setItem('myFocus', event.target.textContent);
+  myFocus.blur();
+};
+
+function clearField(event) {
+  event.target.textContent = ' ';
 };
 
 function changeBgImage() {
@@ -161,10 +160,10 @@ function changeBgImage() {
   document.body.style.backgroundImage = `url('./assets/images/${dayImages[currentImgIndex]}')`;
 };
 
-// если в ссылке заменить lang=en на lang=ru, цитаты будут на русском языке
-// префикс https://cors-anywhere.herokuapp.com используем для доступа к данным с других сайтов,
-//если браузер возвращает ошибку Cross - Origin Request Blocked
 async function getQuote() {
+  // если в ссылке заменить lang=en на lang=ru, цитаты будут на русском языке
+  // префикс https://cors-anywhere.herokuapp.com используем для доступа к данным с других сайтов,
+  //если браузер возвращает ошибку Cross - Origin Request Blocked
   const blockquote = document.querySelector('blockquote');
   const figcaption = document.querySelector('figcaption');
 
@@ -186,20 +185,21 @@ async function getQuote() {
 
 
 function getCity() {
-  city.textContent = (localStorage.getItem('city') === null)
-  ? '[Enter City]'
-  : city.textContent = localStorage.getItem('city');
+  city.textContent = localStorage.getItem('city') || '[Enter City]';
 };
 
 function setCity(event) {
-  if (event.type === 'keydown') {
-    if (event.key === 'Enter') {
-      localStorage.setItem('city', event.target.textContent);
-      city.blur();
-    }
-  } else {
-    localStorage.setItem('city', event.target.textContent);
+  if (event.type === 'keydown' && event.key !== 'Enter') { return; }
+
+  if (event.target.textContent.trim().length === 0 || event.target.textContent === '[Enter City]') {
+    event.target.textContent = localStorage.getItem('city') || '[Enter City]';
+    city.blur();
+
+    return;
   }
+
+  localStorage.setItem('city', event.target.textContent);
+  city.blur();
   getWeather();
 };
 
@@ -218,11 +218,13 @@ async function getWeather() {
   weather.textContent = `${data.main.temp}°C, ${data.main.humidity}%, ${data.wind.speed}m/sec`;
 };
 
-//name.addEventListener('click', clearField);
+name.addEventListener('click', clearField);
 name.addEventListener('keydown', setName);
 name.addEventListener('blur', setName);
+myFocus.addEventListener('click', clearField);
 myFocus.addEventListener('keydown', setFocus);
 myFocus.addEventListener('blur', setFocus);
+city.addEventListener('click', clearField);
 city.addEventListener('keydown', setCity);
 city.addEventListener('blur', setCity);
 document.addEventListener('DOMContentLoaded', getWeather);
