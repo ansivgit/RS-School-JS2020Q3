@@ -4,20 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/owfont-regular.css">
   <link rel="stylesheet" href="./style.css" />
   <title>Momentum</title>
 </head>
 <body>
   <main>
-    <section class="weather-block">
-      <p class="city" contenteditable="true">[Enter City]</p>
-      <icon class="weather-icon owf"></icon>
-      <p class="weather"></p>
+    <section class="header">
+      <button class="btn btn--bgImg-change"></button>
+      <div class="weather-block">
+        <p class="city" contenteditable="true">[Enter City]</p>
+        <icon class="weather-icon owf"></icon>
+        <div class="temperature"></div>
+        <div class="humidity"></div>
+        <div class="wind"></div>
+
+      </div>
     </section>
 
     <section class="date-block">
-      <button class="btn btn--bgImg-change"></button>
       <time class="time"></time>
       <time class="day"></time>
     </section>
@@ -32,11 +38,11 @@
     </section>
 
     <section class="quote-block">
-      <button class="btn btn--quote-change"></button>
       <figure class="quote">
         <blockquote></blockquote>
         <figcaption></figcaption>
       </figure>
+      <button class="btn btn--quote-change"></button>
     </section>
   </main>
   <script src="./script.js"></script>

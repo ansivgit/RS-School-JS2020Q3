@@ -6,6 +6,7 @@ const imagesAll = {
   day: ['01.jpg', '02.jpg', '03.jpg', '04.jpg', '05.jpg', '06.jpg', '07.jpg', '08.jpg', '09.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpg', '19.jpg', '20.jpg'],
   evening: ['01.jpg', '02.jpg', '03.jpg', '04.jpg', '05.jpg', '06.jpg', '07.jpg', '08.jpg', '09.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpg', '19.jpg', '20.jpg'],
 };
+
 const imgPerDayTime = 6;
 const dayImages = [];
 let hour = new Date().getHours();
@@ -76,35 +77,29 @@ function randomGen(quantity = 1, array = []) {
 
 function setBgGreetings() {
   let hour = new Date().getHours();
-  //console.log('hola at ', new Date());
 
   document.body.style.backgroundImage = `url('./assets/images/${dayImages[hour]}')`;
 
   switch (true) {
     case (hour < 6):
-      //currentDayTime = 'night'; //! , возможно. эта переменная не нужна
-      //document.body.style.backgroundImage = `url('./assets/images/${dayImages[hour]}')`;
-      document.body.style.color = 'white';
-      document.body.style.textShadow = 'black 0 0 5px';
       greeting.textContent = 'Good Night, ';
       break;
 
     case (hour < 12):
-      //currentDayTime = 'morning';
+      document.body.style.color = 'black';
+      document.body.style.textShadow = 'white 0 0 5px';
+
       greeting.textContent = 'Good Morning, ';
       break;
 
     case (hour < 18):
-      //currentDayTime = 'day';
-      //document.body.style.backgroundImage = `url('./assets/images/${dayImages[hour]}')`;
+      document.body.style.color = 'black';
+      document.body.style.textShadow = 'white 0 0 5px';
+
       greeting.textContent = 'Good Afternoon, ';
       break;
 
     case (hour < 24):
-      //currentDayTime = 'evening';
-      //document.body.style.backgroundImage = `url('./assets/images/${dayImages[hour]}')`;
-      document.body.style.color = 'white';
-      document.body.style.textShadow = 'black 0 0 5px';
       greeting.textContent = 'Good Evening, ';
       break;
 
@@ -157,7 +152,12 @@ function clearField(event) {
 
 function changeBgImage() {
   currentImgIndex = (currentImgIndex !== 23) ? currentImgIndex += 1 : 0;
+  document.body.style.opacity = 0.5;
   document.body.style.backgroundImage = `url('./assets/images/${dayImages[currentImgIndex]}')`;
+  document.body.style.opacity = 1;
+
+  changeImgBtn.disabled = true;
+  setTimeout(function () { changeImgBtn.disabled = false }, 800);
 };
 
 async function getQuote() {
@@ -179,8 +179,12 @@ async function getQuote() {
   const res = await fetch(url);
   const data = await res.json();
 
-  blockquote.textContent = `«${data.quote.body}»`;
-  figcaption.textContent = data.quote.author;
+  if (data.quote.body.length < 275) {
+    blockquote.textContent = `«${data.quote.body}»`;
+    figcaption.textContent = data.quote.author;
+  } else {
+    getQuote();
+  }
 };
 
 
@@ -206,7 +210,9 @@ function setCity(event) {
 async function getWeather() {
   if (localStorage.getItem('city') === null) { return; }
   const weatherIcon = document.querySelector('.weather-icon');
-  const weather = document.querySelector('.weather');
+  const temperature = document.querySelector('.temperature');
+  const humidity = document.querySelector('.humidity');
+  const wind = document.querySelector('.wind');
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.textContent}&lang=ru&appid=${API_KEY}&units=metric`;
 
   const res = await fetch(url);
@@ -215,7 +221,9 @@ async function getWeather() {
   weatherIcon.className = 'weather-icon owf';
 
   weatherIcon.classList.add(`owf-${data.weather[0].id}`);
-  weather.textContent = `${data.main.temp}°C, ${data.main.humidity}%, ${data.wind.speed}m/sec`;
+  temperature.textContent = `${Math.round(data.main.temp * 10) / 10}°C`;
+  humidity.textContent = `humidity ${data.main.humidity}%`;
+  wind.textContent = `wind ${data.wind.speed} m/s`;
 };
 
 name.addEventListener('click', clearField);
@@ -228,6 +236,7 @@ city.addEventListener('click', clearField);
 city.addEventListener('keydown', setCity);
 city.addEventListener('blur', setCity);
 document.addEventListener('DOMContentLoaded', getWeather);
+//window.addEventListener('onload', changeBgImage);
 changeImgBtn.addEventListener('click', changeBgImage);
 document.addEventListener('DOMContentLoaded', getQuote);
 changeQuoteBtn.addEventListener('click', getQuote);
