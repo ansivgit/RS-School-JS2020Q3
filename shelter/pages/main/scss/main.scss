@@ -405,6 +405,10 @@
       background-color: $primary-theme-color;
       border-radius: 9px;
 
+      &:hover {
+        background-color: $secondary-theme-color;
+      }
+
       @media (max-width: $media-minW) {
         padding: 0.85rem 1.1rem 0.9rem 3.8rem;
         font-size: 1rem;
