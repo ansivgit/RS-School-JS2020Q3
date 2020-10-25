@@ -154,9 +154,12 @@ function clearField(event) {
 
 function changeBgImage() {
   currentImgIndex = (currentImgIndex !== 23) ? currentImgIndex += 1 : 0;
-  document.body.style.opacity = 0.5;
-  document.body.style.backgroundImage = `url('./assets/images/${dayImages[currentImgIndex]}')`;
-  document.body.style.opacity = 1;
+
+  const img = document.createElement('img');
+  img.src = `./assets/images/${dayImages[currentImgIndex]}`;
+  img.onload = () => {
+    document.body.style.backgroundImage = `url('${img.src}')`;
+  };
 
   changeImgBtn.disabled = true;
   setTimeout(function () { changeImgBtn.disabled = false }, 800);
@@ -215,17 +218,23 @@ async function getWeather() {
   const temperature = document.querySelector('.temperature');
   const humidity = document.querySelector('.humidity');
   const wind = document.querySelector('.wind');
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.textContent}&lang=ru&appid=${API_KEY}&units=metric`;
 
-  const res = await fetch(url);
-  const data = await res.json();
+  try {
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.textContent}&lang=ru&appid=${API_KEY}&units=metric`;
 
-  weatherIcon.className = 'weather-icon owf';
+    const res = await fetch(url);
+    const data = await res.json();
 
-  weatherIcon.classList.add(`owf-${data.weather[0].id}`);
-  temperature.textContent = `${Math.round(data.main.temp * 10) / 10}°C`;
-  humidity.textContent = `humidity ${data.main.humidity}%`;
-  wind.textContent = `wind ${data.wind.speed} m/s`;
+    weatherIcon.className = 'weather-icon owf';
+
+    weatherIcon.classList.add(`owf-${data.weather[0].id}`);
+    temperature.textContent = `${Math.round(data.main.temp * 10) / 10}°C`;
+    humidity.textContent = `humidity ${data.main.humidity}%`;
+    wind.textContent = `wind ${data.wind.speed} m/s`;
+  } catch {
+    alert('We can\'t find weather for Your city :(');
+  }
+
 };
 
 name.addEventListener('click', clearField);
