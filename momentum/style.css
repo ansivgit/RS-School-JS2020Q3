@@ -17,6 +17,7 @@
 }
 
 body {
+  /* position: relative; */
   font-family: 'Quicksand', 'Open Sans', sans-serif;
   height: 100vh;
   background-size: cover;
@@ -26,14 +27,21 @@ body {
   text-shadow: #000000 0 0 5px;
   opacity: 0.8;
 }
-
+/*.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url(./assets/images/overlay.png);
+  /*background-size: cover;
+  background-position: center center;*/
+/* } */
 main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   /*align-items: center;*/
   height: 100%;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
 }
 
 @media (max-width: 480px) {
@@ -64,32 +72,33 @@ section {
 }
 
 .city {
-  margin-bottom: 5px;
-  font-size: 1.2rem;
+  /*margin-bottom: 5px;*/
+  font-size: 1rem;
   opacity: 0.8;
 }
 
 .weather-icon {
-  font-size: 50px;
+  font-size: 40px;
   opacity: 0.7;
 }
 
 .temperature{
   display: inline-block;
-  font-size: 30px;
+  font-size: 1.4rem;
   padding-bottom: 3px;
   opacity: 0.8;
 }
 
 .humidity,
 .wind {
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 .time {
-  min-width: 33rem;
-  text-align: justify;
-  font-size: 8rem;
+  font-family: 'B612 Mono', monospace;
+  /*min-width: 33rem;
+  text-align: justify;*/
+  font-size: 7rem;
   text-shadow: #000000 0 0 0.5rem;
 }
 
@@ -107,10 +116,10 @@ section {
 }
 
 .day {
-  font-size: 4rem;
-  margin-bottom: 3rem;
+  font-size: 3rem;
+  margin-bottom: 1rem;
   /*color: #000000;*/
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 @media (max-width: 767px) {
@@ -120,11 +129,13 @@ section {
 }
 
 h1 {
-  margin-bottom: 3rem;
+  max-width: 100%;
+  margin-bottom: 2rem;
   font-size: 2rem;
 }
 
 h2 {
+  max-width: 100%;
   margin-bottom: 0.5rem;
   font-size: 1.2rem;
   /*opacity: 0.8;*/
@@ -139,6 +150,9 @@ h2 {
 
 .greeting,
 .name {
+  display: inline-block;
+  max-width: 90%;
+  word-wrap: break-word;
   font-size: inherit;
 }
 
@@ -148,8 +162,8 @@ h2 {
 }
 
 .btn {
-  margin-left: 1.25rem;
-  margin-right: 1.25rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
   background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
@@ -169,16 +183,16 @@ h2 {
 }
 
 .btn--bgImg-change {
-  height: 80px;
-  width: 80px;
+  height: 60px;
+  width: 60px;
   background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='iso-8859-1'%3F%3E%3Csvg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 426.667 426.667' fill='rgba(255, 255, 255, 0.7)' style='enable-background:new 0 0 426.667 426.667; ' xml:space='preserve'%3E%3Cpolygon points='170.667, 309.333 298.667, 213.333 170.667, 117.333 '/%3E%3Cpath d='M213.333, 0C95.467, 0, 0, 95.467, 0, 213.333s95.467, 213.333, 213.333, 213.333S426.667, 331.2, 426.667, 213.333 S331.2, 0, 213.333, 0z M213.333, 384c-94.08, 0-170.667-76.587-170.667-170.667S119.253, 42.667, 213.333, 42.667 S384, 119.253, 384, 213.333S307.413, 384, 213.333, 384z'/%3E%3C/svg%3E");
   box-shadow: #000000 0 0 5px;
   border-radius: 50%;
 }
 
 .btn--quote-change {
-  min-height: 51px;
-  min-width: 51px;
+  min-height: 40px;
+  min-width: 40px;
   background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='iso-8859-1'%3F%3E%3C!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'%3E%3Csvg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='408px' height='408px' viewBox='0 0 408 408' fill='rgba(255, 255, 255, 0.7)' style='enable-background:new 0 0 408 408;' xml:space='preserve'%3E%3Cg id='refresh'%3E%3Cpath d='M346.8,61.2C311.1,22.95,260.1,0,204,0C91.8,0,0,91.8,0,204s91.8,204,204,204c94.35,0,173.4-66.3,196.35-153H346.8 C326.4,313.65,270.3,357,204,357c-84.15,0-153-68.85-153-153c0-84.15,68.85-153,153-153c43.35,0,79.05,17.85,107.1,45.9 l-81.6,81.6H408V0L346.8,61.2z'/%3E%3C/g%3E%3C/svg%3E%0A");
 }
 
@@ -197,7 +211,7 @@ h2 {
 .quote {
   display: flex;
   flex-direction: column;
-  margin: 1.25rem;
+  margin: 0.5rem;
 }
 @media (max-width: 480px) {
   .quote {
@@ -206,7 +220,7 @@ h2 {
 }
 
 blockquote {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   text-align: start;
 }
 @media (max-width: 767px) {

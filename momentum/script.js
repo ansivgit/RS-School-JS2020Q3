@@ -87,14 +87,16 @@ function setBgGreetings() {
 
     case (hour < 12):
       document.body.style.color = 'black';
-      document.body.style.textShadow = 'white 0 0 5px';
+      //document.body.style.textShadow = 'white 0 0 5px';
+      //document.time.style.textShadow = 'white 0 0 0.5rem';
 
       greeting.textContent = 'Good Morning, ';
       break;
 
     case (hour < 18):
-      document.body.style.color = 'black';
-      document.body.style.textShadow = 'white 0 0 5px';
+      //document.body.style.color = 'black';
+      //document.body.style.textShadow = 'white 0 0 5px';
+      //document.time.style.textShadow = 'white 0 0 0.5rem';
 
       greeting.textContent = 'Good Afternoon, ';
       break;
