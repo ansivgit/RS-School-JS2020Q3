@@ -87,17 +87,11 @@ function setBgGreetings() {
 
     case (hour < 12):
       document.body.style.color = 'black';
-      //document.body.style.textShadow = 'white 0 0 5px';
-      //document.time.style.textShadow = 'white 0 0 0.5rem';
 
       greeting.textContent = 'Good Morning, ';
       break;
 
     case (hour < 18):
-      //document.body.style.color = 'black';
-      //document.body.style.textShadow = 'white 0 0 5px';
-      //document.time.style.textShadow = 'white 0 0 0.5rem';
-
       greeting.textContent = 'Good Afternoon, ';
       break;
 
@@ -166,21 +160,10 @@ function changeBgImage() {
 };
 
 async function getQuote() {
-  // если в ссылке заменить lang=en на lang=ru, цитаты будут на русском языке
-  // префикс https://cors-anywhere.herokuapp.com используем для доступа к данным с других сайтов,
-  //если браузер возвращает ошибку Cross - Origin Request Blocked
   const blockquote = document.querySelector('blockquote');
   const figcaption = document.querySelector('figcaption');
 
-  //префикс https://cors-anywhere.herokuapp.com//
   const url = `https://favqs.com/api/qotd`;
-  //const url = `https://https://type.fit/api/quotes`;
-  //const url = `https://api.adviceslip.com/advice`;
-  //const url = `https://api.chucknorris.io/jokes/random`;
-  //const url = `https://programming-quotes-api.herokuapp.com/quotes`;
-  //const url = `https://quote-garden.herokuapp.com/api/v2/quotes/random`;
-  //const url = `https://quotesondesign.com/wp-json/wp/v2/posts/?orderby=rand`;
-
   const res = await fetch(url);
   const data = await res.json();
 
@@ -191,7 +174,6 @@ async function getQuote() {
     getQuote();
   }
 };
-
 
 function getCity() {
   city.textContent = localStorage.getItem('city') || '[Enter City]';
@@ -247,14 +229,13 @@ city.addEventListener('click', clearField);
 city.addEventListener('keydown', setCity);
 city.addEventListener('blur', setCity);
 document.addEventListener('DOMContentLoaded', getWeather);
-//window.addEventListener('onload', changeBgImage);
 changeImgBtn.addEventListener('click', changeBgImage);
 document.addEventListener('DOMContentLoaded', getQuote);
 changeQuoteBtn.addEventListener('click', getQuote);
 
+setBgGreetings();
 showTime();
 showDate();
-setBgGreetings();
 getName();
 getFocus();
 getCity();
