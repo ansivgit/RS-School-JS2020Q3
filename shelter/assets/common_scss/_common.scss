@@ -236,27 +236,31 @@ a {
     line-height: 160%;
     color: $light-theme-color;
 
-    &:active,
     &:hover,
-    &:focus,
-    &--active {
+    &:focus {
       color: $lightest-color;
     }
     &--active {
       border-bottom: 3px solid $primary-theme-color;
     }
+    &--disabled {
+      pointer-events: none;
+      cursor: default;
+    }
 
     &--regular {
       color: $secondary-color;
 
-      &:active,
       &:hover,
-      &:focus,
-      &--active {
+      &:focus {
         color: $dark-color;
       }
       &--active {
         border-bottom: 3px solid $primary-theme-color;
+      }
+      &--disabled {
+        pointer-events: none;
+        cursor: default;
       }
     }
   }
@@ -330,22 +334,28 @@ a {
   }
 
   &__content {
+    $modal-height: 552px;
+    $button-close-height: 52px;
     position: relative;
     display: flex;
     justify-content: space-between;
     height: 500px;
     width: 900px;
-    margin: calc((100vh - 552px)/2 + 52px) auto calc((100vh - 552px)/2) auto;
+    margin: calc((100vh - #{$modal-height})/2 + #{$button-close-height/2}) auto calc((100vh - #{$modal-height})/2) auto;
     box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
     border-radius: 9px;
     background-color: $lightest-color;
 
     @media (max-width: $media-midW) {
+      $modal-height: 402px;
+      margin: calc((100vh - #{$modal-height})/2 + #{$button-close-height/2}) auto calc((100vh - #{$modal-height})/2) auto;
       height: 350px;
       width: 630px;
     }
 
     @media (max-width: $media-minW) {
+      $modal-height: 392px;
+      margin: calc((100vh - #{$modal-height})/2 + #{$button-close-height/2}) auto calc((100vh - #{$modal-height})/2) auto;
       width: 240px;
     }
   }
