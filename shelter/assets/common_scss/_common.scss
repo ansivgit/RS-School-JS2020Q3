@@ -190,40 +190,80 @@ a {
   }
 }
 
-.logo__title {
-  font-family: $secondary-type;
-  font-size: 32px;
-  letter-spacing: 0.06em;
-  color: $primary-theme-color;
+.logo {
+  height: 4rem;
 
-  &--regular {
-    color: $secondary-color;
+  &--mobile {
+    width: 186px;
+  }
+
+  &__title {
+    font-family: $secondary-type;
+    font-size: 32px;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    color: $primary-theme-color;
+
+    &--regular {
+      color: $secondary-color;
+    }
+  }
+
+  &__subtitle {
+    display: block;
+    margin-top: 9px;
+    font-family: $primary-type;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-align: center;
+    color: #ffffff;
+
+
+    &--regular {
+      color: $dark-color;
+    }
+
+    &.hide {
+      display: none;
+    }
   }
 }
 
-.logo__subtitle {
-  display: block;
-  margin-top: 9px;
-  font-family: $primary-type;
-  font-size: 13px;
-  letter-spacing: 0.1em;
-  text-align: center;
-  color: #ffffff;
-
-  &--regular {
-    color: $dark-color;
-  }
+.blackout {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(41, 41, 41, 0.6);
 }
 
 .main-nav {
   @media (max-width: $media-minW) {
+    display: none;
+  }
+
+  &--mobile {
     position: absolute;
-    //left: 0;
-    right: 0;
+    top: 0;
+    right: -100%;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     width: 320px;
+    height: 100vh;
+    padding: 30px 10px;
     background-color: $dark-color;
+
+    &--open {
+      right: 0;
+      //transform: translateX(-320px);
+      transition: right 0.4s ease
+      //transition: transform 3s ease-in-out;
+    }
+    &--close {
+      right: -100%;
+      transition: right 0.4s ease-in;
+    }
   }
 }
 
@@ -231,8 +271,21 @@ a {
   display: flex;
   list-style: none;
 
-  @media (max-width: $media-minW) {
+  &--mobile {
     flex-direction: column;
+    margin-top: 9.26rem;
+    font-size: 32px;
+  }
+
+  &--mobile>li {
+    margin: 1.33rem auto;
+
+    &>.main-menu__link {
+      //margin-top: 10.5rem;
+
+      font-size: 32px;
+      //line-height: 51.2px;
+    }
   }
 
   &__item {
@@ -277,16 +330,20 @@ a {
 
 .menu-mobile {
   &__btn {
-  margin-right: 2.5rem;
-  height: 21px;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  outline: none;
+    position: absolute;
+    top: 48px;
+    right: 11px;
+    z-index: 10;
+    margin-right: 2.5rem;
+    height: 21px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
 
-    @media (min-width: $media-minW) {
-      display: none;
-    }
+      @media (min-width: $media-minW) {
+        display: none;
+      }
   }
 
   &__decorate,

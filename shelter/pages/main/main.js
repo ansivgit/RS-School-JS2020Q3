@@ -1,6 +1,12 @@
 const body = document.querySelector('body');
 const menuMobileBtn = document.querySelector('.menu-mobile__btn');
+const logoMobile = document.querySelector('.logo--mobile');
+const logoTitle = document.querySelector('.logo__title');
+const logoSubtitle = document.querySelector('.logo__subtitle');
 const mainNav = document.querySelector('.main-nav');
+const blackout = document.querySelector('.blackout');
+const mainMenu = mainNav.querySelector('.main-menu');
+const mainMenuLinkActive = mainNav.querySelector('.main-menu__link--active');
 const sliderCards = document.querySelectorAll('.slider__card');
 const modal = document.querySelector('.modal');
 const slider = document.querySelector('.slider');
@@ -20,10 +26,15 @@ const getData = async function(url) {
 
 function init() {
   getData('../../assets/pets.json').then(function(data) {
-    //console.log(data);
     petsData.push(...data);
     //console.log(petsData);
   });
+
+  if (document.body.offsetWidth <= 767) {
+    mainNav.classList.add('main-nav--mobile');
+    mainNav.classList.add('main-nav--mobile--close');
+    mainMenu.classList.add('main-menu--mobile');
+  }
   //console.log(petsData[0]);
   //console.log(sliderData);
   //return petsData;
@@ -33,10 +44,29 @@ function init() {
 //const currentSlide = sliderData.push(randomGen(3, petsData));
 //console.log(currentSlide);
 //console.log(randomGen(2, [{ a: 1 }, { b: 2 }, { c: 3 }, { d: 4 }]))
-//! menu-burger
+//* menu-burger
 menuMobileBtn.addEventListener('click', () => {
-  menuMobileBtn.classList.toggle('menu-mobile__btn--active')
+  body.classList.toggle('locked');
+  menuMobileBtn.classList.toggle('menu-mobile__btn--active');
+  logoMobile.classList.toggle('hide');
+  logoTitle.classList.toggle('hide');
+  logoSubtitle.classList.toggle('hide');
+  blackout.classList.toggle('hide');
+  mainNav.classList.toggle('main-nav--mobile--close');
+  mainNav.classList.toggle('main-nav--mobile--open');
 });
+
+//* close burger-menu
+function closeBurger() {
+  body.classList.remove('locked');
+  menuMobileBtn.classList.remove('menu-mobile__btn--active');
+  logoTitle.classList.remove('hide');
+  logoSubtitle.classList.remove('hide');
+  blackout.classList.add('hide');
+  mainNav.classList.remove('main-nav--mobile--open');
+  mainNav.classList.add('main-nav--mobile--close');
+};
+
 
 //* open modal window
 function openModal(event) {
@@ -112,7 +142,11 @@ sliderCards.forEach((item) => {
 
 sliderButtons.forEach((item) => {
   item.addEventListener('click', slideChange)
-})
+});
+
+blackout.addEventListener('click', closeBurger);
+
+mainMenuLinkActive.addEventListener('click', closeBurger);
 
 modal.addEventListener('click', (event) => {
   if (event.target.closest('.btn--secondary--arrow--cross') || event.target.classList.contains('modal')) {

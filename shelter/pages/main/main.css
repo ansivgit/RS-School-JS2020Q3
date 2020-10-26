@@ -10,6 +10,7 @@ body {
 html,
 body,
 section,
+nav,
 div,
 dl,
 dt,
@@ -363,10 +364,19 @@ a {
   padding-bottom: 2rem;
 }
 
+.logo {
+  height: 4rem;
+}
+
+.logo--mobile {
+  width: 186px;
+}
+
 .logo__title {
   font-family: Georgia, "Times New Roman", serif;
   font-size: 32px;
   letter-spacing: 0.06em;
+  white-space: nowrap;
   color: #F1CDB3;
 }
 
@@ -388,20 +398,52 @@ a {
   color: #292929;
 }
 
+.logo__subtitle.hide {
+  display: none;
+}
+
+.blackout {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(41, 41, 41, 0.6);
+}
+
 @media (max-width: 767px) {
   .main-nav {
-    position: absolute;
-    right: 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: reverse;
-        -ms-flex-direction: column-reverse;
-            flex-direction: column-reverse;
-    width: 320px;
-    background-color: #292929;
+    display: none;
   }
+}
+
+.main-nav--mobile {
+  position: absolute;
+  top: 0;
+  right: -100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 320px;
+  height: 100vh;
+  padding: 30px 10px;
+  background-color: #292929;
+}
+
+.main-nav--mobile--open {
+  right: 0;
+  -webkit-transition: right 0.4s ease;
+  transition: right 0.4s ease;
+}
+
+.main-nav--mobile--close {
+  right: -100%;
+  -webkit-transition: right 0.4s ease-in;
+  transition: right 0.4s ease-in;
 }
 
 .main-menu {
@@ -411,13 +453,21 @@ a {
   list-style: none;
 }
 
-@media (max-width: 767px) {
-  .main-menu {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-  }
+.main-menu--mobile {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 9.26rem;
+  font-size: 32px;
+}
+
+.main-menu--mobile > li {
+  margin: 1.33rem auto;
+}
+
+.main-menu--mobile > li > .main-menu__link {
+  font-size: 32px;
 }
 
 .main-menu__item {
@@ -462,6 +512,10 @@ a {
 }
 
 .menu-mobile__btn {
+  position: absolute;
+  top: 48px;
+  right: 11px;
+  z-index: 10;
   margin-right: 2.5rem;
   height: 21px;
   border: none;
