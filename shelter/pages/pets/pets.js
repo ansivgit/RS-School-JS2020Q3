@@ -109,7 +109,7 @@ const prevPage = document.querySelector('[value = "prev-page"]');
 const nextPage = document.querySelector('[value = "next-page"]');
 const lastPage = document.querySelector('[value = "last-page"]');
 
-//let petsData = [];
+
 let petsDataArray = [];
 let cardsPerPage;
 let currentPageNumber = Number(currentPage.textContent);
@@ -122,21 +122,7 @@ if (document.body.offsetWidth <= 767) {
   cardsPerPage = 8;
 }
 
-// const getData = async function(url) {
-//   const response = await fetch(url);
-//   if (!response.ok) {
-//     throw new Error(`Error at address ${url},
-//         status ${response.status}!`);
-//   }
-//   return await response.json();
-// };
-
 function init() {
-  // getData('../../assets/pets.json').then(function (data) {
-  //   petsData.push(...data);
-  //   //console.log(petsData[0]);
-  //   return petsData;
-  // });
   if (document.body.offsetWidth <= 767) {
     mainNav.classList.add('main-nav--mobile');
     mainNav.classList.add('main-nav--mobile--close');
@@ -152,18 +138,14 @@ function init() {
     while (petsDataArray.length < num) {
       petsDataArray.push(randomGen(petsData.length, petsData));
     }
-    //console.log(petsDataArray);
     return petsDataArray;
   };
 
   petsDataGen(PETS_QUANTITY / cardsPerPage);
-  //console.log(petsDataGen(PETS_QUANTITY / cardsPerPage));
-  //return petsDataGen(PETS_QUANTITY);
   cardsGen('prev', 'first');
 };
 
 
-//console.log(cardsPerPage);
 //* menu-burger
 menuMobileBtn.addEventListener('click', () => {
   body.classList.toggle('locked');
@@ -189,9 +171,8 @@ function closeBurger() {
 };
 
 //* open modal window
-function openModal(event) {
-  const cardsPets = event.target.closest('.cards__item');
-  const petName = cardsPets.querySelector('.cards__item__name').textContent;
+function openModal(card) {
+  const petName = card.querySelector('.cards__item__name').textContent;
   const modalImg = modal.querySelector('.modal__img');
   const modalName = modal.querySelector('.modal__description__name');
   const modalBreed = modal.querySelector('.modal__description__breed');
@@ -200,6 +181,7 @@ function openModal(event) {
   const modalInoculations = modal.querySelector('[data-inoculations]');
   const modalDiseases = modal.querySelector('[data-diseases]');
   const modalParasites = modal.querySelector('[data-parasites]');
+  console.log(cardsPets);
 
   const petInfo = petsData.filter((item) => {
     if (item.name === petName) return item;
@@ -279,7 +261,6 @@ function cardsGen(direction, firstOrLast = '') {
     nextPage.disabled = true;
     lastPage.disabled = true;
   }
-  //console.log(currentPageNumber);
 
   currentPage.textContent = currentPageNumber;
   let cardsOnPage = petsDataArray[currentPageNumber - 1];
@@ -301,8 +282,9 @@ function cardsGen(direction, firstOrLast = '') {
 
 
 //* event listeners
-cardsPets.forEach((item) => {
-  item.addEventListener('click', openModal);
+cardsListContainer.addEventListener('click', (event) => {
+  const card = event.target.closest('.cards__item');
+  card ? openModal(card) : '';
 });
 
 blackout.addEventListener('click', closeBurger);
