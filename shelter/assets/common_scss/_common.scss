@@ -39,6 +39,7 @@ a {
     top: 0;
     z-index: 10;
     background-color: #ffffff;
+    overflow: visible;
   }
 }
 
@@ -48,7 +49,6 @@ a {
   margin: 0 auto;
 
   @media (max-width: $media-midW) {
-    //max-width: 1023px;
     padding: 0 30px;
   }
 
@@ -244,7 +244,7 @@ a {
   }
 
   &--mobile {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: -100%;
     display: flex;
@@ -256,9 +256,7 @@ a {
 
     &--open {
       right: 0;
-      //transform: translateX(-320px);
       transition: right 0.4s ease
-      //transition: transform 3s ease-in-out;
     }
     &--close {
       right: -100%;
@@ -281,10 +279,7 @@ a {
     margin: 1.33rem auto;
 
     &>.main-menu__link {
-      //margin-top: 10.5rem;
-
       font-size: 32px;
-      //line-height: 51.2px;
     }
   }
 

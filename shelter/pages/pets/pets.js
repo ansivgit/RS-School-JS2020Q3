@@ -91,7 +91,15 @@ const petsData = [
 ];
 const body = document.querySelector('body');
 const menuMobileBtn = document.querySelector('.menu-mobile__btn');
+const menuMobileBtnDecor = document.querySelector('.menu-mobile__decorate');
+const logoMobile = document.querySelector('.logo--mobile');
+const logoTitle = document.querySelector('.logo__title');
+const logoSubtitle = document.querySelector('.logo__subtitle');
 const mainNav = document.querySelector('.main-nav');
+const blackout = document.querySelector('.blackout');
+const mainMenu = mainNav.querySelector('.main-menu');
+const mainMenuLink = mainNav.querySelectorAll('.main-menu__link');
+const mainMenuLinkActive = mainNav.querySelector('.main-menu__link--regular--active');
 const cardsListContainer = document.querySelector('.cards__list__container');
 const cardsPets = document.querySelectorAll('.cards__item');
 const modal = document.querySelector('.modal');
@@ -106,9 +114,9 @@ let petsDataArray = [];
 let cardsPerPage;
 let currentPageNumber = Number(currentPage.textContent);
 
-if (document.body.clientWidth <= 767) {
+if (document.body.offsetWidth <= 767) {
   cardsPerPage = 3;
-} else if (document.body.clientWidth <= 1023) {
+} else if (document.body.offsetWidth <= 1023) {
   cardsPerPage = 6;
 } else {
   cardsPerPage = 8;
@@ -129,18 +137,18 @@ function init() {
   //   //console.log(petsData[0]);
   //   return petsData;
   // });
+  if (document.body.offsetWidth <= 767) {
+    mainNav.classList.add('main-nav--mobile');
+    mainNav.classList.add('main-nav--mobile--close');
+    mainMenu.classList.add('main-menu--mobile');
+    logoMobile.classList.remove('hide');
+    mainMenuLink.forEach(item => {
+      item.classList.remove('main-menu__link--regular');
+    });
+  }
 
   function petsDataGen(num) {
-    petsDataArray = [[
-      petsData[4],
-      petsData[0],
-      petsData[2],
-      petsData[1],
-      petsData[5],
-      petsData[7],
-      petsData[3],
-      petsData[6],
-    ],];//! сделано для соотв.ПП проверки. Потом убрать
+    petsDataArray = [];
     while (petsDataArray.length < num) {
       petsDataArray.push(randomGen(petsData.length, petsData));
     }
@@ -151,14 +159,34 @@ function init() {
   petsDataGen(PETS_QUANTITY / cardsPerPage);
   //console.log(petsDataGen(PETS_QUANTITY / cardsPerPage));
   //return petsDataGen(PETS_QUANTITY);
+  cardsGen('prev', 'first');
 };
 
 
 //console.log(cardsPerPage);
-//! menu-burger
+//* menu-burger
 menuMobileBtn.addEventListener('click', () => {
-  menuMobileBtn.classList.toggle('menu-mobile__btn--active')
+  body.classList.toggle('locked');
+  menuMobileBtn.classList.toggle('menu-mobile__btn--active');
+  menuMobileBtnDecor.classList.toggle('menu-mobile__decorate--light');
+  logoTitle.classList.toggle('hide');
+  logoSubtitle.classList.toggle('hide');
+  blackout.classList.toggle('hide');
+  mainNav.classList.toggle('main-nav--mobile--close');
+  mainNav.classList.toggle('main-nav--mobile--open');
 });
+
+//* close burger-menu
+function closeBurger() {
+  menuMobileBtn.classList.remove('menu-mobile__btn--active');
+  menuMobileBtnDecor.classList.add('menu-mobile__decorate--light');
+  logoTitle.classList.remove('hide');
+  logoSubtitle.classList.remove('hide');
+  blackout.classList.add('hide');
+  mainNav.classList.remove('main-nav--mobile--open');
+  mainNav.classList.add('main-nav--mobile--close');
+  body.classList.remove('locked');
+};
 
 //* open modal window
 function openModal(event) {
@@ -276,6 +304,10 @@ function cardsGen(direction, firstOrLast = '') {
 cardsPets.forEach((item) => {
   item.addEventListener('click', openModal);
 });
+
+blackout.addEventListener('click', closeBurger);
+
+mainMenuLinkActive.addEventListener('click', closeBurger);
 
 modal.addEventListener('click', (event) => {
   if (event.target.closest('.btn--secondary--arrow--cross') || event.target.classList.contains('modal')) {

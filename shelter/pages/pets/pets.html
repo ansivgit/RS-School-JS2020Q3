@@ -11,17 +11,25 @@
     <div class="wrapper--main wrapper--main--light wrapper--main--sticky">
       <div class="container-content">
         <header class="header--desktop header--desktop--regular">
-          <div class="logo">
+          <div class="logo logo-desktop">
             <a href="../main/main.html" class="logo__title logo__title--regular">Cozy House</a>
             <span class="logo__subtitle logo__subtitle--regular">Shelter for pets in Boston</span>
           </div>
+          <div class="blackout hide"></div>
+          <button class="menu-mobile__btn">
+            <span class="menu-mobile__decorate menu-mobile__decorate--light"></span>
+          </button>
           <nav class="main-nav">
+            <div class="logo logo--mobile hide">
+              <a href="#" class="logo__title">Cozy House</a>
+              <span class="logo__subtitle">Shelter for pets in Boston</span>
+            </div>
             <ul class="main-menu">
               <li class="main-menu__item">
                 <a class="main-menu__link main-menu__link--regular" href="../main/main.html" role="menuitem">About the shelter</a>
               </li>
               <li class="main-menu__item">
-                <a class="main-menu__link main-menu__link--regular main-menu__link--regular--active" href="#" role="menuitem">Our pets</a>
+                <a class="main-menu__link main-menu__link--regular main-menu__link--regular--active" href="../pets/pets.html" role="menuitem">Our pets</a>
               </li>
               <li class="main-menu__item">
                 <a class="main-menu__link main-menu__link--regular main-menu__link--regular--disabled" href="/some-address/change-me" role="menuitem">Help the shelter</a>
@@ -30,9 +38,6 @@
                 <a class="main-menu__link main-menu__link--regular main-menu__link--regular--disabled" href="/some-address/change-me" role="menuitem">Contacts</a>
               </li>
             </ul>
-            <button class="menu-mobile__btn">
-              <span class="menu-mobile__decorate menu-mobile__decorate--light"></span>
-            </button>
           </nav>
         </header>
       </div>
@@ -45,7 +50,7 @@
           <h3 class="cards__title">Our friends who are&nbsp;looking for a house</h3>
           <div class="cards__wrapper">
             <ul class="cards__list__container">
-              <li class="cards__item">
+              <!-- <li class="cards__item">
                 <img class="cards__item__img" src="../../assets/images/slider_photo01.png" alt="Сat Katrine" />
                 <h4 class="cards__item__name">Katrine</h4>
                 <a class="btn btn--secondary" href="/some-address/change-me" target="_blanc">Learn more</a>
@@ -84,7 +89,7 @@
                 <img class="cards__item__img" src="../../assets/images/looking_08.png" alt="Cat Freddie" />
                 <h4 class="cards__item__name">Freddie</h4>
                 <a class="btn btn--secondary" href="/some-address/change-me" target="_blanc">Learn more</a>
-              </li>
+              </li> -->
             </ul>
             <div class="cards__btn__container">
               <button
