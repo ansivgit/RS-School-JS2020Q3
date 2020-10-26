@@ -236,9 +236,14 @@ a {
   cursor: pointer;
 }
 
-.btn:hover, .btn:active, .btn:focus {
-  border-color: transparent !important;
-  background-color: #FDDCC4 !important;
+.btn:hover {
+  border-color: transparent;
+  background-color: #FDDCC4;
+}
+
+.btn:active, .btn:focus {
+  border-color: transparent;
+  background-color: #F1CDB3;
   outline: none;
 }
 
@@ -321,6 +326,11 @@ a {
   right: -50px;
   background-image: url(../../assets/icons/cross.svg);
   background-position: 50% 50%;
+}
+
+.btn--secondary--arrow--cross:hover {
+  border-color: transparent !important;
+  background-color: #FDDCC4 !important;
 }
 
 @media (max-width: 767px) {

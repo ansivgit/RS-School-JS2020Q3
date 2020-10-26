@@ -216,42 +216,53 @@ function randomGen(quantity = 1, array = []) {
   return randomArray;
 };
 
-function cardsGen(direction) {
+function cardsGen(direction, firstOrLast = '') {
 
   if (direction === 'next') {
     prevPage.disabled = false;
     firstPage.disabled = false;
 
-    currentPageNumber = (currentPageNumber !== PETS_QUANTITY / cardsPerPage)
-    ? currentPageNumber += 1
-    : PETS_QUANTITY / cardsPerPage;
+    if (firstOrLast === 'last') {
+      currentPageNumber = PETS_QUANTITY / cardsPerPage;
+    } else {
+      currentPageNumber = (currentPageNumber !== PETS_QUANTITY / cardsPerPage)
+        ? currentPageNumber += 1
+        : PETS_QUANTITY / cardsPerPage;
+    }
   }
 
   if (direction === 'prev') {
     nextPage.disabled = false;
     lastPage.disabled = false;
 
-    currentPageNumber = (currentPageNumber !== 1) ? currentPageNumber -= 1 : 1;
+    if (firstOrLast === 'first') {
+      currentPageNumber = 1;
+    } else {
+      currentPageNumber = (currentPageNumber !== 1) ? currentPageNumber -= 1 : 1;
+    }
   }
 
   if (currentPageNumber === 1) {
     prevPage.disabled = true;
     firstPage.disabled = true;
   }
-  if (currentPageNumber === 6) {
+
+  if (currentPageNumber === PETS_QUANTITY / cardsPerPage) {
     nextPage.disabled = true;
     lastPage.disabled = true;
   }
+  //console.log(currentPageNumber);
 
   currentPage.textContent = currentPageNumber;
   let cardsOnPage = petsDataArray[currentPageNumber - 1];
   cardsListContainer.innerHTML = '';
+
   for (let i = 0; i < cardsPerPage; i++) {
     let { age, breed, description, diseases, img, inoculations, name, parasites, type } = cardsOnPage[i];
     let card = document.createElement('li');
     card.className = 'cards__item';
     card.innerHTML =
-      `
+    `
       <img class="cards__item__img" src="${img}" alt="${type} ${name}" />
       <h4 class="cards__item__name">${name}</h4>
       <a class="btn btn--secondary" href="/some-address/change-me" target="_blanc">Learn more</a>
@@ -279,6 +290,14 @@ nextPage.addEventListener('click', () => {
 
 prevPage.addEventListener('click', () => {
   cardsGen('prev');
+});
+
+lastPage.addEventListener('click', () => {
+  cardsGen('next', 'last');
+});
+
+firstPage.addEventListener('click', () => {
+  cardsGen('prev', 'first');
 });
 
 
