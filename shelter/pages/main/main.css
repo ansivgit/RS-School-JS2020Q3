@@ -183,6 +183,15 @@ a {
   background: url(../../assets/icons/noise_transparent@2x.png), radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), linear-gradient(0deg, #211F20, #211F20);
 }
 
+.wrapper--main--sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #ffffff;
+  overflow: visible;
+}
+
 .container-content {
   max-width: 1280px;
   padding: 0 40px;
@@ -410,7 +419,7 @@ a {
 }
 
 .main-nav--mobile {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: -100%;
   display: -webkit-box;

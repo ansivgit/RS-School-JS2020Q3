@@ -27,28 +27,20 @@ const getData = async function(url) {
 function init() {
   getData('../../assets/pets.json').then(function(data) {
     petsData.push(...data);
-    //console.log(petsData);
   });
 
   if (document.body.offsetWidth <= 767) {
     mainNav.classList.add('main-nav--mobile');
     mainNav.classList.add('main-nav--mobile--close');
     mainMenu.classList.add('main-menu--mobile');
+    logoMobile.classList.remove('hide');
   }
-  //console.log(petsData[0]);
-  //console.log(sliderData);
-  //return petsData;
 };
 
-
-//const currentSlide = sliderData.push(randomGen(3, petsData));
-//console.log(currentSlide);
-//console.log(randomGen(2, [{ a: 1 }, { b: 2 }, { c: 3 }, { d: 4 }]))
 //* menu-burger
 menuMobileBtn.addEventListener('click', () => {
   body.classList.toggle('locked');
   menuMobileBtn.classList.toggle('menu-mobile__btn--active');
-  logoMobile.classList.toggle('hide');
   logoTitle.classList.toggle('hide');
   logoSubtitle.classList.toggle('hide');
   blackout.classList.toggle('hide');
