@@ -613,6 +613,7 @@ a {
 @media (max-width: 767px) {
   .modal__content {
     margin: calc((100vh - 392px)/2 + 26px) auto calc((100vh - 392px)/2) auto;
+    height: 392px;
     width: 240px;
   }
 }

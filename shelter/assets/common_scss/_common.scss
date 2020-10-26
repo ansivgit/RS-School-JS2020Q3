@@ -417,6 +417,7 @@ a {
     @media (max-width: $media-minW) {
       $modal-height: 392px;
       margin: calc((100vh - #{$modal-height})/2 + #{$button-close-height/2}) auto calc((100vh - #{$modal-height})/2) auto;
+      height: $modal-height;
       width: 240px;
     }
   }
