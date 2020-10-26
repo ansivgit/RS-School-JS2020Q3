@@ -116,12 +116,14 @@ function randomGen(quantity = 1, array = []) {
   return randomArray;
 };
 
-function slideChange(event) {
+function slideChange() {
   const sliderCards = slider.querySelectorAll('.slider__card');
   const randomSlide = randomGen(petsData.length, petsData);
 
   sliderCards.forEach((item, index) => {
     item.querySelector('.slider__card__img').setAttribute('src', randomSlide[index].img);
+    item.querySelector('.slider__card__img')
+      .setAttribute('alt', `${randomSlide[index].type} ${randomSlide[index].name}`);
     item.querySelector('.slider__card__name').textContent = randomSlide[index].name;
   });
 }
