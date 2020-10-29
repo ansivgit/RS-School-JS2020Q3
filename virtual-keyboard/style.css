@@ -15,9 +15,14 @@
   bottom: 0;
   width: 100%;
   padding: 5px 0;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
   background: #004134;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transition: bottom 0.4s;
   transition: bottom 0.4s;
 }
 
@@ -27,17 +32,23 @@
 
 .keyboard__keys {
   /*display: flex;
-  flex-wrap: wrap;
-  /*grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;*/
+      flex-wrap: wrap;
+      /*grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr 1fr;*/
   text-align: center;
 }
 
 .keyboard__key {
   position: relative;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   height: 45px;
   width: 6%;
   max-width: 90px;
