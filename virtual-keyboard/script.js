@@ -4,6 +4,7 @@ const Keyboard = {
     keysContainer: null,
     keys: [],
     display: null,
+    //textArea: document.querySelector('.use-keyboard-input'),
   },
 
   eventHandlers: {
@@ -29,7 +30,7 @@ const Keyboard = {
 
     this.elements.keys = this.elements.keysContainer.querySelectorAll('.keyboard__key');
 
-    //this.elements.display = document.querySelector('.use-keyboard-input');
+    this.elements.display = document.querySelector('.use-keyboard-input');
 
     document.body.append(this.elements.main);
     this.elements.main.append(this.elements.keysContainer);
@@ -46,12 +47,20 @@ const Keyboard = {
         });
       });
 
-      document.querySelector('.keyboard').addEventListener('mouseenter', () => {
-          this.properties.value = element.value;
-          //this.properties.cursorPosition = this.elements.display.selectionStart;
-          //console.log(this.elements.display);
-        });
+      element.addEventListener('keydown', (event) => {
+        this._triggerKbKeys(event);
       });
+
+      element.addEventListener('keyup', (event) => {
+        this._triggerKbKeys(event);
+      });
+
+      document.querySelector('.keyboard').addEventListener('mouseenter', () => {
+        this.properties.value = element.value;
+        //this.properties.cursorPosition = this.elements.display.selectionStart;
+        //console.log(this.elements.display);
+      });
+    });
   },
 
   _createKeys() {
@@ -133,6 +142,7 @@ const Keyboard = {
 
         case 'caps':
           keyElement.classList.add('keyboard__key--wide', 'keyboard__key--activatable');
+          keyElement.setAttribute('data', 'capsLock');
           keyElement.innerHTML = createIconHTML('keyboard_capslock');
 
           isActive(this.properties.capsLock);
@@ -301,6 +311,37 @@ const Keyboard = {
     this._heightControl();
   },
 
+  _triggerKbKeys(event) {
+    if (event.type === 'keydown') {
+      if (event.key === 'Shift') {
+        //event.preventDefault();
+        if (event.repeat) return;
+        //event.repeat = false;
+        this._toggleShift();
+      }
+
+      if (event.key === 'CapsLock') {
+        event.preventDefault();
+        const capsKey = document.querySelector('[data = "capsLock"]');
+        this._toggleCapsLock();
+
+        if (this.properties.capsLock === true) {
+          capsKey.classList.add('keyboard__key--active');
+        } else {
+          capsKey.classList.remove('keyboard__key--active');
+        }
+      }
+    };
+
+    if (event.type === 'keyup') {
+      console.log(event);
+      if (event.key === 'Shift') {
+        //event.preventDefault();
+        this._toggleShift();
+      }
+    }
+  },
+
   // getCursorPosition(ctrl) {
   //   console.log(this);
   //   let cursorPos = 0;
@@ -329,7 +370,7 @@ const Keyboard = {
     this.eventHandlers.oninput = oninput;
     this.eventHandlers.onclose = onclose;
     this.elements.main.classList.add('keyboard--hidden');
-  }
+  },
 };
 
 window.addEventListener('DOMContentLoaded', function () {
