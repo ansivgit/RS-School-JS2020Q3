@@ -110,6 +110,14 @@ const Keyboard = {
       keyElement.setAttribute('type', 'button');
       keyElement.classList.add('keyboard__key');
 
+      const isActive = (prop, activeClass = 'keyboard__key--active') => {
+        if (prop === true) {
+          keyElement.classList.add(activeClass);
+        } else {
+          keyElement.classList.remove(activeClass);
+        }
+      };
+
       switch (key) {
         case 'backspace':
           keyElement.classList.add('keyboard__key--wide');
@@ -127,28 +135,14 @@ const Keyboard = {
           keyElement.classList.add('keyboard__key--wide', 'keyboard__key--activatable');
           keyElement.innerHTML = createIconHTML('keyboard_capslock');
 
-          if (this.properties.capsLock === true) {
-            keyElement.classList.add('keyboard__key--active');
-          } else {
-            keyElement.classList.remove('keyboard__key--active');
-          }
-
-          // _isActive(prop, activeClass = 'keyboard__key--active') {
-          //   if (prop === true) {
-          //     keyElement.classList.add(activeClass);
-          //   } else {
-          //     keyElement.classList.remove(activeClass);
-          //   }
-          // };
+          isActive(this.properties.capsLock);
 
           keyElement.addEventListener('click', () => {
             this._toggleCapsLock();
-            if (this.properties.capsLock === true) {
-              keyElement.classList.add('keyboard__key--active');
-            } else {
-              keyElement.classList.remove('keyboard__key--active');
-            }
-            //? было так ('keyboard__key--active', this.properties.capsLock)
+
+            isActive(this.properties.capsLock);
+
+            //? было так ('keyboard__key--active', this.properties.capsLock) - см исходный код
             //console.log(this.properties.capsLock);
           });
 
@@ -158,11 +152,7 @@ const Keyboard = {
           keyElement.classList.add('keyboard__key--wide', 'keyboard__key--activatable');
           keyElement.innerHTML = 'shift';
 
-          if (this.properties.shift === true) {
-            keyElement.classList.add('keyboard__key--active');
-          } else {
-            keyElement.classList.remove('keyboard__key--active');
-          }
+          isActive(this.properties.shift);
 
           keyElement.addEventListener('click', () => {
             this._toggleShift();
@@ -212,7 +202,7 @@ const Keyboard = {
             this.properties.cursorPosition = (this.properties.cursorPosition === this.properties.value.length)
               ? this.properties.value.length
               : this.properties.cursorPosition + 1;
-            console.log(this.properties.value.length, this.properties.cursorPosition);
+            //console.log(this.properties.value.length, this.properties.cursorPosition);
             //! понять, как внутри объекта обращаться к текстАреа своему и переписать эту функцию.
             //! затем добавить ее на др.стрелку
             document.querySelector('textarea').selectionStart = document.querySelector('textarea').selectionEnd = this.properties.cursorPosition;
@@ -274,11 +264,8 @@ const Keyboard = {
     }
   },
 
-  _toggleCapsLock() {
-    this.properties.capsLock = !this.properties.capsLock;
-
+  _heightControl() {
     for (const key of this.elements.keys) {
-      console.log(key.textContent);
       if (key.childElementCount === 0) {
         if (this.properties.capsLock === this.properties.shift) {
           key.textContent = key.textContent.toLowerCase();
@@ -289,23 +276,19 @@ const Keyboard = {
     }
   },
 
+  _toggleCapsLock() {
+    this.properties.capsLock = !this.properties.capsLock;
+    this._heightControl();
+  },
+
   _toggleLang() {
     this.properties.secondLang = !this.properties.secondLang;
 
     this.elements.keysContainer.innerHTML = '';
-    //this.properties.capsLock = false;
     this.elements.keysContainer.append(this._createKeys());
     this.elements.keys = this.elements.keysContainer.querySelectorAll('.keyboard__key');
 
-    for (const key of this.elements.keys) {
-      if (key.childElementCount === 0) {
-        if (this.properties.capsLock === this.properties.shift) {
-          key.textContent = key.textContent.toLowerCase();
-        } else {
-          key.textContent = key.textContent.toUpperCase();
-        }
-      }
-    }
+    this._heightControl();
   },
 
   _toggleShift() {
@@ -315,15 +298,7 @@ const Keyboard = {
     this.elements.keysContainer.append(this._createKeys());
     this.elements.keys = this.elements.keysContainer.querySelectorAll('.keyboard__key');
 
-    for (const key of this.elements.keys) {
-      if (key.childElementCount === 0) {
-        if (this.properties.capsLock === this.properties.shift) {
-          key.textContent = key.textContent.toLowerCase();
-        } else {
-          key.textContent = key.textContent.toUpperCase();
-        }
-      }
-    }
+    this._heightControl();
   },
 
   // getCursorPosition(ctrl) {
