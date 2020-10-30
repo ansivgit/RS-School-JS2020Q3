@@ -109,8 +109,6 @@ const Keyboard = {
 
       keyElement.setAttribute('type', 'button');
       keyElement.classList.add('keyboard__key');
-      //console.log(this);
-
 
       switch (key) {
         case 'backspace':
@@ -129,22 +127,29 @@ const Keyboard = {
           keyElement.classList.add('keyboard__key--wide', 'keyboard__key--activatable');
           keyElement.innerHTML = createIconHTML('keyboard_capslock');
 
-          if (this.properties.shift === true) {
+          if (this.properties.capsLock === true) {
             keyElement.classList.add('keyboard__key--active');
           } else {
             keyElement.classList.remove('keyboard__key--active');
           }
 
+          // _isActive(prop, activeClass = 'keyboard__key--active') {
+          //   if (prop === true) {
+          //     keyElement.classList.add(activeClass);
+          //   } else {
+          //     keyElement.classList.remove(activeClass);
+          //   }
+          // };
+
           keyElement.addEventListener('click', () => {
             this._toggleCapsLock();
-            if (this.properties.shift === true) {
+            if (this.properties.capsLock === true) {
               keyElement.classList.add('keyboard__key--active');
             } else {
               keyElement.classList.remove('keyboard__key--active');
             }
-            //keyElement.classList.toggle('keyboard__key--active');
             //? было так ('keyboard__key--active', this.properties.capsLock)
-            console.log(this.properties.capsLock);
+            //console.log(this.properties.capsLock);
           });
 
           break;
@@ -275,7 +280,11 @@ const Keyboard = {
     for (const key of this.elements.keys) {
       console.log(key.textContent);
       if (key.childElementCount === 0) {
-        key.textContent = this.properties.capsLock ? key.textContent.toUpperCase() : key.textContent.toLowerCase();
+        if (this.properties.capsLock === this.properties.shift) {
+          key.textContent = key.textContent.toLowerCase();
+        } else {
+          key.textContent = key.textContent.toUpperCase();
+        }
       }
     }
   },
@@ -284,38 +293,29 @@ const Keyboard = {
     this.properties.secondLang = !this.properties.secondLang;
 
     this.elements.keysContainer.innerHTML = '';
-    this.properties.capsLock = false;
+    //this.properties.capsLock = false;
     this.elements.keysContainer.append(this._createKeys());
     this.elements.keys = this.elements.keysContainer.querySelectorAll('.keyboard__key');
+
+    for (const key of this.elements.keys) {
+      if (key.childElementCount === 0) {
+        if (this.properties.capsLock === this.properties.shift) {
+          key.textContent = key.textContent.toLowerCase();
+        } else {
+          key.textContent = key.textContent.toUpperCase();
+        }
+      }
+    }
   },
 
   _toggleShift() {
     this.properties.shift = !this.properties.shift;
 
     this.elements.keysContainer.innerHTML = '';
-    //this.properties.capsLock = false;
     this.elements.keysContainer.append(this._createKeys());
     this.elements.keys = this.elements.keysContainer.querySelectorAll('.keyboard__key');
 
     for (const key of this.elements.keys) {
-      // switch (key.textContent) {
-      //   case '1':
-      //     console.log(key);
-      //     key.textContent = '!';
-
-      //     break;
-      //   case '!':
-      //     console.log(key);
-      //     key.textContent = '1';
-
-      //     break;
-      // }
-      // let keyElement = '';
-      // if (key.innerHTML === 'shift') {
-      //   keyElement = key;
-      // }
-
-      //console.log(key.textContent);
       if (key.childElementCount === 0) {
         if (this.properties.capsLock === this.properties.shift) {
           key.textContent = key.textContent.toLowerCase();
