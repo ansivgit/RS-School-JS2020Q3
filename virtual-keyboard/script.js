@@ -4,7 +4,6 @@ const Keyboard = {
     keysContainer: null,
     keys: [],
     display: null,
-    //textArea: document.querySelector('.use-keyboard-input'),
   },
 
   eventHandlers: {
@@ -15,12 +14,14 @@ const Keyboard = {
   properties: {
     value: '',
     capsLock: false,
-    cursorPosition: 0,
     secondLang: false,
     shift: false,
+    cursorPosition: 0,
   },
 
   init() {
+    this.elements.display = document.querySelector('.use-keyboard-input');
+
     this.elements.main = document.createElement('div');
     this.elements.keysContainer = document.createElement('div');
 
@@ -29,8 +30,6 @@ const Keyboard = {
     this.elements.keysContainer.append(this._createKeys());
 
     this.elements.keys = this.elements.keysContainer.querySelectorAll('.keyboard__key');
-
-    this.elements.display = document.querySelector('.use-keyboard-input');
 
     document.body.append(this.elements.main);
     this.elements.main.append(this.elements.keysContainer);
@@ -55,10 +54,14 @@ const Keyboard = {
         this._triggerKbKeys(event);
       });
 
+      element.addEventListener('input', (event) => {
+        this._triggerKbKeys(event);
+      });
+
       document.querySelector('.keyboard').addEventListener('mouseenter', () => {
         this.properties.value = element.value;
-        //this.properties.cursorPosition = this.elements.display.selectionStart;
-        //console.log(this.elements.display);
+        this.properties.cursorPosition = this.elements.display.selectionStart;
+        //console.log(this.properties.cursorPosition);
       });
     });
   },
@@ -66,8 +69,6 @@ const Keyboard = {
   _createKeys() {
     const fragment = document.createDocumentFragment();
     let keyLayout = [];
-    let specKeys = [];
-    let chars = [];
 
     if (!this.properties.secondLang) {
       if (!this.properties.shift) {
@@ -134,7 +135,15 @@ const Keyboard = {
 
           keyElement.addEventListener('click', () => {
             //? возможно, эту функцию придется изменить после реализации гориз.смещения курсора
-            this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
+            this.properties.value = this.properties.value.substring(0, this.properties.cursorPosition - 1)
+              + this.properties.value.substring(this.properties.cursorPosition);
+
+            this.properties.cursorPosition = (this.properties.cursorPosition !== 0)
+              ? this.properties.cursorPosition - 1
+              : 0;
+
+            this.elements.display.selectionStart = this.elements.display.selectionEnd = this.properties.cursorPosition;
+            //console.log(this.properties.cursorPosition, this.elements.display.selectionStart);
             this._triggerEvent('oninput');
           });
 
@@ -153,7 +162,6 @@ const Keyboard = {
             isActive(this.properties.capsLock);
 
             //? было так ('keyboard__key--active', this.properties.capsLock) - см исходный код
-            //console.log(this.properties.capsLock);
           });
 
           break;
@@ -200,6 +208,9 @@ const Keyboard = {
               ? this.properties.cursorPosition - 1
               : 0;
 
+            this.elements.display.selectionStart = this.elements.display.selectionEnd = this.properties.cursorPosition;
+            //console.log(this.properties.cursorPosition);
+
             this._triggerEvent('oninput');
           });
 
@@ -212,10 +223,8 @@ const Keyboard = {
             this.properties.cursorPosition = (this.properties.cursorPosition === this.properties.value.length)
               ? this.properties.value.length
               : this.properties.cursorPosition + 1;
-            //console.log(this.properties.value.length, this.properties.cursorPosition);
-            //! понять, как внутри объекта обращаться к текстАреа своему и переписать эту функцию.
-            //! затем добавить ее на др.стрелку
-            document.querySelector('textarea').selectionStart = document.querySelector('textarea').selectionEnd = this.properties.cursorPosition;
+
+            this.elements.display.selectionStart = this.elements.display.selectionEnd = this.properties.cursorPosition;
 
             this._triggerEvent('oninput');
           });
@@ -269,8 +278,8 @@ const Keyboard = {
   _triggerEvent(handlerName) {
     if (typeof this.eventHandlers[handlerName] == 'function') {
       this.eventHandlers[handlerName](this.properties.value);
-      this.properties.cursorPosition = document.querySelector('textarea').selectionStart;
-      //console.log(this.properties.cursorPosition);
+      //this.elements.display.selectionStart = this.elements.display.selectionEnd = this.properties.cursorPosition;
+      console.log(this.properties.cursorPosition);
     }
   },
 
@@ -331,14 +340,25 @@ const Keyboard = {
           capsKey.classList.remove('keyboard__key--active');
         }
       }
+
     };
 
     if (event.type === 'keyup') {
-      console.log(event);
+      //console.log(event);
       if (event.key === 'Shift') {
         //event.preventDefault();
         this._toggleShift();
       }
+    }
+
+    if (event.type === 'input') {
+      //console.log('input');
+      this.properties.capsLock = false;
+      this.properties.shift = false;
+
+      this.elements.keysContainer.innerHTML = '';
+      this.elements.keysContainer.append(this._createKeys());
+      this.elements.keys = this.elements.keysContainer.querySelectorAll('.keyboard__key');
     }
   },
 
