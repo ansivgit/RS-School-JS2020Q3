@@ -31,10 +31,6 @@
 }
 
 .keyboard__keys {
-  /*display: flex;
-      flex-wrap: wrap;
-      /*grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-      grid-template-rows: 1fr 1fr 1fr 1fr 1fr;*/
   text-align: center;
 }
 
@@ -96,4 +92,12 @@
 
 .keyboard__key--dark {
   background: rgba(0, 0, 0, 0.25);
+}
+
+.active {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.unvisible {
+  display: none;
 }

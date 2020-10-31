@@ -16,6 +16,7 @@ const Keyboard = {
     capsLock: false,
     secondLang: false,
     shift: false,
+    //keyIsActive: false,
     cursorPosition: 0,
   },
 
@@ -73,36 +74,36 @@ const Keyboard = {
     if (!this.properties.secondLang) {
       if (!this.properties.shift) {
         keyLayout = [
-          '~', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'backspace',
-          'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', 'caps',
-          'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '"', 'enter',
-          'done', 'z', 'x', 'c', 'v', 'b', 'n', 'm', '+', '-', ',', '.', '?',
+          '`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'backspace', 'br',
+          'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', 'caps', 'br',
+          'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'enter', 'br',
+          'done', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'br',
           'lang', 'shift', 'space', 'left', 'right',
         ];
       } else {
         keyLayout = [
-          '`', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', 'backspace',
-          'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '{', '}', 'caps',
-          'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ':', '\'', 'enter',
-          'done', 'z', 'x', 'c', 'v', 'b', 'n', 'm', '<', '>', ',', '.', '?',
+          '~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', 'backspace', 'br',
+          'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '{', '}', 'caps', 'br',
+          'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ':', '\"', 'enter', 'br',
+          'done', 'z', 'x', 'c', 'v', 'b', 'n', 'm', '<', '>', '?', 'br',
           'lang', 'shift', 'space', 'left', 'right',
         ];
       }
     } else {
       if (!this.properties.shift) {
         keyLayout = [
-          'ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'backspace',
-          'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', 'caps',
-          'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'enter',
-          'done', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', ',', '.', '?',
+          'ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'backspace', 'br',
+          'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', 'caps', 'br',
+          'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'enter', 'br',
+          'done', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', 'br',
           'lang', 'shift', 'space', 'left', 'right',
         ];
       } else {
         keyLayout = [
-          'ё', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', 'backspace',
-          'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', 'caps',
-          'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'enter',
-          'done', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', ',', '.', '?',
+          'ё', '!', '"', '№', ';', '%', ':', '?', '*', '(', ')', 'backspace', 'br',
+          'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', 'caps', 'br',
+          'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'enter', 'br',
+          'done', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', ',', 'br',
           'lang', 'shift', 'space', 'left', 'right',
         ];
       }
@@ -114,10 +115,11 @@ const Keyboard = {
 
     keyLayout.forEach((key) => {
       //? изначально массив был такой ['backspace', 'p', 'enter', '?']
-      const insertLineBreak = ['backspace', 'enter', '?', 'caps'].indexOf(key) !== -1;
+      const insertLineBreak = ['br'].indexOf(key) !== -1;
       const keyElement = document.createElement('button');
 
       keyElement.setAttribute('type', 'button');
+      keyElement.setAttribute('data-code', key);
       keyElement.classList.add('keyboard__key');
 
       const isActive = (prop, activeClass = 'keyboard__key--active') => {
@@ -129,6 +131,11 @@ const Keyboard = {
       };
 
       switch (key) {
+        case 'br':
+          keyElement.classList.add('unvisible');
+          keyElement.textContent = '';
+          break;
+
         case 'backspace':
           keyElement.classList.add('keyboard__key--wide');
           keyElement.innerHTML = createIconHTML('backspace');
@@ -142,16 +149,15 @@ const Keyboard = {
               ? this.properties.cursorPosition - 1
               : 0;
 
+            this._triggerEvent('oninput');
             this.elements.display.selectionStart = this.elements.display.selectionEnd = this.properties.cursorPosition;
             //console.log(this.properties.cursorPosition, this.elements.display.selectionStart);
-            this._triggerEvent('oninput');
           });
 
           break;
 
         case 'caps':
           keyElement.classList.add('keyboard__key--wide', 'keyboard__key--activatable');
-          keyElement.setAttribute('data', 'capsLock');
           keyElement.innerHTML = createIconHTML('keyboard_capslock');
 
           isActive(this.properties.capsLock);
@@ -256,9 +262,7 @@ const Keyboard = {
           keyElement.textContent = key.toLocaleLowerCase();
 
           keyElement.addEventListener('click', () => {
-            this.properties.value += (this.properties.capsLock === this.properties.shift)
-              ? key.toLowerCase()
-              : key.toUpperCase();
+            this._stringRenew(key)
             this._triggerEvent('oninput');
           });
 
@@ -278,8 +282,6 @@ const Keyboard = {
   _triggerEvent(handlerName) {
     if (typeof this.eventHandlers[handlerName] == 'function') {
       this.eventHandlers[handlerName](this.properties.value);
-      //this.elements.display.selectionStart = this.elements.display.selectionEnd = this.properties.cursorPosition;
-      console.log(this.properties.cursorPosition);
     }
   },
 
@@ -320,39 +322,68 @@ const Keyboard = {
     this._heightControl();
   },
 
+  _stringRenew(char) {
+    console.log('before ', this.properties.cursorPosition);
+
+    const newText = (this.properties.capsLock === this.properties.shift)
+      ? char.toLowerCase()
+      : char.toUpperCase();
+
+    this.properties.cursorPosition = this.elements.display.selectionStart = this.elements.display.selectionEnd;
+
+    this.properties.value = this.properties.value.substring(0, this.properties.cursorPosition + 1)
+      + newText
+      + this.properties.value.substring(this.properties.cursorPosition);
+
+    this.elements.display.selectionStart = this.elements.display.selectionEnd = this.properties.cursorPosition;
+    console.log('end ', this.properties.cursorPosition);
+  },
+
   _triggerKbKeys(event) {
+    const simbolKey = document.querySelector(`[data-code = "${event.key.toLowerCase()}"]`);
+
+    if (!simbolKey) return;
+
     if (event.type === 'keydown') {
+      event.preventDefault();
+
       if (event.key === 'Shift') {
-        //event.preventDefault();
         if (event.repeat) return;
-        //event.repeat = false;
+
         this._toggleShift();
       }
 
       if (event.key === 'CapsLock') {
-        event.preventDefault();
-        const capsKey = document.querySelector('[data = "capsLock"]');
+        //event.preventDefault();
+
+        const capsKey = document.querySelector('[data-code = "caps"]');
         this._toggleCapsLock();
 
-        if (this.properties.capsLock === true) {
-          capsKey.classList.add('keyboard__key--active');
-        } else {
-          capsKey.classList.remove('keyboard__key--active');
-        }
-      }
+        (this.properties.capsLock)
+          ? capsKey.classList.add('keyboard__key--active')
+          : capsKey.classList.remove('keyboard__key--active');
 
+      }
+      //event.preventDefault();
+      const text = simbolKey.textContent;
+
+      this._stringRenew(text);
+      this._triggerEvent('oninput');
+
+      simbolKey.classList.add('active');
     };
 
     if (event.type === 'keyup') {
-      //console.log(event);
       if (event.key === 'Shift') {
-        //event.preventDefault();
         this._toggleShift();
+
+      } else {
+        event.preventDefault();
+        simbolKey.classList.remove('active');
       }
     }
 
     if (event.type === 'input') {
-      //console.log('input');
       this.properties.capsLock = false;
       this.properties.shift = false;
 
@@ -361,22 +392,6 @@ const Keyboard = {
       this.elements.keys = this.elements.keysContainer.querySelectorAll('.keyboard__key');
     }
   },
-
-  // getCursorPosition(ctrl) {
-  //   console.log(this);
-  //   let cursorPos = 0;
-  //   if ( document.selection ) {
-  //       ctrl.focus ();
-  //       var Sel = document.selection.createRange();
-  //       Sel.moveStart ('character', -ctrl.value.length);
-  //       CaretPos = Sel.text.length;
-  //   } else if ( ctrl.selectionStart || ctrl.selectionStart == '0' ) {
-  //       CaretPos = ctrl.selectionStart;
-  //   }
-  //   return CaretPos;
-  // },
-
-
 
   open(initialValue, oninput, onclose) {
     this.properties.value = initialValue || '';

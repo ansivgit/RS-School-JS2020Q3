@@ -25,10 +25,6 @@
     }
 
     &__keys {
-      /*display: flex;
-      flex-wrap: wrap;
-      /*grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-      grid-template-rows: 1fr 1fr 1fr 1fr 1fr;*/
       text-align: center;
     }
 
@@ -85,4 +81,13 @@
           background: rgba(0, 0, 0, 0.25);
         }
     }
+}
+
+//* style for active buttons when real KB keys pressing
+.active {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.unvisible {
+  display: none;
 }
