@@ -17,6 +17,7 @@ const Keyboard = {
     secondLang: false,
     shift: false,
     cursorPosition: 0,
+    sound: true,
   },
 
   init() {
@@ -54,6 +55,7 @@ const Keyboard = {
         this._triggerKbKeys(event);
       });
 
+      //! возможно, эта функция не нужна
       // element.addEventListener('input', (event) => {
       //   this._triggerKbKeys(event);
       // });
@@ -61,7 +63,6 @@ const Keyboard = {
       document.querySelector('.keyboard').addEventListener('mouseenter', () => {
         this.properties.value = element.value;
         this.properties.cursorPosition = this.elements.display.selectionStart;
-        //console.log(this.properties.cursorPosition);
       });
     });
   },
@@ -77,7 +78,7 @@ const Keyboard = {
           'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', 'caps', 'br',
           'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'enter', 'br',
           'done', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'br',
-          'lang', 'shift', 'space', 'left', 'right',
+          'sound', 'lang', 'shift', 'space', 'left', 'right',
         ];
       } else {
         keyLayout = [
@@ -85,7 +86,7 @@ const Keyboard = {
           'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '{', '}', 'caps', 'br',
           'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ':', '\"', 'enter', 'br',
           'done', 'z', 'x', 'c', 'v', 'b', 'n', 'm', '<', '>', '?', 'br',
-          'lang', 'shift', 'space', 'left', 'right',
+          'sound', 'lang', 'shift', 'space', 'left', 'right',
         ];
       }
     } else {
@@ -95,7 +96,7 @@ const Keyboard = {
           'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', 'caps', 'br',
           'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'enter', 'br',
           'done', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', 'br',
-          'lang', 'shift', 'space', 'left', 'right',
+          'sound', 'lang', 'shift', 'space', 'left', 'right',
         ];
       } else {
         keyLayout = [
@@ -103,7 +104,7 @@ const Keyboard = {
           'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', 'caps', 'br',
           'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'enter', 'br',
           'done', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', ',', 'br',
-          'lang', 'shift', 'space', 'left', 'right',
+          'sound', 'lang', 'shift', 'space', 'left', 'right',
         ];
       }
     }
@@ -113,7 +114,6 @@ const Keyboard = {
     }
 
     keyLayout.forEach((key) => {
-      //? изначально массив был такой ['backspace', 'p', 'enter', '?']
       const insertLineBreak = ['br'].indexOf(key) !== -1;
       const keyElement = document.createElement('button');
 
@@ -166,7 +166,6 @@ const Keyboard = {
         case 'shift':
           keyElement.classList.add('keyboard__key--wide', 'keyboard__key--activatable');
           keyElement.innerHTML = createIconHTML('arrow_circle_up');
-          //keyElement.innerHTML = 'shift';
 
           isActive(this.properties.shift);
 
@@ -219,6 +218,20 @@ const Keyboard = {
 
           break;
 
+        case 'sound':
+          keyElement.innerHTML = (this.properties.sound)
+            ? createIconHTML('volume_up')
+            : createIconHTML('volume_off');
+
+          keyElement.addEventListener('click', () => {
+            this.properties.sound = !this.properties.sound;
+            keyElement.innerHTML = (this.properties.sound)
+              ? createIconHTML('volume_up')
+              : createIconHTML('volume_off');
+          });
+
+          break;
+
         case 'lang':
           keyElement.innerHTML = (this.properties.secondLang === false) ? 'en' : 'ru';
 
@@ -227,7 +240,6 @@ const Keyboard = {
           });
 
           break;
-
 
         case 'done':
           keyElement.classList.add('keyboard__key--wide', 'keyboard__key--dark');
@@ -247,11 +259,9 @@ const Keyboard = {
           keyElement.addEventListener('click', () => {
             this._stringRenew(key)
             this._triggerEvent('oninput');
-            //console.log(this.properties.cursorPosition);
             this._cursorMove('get');
 
             this._sounds('allKeys');
-            //this.elements.display.selectionStart = this.elements.display.selectionEnd = this.properties.cursorPosition;
           });
 
           break;
@@ -311,22 +321,15 @@ const Keyboard = {
   },
 
   _stringRenew(char) {
-    //console.log('before ', this.properties.cursorPosition);
-
     const newText = (this.properties.capsLock === this.properties.shift)
       ? char.toLowerCase()
       : char.toUpperCase();
-
-
-    //this._cursorMove('get');
 
     this.properties.value = this.properties.value.substring(0, this.properties.cursorPosition)
       + newText
       + this.properties.value.substring(this.properties.cursorPosition);
 
     this.properties.cursorPosition += 1;
-
-    //console.log('end ', this.properties.cursorPosition);
   },
 
   _cursorMove(param) {
@@ -344,8 +347,6 @@ const Keyboard = {
               : 0;
 
     this._cursorMove('get');
-    //console.log('left: ', this.properties.cursorPosition);
-
     this._triggerEvent('oninput');
   },
 
@@ -355,8 +356,6 @@ const Keyboard = {
               : this.properties.cursorPosition + 1;
 
     this._cursorMove('get');
-    //this.elements.display.selectionStart = this.elements.display.selectionEnd = this.properties.cursorPosition;
-
     this._triggerEvent('oninput');
   },
 
@@ -370,9 +369,6 @@ const Keyboard = {
 
     this._triggerEvent('oninput');
     this._cursorMove('get');
-
-    //this.elements.display.selectionStart = this.elements.display.selectionEnd = this.properties.cursorPosition;
-    //console.log(this.properties.cursorPosition, this.elements.display.selectionStart);
   },
 
   _enter() {
@@ -383,8 +379,6 @@ const Keyboard = {
     this._triggerEvent('oninput');
     this.properties.cursorPosition += 1;
     this._cursorMove('get');
-    //console.log(this.properties.cursorPosition);
-    //this.properties.cursorPosition -= this.properties.value.substring(this.properties.cursorPosition).length;
   },
 
   _space() {
@@ -398,12 +392,7 @@ const Keyboard = {
   },
 
   _triggerKbKeys(event) {
-    // console.log('1: ', event.key);
-    // const REGEXP = /[\w\W]{1}/i;
-    // console.log(REGEXP.test(event.key));
-    // if (!REGEXP.test(event.key) || ['CapsLock', 'Shift', 'ArrowLeft', 'ArrowRight', 'Backspace', 'Enter', 'Space'].indexOf(event.key) === -1) return `5: ${event.key}`;
-    // //const simbolKey = document.querySelector(`[data-code = "${event.key.toLowerCase()}"]`);
-    // console.log('2 ', event.key);
+    if (/F[0-9]{1,2}/g.test(event.key)) return;
 
     const simbolKey = (event.key !== '\"')
       ? document.querySelector(`[data-code = "${event.key.toLowerCase()}"]`)
@@ -417,12 +406,9 @@ const Keyboard = {
     const enterKey = document.querySelector(`button[data-code = 'enter']`);
     const spaceKey = document.querySelector(`button[data-code = 'space']`);
 
-    //console.log(enterKey);
-
     this._cursorMove('get');
 
     if (event.type === 'keydown') {
-      //console.log('1');
       event.preventDefault();
 
       switch (event.key) {
@@ -432,11 +418,9 @@ const Keyboard = {
 
           this._toggleShift();
           this._sounds('shift');
-
           break;
 
         case 'CapsLock':
-          //event.preventDefault();
           this._toggleCapsLock();
 
           (this.properties.capsLock)
@@ -446,7 +430,6 @@ const Keyboard = {
           capsKey.classList.add('active');
 
           this._sounds('caps');
-
           break;
 
         case 'ArrowLeft':
@@ -481,7 +464,6 @@ const Keyboard = {
 
         default:
           if (simbolKey) {
-            //event.preventDefault();
             const text = simbolKey.textContent;
 
             this._stringRenew(text);
@@ -498,7 +480,6 @@ const Keyboard = {
 
 
     if (event.type === 'keyup') {
-      console.log('2');
       if (event.key === 'Shift') {
         this._toggleShift();
 
@@ -511,7 +492,6 @@ const Keyboard = {
 
     if (event.type === 'input') {
       //! нужно ли обрабатывать инпут?
-      //console.log('3');
       this.properties.capsLock = false;
       this.properties.shift = false;
 
@@ -526,6 +506,7 @@ const Keyboard = {
     const key = document.querySelector(`[data-code='${keyCode}']`);
 
     if (!audio) return;
+    if (!this.properties.sound) return;
 
     key.classList.add('playing');
 
