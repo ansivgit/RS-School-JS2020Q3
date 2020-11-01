@@ -17,7 +17,7 @@ const Keyboard = {
     secondLang: false,
     shift: false,
     //keyIsActive: false,
-    cursorPosition: 0,
+    cursorPosition: 1,
   },
 
   init() {
@@ -141,17 +141,7 @@ const Keyboard = {
           keyElement.innerHTML = createIconHTML('backspace');
 
           keyElement.addEventListener('click', () => {
-            //? возможно, эту функцию придется изменить после реализации гориз.смещения курсора
-            this.properties.value = this.properties.value.substring(0, this.properties.cursorPosition - 1)
-              + this.properties.value.substring(this.properties.cursorPosition);
-
-            this.properties.cursorPosition = (this.properties.cursorPosition !== 0)
-              ? this.properties.cursorPosition - 1
-              : 0;
-
-            this._triggerEvent('oninput');
-            this.elements.display.selectionStart = this.elements.display.selectionEnd = this.properties.cursorPosition;
-            //console.log(this.properties.cursorPosition, this.elements.display.selectionStart);
+            this._backspace();
           });
 
           break;
@@ -174,7 +164,8 @@ const Keyboard = {
 
         case 'shift':
           keyElement.classList.add('keyboard__key--wide', 'keyboard__key--activatable');
-          keyElement.innerHTML = 'shift';
+          keyElement.innerHTML = createIconHTML('arrow_circle_up');
+          //keyElement.innerHTML = 'shift';
 
           isActive(this.properties.shift);
 
@@ -189,8 +180,7 @@ const Keyboard = {
           keyElement.innerHTML = createIconHTML('keyboard_return');
 
           keyElement.addEventListener('click', () => {
-            this.properties.value += '\n';
-            this._triggerEvent('oninput');
+            this._enter();
           });
 
           break;
@@ -200,8 +190,7 @@ const Keyboard = {
           keyElement.innerHTML = createIconHTML('space_bar');
 
           keyElement.addEventListener('click', () => {
-            this.properties.value += ' ';
-            this._triggerEvent('oninput');
+            this._space();
           });
 
           break;
@@ -210,14 +199,7 @@ const Keyboard = {
           keyElement.innerHTML = createIconHTML('west');
 
           keyElement.addEventListener('click', () => {
-            this.properties.cursorPosition = (this.properties.cursorPosition > 1)
-              ? this.properties.cursorPosition - 1
-              : 0;
-
-            this.elements.display.selectionStart = this.elements.display.selectionEnd = this.properties.cursorPosition;
-            //console.log(this.properties.cursorPosition);
-
-            this._triggerEvent('oninput');
+            this._leftArrow();
           });
 
           break;
@@ -226,13 +208,7 @@ const Keyboard = {
           keyElement.innerHTML = createIconHTML('east');
 
           keyElement.addEventListener('click', () => {
-            this.properties.cursorPosition = (this.properties.cursorPosition === this.properties.value.length)
-              ? this.properties.value.length
-              : this.properties.cursorPosition + 1;
-
-            this.elements.display.selectionStart = this.elements.display.selectionEnd = this.properties.cursorPosition;
-
-            this._triggerEvent('oninput');
+            this._rightArrow();
           });
 
           break;
@@ -264,6 +240,9 @@ const Keyboard = {
           keyElement.addEventListener('click', () => {
             this._stringRenew(key)
             this._triggerEvent('oninput');
+            //console.log(this.properties.cursorPosition);
+            this._cursorMove('get');
+            //this.elements.display.selectionStart = this.elements.display.selectionEnd = this.properties.cursorPosition;
           });
 
           break;
@@ -323,55 +302,172 @@ const Keyboard = {
   },
 
   _stringRenew(char) {
-    console.log('before ', this.properties.cursorPosition);
+    //console.log('before ', this.properties.cursorPosition);
 
     const newText = (this.properties.capsLock === this.properties.shift)
       ? char.toLowerCase()
       : char.toUpperCase();
 
-    this.properties.cursorPosition = this.elements.display.selectionStart = this.elements.display.selectionEnd;
 
-    this.properties.value = this.properties.value.substring(0, this.properties.cursorPosition + 1)
+    //this._cursorMove('get');
+
+    this.properties.value = this.properties.value.substring(0, this.properties.cursorPosition)
       + newText
       + this.properties.value.substring(this.properties.cursorPosition);
 
-    this.elements.display.selectionStart = this.elements.display.selectionEnd = this.properties.cursorPosition;
-    console.log('end ', this.properties.cursorPosition);
+    this.properties.cursorPosition += 1;
+
+    //console.log('end ', this.properties.cursorPosition);
+  },
+
+  _cursorMove(param) {
+    if (param === 'set') {
+      this.properties.cursorPosition = this.elements.display.selectionStart = this.elements.display.selectionEnd
+    }
+    if (param === 'get') {
+      this.elements.display.selectionStart = this.elements.display.selectionEnd = this.properties.cursorPosition;
+    }
+  },
+
+  _leftArrow() {
+    this.properties.cursorPosition = (this.properties.cursorPosition > 0)
+              ? this.properties.cursorPosition - 1
+              : 0;
+
+    this._cursorMove('get');
+    //console.log('left: ', this.properties.cursorPosition);
+
+    this._triggerEvent('oninput');
+  },
+
+  _rightArrow() {
+    this.properties.cursorPosition = (this.properties.cursorPosition === this.properties.value.length)
+              ? this.properties.value.length
+              : this.properties.cursorPosition + 1;
+
+    this._cursorMove('get');
+    //this.elements.display.selectionStart = this.elements.display.selectionEnd = this.properties.cursorPosition;
+
+    this._triggerEvent('oninput');
+  },
+
+  _backspace() {
+    this.properties.value = this.properties.value.substring(0, this.properties.cursorPosition - 1)
+              + this.properties.value.substring(this.properties.cursorPosition);
+
+    this.properties.cursorPosition = (this.properties.cursorPosition !== 0)
+      ? this.properties.cursorPosition - 1
+      : 0;
+
+    this._triggerEvent('oninput');
+    this._cursorMove('get');
+
+    //this.elements.display.selectionStart = this.elements.display.selectionEnd = this.properties.cursorPosition;
+    //console.log(this.properties.cursorPosition, this.elements.display.selectionStart);
+  },
+
+  _enter() {
+    this.properties.value = this.properties.value.substring(0, this.properties.cursorPosition)
+      + '\n'
+      + this.properties.value.substring(this.properties.cursorPosition);
+
+    this._triggerEvent('oninput');
+    this.properties.cursorPosition += 1;
+    this._cursorMove('get');
+    //console.log(this.properties.cursorPosition);
+    //this.properties.cursorPosition -= this.properties.value.substring(this.properties.cursorPosition).length;
+  },
+
+  _space() {
+    this.properties.value = this.properties.value.substring(0, this.properties.cursorPosition)
+      + ' '
+      + this.properties.value.substring(this.properties.cursorPosition);
+
+    this._triggerEvent('oninput');
+    this.properties.cursorPosition += 1;
+    this._cursorMove('get');
   },
 
   _triggerKbKeys(event) {
-    const simbolKey = document.querySelector(`[data-code = "${event.key.toLowerCase()}"]`);
+    const simbolKey = (event.key !== '\"')
+      ? document.querySelector(`[data-code = "${event.key.toLowerCase()}"]`)
+      : document.querySelector(`[data-code = '\"']`);
 
-    if (!simbolKey) return;
+    const capsKey = document.querySelector(`[data-code = 'caps']`);
+    const shiftKey = document.querySelector(`[data-code = 'shift']`);
+    const leftKey = document.querySelector(`[data-code = 'left']`);
+    const rightKey = document.querySelector(`[data-code = 'right']`);
+    const backspaceKey = document.querySelector(`[data-code = 'backspace']`);
+    const enterKey = document.querySelector(`[data-code = 'enter']`);
+    const spaceKey = document.querySelector(`[data-code = 'space']`);
+
+    console.log(event.key);
+
+    this._cursorMove('get');
 
     if (event.type === 'keydown') {
       event.preventDefault();
 
-      if (event.key === 'Shift') {
-        if (event.repeat) return;
+      switch (event.key) {
+        case 'Shift':
+          shiftKey.classList.add('active');
+          if (event.repeat) return;
 
-        this._toggleShift();
+          this._toggleShift();
+
+          break;
+
+        case 'CapsLock':
+          //event.preventDefault();
+          this._toggleCapsLock();
+
+          (this.properties.capsLock)
+            ? capsKey.classList.add('keyboard__key--active')
+            : capsKey.classList.remove('keyboard__key--active');
+
+          capsKey.classList.add('active');
+          break;
+
+        case 'ArrowLeft':
+          leftKey.classList.add('active');
+          this._leftArrow();
+          break;
+
+        case 'ArrowRight':
+          rightKey.classList.add('active');
+          this._rightArrow();
+          break;
+
+        case 'Backspace':
+          backspaceKey.classList.add('active');
+          this._backspace();
+          break;
+
+        case 'Enter':
+          enterKey.classList.add('active');
+          this._enter();
+          break;
+
+        case ' ':
+          spaceKey.classList.add('active');
+          this._space();
+          break;
+
+        default:
+          if (simbolKey) {
+            //event.preventDefault();
+            const text = simbolKey.textContent;
+
+            this._stringRenew(text);
+            this._triggerEvent('oninput');
+            this._cursorMove('get');
+
+            simbolKey.classList.add('active');
+          }
+          break;
       }
+    }
 
-      if (event.key === 'CapsLock') {
-        //event.preventDefault();
-
-        const capsKey = document.querySelector('[data-code = "caps"]');
-        this._toggleCapsLock();
-
-        (this.properties.capsLock)
-          ? capsKey.classList.add('keyboard__key--active')
-          : capsKey.classList.remove('keyboard__key--active');
-
-      }
-      //event.preventDefault();
-      const text = simbolKey.textContent;
-
-      this._stringRenew(text);
-      this._triggerEvent('oninput');
-
-      simbolKey.classList.add('active');
-    };
 
     if (event.type === 'keyup') {
       if (event.key === 'Shift') {
@@ -379,7 +475,8 @@ const Keyboard = {
 
       } else {
         event.preventDefault();
-        simbolKey.classList.remove('active');
+        const activeKey = document.querySelector('.active');
+        (activeKey) ? activeKey.classList.remove('active') : '';
       }
     }
 
