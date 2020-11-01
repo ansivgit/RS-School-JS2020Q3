@@ -9,6 +9,29 @@
   cursor: text;
 }
 
+@media (max-width: 1000px) {
+  .use-keyboard-input {
+    width: 96%;
+    margin: 10px auto;
+    padding: 5px;
+  }
+}
+
+@media (max-width: 499px) {
+  .use-keyboard-input {
+    width: 96%;
+    margin: 10px auto;
+    padding: 5px;
+  }
+}
+
+@media (max-height: 1000px) {
+  .use-keyboard-input {
+    height: calc(100vh - 300px);
+    min-height: 150px;
+  }
+}
+
 .keyboard {
   position: fixed;
   left: 0;
@@ -68,6 +91,12 @@
 .keyboard__key--wide {
   width: 12%;
   /*max-width: 90px;*/
+}
+
+@media (max-width: 499px) {
+  .keyboard__key--wide {
+    width: 8%;
+  }
 }
 
 .keyboard__key--extra-wide {

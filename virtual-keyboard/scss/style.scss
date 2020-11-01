@@ -7,6 +7,23 @@
   padding: 10px;
   font-size: 20px;
   cursor: text;
+
+  @media (max-width: 1000px) {
+    width: 96%;
+    margin: 10px auto;
+    padding: 5px;
+  }
+
+  @media (max-width: 499px) {
+    width: 96%;
+    margin: 10px auto;
+    padding: 5px;
+  }
+
+  @media (max-height: 1000px) {
+    height: calc(100vh - 300px);
+    min-height: 150px;
+  }
 }
 
 .keyboard {
@@ -55,6 +72,10 @@
         &--wide {
           width: 12%;
           /*max-width: 90px;*/
+
+          @media (max-width: 499px) {
+            width: 8%;
+          }
         }
 
         &--extra-wide {
