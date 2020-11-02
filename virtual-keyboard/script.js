@@ -14,11 +14,12 @@ const Keyboard = {
   properties: {
     value: '',
     capsLock: false,
-    secondLang: true,
+    secondLang: false,
     shift: false,
     cursorPosition: 0,
     sound: true,
     voice: false,
+    recognition: true,
   },
 
   init() {
@@ -235,22 +236,29 @@ const Keyboard = {
 
         case 'voice':
           keyElement.innerHTML = (this.properties.voice)
-            ? createIconHTML('mic')
-            : createIconHTML('mic_off');
+          ? createIconHTML('mic')
+          : createIconHTML('mic_off');
 
           keyElement.addEventListener('click', () => {
             this.properties.voice = !this.properties.voice;
+            this.properties.recognition.lang = (this.properties.secondLang) ? 'ru-RU' : 'en-EN';
+            console.log(this.properties.secondLang, this.properties.recognition.lang);
 
             if (this.properties.voice) {
               keyElement.innerHTML = createIconHTML('mic');
               keyElement.style.color = 'red';
 
+              this._speech();
+              this.properties.recognition.addEventListener('end', this.properties.recognition.start);
+              this.properties.recognition.start();
+
             } else {
               keyElement.innerHTML = createIconHTML('mic_off');
               keyElement.style.color = 'white';
-            }
 
-            this._speech();
+              this.properties.recognition.removeEventListener('end', this.properties.recognition.start);
+              this.properties.recognition.stop();
+            }
           });
 
           break;
@@ -325,6 +333,8 @@ const Keyboard = {
 
   _toggleLang() {
     this.properties.secondLang = !this.properties.secondLang;
+
+    this.properties.recognition.removeEventListener('end', this.properties.recognition.start);
 
     this.elements.keysContainer.innerHTML = '';
     this.elements.keysContainer.append(this._createKeys());
@@ -513,15 +523,15 @@ const Keyboard = {
       }
     }
 
-    if (event.type === 'input') {
-      //! нужно ли обрабатывать инпут?
-      this.properties.capsLock = false;
-      this.properties.shift = false;
+    // if (event.type === 'input') {
+    //   //! нужно ли обрабатывать инпут?
+    //   this.properties.capsLock = false;
+    //   this.properties.shift = false;
 
-      this.elements.keysContainer.innerHTML = '';
-      this.elements.keysContainer.append(this._createKeys());
-      this.elements.keys = this.elements.keysContainer.querySelectorAll('.keyboard__key');
-    }
+    //   this.elements.keysContainer.innerHTML = '';
+    //   this.elements.keysContainer.append(this._createKeys());
+    //   this.elements.keys = this.elements.keysContainer.querySelectorAll('.keyboard__key');
+    // }
   },
 
   _sounds(keyCode) {
@@ -548,54 +558,23 @@ const Keyboard = {
 
   //* speech recognition
   _speech() {
-    console.log(window.SpeechRecognition);
-    const recognition = new SpeechRecognition();
-    recognition.interimResults = true;
+    this.properties.recognition = new SpeechRecognition();
+    this.properties.recognition.interimResults = true;
+    this.properties.recognition.lang = (this.properties.secondLang) ? 'ru-RU' : 'en-EN';
 
-    recognition.lang = (this.properties.secondLang) ? 'ru-RU' : 'en-EN';
-
-    const recording = (event) => {
-      //console.log(event.results);
+    this.properties.recognition.addEventListener('result', event => {
+      console.log('here');
       const transcript = Array.from(event.results)
         .map(result => result[0])
         .map(result => result.transcript)
         .join('');
 
-      console.log(transcript);
-
       if (event.results[0].isFinal) {
-        this.properties.value += transcript + ' ';
+        this.properties.value +=  ' ' + transcript;
         this._triggerEvent('oninput');
       }
-    };
-
-    if (this.properties.voice == true) {
-      console.log(this.properties.voice);
-      console.log('sss');
-      recognition.addEventListener('result', recording);
-      recognition.addEventListener('end', recognition.start);
-      recognition.start();
-
-    } else {
-      console.log('jjj');
-      console.log(this.properties.voice);
-
-      //recognition.interimResults = false;
-      recognition.removeEventListener('end', recognition.start);
-      recognition.removeEventListener('result', recording);
-      recognition.stop();
-      //this.properties.cursorPosition = this.properties.value.length;
-      //this._cursorMove('get');
-
-      this.elements.keysContainer.innerHTML = '';
-      this.elements.keysContainer.append(this._createKeys());
-      this.elements.keys = this.elements.keysContainer.querySelectorAll('.keyboard__key');
-      console.log(this.properties.voice);
-
-      //this._triggerEvent('oninput');
-    }
+    });
   },
-
 
 
   open(initialValue, oninput, onclose) {
