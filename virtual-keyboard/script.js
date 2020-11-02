@@ -194,7 +194,7 @@ const Keyboard = {
 
           keyElement.addEventListener('click', () => {
             this._space();
-            this._sounds('allKeys');
+            (this.properties.secondLang) ? this._sounds('allKeysRu') : this._sounds('allKeys');
           });
 
           break;
@@ -283,7 +283,7 @@ const Keyboard = {
             this._triggerEvent('oninput');
             this._cursorMove('get');
 
-            this._sounds('allKeys');
+            (this.properties.secondLang) ? this._sounds('allKeysRu') : this._sounds('allKeys');
           });
 
           break;

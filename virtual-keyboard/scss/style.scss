@@ -9,6 +9,7 @@
   cursor: text;
 
   @media (max-width: 1000px) {
+    height: calc(100vh - 300px);
     min-height: 230px;
     width: 96%;
     margin: 10px auto;
