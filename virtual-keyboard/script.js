@@ -14,7 +14,7 @@ const Keyboard = {
   properties: {
     value: '',
     capsLock: false,
-    secondLang: false,
+    secondLang: true,
     shift: false,
     cursorPosition: 0,
     sound: true,
@@ -245,11 +245,12 @@ const Keyboard = {
               keyElement.innerHTML = createIconHTML('mic');
               keyElement.style.color = 'red';
 
-              this._speech();
             } else {
               keyElement.innerHTML = createIconHTML('mic_off');
               keyElement.style.color = 'white';
             }
+
+            this._speech();
           });
 
           break;
@@ -547,16 +548,13 @@ const Keyboard = {
 
   //* speech recognition
   _speech() {
+    console.log(window.SpeechRecognition);
     const recognition = new SpeechRecognition();
     recognition.interimResults = true;
-    recognition.lang = 'ru-RU';
 
-    //let p = document.createElement('p');
-    //const words = document.querySelector('.words');
-    //this.elements.display.appendChild(p);
+    recognition.lang = (this.properties.secondLang) ? 'ru-RU' : 'en-EN';
 
-    recognition.addEventListener('result', event => {
-      const voiceKey = document.querySelector(`button[data-code = 'voice']`);
+    const recording = (event) => {
       //console.log(event.results);
       const transcript = Array.from(event.results)
         .map(result => result[0])
@@ -565,27 +563,37 @@ const Keyboard = {
 
       console.log(transcript);
 
-      //const poopScript = transcript.replace(/poop|poo|shit|dump/gi, '💩');
-      //p.textContent = poopScript;
-
       if (event.results[0].isFinal) {
-        //p = document.createElement('p');
         this.properties.value += transcript + ' ';
-        //console.log(this.properties.cursorPosition);
         this._triggerEvent('oninput');
-
       }
+    };
 
-      voiceKey.addEventListener('click', () => {
-        recognition.stop();
-        this.properties.cursorPosition = this.properties.value.length;
-        this._cursorMove('get');
-      });
-    });
+    if (this.properties.voice == true) {
+      console.log(this.properties.voice);
+      console.log('sss');
+      recognition.addEventListener('result', recording);
+      recognition.addEventListener('end', recognition.start);
+      recognition.start();
 
-    recognition.addEventListener('end', recognition.start);
+    } else {
+      console.log('jjj');
+      console.log(this.properties.voice);
 
-    recognition.start();
+      //recognition.interimResults = false;
+      recognition.removeEventListener('end', recognition.start);
+      recognition.removeEventListener('result', recording);
+      recognition.stop();
+      //this.properties.cursorPosition = this.properties.value.length;
+      //this._cursorMove('get');
+
+      this.elements.keysContainer.innerHTML = '';
+      this.elements.keysContainer.append(this._createKeys());
+      this.elements.keys = this.elements.keysContainer.querySelectorAll('.keyboard__key');
+      console.log(this.properties.voice);
+
+      //this._triggerEvent('oninput');
+    }
   },
 
 
