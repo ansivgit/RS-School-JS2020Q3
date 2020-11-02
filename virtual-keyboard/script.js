@@ -18,6 +18,7 @@ const Keyboard = {
     shift: false,
     cursorPosition: 0,
     sound: true,
+    voice: false,
   },
 
   init() {
@@ -78,7 +79,7 @@ const Keyboard = {
           'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', 'caps', 'br',
           'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'enter', 'br',
           'done', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'br',
-          'sound', 'lang', 'shift', 'space', 'left', 'right',
+          'sound', 'lang', 'shift', 'space', 'left', 'right', 'voice',
         ];
       } else {
         keyLayout = [
@@ -86,7 +87,7 @@ const Keyboard = {
           'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '{', '}', 'caps', 'br',
           'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ':', '\"', 'enter', 'br',
           'done', 'z', 'x', 'c', 'v', 'b', 'n', 'm', '<', '>', '?', 'br',
-          'sound', 'lang', 'shift', 'space', 'left', 'right',
+          'sound', 'lang', 'shift', 'space', 'left', 'right', 'voice',
         ];
       }
     } else {
@@ -96,7 +97,7 @@ const Keyboard = {
           'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', 'caps', 'br',
           'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'enter', 'br',
           'done', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', 'br',
-          'sound', 'lang', 'shift', 'space', 'left', 'right',
+          'sound', 'lang', 'shift', 'space', 'left', 'right', 'voice',
         ];
       } else {
         keyLayout = [
@@ -104,7 +105,7 @@ const Keyboard = {
           'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', 'caps', 'br',
           'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'enter', 'br',
           'done', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', ',', 'br',
-          'sound', 'lang', 'shift', 'space', 'left', 'right',
+          'sound', 'lang', 'shift', 'space', 'left', 'right', 'voice',
         ];
       }
     }
@@ -228,6 +229,27 @@ const Keyboard = {
             keyElement.innerHTML = (this.properties.sound)
               ? createIconHTML('volume_up')
               : createIconHTML('volume_off');
+          });
+
+          break;
+
+        case 'voice':
+          keyElement.innerHTML = (this.properties.voice)
+            ? createIconHTML('mic')
+            : createIconHTML('mic_off');
+
+          keyElement.addEventListener('click', () => {
+            this.properties.voice = !this.properties.voice;
+
+            if (this.properties.voice) {
+              keyElement.innerHTML = createIconHTML('mic');
+              keyElement.style.color = 'red';
+
+              this._speech();
+            } else {
+              keyElement.innerHTML = createIconHTML('mic_off');
+              keyElement.style.color = 'white';
+            }
           });
 
           break;
@@ -523,6 +545,51 @@ const Keyboard = {
     event.target.classList.remove('playing');
   },
 
+  //* speech recognition
+  _speech() {
+    const recognition = new SpeechRecognition();
+    recognition.interimResults = true;
+    recognition.lang = 'ru-RU';
+
+    //let p = document.createElement('p');
+    //const words = document.querySelector('.words');
+    //this.elements.display.appendChild(p);
+
+    recognition.addEventListener('result', event => {
+      const voiceKey = document.querySelector(`button[data-code = 'voice']`);
+      //console.log(event.results);
+      const transcript = Array.from(event.results)
+        .map(result => result[0])
+        .map(result => result.transcript)
+        .join('');
+
+      console.log(transcript);
+
+      //const poopScript = transcript.replace(/poop|poo|shit|dump/gi, '💩');
+      //p.textContent = poopScript;
+
+      if (event.results[0].isFinal) {
+        //p = document.createElement('p');
+        this.properties.value += transcript + ' ';
+        //console.log(this.properties.cursorPosition);
+        this._triggerEvent('oninput');
+
+      }
+
+      voiceKey.addEventListener('click', () => {
+        recognition.stop();
+        this.properties.cursorPosition = this.properties.value.length;
+        this._cursorMove('get');
+      });
+    });
+
+    recognition.addEventListener('end', recognition.start);
+
+    recognition.start();
+  },
+
+
+
   open(initialValue, oninput, onclose) {
     this.properties.value = initialValue || '';
     this.eventHandlers.oninput = oninput;
@@ -541,3 +608,5 @@ const Keyboard = {
 window.addEventListener('DOMContentLoaded', function () {
   Keyboard.init();
 });
+
+window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
