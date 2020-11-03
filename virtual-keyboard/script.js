@@ -334,8 +334,6 @@ const Keyboard = {
   _toggleLang() {
     this.properties.secondLang = !this.properties.secondLang;
 
-    this.properties.recognition.removeEventListener('end', this.properties.recognition.start);
-
     this.elements.keysContainer.innerHTML = '';
     this.elements.keysContainer.append(this._createKeys());
     this.elements.keys = this.elements.keysContainer.querySelectorAll('.keyboard__key');
