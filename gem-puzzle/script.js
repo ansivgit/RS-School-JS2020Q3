@@ -4,7 +4,10 @@ class Box {
   constructor(dimension) {
     this.dimension = dimension;
     this.chips = [];
-    this.empty = null,
+    this.empty = null;
+    this.time = 0;
+    this.moves = 0;
+    this.playing = false;
     this.clear();
   }
 
@@ -27,6 +30,28 @@ class Box {
     this.shuffle.setAttribute('type', 'button');
     this.shuffle.textContent = 'Shuffle';
 
+    this.statistic = document.createElement('div');
+    this.statistic.classList.add('statistic');
+
+    this.statTime = document.createElement('div');
+    this.statTime.classList.add('statistic__time');
+    this.statTimeTitle = document.createElement('div');
+    this.statTimeTitle.classList.add('statistic__time--title');
+    this.statTimeTitle.textContent = 'Time: ';
+    this.statTimeValue = document.createElement('div');
+    this.statTimeValue.classList.add('statistic__time--value');
+    this.statTimeValue.textContent = this.time;
+
+    this.statMoves = document.createElement('div');
+    this.statMoves.classList.add('statistic__moves');
+    this.statMovesTitle = document.createElement('div');
+    this.statMovesTitle.classList.add('statistic__moves--title');
+    this.statMovesTitle.textContent = 'Moves: ';
+    this.statMovesValue = document.createElement('div');
+    this.statMovesValue.classList.add('statistic__moves--value');
+    this.statMovesValue.textContent = this.moves;
+
+
     this.box = document.createElement('div');
     this.box.classList.add('box');
 
@@ -39,19 +64,32 @@ class Box {
     this.container.append(this.header);
     this.header.append(this.title);
     this.header.append(this.shuffle);
+    this.container.append(this.statistic);
+    this.statistic.append(this.statTime);
+    this.statTime.append(this.statTimeTitle);
+    this.statTime.append(this.statTimeValue);
+    this.statistic.append(this.statMoves);
+    this.statMoves.append(this.statMovesTitle);
+    this.statMoves.append(this.statMovesValue);
     this.container.append(this.box);
     this.box.append(this._createChips(this.dimension));
 
     this.container.querySelectorAll('.chip').forEach(elem => {
       elem.addEventListener('click', () => {
+        this.playing = true;
         this._move(elem);
       });
     });
 
     this.shuffle.addEventListener('click', () => {
+      this.playing = false;
+      this.time = 0;
+      this.statTimeValue.textContent = this.time;
+
       this._shuffle(50);
-      console.log(this.empty);
-      console.log(this.chips);;
+
+      //console.log(this.empty);
+      //console.log(this.chips);;
     })
   }
 
@@ -66,9 +104,7 @@ class Box {
         elem.classList.add('chip');
 
         elem.style.gridRowStart = i + 1;
-        //elem.style.gridRowEnd = i + 2;
         elem.style.gridColumnStart = j + 1;
-        //elem.style.gridColumnEnd = j + 2;
 
         fragment.append(elem);
 
@@ -136,6 +172,13 @@ class Box {
         chip.style.gridRowStart = currentChip.y + 1;
         chip.style.gridColumnStart = currentChip.x + 1;
 
+        this.moves += 1;
+        this.statMovesValue.textContent = this.moves;
+
+        if (this.time === 0 && this.playing) {
+          this._timer();
+        }
+
         //console.log(this.chips);
       }
     }
@@ -151,7 +194,21 @@ class Box {
       //console.log(cell);
       //console.log(chip);
       this._move(cell);
+
+      this.moves = 0;
+      this.statMovesValue.textContent = this.moves;
+
+      this.time = 0;
+      this.statTimeValue.textContent = this.time;
     }
+  }
+
+  _timer() {
+    const tick = () => {
+      this.time += 1;
+      this.statTimeValue.textContent = this.time;
+    };
+    setInterval(tick, 1000);
   }
 
 
