@@ -59,14 +59,17 @@ body {
   &__time,
   &__moves {
     display: flex;
-    width: 50%;
 
     &--value {
       height: 100%;
-      min-width: 50px;
+      min-width: 30px;
       margin: 0 10px;
       //border: $secondary-border-line solid $secondary-color;
     }
+  }
+
+  &__time {
+    width: 70%;
   }
 }
 

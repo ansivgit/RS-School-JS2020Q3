@@ -131,13 +131,16 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 50%;
 }
 
 .statistic__time--value, .statistic__moves--value {
   height: 100%;
-  min-width: 50px;
+  min-width: 30px;
   margin: 0 10px;
+}
+
+.statistic__time {
+  width: 70%;
 }
 
 .box {

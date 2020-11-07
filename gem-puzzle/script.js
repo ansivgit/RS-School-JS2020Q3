@@ -163,7 +163,7 @@ class Box {
 
         this.chips[this.empty.y][this.empty.x].cell = currentChip.cell;
 
-        console.log(currentChip.y, currentChip.x);
+        //console.log(currentChip.y, currentChip.x);
         this.chips[currentChip.y][currentChip.x].cell = 'empty';
 
         this.empty = this.chips[currentChip.y][currentChip.x];
