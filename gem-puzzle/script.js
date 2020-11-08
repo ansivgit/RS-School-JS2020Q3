@@ -158,12 +158,39 @@ class Box {
     const closest = this._getFreeChips();
 
     for (let item of closest) {
+
       if (item.cell === currentChip.cell) {
+        //*animation
+        let moveDirection = '';
+        if (currentChip.x === this.empty.x) {
+          if (currentChip.y > this.empty.y) {
+            moveDirection = 'top';
+          } else {
+            moveDirection = 'bottom';
+          }
+        } else {
+           if (currentChip.x > this.empty.x) {
+            moveDirection = 'left';
+          } else {
+            moveDirection = 'right';
+          }
+        }
+
+        const animation = (elem, direction) => {
+          elem.classList.add(`move-${direction}`);
+          elem.addEventListener('animationend', () => {
+            elem.classList.remove(`move-${direction}`);
+          });
+        }
+        animation(chip, moveDirection);
+
+        //*change position in array
         let temp = {x: this.empty.x, y: this.empty.y, cell: currentChip.cell};
 
         this.chips[this.empty.y][this.empty.x].cell = currentChip.cell;
 
         //console.log(currentChip.y, currentChip.x);
+
         this.chips[currentChip.y][currentChip.x].cell = 'empty';
 
         this.empty = this.chips[currentChip.y][currentChip.x];
@@ -178,9 +205,8 @@ class Box {
         if (this.time === 0 && this.playing) {
           this._timer();
         }
-
-        //console.log(this.chips);
       }
+        //console.log(this.chips);
     }
   }
 
@@ -210,8 +236,6 @@ class Box {
     };
     setInterval(tick, 1000);
   }
-
-
 }
 
 const box = new Box(FIELD_DIMENSION);

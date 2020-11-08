@@ -16,6 +16,9 @@ $max-border-line: 10px;
 
 $primary-border-radius: 4px;
 
+$animation-time: 0.3s;
+$animation-function: ease-in;
+
 body {
   display: flex;
   justify-content: center;
@@ -99,5 +102,57 @@ body {
   &--empty {
     border: 0;
     cursor: default;
+  }
+}
+
+
+.move-right {
+  animation: move-right $animation-time $animation-function;
+}
+.move-left {
+  animation: move-left $animation-time $animation-function;
+}
+.move-top {
+  animation: move-top $animation-time $animation-function;
+}
+.move-bottom {
+  animation: move-bottom $animation-time $animation-function;
+}
+
+//* animations
+
+@keyframes move-right {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes move-left {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes move-top {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes move-bottom {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
