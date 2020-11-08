@@ -17,6 +17,7 @@ class Box {
 
   init() {
     this.container = document.querySelector('.container');
+    //this.chipEmpty = document.querySelector('.chip--empty');
 
     this.header = document.createElement('div');
     this.header.classList.add('header');
@@ -54,6 +55,9 @@ class Box {
 
     this.box = document.createElement('div');
     this.box.classList.add('box');
+    this.box.addEventListener('dragover', (event) => {
+      event.preventDefault();
+    });
 
     this.empty = {
       x: this.dimension - 1,
@@ -79,6 +83,17 @@ class Box {
         this.playing = true;
         this._move(elem);
       });
+
+      elem.addEventListener('dragstart', (event) => {
+        event.target.classList.add('selected');
+      });
+
+      elem.addEventListener('dragend', (event) => {
+        event.target.classList.remove('selected');
+        this.playing = true;
+
+        this._move(elem);
+      });
     });
 
     this.shuffle.addEventListener('click', () => {
@@ -90,7 +105,7 @@ class Box {
 
       //console.log(this.empty);
       //console.log(this.chips);;
-    })
+    });
   }
 
   _createChips(quantity) {
@@ -102,6 +117,7 @@ class Box {
       for (let j = 0; j < quantity; j++) {
         const elem = document.createElement('div');
         elem.classList.add('chip');
+        elem.setAttribute('draggable', 'true');
 
         elem.style.gridRowStart = i + 1;
         elem.style.gridColumnStart = j + 1;
@@ -116,12 +132,21 @@ class Box {
           row.push({ x: j, y: i, 'cell': number });
         } else {
           elem.classList.add('chip--empty');
+          elem.setAttribute('draggable', 'false');
+
+          elem.addEventListener('dragover', (event) => {
+            console.log(event.target);
+            event.preventDefault();
+          });
+
           row.push(this.empty);
         }
       }
 
       this.chips.push(row);
     }
+
+    this.chipEmpty
     return fragment;
   }
 
@@ -139,6 +164,8 @@ class Box {
       case (this.dimension - 1): freeChips.push(this.chips[this.empty.y - 1][this.empty.x]); break;
       default: freeChips.push(this.chips[this.empty.y - 1][this.empty.x], this.chips[this.empty.y + 1][this.empty.x]); break;
     }
+
+    console.log(freeChips);
 
     return freeChips;
   }
@@ -184,6 +211,7 @@ class Box {
         }
         animation(chip, moveDirection);
 
+
         //*change position in array
         let temp = {x: this.empty.x, y: this.empty.y, cell: currentChip.cell};
 
@@ -199,6 +227,17 @@ class Box {
         chip.style.gridRowStart = currentChip.y + 1;
         chip.style.gridColumnStart = currentChip.x + 1;
 
+        // const emptyHTMLelement = document.querySelector('.chip--empty');
+        // emptyHTMLelement.classList.remove('chip--empty');
+        // emptyHTMLelement.setAttribute('draggable', 'true');
+        // emptyHTMLelement.setAttribute('data-cell', `${currentChip.cell}`);
+        // emptyHTMLelement.textContent = currentChip.cell;
+
+
+        // chip.classList.add('chip--empty');
+        // chip.setAttribute('draggable', 'false');
+        // chip.textContent = '';
+
         this.moves += 1;
         this.statMovesValue.textContent = this.moves;
 
@@ -209,6 +248,37 @@ class Box {
         //console.log(this.chips);
     }
   }
+
+
+  //*drag&drop
+
+
+
+
+  // const dragEnter = (event) => {
+  //   event.preventDefault();
+  //   return true; //?
+  // }
+
+  // const dragOver = (event) => {
+  //   event.preventDefault();
+  // }
+
+  // const dragDrop = (event) => {
+  //   //const data = event.dataTransfer.getData('Text');
+  //   //event.target.appendChild(document.querySelector(data));
+  //   event.stopPropagation();
+  //   return false;
+  // }
+
+  // this.empty.addEventListener('dragenter', dragEnter);
+  // this.empty.addEventListener('drop', dragDrop);
+  // this.empty.addEventListener('dragover', dragOver);
+
+  // chip.addEventListener('dragstart', dragStart);
+  // chip.addEventListener('dragend', dragEnter);
+
+
 
   _shuffle(iteration) {
     for (let i = 0; i < iteration; i++) {
