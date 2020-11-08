@@ -12,12 +12,15 @@ class Box {
   }
 
   clear() {
-    //! здесь будет функция очистки поля???
+    this.chips = [];
+    this.empty = null;
+    this.time = 0;
+    this.moves = 0;
+    this.playing = false;
   }
 
   init() {
     this.container = document.querySelector('.container');
-    //this.chipEmpty = document.querySelector('.chip--empty');
 
     this.header = document.createElement('div');
     this.header.classList.add('header');
@@ -59,6 +62,24 @@ class Box {
       event.preventDefault();
     });
 
+    this.footer = document.createElement('div');
+    this.footer.classList.add('footer');
+
+    for (let i = 0; i < 6; i++) {
+      this.footerBtn = document.createElement('button');
+      this.footerBtn.classList.add('footer__btn');
+      this.footerBtn.setAttribute('type', 'button');
+      this.footerBtn.setAttribute('data-field', `${i + 3}`);
+
+      if (i === this.dimension - 3) {
+        this.footerBtn.setAttribute('active', 'true');
+        this.footerBtn.classList.add('footer__btn--active');
+      }
+
+      this.footerBtn.textContent = `${i + 3}×${i + 3}`;
+      this.footer.append(this.footerBtn);
+    }
+
     this.empty = {
       x: this.dimension - 1,
       y: this.dimension - 1,
@@ -77,6 +98,7 @@ class Box {
     this.statMoves.append(this.statMovesValue);
     this.container.append(this.box);
     this.box.append(this._createChips(this.dimension));
+    this.container.append(this.footer);
 
     this.container.querySelectorAll('.chip').forEach(elem => {
       elem.addEventListener('click', () => {
@@ -85,11 +107,11 @@ class Box {
       });
 
       elem.addEventListener('dragstart', (event) => {
-        event.target.classList.add('selected');
+        //event.target.classList.add('selected');
       });
 
       elem.addEventListener('dragend', (event) => {
-        event.target.classList.remove('selected');
+        //event.target.classList.remove('selected');
         this.playing = true;
 
         this._move(elem);
@@ -97,14 +119,18 @@ class Box {
     });
 
     this.shuffle.addEventListener('click', () => {
-      this.playing = false;
       this.time = 0;
+      this.playing = false;
       this.statTimeValue.textContent = this.time;
 
       this._shuffle(50);
+    });
 
-      //console.log(this.empty);
-      //console.log(this.chips);;
+    this.footer.querySelectorAll('.footer__btn').forEach((elem) => {
+      elem.addEventListener('click', () => {
+        this._changeField(elem);
+        //console.log(this.playing);
+      });
     });
   }
 
@@ -124,18 +150,24 @@ class Box {
 
         fragment.append(elem);
 
-        if (i * 4 + j + 1 !== 16) {
-          let number = i * 4 + j + 1;
+        if (i * this.dimension + j + 1 !== this.dimension ** 2) {
+          let number = i * this.dimension + j + 1;
           elem.setAttribute('data-cell', number);
           elem.textContent = number;
 
+          if (this.dimension === 3) {
+            elem.style.width = '5rem';
+            elem.style.height = '5rem';
+          }
+
           row.push({ x: j, y: i, 'cell': number });
+
         } else {
           elem.classList.add('chip--empty');
           elem.setAttribute('draggable', 'false');
 
           elem.addEventListener('dragover', (event) => {
-            console.log(event.target);
+            //console.log(event.target);
             event.preventDefault();
           });
 
@@ -146,7 +178,6 @@ class Box {
       this.chips.push(row);
     }
 
-    this.chipEmpty
     return fragment;
   }
 
@@ -164,8 +195,6 @@ class Box {
       case (this.dimension - 1): freeChips.push(this.chips[this.empty.y - 1][this.empty.x]); break;
       default: freeChips.push(this.chips[this.empty.y - 1][this.empty.x], this.chips[this.empty.y + 1][this.empty.x]); break;
     }
-
-    console.log(freeChips);
 
     return freeChips;
   }
@@ -217,8 +246,6 @@ class Box {
 
         this.chips[this.empty.y][this.empty.x].cell = currentChip.cell;
 
-        //console.log(currentChip.y, currentChip.x);
-
         this.chips[currentChip.y][currentChip.x].cell = 'empty';
 
         this.empty = this.chips[currentChip.y][currentChip.x];
@@ -240,44 +267,15 @@ class Box {
 
         this.moves += 1;
         this.statMovesValue.textContent = this.moves;
+        console.log(this.playing);
 
         if (this.time === 0 && this.playing) {
+          console.log(this.playing);
           this._timer();
         }
       }
-        //console.log(this.chips);
     }
   }
-
-
-  //*drag&drop
-
-
-
-
-  // const dragEnter = (event) => {
-  //   event.preventDefault();
-  //   return true; //?
-  // }
-
-  // const dragOver = (event) => {
-  //   event.preventDefault();
-  // }
-
-  // const dragDrop = (event) => {
-  //   //const data = event.dataTransfer.getData('Text');
-  //   //event.target.appendChild(document.querySelector(data));
-  //   event.stopPropagation();
-  //   return false;
-  // }
-
-  // this.empty.addEventListener('dragenter', dragEnter);
-  // this.empty.addEventListener('drop', dragDrop);
-  // this.empty.addEventListener('dragover', dragOver);
-
-  // chip.addEventListener('dragstart', dragStart);
-  // chip.addEventListener('dragend', dragEnter);
-
 
 
   _shuffle(iteration) {
@@ -287,8 +285,7 @@ class Box {
       const chip = closest[randIndex];
       const cell = document.querySelector(`[data-cell = '${chip.cell}']`);
 
-      //console.log(cell);
-      //console.log(chip);
+      this.playing = false;
       this._move(cell);
 
       this.moves = 0;
@@ -304,7 +301,25 @@ class Box {
       this.time += 1;
       this.statTimeValue.textContent = this.time;
     };
-    setInterval(tick, 1000);
+    if (this.playing) {
+      console.log(this.playing);
+      setInterval(tick, 1000);
+    }
+  }
+
+  _changeField(btn) {
+    //const currentBtn = document.querySelector('.footer__btn--active');
+    const newDimension = btn.getAttribute('data-field');
+    this.dimension = parseInt(newDimension);
+
+    this.container.textContent = '';
+    this.clear();
+    console.log(this.playing);
+    this.init();
+    //console.log(btn);
+
+    //currentBtn.classList.remove('footer__btn--active');
+    //btn.classList.add('footer__btn--active');
   }
 }
 

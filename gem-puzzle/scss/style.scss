@@ -15,6 +15,7 @@ $secondary-border-line: 1px;
 $max-border-line: 10px;
 
 $primary-border-radius: 4px;
+$secondary-border-radius: 10px;
 
 $animation-time: 0.3s;
 $animation-function: ease-in;
@@ -31,6 +32,7 @@ body {
   //height: 70vh;
   margin: 1.4rem auto;
   background-color: $primary-bg-color;
+  //transition: all 5s ease-in-out;
 }
 
 .header {
@@ -41,6 +43,7 @@ body {
   padding: 10px 10px 0 10px;
 
   &__title {
+    padding-left: 10px;
     font-size: 2rem;
     font-weight: bold;
     font-family: $primary-font;
@@ -78,30 +81,49 @@ body {
 
 .box {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   gap: 2px;
-  //height: 100%;
   padding: 2px;
   border: $max-border-line solid $primary-color;
+
 }
 
 .chip {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 60px;
-  width: 60px;
+  height: 3.75rem;
+  width: 3.75rem;
   border: $primary-border-line solid $secondary-color;
   border-radius: $primary-border-radius;
   font-family: $primary-font;
   font-size: 2.5rem;
   cursor: move;
-  //transition: all 5s ease-in-out;
 
   &--empty {
     border: 0;
     cursor: default;
+  }
+}
+
+.footer {
+  display: flex;
+  background-color: #ffffff;
+
+  &__btn {
+    width: 100%;
+    border: $primary-border-line solid $secondary-color;
+    border-radius: 0 0 $secondary-border-radius $secondary-border-radius;
+    cursor: pointer;
+
+    &:active,
+    &:focus,
+    &--active {
+      outline: none;
+      background-color: $primary-bg-color;
+      font-weight: bold;
+    }
   }
 }
 
