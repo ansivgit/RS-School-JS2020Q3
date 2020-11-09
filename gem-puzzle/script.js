@@ -9,6 +9,7 @@ class Box {
     this.time = 0;
     this.moves = 0;
     this.playing = false;
+    this.sound = true;
     this.clear();
   }
 
@@ -23,7 +24,13 @@ class Box {
   }
 
   init() {
-    this.container = document.querySelector('.container');
+    this.body = document.querySelector('body');
+    this.container = document.createElement('div');
+    this.container.classList.add('container');
+
+    this.audio = document.createElement('audio');
+    this.audio.setAttribute('src', './assets/keys2.mp3');
+    this.audio.setAttribute('data-audio', 'keys');
 
     this.header = document.createElement('div');
     this.header.classList.add('header');
@@ -36,6 +43,16 @@ class Box {
     this.shuffle.classList.add('header__shuffle');
     this.shuffle.setAttribute('type', 'button');
     this.shuffle.textContent = 'Shuffle';
+
+    this.menu = document.createElement('nav');
+    this.menu.classList.add('menu');
+
+    this.menuSound = document.createElement('button');
+    this.menuSound.classList.add('menu__sound');
+
+    this.menuMain = document.createElement('button');
+    this.menuMain.classList.add('menu__main');
+    this.menuMain.textContent = 'Menu';
 
     this.statistic = document.createElement('div');
     this.statistic.classList.add('statistic');
@@ -89,9 +106,13 @@ class Box {
       cell: 'empty',
     };
 
+    this.body.append(this.container);
     this.container.append(this.header);
     this.header.append(this.title);
     this.header.append(this.shuffle);
+    this.container.append(this.menu);
+    this.menu.append(this.menuSound);
+    this.menu.append(this.menuMain);
     this.container.append(this.statistic);
     this.statistic.append(this.statTime);
     this.statTime.append(this.statTimeTitle);
@@ -102,6 +123,7 @@ class Box {
     this.container.append(this.box);
     this.box.append(this._createChips(this.dimension));
     this.container.append(this.footer);
+    this.body.append(this.audio);
 
     this.container.querySelectorAll('.chip').forEach(elem => {
       elem.addEventListener('click', () => {
@@ -121,6 +143,13 @@ class Box {
       });
     });
 
+    this.menuSound.addEventListener('click', () => {
+      this.sound = !this.sound;
+      this.menuSound.classList.toggle('menu__sound--mute');
+
+      //this._shuffle(50);
+    });
+
     this.shuffle.addEventListener('click', () => {
       this.time = 0;
       this.playing = false;
@@ -132,7 +161,6 @@ class Box {
     this.footer.querySelectorAll('.footer__btn').forEach((elem) => {
       elem.addEventListener('click', () => {
         this._changeField(elem);
-        //console.log(this.playing);
       });
     });
   }
@@ -228,7 +256,7 @@ class Box {
             moveDirection = 'bottom';
           }
         } else {
-           if (currentChip.x > this.empty.x) {
+          if (currentChip.x > this.empty.x) {
             moveDirection = 'left';
           } else {
             moveDirection = 'right';
@@ -245,7 +273,7 @@ class Box {
 
 
         //*change position in array
-        let temp = {x: this.empty.x, y: this.empty.y, cell: currentChip.cell};
+        let temp = { x: this.empty.x, y: this.empty.y, cell: currentChip.cell };
 
         this.chips[this.empty.y][this.empty.x].cell = currentChip.cell;
 
@@ -268,13 +296,12 @@ class Box {
         // chip.setAttribute('draggable', 'false');
         // chip.textContent = '';
 
+        this._sounds(chip);
+
         this.moves += 1;
         this.statMovesValue.textContent = this.moves;
-        console.log(this.playing);
 
-        console.log(intervalId);
         if (this.time === 0 && this.playing && intervalId === undefined) {
-
           this._timer();
         }
       }
@@ -316,11 +343,10 @@ class Box {
   }
 
   _changeField(btn) {
-    //const currentBtn = document.querySelector('.footer__btn--active');
     const newDimension = btn.getAttribute('data-field');
     this.dimension = parseInt(newDimension);
 
-    this.container.textContent = '';
+    this.body.innerHTML = '';
     this.clear();
     console.log(this.playing);
     this.init();
@@ -328,6 +354,28 @@ class Box {
 
     //currentBtn.classList.remove('footer__btn--active');
     //btn.classList.add('footer__btn--active');
+  }
+
+  _sounds(chip) {
+    const audio = document.querySelector('audio');
+    //const chip = document.querySelector(`[data-code='${keyCode}']`);
+
+    if (!audio) return;
+    if (!this.sound) return;
+
+    chip.classList.add('playing');
+
+    audio.currentTime = 0;
+    audio.play();
+
+    chip.addEventListener('transitionend', () => {
+      this._removeTransition();
+    });
+  }
+
+  _removeTransition(event) {
+    if (event.propertyName !== 'transform') return;
+    event.target.classList.remove('playing');
   }
 }
 
