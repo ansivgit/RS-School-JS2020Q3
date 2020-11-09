@@ -1,4 +1,5 @@
 const FIELD_DIMENSION = 4;
+let intervalId;
 
 class Box {
   constructor(dimension) {
@@ -17,6 +18,8 @@ class Box {
     this.time = 0;
     this.moves = 0;
     this.playing = false;
+    clearInterval(intervalId);
+    this._timer();
   }
 
   init() {
@@ -269,8 +272,9 @@ class Box {
         this.statMovesValue.textContent = this.moves;
         console.log(this.playing);
 
-        if (this.time === 0 && this.playing) {
-          console.log(this.playing);
+        console.log(intervalId);
+        if (this.time === 0 && this.playing && intervalId === undefined) {
+
           this._timer();
         }
       }
@@ -286,6 +290,7 @@ class Box {
       const cell = document.querySelector(`[data-cell = '${chip.cell}']`);
 
       this.playing = false;
+      this._timer();
       this._move(cell);
 
       this.moves = 0;
@@ -301,9 +306,12 @@ class Box {
       this.time += 1;
       this.statTimeValue.textContent = this.time;
     };
+
     if (this.playing) {
-      console.log(this.playing);
-      setInterval(tick, 1000);
+      intervalId = setInterval(tick, 1000);
+    } else {
+      clearInterval(intervalId);
+      intervalId = undefined;
     }
   }
 

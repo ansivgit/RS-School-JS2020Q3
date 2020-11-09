@@ -152,7 +152,7 @@ body {
   -ms-grid-rows: 1fr 1fr;
       grid-template-rows: 1fr 1fr;
   gap: 2px;
-  padding: 2px;
+  padding: 4px;
   border: 10px solid darkolivegreen;
 }
 
