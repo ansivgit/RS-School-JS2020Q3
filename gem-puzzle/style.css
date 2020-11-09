@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Luckiest Guy';
+  src: url("./assets/fonts/Luckiest_Guy/luckiestguy-regular.woff2") format("woff2"), url("./assets/fonts/Luckiest_Guy/luckiestguy-regular.woff") format("woff"), url("./assets/fonts/Luckiest_Guy/LuckiestGuy-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 html {
   background-color: #ffffff;
 }
@@ -85,6 +92,10 @@ body {
   font-family: cursive;
 }
 
+button:active, button:focus {
+  outline: none;
+}
+
 .container {
   margin: 1.4rem auto;
   background-color: rgba(30, 155, 36, 0.5);
@@ -116,9 +127,56 @@ body {
 }
 
 .header__shuffle {
-  padding: 5px 5px;
+  border: 2px solid darkgreen;
+  border-radius: 10px;
   font-family: cursive;
   cursor: pointer;
+  padding: 5px 5px;
+}
+
+.menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding: 10px 10px 0 10px;
+}
+
+.menu__sound {
+  border: 2px solid darkgreen;
+  border-radius: 10px;
+  font-family: cursive;
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  margin: 0 10px;
+  border-color: darkolivegreen;
+  border-radius: 50%;
+  background: url("./../assets/icons/volume_up-18dp.svg");
+  background-size: contain;
+  background-color: darkolivegreen;
+}
+
+.menu__sound--mute {
+  background: url("./../assets/icons/volume_off-18dp.svg");
+  background-size: contain;
+}
+
+.menu__main {
+  border: 2px solid darkgreen;
+  border-radius: 10px;
+  font-family: cursive;
+  cursor: pointer;
+  margin-left: 10px;
+  padding: 0 15px;
+  border-color: darkolivegreen;
+  font-size: 1.3rem;
+  font-weight: bold;
+  font-family: "Luckiest Guy", cursive;
+  color: darkolivegreen;
+  background-color: transparent;
 }
 
 .statistic {
@@ -188,14 +246,15 @@ body {
 }
 
 .footer__btn {
-  width: 100%;
   border: 2px solid darkgreen;
-  border-radius: 0 0 10px 10px;
+  border-radius: 10px;
+  font-family: cursive;
   cursor: pointer;
+  width: 100%;
+  border-radius: 0 0 10px 10px;
 }
 
 .footer__btn:active, .footer__btn:focus, .footer__btn--active {
-  outline: none;
   background-color: rgba(30, 155, 36, 0.5);
   font-weight: bold;
 }

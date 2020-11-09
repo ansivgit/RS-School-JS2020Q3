@@ -1,3 +1,4 @@
+@import './_fonts.scss';
 @import './_global.scss';
 
 //* variables
@@ -6,7 +7,7 @@ $primary-font: 'Luckiest Guy', cursive;
 $secondary-font: cursive;
 
 $primary-color: darkolivegreen;
-$secondary-color: darkgreen;;
+$secondary-color: darkgreen;
 
 $primary-bg-color: rgba(30, 155, 36, 0.5);
 
@@ -20,12 +21,26 @@ $secondary-border-radius: 10px;
 $animation-time: 0.3s;
 $animation-function: ease-in;
 
+@mixin buttons {
+  border: $primary-border-line solid $secondary-color;
+  border-radius: $secondary-border-radius;
+  font-family: $secondary-font;
+  cursor: pointer;
+}
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   font-family: $secondary-font;
+}
+
+button {
+  &:active,
+  &:focus {
+    outline: none;
+  }
 }
 
 .container {
@@ -51,9 +66,43 @@ body {
   }
 
   &__shuffle {
+    @include buttons;
     padding: 5px 5px;
-    font-family: $secondary-font;
-    cursor: pointer;
+  }
+}
+
+.menu {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 10px 0 10px;
+
+  &__sound {
+    @include buttons;
+    width: 35px;
+    height: 35px;
+    margin: 0 10px;
+    border-color: $primary-color;
+    border-radius: 50%;
+    background: url('./../assets/icons/volume_up-18dp.svg');
+    background-size: contain;
+    background-color: $primary-color;
+
+    &--mute {
+      background: url('./../assets/icons/volume_off-18dp.svg');
+      background-size: contain;
+    }
+  }
+
+  &__main {
+    @include buttons;
+    margin-left: 10px;
+    padding: 0 15px;
+    border-color: $primary-color;
+    font-size: 1.3rem;
+    font-weight: bold;
+    font-family: $primary-font;
+    color: $primary-color;
+    background-color: transparent;
   }
 }
 
@@ -112,15 +161,13 @@ body {
   background-color: #ffffff;
 
   &__btn {
+    @include buttons;
     width: 100%;
-    border: $primary-border-line solid $secondary-color;
     border-radius: 0 0 $secondary-border-radius $secondary-border-radius;
-    cursor: pointer;
 
     &:active,
     &:focus,
     &--active {
-      outline: none;
       background-color: $primary-bg-color;
       font-weight: bold;
     }
