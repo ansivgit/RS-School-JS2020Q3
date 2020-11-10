@@ -94,15 +94,27 @@ button {
   }
 
   &__main {
-    @include buttons;
-    margin-left: 10px;
-    padding: 0 15px;
-    border-color: $primary-color;
-    font-size: 1.3rem;
-    font-weight: bold;
-    font-family: $primary-font;
-    color: $primary-color;
-    background-color: transparent;
+    &__btn {
+      @include buttons;
+      margin-left: 10px;
+      padding: 0 15px;
+      border-color: $primary-color;
+      font-size: 1.3rem;
+      font-weight: bold;
+      font-family: $primary-font;
+      color: $primary-color;
+      background-color: transparent;
+    }
+
+    &__container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__item {
+      @include buttons;
+      margin: 2px 5px;
+    }
   }
 }
 

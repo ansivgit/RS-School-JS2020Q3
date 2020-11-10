@@ -9,11 +9,11 @@ class Box {
     this.time = 0;
     this.moves = 0;
     this.playing = false;
-    this.sound = true;
-    this.clear();
+    this.sound = false;
+    this._clear();
   }
 
-  clear() {
+  _clear() {
     this.chips = [];
     this.empty = null;
     this.time = 0;
@@ -49,10 +49,24 @@ class Box {
 
     this.menuSound = document.createElement('button');
     this.menuSound.classList.add('menu__sound');
+    !this.sound ? this.menuSound.classList.add('menu__sound--mute') : '';
 
-    this.menuMain = document.createElement('button');
+    this.menuMain = document.createElement('div');
     this.menuMain.classList.add('menu__main');
-    this.menuMain.textContent = 'Menu';
+    this.menuMainBtn = document.createElement('button');
+    this.menuMainBtn.classList.add('menu__main__btn');
+    this.menuMainBtn.textContent = 'Menu';
+
+    this.menuMainContainer = document.createElement('div');
+    this.menuMainContainer.classList.add('menu__main__container');
+    this.menuMainSave = document.createElement('button');
+    this.menuMainSave.classList.add('menu__main__item');
+    this.menuMainSave.classList.add('menu__main__item--save');
+    this.menuMainSave.textContent = 'Save Game';
+    this.menuMainRestore = document.createElement('button');
+    this.menuMainRestore.classList.add('menu__main__item');
+    this.menuMainRestore.classList.add('menu__main__item--restore');
+    this.menuMainRestore.textContent = 'Restore Game';
 
     this.statistic = document.createElement('div');
     this.statistic.classList.add('statistic');
@@ -113,6 +127,10 @@ class Box {
     this.container.append(this.menu);
     this.menu.append(this.menuSound);
     this.menu.append(this.menuMain);
+    this.menuMain.append(this.menuMainBtn);
+    this.menuMain.append(this.menuMainContainer);
+    this.menuMainContainer.append(this.menuMainSave);
+    this.menuMainContainer.append(this.menuMainRestore);
     this.container.append(this.statistic);
     this.statistic.append(this.statTime);
     this.statTime.append(this.statTimeTitle);
@@ -127,6 +145,7 @@ class Box {
 
     this.container.querySelectorAll('.chip').forEach(elem => {
       elem.addEventListener('click', () => {
+        console.log('iii');
         this.playing = true;
         this._move(elem);
       });
@@ -145,9 +164,9 @@ class Box {
 
     this.menuSound.addEventListener('click', () => {
       this.sound = !this.sound;
-      this.menuSound.classList.toggle('menu__sound--mute');
-
-      //this._shuffle(50);
+      this.sound
+        ? this.menuSound.classList.remove('menu__sound--mute')
+        : this.menuSound.classList.add('menu__sound--mute');
     });
 
     this.shuffle.addEventListener('click', () => {
@@ -156,6 +175,18 @@ class Box {
       this.statTimeValue.textContent = this.time;
 
       this._shuffle(50);
+    });
+
+    this.menuMainBtn.addEventListener('click', () => {
+      console.log(this.chips);
+    });
+
+    this.menuMainSave.addEventListener('click', () => {
+      this._saveGame();
+    });
+
+    this.menuMainRestore.addEventListener('click', () => {
+      this._restoreGame();
     });
 
     this.footer.querySelectorAll('.footer__btn').forEach((elem) => {
@@ -301,7 +332,7 @@ class Box {
         this.moves += 1;
         this.statMovesValue.textContent = this.moves;
 
-        if (this.time === 0 && this.playing && intervalId === undefined) {
+        if (this.playing && intervalId === undefined) {
           this._timer();
         }
       }
@@ -328,10 +359,53 @@ class Box {
     }
   }
 
+  _reNew(array) {
+    this.box.innerHTML = '';
+
+    console.log(this.playing, intervalId);
+    const fragment = document.createDocumentFragment();
+
+    let sortArray = array.flat().sort((prev, next) => parseInt(prev.cell) - parseInt(next.cell));
+
+    for (let i = 0; i < sortArray.length; i++) {
+        const elem = document.createElement('div');
+        elem.classList.add('chip');
+        elem.classList.add('playing');
+        elem.setAttribute('draggable', 'true');
+
+        elem.style.gridRowStart = sortArray[i].y + 1;
+        elem.style.gridColumnStart = sortArray[i].x + 1;
+        elem.setAttribute('data-cell', sortArray[i].cell);
+        elem.textContent = sortArray[i].cell;
+
+        if (sortArray[i].cell === 'empty') {
+          this.empty = sortArray[i];
+          //console.log(this.empty);
+          elem.classList.add('chip--empty');
+          elem.classList.remove('playing');
+          elem.setAttribute('draggable', 'false');
+          elem.textContent = '';
+
+          elem.addEventListener('dragover', (event) => {
+            event.preventDefault();
+          });
+        }
+
+        fragment.append(elem);
+
+        if (array.length === 3) {
+          elem.style.width = '5rem';
+          elem.style.height = '5rem';
+        }
+      }
+
+    return fragment;
+  }
+
   _timer() {
     const tick = () => {
       this.time += 1;
-      this.statTimeValue.textContent = this.time;
+      this.statTimeValue.textContent = this._timeConvert(this.time);
     };
 
     if (this.playing) {
@@ -342,18 +416,19 @@ class Box {
     }
   }
 
+  _timeConvert(time) {
+    let min = Math.floor(time / 60);
+    let sec = time % 60;
+    return `${min} m ${sec} s`;
+  }
+
   _changeField(btn) {
     const newDimension = btn.getAttribute('data-field');
     this.dimension = parseInt(newDimension);
 
     this.body.innerHTML = '';
-    this.clear();
-    console.log(this.playing);
+    this._clear();
     this.init();
-    //console.log(btn);
-
-    //currentBtn.classList.remove('footer__btn--active');
-    //btn.classList.add('footer__btn--active');
   }
 
   _sounds(chip) {
@@ -376,6 +451,53 @@ class Box {
   _removeTransition(event) {
     if (event.propertyName !== 'transform') return;
     event.target.classList.remove('playing');
+  }
+
+  _saveGame() {
+    localStorage.setItem('saveGame', JSON.stringify(this.chips));
+    localStorage.setItem('time', this.time);
+    localStorage.setItem('moves', this.moves);
+    localStorage.setItem('dimension', this.dimension);
+    //console.log(localStorage.saveGame);
+  }
+
+  _restoreGame() {
+    this.chips = JSON.parse(localStorage.getItem('saveGame'));
+    this.time = parseInt(localStorage.getItem('time'));
+    this.moves = parseInt(localStorage.getItem('moves'));
+    this.dimension = localStorage.getItem('dimension');
+    this.playing = false;
+    this._timer();
+
+    this.statMovesValue.textContent = this.moves;
+    this.statTimeValue.textContent = this._timeConvert(this.time);
+    console.log(intervalId, this.playing);
+
+    const currentFooterBtn = document.querySelector('.footer__btn--active');
+    const restoreFooterBtn = document.querySelector(`[data-field="${this.dimension}"]`);
+    currentFooterBtn.classList.remove('footer__btn--active');
+    restoreFooterBtn.classList.add('footer__btn--active');
+
+    this.box.append(this._reNew(this.chips));
+
+    const container = document.querySelector('.container');
+    //TODO слушатели дублируются из инит. Как то поправить?
+    container.querySelectorAll('.chip').forEach(elem => {
+      elem.addEventListener('click', () => {
+        this.playing = true;
+        this._move(elem);
+      });
+
+      elem.addEventListener('dragstart', (event) => {
+        //event.target.classList.add('selected');
+      });
+
+      elem.addEventListener('dragend', (event) => {
+        //event.target.classList.remove('selected');
+        this.playing = true;
+        this._move(elem);
+      });
+    });
   }
 }
 

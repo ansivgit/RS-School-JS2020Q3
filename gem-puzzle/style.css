@@ -164,7 +164,7 @@ button:active, button:focus {
   background-size: contain;
 }
 
-.menu__main {
+.menu__main__btn {
   border: 2px solid darkgreen;
   border-radius: 10px;
   font-family: cursive;
@@ -177,6 +177,24 @@ button:active, button:focus {
   font-family: "Luckiest Guy", cursive;
   color: darkolivegreen;
   background-color: transparent;
+}
+
+.menu__main__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.menu__main__item {
+  border: 2px solid darkgreen;
+  border-radius: 10px;
+  font-family: cursive;
+  cursor: pointer;
+  margin: 2px 5px;
 }
 
 .statistic {
