@@ -9,7 +9,8 @@ $secondary-font: cursive;
 $primary-color: darkolivegreen;
 $secondary-color: darkgreen;
 
-$primary-bg-color: rgba(30, 155, 36, 0.5);
+$primary-bg-color:  rgb(142,205,145);//rgba(30, 155, 36, 0.5);
+$secondary-bg-color: rgba(85, 107, 47, 0.6);
 
 $primary-border-line: 2px;
 $secondary-border-line: 1px;
@@ -29,6 +30,15 @@ $animation-function: ease-in;
 }
 
 body {
+  --title-font-size: 2rem;
+  --nav-height: 2.2rem;
+  --nav-btn-width: 5.25rem;
+  --nav-btn-font-size: 1rem;
+  --stat-font-size: 1rem;
+  --chip-size: 3.75rem;
+  --chip-font-size: 2.5rem;
+
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,9 +53,21 @@ button {
   }
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0 0 0 0)
+}
+
 .container {
   //height: 70vh;
   margin: 1.4rem auto;
+  border-radius: $secondary-border-radius $secondary-border-radius 0 0;
   background-color: $primary-bg-color;
   //transition: all 5s ease-in-out;
 }
@@ -59,27 +81,22 @@ button {
 
   &__title {
     padding-left: 10px;
-    font-size: 2rem;
+    font-size: var(--title-font-size);
     font-weight: bold;
     font-family: $primary-font;
     color: $primary-color;
-  }
-
-  &__shuffle {
-    @include buttons;
-    padding: 5px 5px;
   }
 }
 
 .menu {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 10px 10px 0 10px;
 
   &__sound {
     @include buttons;
-    width: 35px;
-    height: 35px;
+    width: var(--nav-height);
+    height: var(--nav-height);
     margin: 0 10px;
     border-color: $primary-color;
     border-radius: 50%;
@@ -91,29 +108,60 @@ button {
       background: url('./../assets/icons/volume_off-18dp.svg');
       background-size: contain;
     }
+
+    &:hover {
+      transform: scale(1.4);
+      transition: transform 0.2s ease-in-out;
+    }
   }
 
   &__main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
     &__btn {
       @include buttons;
-      margin-left: 10px;
-      padding: 0 15px;
+      height: var(--nav-height);
+      min-width: var(--nav-btn-width);
+      //margin-left: 10px;
+      padding: 0 10px;
       border-color: $primary-color;
-      font-size: 1.3rem;
+      font-size: var(--nav-btn-font-size);
       font-weight: bold;
       font-family: $primary-font;
       color: $primary-color;
       background-color: transparent;
+
+      &:hover,
+      &:focus {
+        background-color: $primary-color;
+        color: #ffffff;
+      }
     }
 
     &__container {
+      position: absolute;
+      top: 40px;
+      //right: 10px;
       display: flex;
       flex-direction: column;
+      width: 150px;
     }
 
     &__item {
       @include buttons;
       margin: 2px 5px;
+      background-color: rgb(142,205,145);
+
+      &:hover,
+      &:focus,
+      &--active {
+        background-color: $primary-color;
+        border-color: $primary-color;
+        color: #ffffff;
+      }
     }
   }
 }
@@ -122,6 +170,7 @@ button {
   display: flex;
   //justify-content: space-between;
   padding: 10px;
+  font-size: var(--stat-font-size);
 
   &__time,
   &__moves {
@@ -154,17 +203,25 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 3.75rem;
-  width: 3.75rem;
+  height: var(--chip-size);
+  width: var(--chip-size);
   border: $primary-border-line solid $secondary-color;
   border-radius: $primary-border-radius;
   font-family: $primary-font;
-  font-size: 2.5rem;
-  cursor: move;
+  font-size: var(--chip-font-size);
+  cursor: pointer;
+
+  &:hover {
+    background-color: $secondary-bg-color;
+  }
 
   &--empty {
     border: 0;
     cursor: default;
+
+    &:hover {
+    background-color: transparent;
+  }
   }
 }
 
@@ -177,7 +234,6 @@ button {
     width: 100%;
     border-radius: 0 0 $secondary-border-radius $secondary-border-radius;
 
-    &:active,
     &:focus,
     &--active {
       background-color: $primary-bg-color;

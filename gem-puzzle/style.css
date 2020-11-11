@@ -79,6 +79,13 @@ h6 {
 }
 
 body {
+  --title-font-size: 2rem;
+  --nav-height: 2.2rem;
+  --nav-btn-width: 5.25rem;
+  --nav-btn-font-size: 1rem;
+  --stat-font-size: 1rem;
+  --chip-size: 3.75rem;
+  --chip-font-size: 2.5rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -96,9 +103,21 @@ button:active, button:focus {
   outline: none;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0 0 0 0);
+}
+
 .container {
   margin: 1.4rem auto;
-  background-color: rgba(30, 155, 36, 0.5);
+  border-radius: 10px 10px 0 0;
+  background-color: #8ecd91;
 }
 
 .header {
@@ -120,27 +139,19 @@ button:active, button:focus {
 
 .header__title {
   padding-left: 10px;
-  font-size: 2rem;
+  font-size: var(--title-font-size);
   font-weight: bold;
   font-family: "Luckiest Guy", cursive;
   color: darkolivegreen;
-}
-
-.header__shuffle {
-  border: 2px solid darkgreen;
-  border-radius: 10px;
-  font-family: cursive;
-  cursor: pointer;
-  padding: 5px 5px;
 }
 
 .menu {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   padding: 10px 10px 0 10px;
 }
 
@@ -149,8 +160,8 @@ button:active, button:focus {
   border-radius: 10px;
   font-family: cursive;
   cursor: pointer;
-  width: 35px;
-  height: 35px;
+  width: var(--nav-height);
+  height: var(--nav-height);
   margin: 0 10px;
   border-color: darkolivegreen;
   border-radius: 50%;
@@ -164,22 +175,17 @@ button:active, button:focus {
   background-size: contain;
 }
 
-.menu__main__btn {
-  border: 2px solid darkgreen;
-  border-radius: 10px;
-  font-family: cursive;
-  cursor: pointer;
-  margin-left: 10px;
-  padding: 0 15px;
-  border-color: darkolivegreen;
-  font-size: 1.3rem;
-  font-weight: bold;
-  font-family: "Luckiest Guy", cursive;
-  color: darkolivegreen;
-  background-color: transparent;
+.menu__sound:hover {
+  -webkit-transform: scale(1.4);
+          transform: scale(1.4);
+  -webkit-transition: -webkit-transform 0.2s ease-in-out;
+  transition: -webkit-transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
 }
 
-.menu__main__container {
+.menu__main {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -187,6 +193,43 @@ button:active, button:focus {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.menu__main__btn {
+  border: 2px solid darkgreen;
+  border-radius: 10px;
+  font-family: cursive;
+  cursor: pointer;
+  height: var(--nav-height);
+  min-width: var(--nav-btn-width);
+  padding: 0 10px;
+  border-color: darkolivegreen;
+  font-size: var(--nav-btn-font-size);
+  font-weight: bold;
+  font-family: "Luckiest Guy", cursive;
+  color: darkolivegreen;
+  background-color: transparent;
+}
+
+.menu__main__btn:hover, .menu__main__btn:focus {
+  background-color: darkolivegreen;
+  color: #ffffff;
+}
+
+.menu__main__container {
+  position: absolute;
+  top: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 150px;
 }
 
 .menu__main__item {
@@ -195,6 +238,13 @@ button:active, button:focus {
   font-family: cursive;
   cursor: pointer;
   margin: 2px 5px;
+  background-color: #8ecd91;
+}
+
+.menu__main__item:hover, .menu__main__item:focus, .menu__main__item--active {
+  background-color: darkolivegreen;
+  border-color: darkolivegreen;
+  color: #ffffff;
 }
 
 .statistic {
@@ -202,6 +252,7 @@ button:active, button:focus {
   display: -ms-flexbox;
   display: flex;
   padding: 10px;
+  font-size: var(--stat-font-size);
 }
 
 .statistic__time, .statistic__moves {
@@ -242,18 +293,26 @@ button:active, button:focus {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 3.75rem;
-  width: 3.75rem;
+  height: var(--chip-size);
+  width: var(--chip-size);
   border: 2px solid darkgreen;
   border-radius: 4px;
   font-family: "Luckiest Guy", cursive;
-  font-size: 2.5rem;
-  cursor: move;
+  font-size: var(--chip-font-size);
+  cursor: pointer;
+}
+
+.chip:hover {
+  background-color: rgba(85, 107, 47, 0.6);
 }
 
 .chip--empty {
   border: 0;
   cursor: default;
+}
+
+.chip--empty:hover {
+  background-color: transparent;
 }
 
 .footer {
@@ -272,8 +331,8 @@ button:active, button:focus {
   border-radius: 0 0 10px 10px;
 }
 
-.footer__btn:active, .footer__btn:focus, .footer__btn--active {
-  background-color: rgba(30, 155, 36, 0.5);
+.footer__btn:focus, .footer__btn--active {
+  background-color: #8ecd91;
   font-weight: bold;
 }
 

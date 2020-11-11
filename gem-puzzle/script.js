@@ -39,13 +39,13 @@ class Box {
     this.title.classList.add('header__title');
     this.title.textContent = 'Gem-Puzzle';
 
-    this.shuffle = document.createElement('button');
-    this.shuffle.classList.add('header__shuffle');
-    this.shuffle.setAttribute('type', 'button');
-    this.shuffle.textContent = 'Shuffle';
-
     this.menu = document.createElement('nav');
     this.menu.classList.add('menu');
+
+    this.menuShuffle = document.createElement('button');
+    this.menuShuffle.classList.add('menu__main__btn');
+    this.menuShuffle.classList.add('menu__main__btn--shuffle');
+    this.menuShuffle.textContent = 'Shuffle';
 
     this.menuSound = document.createElement('button');
     this.menuSound.classList.add('menu__sound');
@@ -55,10 +55,12 @@ class Box {
     this.menuMain.classList.add('menu__main');
     this.menuMainBtn = document.createElement('button');
     this.menuMainBtn.classList.add('menu__main__btn');
+    this.menuMainBtn.classList.add('menu__main__btn--main');
     this.menuMainBtn.textContent = 'Menu';
 
     this.menuMainContainer = document.createElement('div');
     this.menuMainContainer.classList.add('menu__main__container');
+    this.menuMainContainer.classList.add('visually-hidden');
     this.menuMainSave = document.createElement('button');
     this.menuMainSave.classList.add('menu__main__item');
     this.menuMainSave.classList.add('menu__main__item--save');
@@ -102,7 +104,6 @@ class Box {
     for (let i = 0; i < 6; i++) {
       this.footerBtn = document.createElement('button');
       this.footerBtn.classList.add('footer__btn');
-      this.footerBtn.setAttribute('type', 'button');
       this.footerBtn.setAttribute('data-field', `${i + 3}`);
 
       if (i === this.dimension - 3) {
@@ -123,8 +124,8 @@ class Box {
     this.body.append(this.container);
     this.container.append(this.header);
     this.header.append(this.title);
-    this.header.append(this.shuffle);
     this.container.append(this.menu);
+    this.menu.append(this.menuShuffle);
     this.menu.append(this.menuSound);
     this.menu.append(this.menuMain);
     this.menuMain.append(this.menuMainBtn);
@@ -142,6 +143,10 @@ class Box {
     this.box.append(this._createChips(this.dimension));
     this.container.append(this.footer);
     this.body.append(this.audio);
+
+    document.querySelectorAll('button').forEach(button => {
+      button.setAttribute('type', 'button');
+    });
 
     this.container.querySelectorAll('.chip').forEach(elem => {
       elem.addEventListener('click', () => {
@@ -169,7 +174,7 @@ class Box {
         : this.menuSound.classList.add('menu__sound--mute');
     });
 
-    this.shuffle.addEventListener('click', () => {
+    this.menuShuffle.addEventListener('click', () => {
       this.time = 0;
       this.playing = false;
       this.statTimeValue.textContent = this.time;
@@ -178,7 +183,7 @@ class Box {
     });
 
     this.menuMainBtn.addEventListener('click', () => {
-      console.log(this.chips);
+      this.menuMainContainer.classList.toggle('visually-hidden');
     });
 
     this.menuMainSave.addEventListener('click', () => {
@@ -212,15 +217,15 @@ class Box {
 
         fragment.append(elem);
 
+        if (this.dimension === 3) {
+          elem.style.width = '5rem';
+          elem.style.height = '5rem';
+        }
+
         if (i * this.dimension + j + 1 !== this.dimension ** 2) {
           let number = i * this.dimension + j + 1;
           elem.setAttribute('data-cell', number);
           elem.textContent = number;
-
-          if (this.dimension === 3) {
-            elem.style.width = '5rem';
-            elem.style.height = '5rem';
-          }
 
           row.push({ x: j, y: i, 'cell': number });
 
@@ -229,7 +234,6 @@ class Box {
           elem.setAttribute('draggable', 'false');
 
           elem.addEventListener('dragover', (event) => {
-            //console.log(event.target);
             event.preventDefault();
           });
 
@@ -339,7 +343,6 @@ class Box {
     }
   }
 
-
   _shuffle(iteration) {
     for (let i = 0; i < iteration; i++) {
       const closest = this._getFreeChips();
@@ -380,7 +383,6 @@ class Box {
 
         if (sortArray[i].cell === 'empty') {
           this.empty = sortArray[i];
-          //console.log(this.empty);
           elem.classList.add('chip--empty');
           elem.classList.remove('playing');
           elem.setAttribute('draggable', 'false');
@@ -399,7 +401,45 @@ class Box {
         }
       }
 
+    this._reDrow();
     return fragment;
+  }
+
+  _reDrow() {
+    // --title-font-size: 2rem;
+    // --nav-height: 2.2rem;
+    // --nav-btn-width: 5.25rem;
+    // --nav-btn-font-size: 1rem;
+    // --stat-font-size: 1rem;
+    // --chip-size: 3.75rem;
+    // --chip-font-size: 2.5rem;
+    switch (this.dimension) {
+      case 5:
+      case 6:
+        this.body.style.setProperty('--title-font-size', '3rem');
+        this.body.style.setProperty('--nav-btn-width', '7.25rem');
+        this.body.style.setProperty('--nav-btn-font-size', '1.4rem');
+        this.body.style.setProperty('--stat-font-size', '1.2rem');
+        break;
+
+      case 7:
+      case 8:
+        this.body.style.setProperty('--title-font-size', '3rem');
+        this.body.style.setProperty('--nav-btn-width', '8.5rem');
+        this.body.style.setProperty('--nav-btn-font-size', '1.4rem');
+        this.body.style.setProperty('--stat-font-size', '1.2rem');
+        this.body.style.setProperty('--chip-size', '3rem');
+        this.body.style.setProperty('--chip-font-size', '2rem');
+        break;
+
+      default:
+        this.body.style.setProperty('--title-font-size', '2rem');
+        this.body.style.setProperty('--nav-btn-width', '5.25rem');
+        this.body.style.setProperty('--nav-btn-font-size', '1rem');
+        this.body.style.setProperty('--stat-font-size', '1rem');
+        this.body.style.setProperty('--chip-size', '3.75rem');
+        this.body.style.setProperty('--chip-font-size', '2.5rem');
+    }
   }
 
   _timer() {
@@ -429,11 +469,11 @@ class Box {
     this.body.innerHTML = '';
     this._clear();
     this.init();
+    this._reDrow();
   }
 
   _sounds(chip) {
     const audio = document.querySelector('audio');
-    //const chip = document.querySelector(`[data-code='${keyCode}']`);
 
     if (!audio) return;
     if (!this.sound) return;
@@ -458,7 +498,6 @@ class Box {
     localStorage.setItem('time', this.time);
     localStorage.setItem('moves', this.moves);
     localStorage.setItem('dimension', this.dimension);
-    //console.log(localStorage.saveGame);
   }
 
   _restoreGame() {
