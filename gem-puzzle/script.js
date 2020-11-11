@@ -5,9 +5,19 @@ class Box {
   constructor(dimension) {
     this.dimension = dimension;
     this.chips = [];
+    this.completed = [];
     this.empty = null;
     this.time = 0;
     this.moves = 0;
+    this.result = {};
+    this.bestScore = {
+      3: [],
+      4: [],
+      5: [],
+      6: [],
+      7: [],
+      8: [],
+    };
     this.playing = false;
     this.sound = false;
     this._clear();
@@ -69,6 +79,17 @@ class Box {
     this.menuMainRestore.classList.add('menu__main__item');
     this.menuMainRestore.classList.add('menu__main__item--restore');
     this.menuMainRestore.textContent = 'Restore Game';
+    this.menuMainBestScore = document.createElement('button');
+    this.menuMainBestScore.classList.add('menu__main__item');
+    this.menuMainBestScore.classList.add('menu__main__item--BestScore');
+    this.menuMainBestScore.textContent = 'Best Score';
+    this.menuMainScore = document.createElement('div');
+    this.menuMainScore.classList.add('menu__main__score');
+    this.menuMainScoreTitle = document.createElement('div');
+    this.menuMainScoreTitle.classList.add('menu__main__score__title');
+    this.menuMainScoreTitle.textContent =`Best Score for ${this.dimension}×${this.dimension}`;
+    this.menuMainScoreTable = document.createElement('div');
+    this.menuMainScoreTable.classList.add('menu__main__score__table');
 
     this.statistic = document.createElement('div');
     this.statistic.classList.add('statistic');
@@ -101,6 +122,21 @@ class Box {
     this.footer = document.createElement('div');
     this.footer.classList.add('footer');
 
+    this.popup = document.createElement('div');
+    this.popup.classList.add('popup');
+    this.popup.classList.add('popup--hide');
+    this.popupText = document.createElement('div');
+    this.popupText.classList.add('popup__text');
+    this.popupText.textContent = 'Congratulations! You\u00A0won!';
+    this.popupTime = document.createElement('div');
+    this.popupTime.classList.add('popup__time');
+    this.popupMoves = document.createElement('div');
+    this.popupMoves.classList.add('popup__moves');
+    this.popupClose = document.createElement('button');
+    this.popupClose.classList.add('popup__btn');
+    this.popupClose.textContent = 'Close';
+
+
     for (let i = 0; i < 6; i++) {
       this.footerBtn = document.createElement('button');
       this.footerBtn.classList.add('footer__btn');
@@ -130,8 +166,13 @@ class Box {
     this.menu.append(this.menuMain);
     this.menuMain.append(this.menuMainBtn);
     this.menuMain.append(this.menuMainContainer);
+    this.menuMain.append(this.menuMainScore);
+    this.menuMainScore.append(this.menuMainScoreTitle);
+    this.menuMainScore.append(this.menuMainScoreTable);
+    this.menuMainScoreTable.append(this.menuMainScoreTableHead);
     this.menuMainContainer.append(this.menuMainSave);
     this.menuMainContainer.append(this.menuMainRestore);
+    this.menuMainContainer.append(this.menuMainBestScore);
     this.container.append(this.statistic);
     this.statistic.append(this.statTime);
     this.statTime.append(this.statTimeTitle);
@@ -142,6 +183,11 @@ class Box {
     this.container.append(this.box);
     this.box.append(this._createChips(this.dimension));
     this.container.append(this.footer);
+    this.container.append(this.popup);
+    this.popup.append(this.popupText);
+    this.popup.append(this.popupTime);
+    this.popup.append(this.popupMoves);
+    this.popup.append(this.popupClose);
     this.body.append(this.audio);
 
     document.querySelectorAll('button').forEach(button => {
@@ -150,7 +196,6 @@ class Box {
 
     this.container.querySelectorAll('.chip').forEach(elem => {
       elem.addEventListener('click', () => {
-        console.log('iii');
         this.playing = true;
         this._move(elem);
       });
@@ -243,6 +288,7 @@ class Box {
 
       this.chips.push(row);
     }
+    this.completed = this.chips.slice();
 
     return fragment;
   }
@@ -339,6 +385,7 @@ class Box {
         if (this.playing && intervalId === undefined) {
           this._timer();
         }
+        this._isComplete();
       }
     }
   }
@@ -362,10 +409,55 @@ class Box {
     }
   }
 
+  _isComplete() {
+    let count = 0;
+    for (let i = 0; i < this.chips.flat().length - 1; i++) {
+      if (this.chips.flat()[i].cell === i + 1) {
+        count++;
+      }
+    }
+
+    if (count === this.chips.flat().length - 1 && this.playing) {
+      const data = new Date();
+
+      const minutes = (data.getMinutes() > 9) ? data.getMinutes() : `0${data.getMinutes()}`;
+      const seconds = (data.getSeconds() > 9) ? data.getSeconds() : `0${data.getSeconds()}`;
+      this.result.data = `${data.getDate()}.${data.getMonth()}.${data.getFullYear()}, ${data.getHours()}:${minutes}:${seconds}`;
+
+      this.result.time = this.time;
+      this.result.moves = this.moves;
+
+      this.playing = false;
+      this._timer();
+
+      this.popup.classList.remove('popup--hide');
+      this.popupTime.textContent = `Your time: ${this._timeConvert(this.result.time)}`;
+      this.popupMoves.textContent = `Your moves: ${this.result.moves}`;
+
+      this.bestScore[this.dimension] = (localStorage.getItem('bestScore'))
+        ? JSON.parse(localStorage.getItem('bestScore'))[this.dimension]
+        : [];
+
+      if (this.bestScore[this.dimension].length === 0) {
+        this.bestScore[this.dimension].push(this.result);
+        localStorage.setItem('bestScore', JSON.stringify(this.bestScore));
+        console.log(this.bestScore);
+      } else if (this.bestScore[this.dimension].length < 10) {
+        this.bestScore[this.dimension].push(this.result);
+        this.bestScore[this.dimension].sort((prev, last) => prev.time - last.time);
+        localStorage.setItem('bestScore', JSON.stringify(this.bestScore));
+        console.log(this.bestScore);
+      }
+    }
+
+    this.popupClose.addEventListener('click', () => {
+      this.popup.classList.add('popup--hide');
+    });
+  }
+
   _reNew(array) {
     this.box.innerHTML = '';
 
-    console.log(this.playing, intervalId);
     const fragment = document.createDocumentFragment();
 
     let sortArray = array.flat().sort((prev, next) => parseInt(prev.cell) - parseInt(next.cell));
@@ -406,13 +498,6 @@ class Box {
   }
 
   _reDrow() {
-    // --title-font-size: 2rem;
-    // --nav-height: 2.2rem;
-    // --nav-btn-width: 5.25rem;
-    // --nav-btn-font-size: 1rem;
-    // --stat-font-size: 1rem;
-    // --chip-size: 3.75rem;
-    // --chip-font-size: 2.5rem;
     switch (this.dimension) {
       case 5:
       case 6:
@@ -420,6 +505,7 @@ class Box {
         this.body.style.setProperty('--nav-btn-width', '7.25rem');
         this.body.style.setProperty('--nav-btn-font-size', '1.4rem');
         this.body.style.setProperty('--stat-font-size', '1.2rem');
+        this.body.style.setProperty('--popup-font-size', '1.2rem');
         break;
 
       case 7:
@@ -430,6 +516,7 @@ class Box {
         this.body.style.setProperty('--stat-font-size', '1.2rem');
         this.body.style.setProperty('--chip-size', '3rem');
         this.body.style.setProperty('--chip-font-size', '2rem');
+        this.body.style.setProperty('--popup-font-size', '1.5rem');
         break;
 
       default:
@@ -439,6 +526,7 @@ class Box {
         this.body.style.setProperty('--stat-font-size', '1rem');
         this.body.style.setProperty('--chip-size', '3.75rem');
         this.body.style.setProperty('--chip-font-size', '2.5rem');
+        this.body.style.setProperty('--popup-font-size', '1rem');
     }
   }
 
@@ -538,6 +626,35 @@ class Box {
       });
     });
   }
+// //! дописать!!!!
+//   _scoreTableGen() {
+//     //! наверное лучше тоже делать через фрагмент
+//     for (let i = 0; i < //!длина массива в ЛС ; i++) {
+//       for (let j = 0; j < 3; j++) {
+//         this.menuMainScoreTableElem = document.createElement('div');
+
+//         if (i === 0) {
+//           const arrTitles = ['Data', 'Time', 'Moves',];
+//           this.menuMainScoreTableElem.classList.add('menu__main__score__table--head');
+//           this.menuMainScoreTableElem.textContent = arrTitles[j];
+//         }
+//         this.menuMainScoreTable.append(this.menuMainScoreTableElem);
+
+//       }
+
+//       this.footerBtn = document.createElement('button');
+//       this.footerBtn.classList.add('footer__btn');
+//       this.footerBtn.setAttribute('data-field', `${i + 3}`);
+
+//       if (i === this.dimension - 3) {
+//         this.footerBtn.setAttribute('active', 'true');
+//         this.footerBtn.classList.add('footer__btn--active');
+//       }
+
+//       this.footerBtn.textContent = `${i + 3}×${i + 3}`;
+//       this.footer.append(this.footerBtn);
+//     }
+//   }
 }
 
 const box = new Box(FIELD_DIMENSION);

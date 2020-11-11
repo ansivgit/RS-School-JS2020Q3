@@ -86,6 +86,7 @@ body {
   --stat-font-size: 1rem;
   --chip-size: 3.75rem;
   --chip-font-size: 2.5rem;
+  --popup-font-size: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -115,6 +116,7 @@ button:active, button:focus {
 }
 
 .container {
+  position: relative;
   margin: 1.4rem auto;
   border-radius: 10px 10px 0 0;
   background-color: #8ecd91;
@@ -247,6 +249,26 @@ button:active, button:focus {
   color: #ffffff;
 }
 
+.menu__main__score {
+  position: absolute;
+  top: 128px;
+  width: 90%;
+  background-color: #ffffff;
+  border: 2px solid darkgreen;
+}
+
+.menu__main__score__title {
+  font-family: "Luckiest Guy", cursive;
+  color: darkolivegreen;
+}
+
+.menu__main__score__table {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+}
+
 .statistic {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -307,6 +329,7 @@ button:active, button:focus {
 }
 
 .chip--empty {
+  z-index: -1;
   border: 0;
   cursor: default;
 }
@@ -334,6 +357,52 @@ button:active, button:focus {
 .footer__btn:focus, .footer__btn--active {
   background-color: #8ecd91;
   font-weight: bold;
+}
+
+.popup {
+  position: absolute;
+  top: 25%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+  font-size: var(--popup-font-size);
+  background-color: darkolivegreen;
+  color: #ffffff;
+  text-align: center;
+}
+
+.popup--hide {
+  display: none;
+}
+
+.popup__text {
+  margin-bottom: 10px;
+  font-family: "Luckiest Guy", cursive;
+  font-size: calc(var(--popup-font-size) * 1.1);
+}
+
+.popup__btn {
+  border: 2px solid darkgreen;
+  border-radius: 10px;
+  font-family: cursive;
+  cursor: pointer;
+  margin-top: 10px;
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+  font-size: var(--popup-font-size);
+  background-color: transparent;
+  color: #ffffff;
 }
 
 .move-right {
