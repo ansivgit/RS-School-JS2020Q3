@@ -252,21 +252,36 @@ button:active, button:focus {
 .menu__main__score {
   position: absolute;
   top: 128px;
-  width: 90%;
+  right: -10px;
   background-color: #ffffff;
   border: 2px solid darkgreen;
 }
 
 .menu__main__score__title {
+  margin: 5px 0;
   font-family: "Luckiest Guy", cursive;
   color: darkolivegreen;
+  text-align: center;
 }
 
 .menu__main__score__table {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 1fr 1fr;
-      grid-template-columns: 1fr 1fr 1fr;
+  -ms-grid-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.menu__main__score__table--head {
+  padding: 0 5px;
+  font-weight: bold;
+  text-align: center;
+  border-top: 1px dashed darkgreen;
+}
+
+.menu__main__score__table--cell {
+  border-top: 1px dashed darkgreen;
+  font-size: 0.8rem;
+  text-align: center;
 }
 
 .statistic {

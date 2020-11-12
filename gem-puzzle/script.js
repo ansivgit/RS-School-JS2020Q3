@@ -169,7 +169,7 @@ class Box {
     this.menuMain.append(this.menuMainScore);
     this.menuMainScore.append(this.menuMainScoreTitle);
     this.menuMainScore.append(this.menuMainScoreTable);
-    this.menuMainScoreTable.append(this.menuMainScoreTableHead);
+    this.menuMainScoreTable.append(this._scoreTableGen());
     this.menuMainContainer.append(this.menuMainSave);
     this.menuMainContainer.append(this.menuMainRestore);
     this.menuMainContainer.append(this.menuMainBestScore);
@@ -237,6 +237,10 @@ class Box {
 
     this.menuMainRestore.addEventListener('click', () => {
       this._restoreGame();
+    });
+
+    this.menuMainBestScore.addEventListener('click', () => {
+      this._scoreTableGen();
     });
 
     this.footer.querySelectorAll('.footer__btn').forEach((elem) => {
@@ -442,11 +446,12 @@ class Box {
         this.bestScore[this.dimension].push(this.result);
         localStorage.setItem('bestScore', JSON.stringify(this.bestScore));
         console.log(this.bestScore);
-      } else if (this.bestScore[this.dimension].length < 10) {
+      } else if (this.bestScore[this.dimension].length <= 10) {
+
         this.bestScore[this.dimension].push(this.result);
-        this.bestScore[this.dimension].sort((prev, last) => prev.time - last.time);
+        this.bestScore[this.dimension].sort((prev, last) => prev.time - last.time).slice(0, 10);
+
         localStorage.setItem('bestScore', JSON.stringify(this.bestScore));
-        console.log(this.bestScore);
       }
     }
 
@@ -626,35 +631,47 @@ class Box {
       });
     });
   }
-// //! дописать!!!!
-//   _scoreTableGen() {
-//     //! наверное лучше тоже делать через фрагмент
-//     for (let i = 0; i < //!длина массива в ЛС ; i++) {
-//       for (let j = 0; j < 3; j++) {
-//         this.menuMainScoreTableElem = document.createElement('div');
 
-//         if (i === 0) {
-//           const arrTitles = ['Data', 'Time', 'Moves',];
-//           this.menuMainScoreTableElem.classList.add('menu__main__score__table--head');
-//           this.menuMainScoreTableElem.textContent = arrTitles[j];
-//         }
-//         this.menuMainScoreTable.append(this.menuMainScoreTableElem);
+  _scoreTableGen() {
+    this.bestScore = JSON.parse(localStorage.getItem('bestScore'));
 
-//       }
+    const fragment = document.createDocumentFragment();
 
-//       this.footerBtn = document.createElement('button');
-//       this.footerBtn.classList.add('footer__btn');
-//       this.footerBtn.setAttribute('data-field', `${i + 3}`);
+    if (this.bestScore[this.dimension].length === 0) {
+      this.menuMainScoreTitle.textContent = `There is no Best Score for`;
+      return `${this.dimension}×${this.dimension}`;
+    }
 
-//       if (i === this.dimension - 3) {
-//         this.footerBtn.setAttribute('active', 'true');
-//         this.footerBtn.classList.add('footer__btn--active');
-//       }
+    for (let i = 0; i < this.bestScore[this.dimension].length + 1; i++) {
+      let row = [];
 
-//       this.footerBtn.textContent = `${i + 3}×${i + 3}`;
-//       this.footer.append(this.footerBtn);
-//     }
-//   }
+      for (let j = 0; j < 4; j++) {
+        const elem = document.createElement('div');
+
+        if (i === 0) {
+          const arrTitles = ['#', 'Data', 'Time', 'Moves',];
+          elem.classList.add('menu__main__score__table--head');
+          elem.textContent = arrTitles[j];
+        } else {
+          elem.classList.add('menu__main__score__table--cell');
+
+          switch (j) {
+            case 0: elem.textContent = i; break;
+            case 1: elem.textContent = this.bestScore[this.dimension][i - 1].data; break;
+            case 2: elem.textContent = this.bestScore[this.dimension][i - 1].time; break;
+            default: elem.textContent = this.bestScore[this.dimension][i - 1].moves; break;
+          }
+        }
+
+        elem.style.gridRowStart = i + 1;
+        elem.style.gridColumnStart = j + 1;
+
+        fragment.append(elem);
+      }
+    }
+
+    return fragment;
+  }
 }
 
 const box = new Box(FIELD_DIMENSION);

@@ -169,18 +169,35 @@ button {
     &__score {
       position: absolute;
       top: 128px;
-      width: 90%;
+      right: -10px;
+      //width: 90%;
       background-color: #ffffff;
       border: $primary-border-line solid $secondary-color;
 
       &__title {
+        margin: 5px 0;
         font-family: $primary-font;
         color: $primary-color;
+        text-align: center;
       }
 
       &__table {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+
+        &--head {
+          padding: 0 5px;
+          font-weight: bold;
+          text-align: center;
+          //border: $secondary-border-line solid $secondary-color;
+          border-top: $secondary-border-line dashed $secondary-color;
+        }
+
+        &--cell {
+          border-top: $secondary-border-line dashed $secondary-color;
+          font-size: 0.8rem;
+          text-align: center;
+        }
       }
     }
   }
