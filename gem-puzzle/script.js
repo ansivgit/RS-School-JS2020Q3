@@ -65,7 +65,7 @@ class Box {
     this.menuMain.classList.add('menu__main');
     this.menuMainBtn = document.createElement('button');
     this.menuMainBtn.classList.add('menu__main__btn');
-    this.menuMainBtn.classList.add('menu__main__btn--main');
+    this.menuMainBtn.classList.add('menu__main__btn--menu');
     this.menuMainBtn.textContent = 'Menu';
 
     this.menuMainContainer = document.createElement('div');
@@ -85,9 +85,13 @@ class Box {
     this.menuMainBestScore.textContent = 'Best Score';
     this.menuMainScore = document.createElement('div');
     this.menuMainScore.classList.add('menu__main__score');
+    this.menuMainScore.classList.add('visually-hidden');
     this.menuMainScoreTitle = document.createElement('div');
     this.menuMainScoreTitle.classList.add('menu__main__score__title');
-    this.menuMainScoreTitle.textContent =`Best Score for ${this.dimension}×${this.dimension}`;
+    this.menuMainScoreTitle.textContent = `Best Score for ${this.dimension}×${this.dimension}`;
+    this.menuMainScoreClose = document.createElement('button');
+    this.menuMainScoreClose.classList.add('menu__main__score__close');
+
     this.menuMainScoreTable = document.createElement('div');
     this.menuMainScoreTable.classList.add('menu__main__score__table');
 
@@ -168,8 +172,9 @@ class Box {
     this.menuMain.append(this.menuMainContainer);
     this.menuMain.append(this.menuMainScore);
     this.menuMainScore.append(this.menuMainScoreTitle);
+    this.menuMainScore.append(this.menuMainScoreClose);
     this.menuMainScore.append(this.menuMainScoreTable);
-    this.menuMainScoreTable.append(this._scoreTableGen());
+    //this.menuMainScoreTable.append(this._scoreTableGen());
     this.menuMainContainer.append(this.menuMainSave);
     this.menuMainContainer.append(this.menuMainRestore);
     this.menuMainContainer.append(this.menuMainBestScore);
@@ -228,7 +233,22 @@ class Box {
     });
 
     this.menuMainBtn.addEventListener('click', () => {
+      this.menuMainBtn.classList.toggle('menu__main__btn--active');
       this.menuMainContainer.classList.toggle('visually-hidden');
+    });
+
+    this.menuMain.addEventListener('focusout', (event) => {
+      if (event.target.closest('.menu__main__container')) {
+        this.menuMainBtn.classList.remove('menu__main__btn--active');
+        this.menuMainContainer.classList.add('visually-hidden');
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('.menu__main')) {
+        this.menuMainBtn.classList.remove('menu__main__btn--active');
+        this.menuMainContainer.classList.add('visually-hidden');
+      }
     });
 
     this.menuMainSave.addEventListener('click', () => {
@@ -240,7 +260,14 @@ class Box {
     });
 
     this.menuMainBestScore.addEventListener('click', () => {
+      this.menuMainScore.classList.remove('visually-hidden');
+      //this._scoreSet();
       this._scoreTableGen();
+      this.menuMainScoreTable.append(this._scoreTableGen());
+    });
+
+    this.menuMainScoreClose.addEventListener('click', () => {
+      this.menuMainScore.classList.add('visually-hidden');
     });
 
     this.footer.querySelectorAll('.footer__btn').forEach((elem) => {
@@ -248,6 +275,7 @@ class Box {
         this._changeField(elem);
       });
     });
+
   }
 
   _createChips(quantity) {
@@ -433,26 +461,11 @@ class Box {
 
       this.playing = false;
       this._timer();
+      this._scoreSet();
 
       this.popup.classList.remove('popup--hide');
       this.popupTime.textContent = `Your time: ${this._timeConvert(this.result.time)}`;
       this.popupMoves.textContent = `Your moves: ${this.result.moves}`;
-
-      this.bestScore[this.dimension] = (localStorage.getItem('bestScore'))
-        ? JSON.parse(localStorage.getItem('bestScore'))[this.dimension]
-        : [];
-
-      if (this.bestScore[this.dimension].length === 0) {
-        this.bestScore[this.dimension].push(this.result);
-        localStorage.setItem('bestScore', JSON.stringify(this.bestScore));
-        console.log(this.bestScore);
-      } else if (this.bestScore[this.dimension].length <= 10) {
-
-        this.bestScore[this.dimension].push(this.result);
-        this.bestScore[this.dimension].sort((prev, last) => prev.time - last.time).slice(0, 10);
-
-        localStorage.setItem('bestScore', JSON.stringify(this.bestScore));
-      }
     }
 
     this.popupClose.addEventListener('click', () => {
@@ -508,6 +521,7 @@ class Box {
       case 6:
         this.body.style.setProperty('--title-font-size', '3rem');
         this.body.style.setProperty('--nav-btn-width', '7.25rem');
+        this.body.style.setProperty('--score-width', '20rem');
         this.body.style.setProperty('--nav-btn-font-size', '1.4rem');
         this.body.style.setProperty('--stat-font-size', '1.2rem');
         this.body.style.setProperty('--popup-font-size', '1.2rem');
@@ -517,6 +531,7 @@ class Box {
       case 8:
         this.body.style.setProperty('--title-font-size', '3rem');
         this.body.style.setProperty('--nav-btn-width', '8.5rem');
+        this.body.style.setProperty('--score-width', '20rem');
         this.body.style.setProperty('--nav-btn-font-size', '1.4rem');
         this.body.style.setProperty('--stat-font-size', '1.2rem');
         this.body.style.setProperty('--chip-size', '3rem');
@@ -527,6 +542,7 @@ class Box {
       default:
         this.body.style.setProperty('--title-font-size', '2rem');
         this.body.style.setProperty('--nav-btn-width', '5.25rem');
+        this.body.style.setProperty('--score-width', '17rem');
         this.body.style.setProperty('--nav-btn-font-size', '1rem');
         this.body.style.setProperty('--stat-font-size', '1rem');
         this.body.style.setProperty('--chip-size', '3.75rem');
@@ -579,6 +595,7 @@ class Box {
     chip.addEventListener('transitionend', () => {
       this._removeTransition();
     });
+    console.log(this.bestScore);
   }
 
   _removeTransition(event) {
@@ -603,7 +620,6 @@ class Box {
 
     this.statMovesValue.textContent = this.moves;
     this.statTimeValue.textContent = this._timeConvert(this.time);
-    console.log(intervalId, this.playing);
 
     const currentFooterBtn = document.querySelector('.footer__btn--active');
     const restoreFooterBtn = document.querySelector(`[data-field="${this.dimension}"]`);
@@ -632,15 +648,40 @@ class Box {
     });
   }
 
-  _scoreTableGen() {
-    this.bestScore = JSON.parse(localStorage.getItem('bestScore'));
+  _scoreSet() {
+    if (!this.result.time) return;
 
-    const fragment = document.createDocumentFragment();
+    if (localStorage.getItem('bestScore') !== null) {
+      this.bestScore = JSON.parse(localStorage.getItem('bestScore'));
+    }
 
     if (this.bestScore[this.dimension].length === 0) {
-      this.menuMainScoreTitle.textContent = `There is no Best Score for`;
-      return `${this.dimension}×${this.dimension}`;
+      this.bestScore[this.dimension].push(this.result);
+      localStorage.setItem('bestScore', JSON.stringify(this.bestScore));
+    } else {
+
+      this.bestScore[this.dimension].push(this.result);
+      this.bestScore[this.dimension].sort((prev, last) => prev.time - last.time)
+
+      if (this.bestScore[this.dimension].length > 10) {
+        this.bestScore[this.dimension].splice(-1, 1);
+      }
+
+      localStorage.setItem('bestScore', JSON.stringify(this.bestScore));
     }
+  }
+
+  _scoreTableGen() {
+    if (localStorage.getItem('bestScore') !== null) {
+      this.bestScore = JSON.parse(localStorage.getItem('bestScore'));
+    }
+
+    if (this.bestScore[this.dimension].length === 0 || localStorage.getItem('bestScore') === null) {
+      this.menuMainScoreTitle.textContent = `There is no Best Score for ${this.dimension}×${this.dimension}`;
+      return '';
+    }
+
+    const fragment = document.createDocumentFragment();
 
     for (let i = 0; i < this.bestScore[this.dimension].length + 1; i++) {
       let row = [];

@@ -82,6 +82,7 @@ body {
   --title-font-size: 2rem;
   --nav-height: 2.2rem;
   --nav-btn-width: 5.25rem;
+  --score-width: 17rem;
   --nav-btn-font-size: 1rem;
   --stat-font-size: 1rem;
   --chip-size: 3.75rem;
@@ -216,7 +217,7 @@ button:active, button:focus {
   background-color: transparent;
 }
 
-.menu__main__btn:hover, .menu__main__btn:focus {
+.menu__main__btn:hover, .menu__main__btn:focus, .menu__main__btn--active {
   background-color: darkolivegreen;
   color: #ffffff;
 }
@@ -251,24 +252,47 @@ button:active, button:focus {
 
 .menu__main__score {
   position: absolute;
-  top: 128px;
+  top: -10px;
   right: -10px;
+  width: var(--score-width);
   background-color: #ffffff;
   border: 2px solid darkgreen;
 }
 
 .menu__main__score__title {
-  margin: 5px 0;
+  margin: 8px 35px 5px 5px;
   font-family: "Luckiest Guy", cursive;
   color: darkolivegreen;
   text-align: center;
 }
 
+.menu__main__score__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--nav-height);
+  height: var(--nav-height);
+  border: none;
+  border-radius: 50%;
+  background: url("./../assets/icons/highlight_off-18dp.svg");
+  background-size: contain;
+  cursor: pointer;
+}
+
+.menu__main__score__close:hover {
+  -webkit-transform: scale(1.4);
+          transform: scale(1.4);
+  -webkit-transition: -webkit-transform 0.2s ease-in-out;
+  transition: -webkit-transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
+}
+
 .menu__main__score__table {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 1fr 1fr 1fr;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+  -ms-grid-columns: 1fr auto 1fr 1fr;
+      grid-template-columns: 1fr auto 1fr 1fr;
 }
 
 .menu__main__score__table--head {

@@ -33,6 +33,7 @@ body {
   --title-font-size: 2rem;
   --nav-height: 2.2rem;
   --nav-btn-width: 5.25rem;
+  --score-width: 17rem;
   --nav-btn-font-size: 1rem;
   --stat-font-size: 1rem;
   --chip-size: 3.75rem;
@@ -137,7 +138,8 @@ button {
       background-color: transparent;
 
       &:hover,
-      &:focus {
+      &:focus,
+      &--active {
         background-color: $primary-color;
         color: #ffffff;
       }
@@ -168,28 +170,45 @@ button {
 
     &__score {
       position: absolute;
-      top: 128px;
+      top: -10px;
       right: -10px;
-      //width: 90%;
+      width: var(--score-width);
       background-color: #ffffff;
       border: $primary-border-line solid $secondary-color;
 
       &__title {
-        margin: 5px 0;
+        margin: 8px 35px 5px 5px;
         font-family: $primary-font;
         color: $primary-color;
         text-align: center;
       }
 
+      &__close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: var(--nav-height);
+        height: var(--nav-height);
+        border: none;
+        border-radius: 50%;
+        background: url('./../assets/icons/highlight_off-18dp.svg');
+        background-size: contain;
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(1.4);
+          transition: transform 0.2s ease-in-out;
+        }
+      }
+
       &__table {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr auto 1fr 1fr;
 
         &--head {
           padding: 0 5px;
           font-weight: bold;
           text-align: center;
-          //border: $secondary-border-line solid $secondary-color;
           border-top: $secondary-border-line dashed $secondary-color;
         }
 
@@ -205,7 +224,6 @@ button {
 
 .statistic {
   display: flex;
-  //justify-content: space-between;
   padding: 10px;
   font-size: var(--stat-font-size);
 
@@ -217,7 +235,6 @@ button {
       height: 100%;
       min-width: 30px;
       margin: 0 10px;
-      //border: $secondary-border-line solid $secondary-color;
     }
   }
 
