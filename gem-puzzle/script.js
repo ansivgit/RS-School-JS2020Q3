@@ -9,6 +9,7 @@ class Box {
     this.empty = null;
     this.time = 0;
     this.moves = 0;
+    this.isShuffle = false;
     this.result = {};
     this.bestScore = {
       3: [],
@@ -222,6 +223,8 @@ class Box {
       this.sound
         ? this.menuSound.classList.remove('menu__sound--mute')
         : this.menuSound.classList.add('menu__sound--mute');
+    console.log('dim: ', this.dimension, 'isShuffle: ', this.isShuffle, 'time&moves: ', this.time, this.moves, 'res: ', this.result, 'bestScore: ', this.bestScore, 'playing: ', this.playing);
+
     });
 
     this.menuShuffle.addEventListener('click', () => {
@@ -229,7 +232,7 @@ class Box {
       this.playing = false;
       this.statTimeValue.textContent = this.time;
 
-      this._shuffle(50);
+      this._shuffle(5);
     });
 
     this.menuMainBtn.addEventListener('click', () => {
@@ -261,8 +264,7 @@ class Box {
 
     this.menuMainBestScore.addEventListener('click', () => {
       this.menuMainScore.classList.remove('visually-hidden');
-      //this._scoreSet();
-      this._scoreTableGen();
+      this.menuMainScoreTable.innerHTML = '';
       this.menuMainScoreTable.append(this._scoreTableGen());
     });
 
@@ -411,18 +413,20 @@ class Box {
 
         this._sounds(chip);
 
-        this.moves += 1;
+        (this.isShuffle) ? this.moves += 1 : '';
         this.statMovesValue.textContent = this.moves;
 
-        if (this.playing && intervalId === undefined) {
+        if (this.playing && intervalId === undefined && this.isShuffle) {
           this._timer();
         }
-        this._isComplete();
+        (this.isShuffle) ? this._isComplete() : '';
       }
     }
   }
 
   _shuffle(iteration) {
+    this.isShuffle = true;
+
     for (let i = 0; i < iteration; i++) {
       const closest = this._getFreeChips();
       const randIndex = Math.round(Math.random() * (closest.length - 1));
@@ -454,12 +458,13 @@ class Box {
 
       const minutes = (data.getMinutes() > 9) ? data.getMinutes() : `0${data.getMinutes()}`;
       const seconds = (data.getSeconds() > 9) ? data.getSeconds() : `0${data.getSeconds()}`;
-      this.result.data = `${data.getDate()}.${data.getMonth()}.${data.getFullYear()}, ${data.getHours()}:${minutes}:${seconds}`;
+      this.result.data = `${data.getDate()}.${data.getMonth() + 1}.${data.getFullYear()}, ${data.getHours()}:${minutes}:${seconds}`;
 
       this.result.time = this.time;
       this.result.moves = this.moves;
 
       this.playing = false;
+      this.isShuffle = false;
       this._timer();
       this._scoreSet();
 
@@ -510,7 +515,7 @@ class Box {
           elem.style.height = '5rem';
         }
       }
-
+    this.isShuffle = false;
     this._reDrow();
     return fragment;
   }
@@ -524,6 +529,8 @@ class Box {
         this.body.style.setProperty('--score-width', '20rem');
         this.body.style.setProperty('--nav-btn-font-size', '1.4rem');
         this.body.style.setProperty('--stat-font-size', '1.2rem');
+        this.body.style.setProperty('--chip-size', '3.75rem');
+        this.body.style.setProperty('--chip-font-size', '2.5rem');
         this.body.style.setProperty('--popup-font-size', '1.2rem');
         break;
 
@@ -595,7 +602,6 @@ class Box {
     chip.addEventListener('transitionend', () => {
       this._removeTransition();
     });
-    console.log(this.bestScore);
   }
 
   _removeTransition(event) {
