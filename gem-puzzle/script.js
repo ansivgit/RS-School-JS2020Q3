@@ -419,7 +419,7 @@ class Box {
         if (this.playing && intervalId === undefined && this.isShuffle) {
           this._timer();
         }
-        (this.isShuffle) ? this._isComplete() : '';
+        (this.isShuffle && this.playing) ? this._isComplete() : '';
       }
     }
   }
@@ -447,18 +447,21 @@ class Box {
 
   _isComplete() {
     let count = 0;
-    for (let i = 0; i < this.chips.flat().length - 1; i++) {
+    const length = this.chips.flat().length;
+
+    for (let i = 0; i < length - 1; i++) {
       if (this.chips.flat()[i].cell === i + 1) {
         count++;
       }
     }
 
-    if (count === this.chips.flat().length - 1 && this.playing) {
+    if (count === length - 1 && this.playing) {
       const data = new Date();
 
       const minutes = (data.getMinutes() > 9) ? data.getMinutes() : `0${data.getMinutes()}`;
       const seconds = (data.getSeconds() > 9) ? data.getSeconds() : `0${data.getSeconds()}`;
-      this.result.data = `${data.getDate()}.${data.getMonth() + 1}.${data.getFullYear()}, ${data.getHours()}:${minutes}:${seconds}`;
+
+      this.result.data = `${data.getDate()}.${data.getMonth() + 1}.${data.getFullYear() - 2000}, ${data.getHours()}:${minutes}:${seconds}`;
 
       this.result.time = this.time;
       this.result.moves = this.moves;
@@ -484,8 +487,9 @@ class Box {
     const fragment = document.createDocumentFragment();
 
     let sortArray = array.flat().sort((prev, next) => parseInt(prev.cell) - parseInt(next.cell));
+    const length = sortArray.length;
 
-    for (let i = 0; i < sortArray.length; i++) {
+    for (let i = 0; i < length; i++) {
         const elem = document.createElement('div');
         elem.classList.add('chip');
         elem.classList.add('playing');
@@ -661,7 +665,9 @@ class Box {
       this.bestScore = JSON.parse(localStorage.getItem('bestScore'));
     }
 
-    if (this.bestScore[this.dimension].length === 0) {
+    const length = this.bestScore[this.dimension].length;
+
+    if (length === 0) {
       this.bestScore[this.dimension].push(this.result);
       localStorage.setItem('bestScore', JSON.stringify(this.bestScore));
     } else {
@@ -669,9 +675,10 @@ class Box {
       this.bestScore[this.dimension].push(this.result);
       this.bestScore[this.dimension].sort((prev, last) => prev.time - last.time)
 
-      if (this.bestScore[this.dimension].length > 10) {
+      if (length > 10) {
         this.bestScore[this.dimension].splice(-1, 1);
       }
+      console.log(111);
 
       localStorage.setItem('bestScore', JSON.stringify(this.bestScore));
     }
@@ -682,14 +689,16 @@ class Box {
       this.bestScore = JSON.parse(localStorage.getItem('bestScore'));
     }
 
-    if (this.bestScore[this.dimension].length === 0 || localStorage.getItem('bestScore') === null) {
+    const length = this.bestScore[this.dimension].length;
+
+    if (length === 0 || localStorage.getItem('bestScore') === null) {
       this.menuMainScoreTitle.textContent = `There is no Best Score for ${this.dimension}×${this.dimension}`;
       return '';
     }
 
     const fragment = document.createDocumentFragment();
 
-    for (let i = 0; i < this.bestScore[this.dimension].length + 1; i++) {
+    for (let i = 0; i < length + 1; i++) {
       let row = [];
 
       for (let j = 0; j < 4; j++) {
@@ -705,7 +714,7 @@ class Box {
           switch (j) {
             case 0: elem.textContent = i; break;
             case 1: elem.textContent = this.bestScore[this.dimension][i - 1].data; break;
-            case 2: elem.textContent = this.bestScore[this.dimension][i - 1].time; break;
+            case 2: elem.textContent = this._timeConvert(this.bestScore[this.dimension][i - 1].time); break;
             default: elem.textContent = this.bestScore[this.dimension][i - 1].moves; break;
           }
         }
