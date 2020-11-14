@@ -103,12 +103,12 @@ button {
     margin: 0 10px;
     border-color: $primary-color;
     border-radius: 50%;
-    background: url('./../assets/icons/volume_up-18dp.svg');
+    background: url('./assets/icons/volume_up-18dp.svg');
     background-size: contain;
     background-color: $primary-color;
 
     &--mute {
-      background: url('./../assets/icons/volume_off-18dp.svg');
+      background: url('./assets/icons/volume_off-18dp.svg');
       background-size: contain;
     }
 
@@ -191,7 +191,7 @@ button {
         height: var(--nav-height);
         border: none;
         border-radius: 50%;
-        background: url('./../assets/icons/highlight_off-18dp.svg');
+        background: url('./assets/icons/highlight_off-18dp.svg');
         background-size: contain;
         cursor: pointer;
 
