@@ -361,6 +361,8 @@ button:active, button:focus {
   font-family: "Luckiest Guy", cursive;
   font-size: var(--chip-font-size);
   cursor: pointer;
+  color: black;
+  -webkit-text-stroke: 1px none;
 }
 
 .chip:hover {

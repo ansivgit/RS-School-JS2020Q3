@@ -10,6 +10,8 @@ class Box {
     this.time = 0;
     this.moves = 0;
     this.isShuffle = false;
+    this.isPicture = true;
+    this.bgImageURL = null;
     this.result = {};
     this.bestScore = {
       3: [],
@@ -84,6 +86,10 @@ class Box {
     this.menuMainBestScore.classList.add('menu__main__item');
     this.menuMainBestScore.classList.add('menu__main__item--BestScore');
     this.menuMainBestScore.textContent = 'Best Score';
+    this.menuMainPicture = document.createElement('button');
+    this.menuMainPicture.classList.add('menu__main__item');
+    this.menuMainPicture.classList.add('menu__main__item--picture');
+    this.menuMainPicture.textContent = 'Set Image';
     this.menuMainScore = document.createElement('div');
     this.menuMainScore.classList.add('menu__main__score');
     this.menuMainScore.classList.add('visually-hidden');
@@ -175,10 +181,10 @@ class Box {
     this.menuMainScore.append(this.menuMainScoreTitle);
     this.menuMainScore.append(this.menuMainScoreClose);
     this.menuMainScore.append(this.menuMainScoreTable);
-    //this.menuMainScoreTable.append(this._scoreTableGen());
     this.menuMainContainer.append(this.menuMainSave);
     this.menuMainContainer.append(this.menuMainRestore);
     this.menuMainContainer.append(this.menuMainBestScore);
+    this.menuMainContainer.append(this.menuMainPicture);
     this.container.append(this.statistic);
     this.statistic.append(this.statTime);
     this.statTime.append(this.statTimeTitle);
@@ -268,6 +274,11 @@ class Box {
       this.menuMainScoreTable.append(this._scoreTableGen());
     });
 
+    this.menuMainPicture.addEventListener('click', () => {
+      this.isPicture = !this.isPicture;
+      this.bgImageURL = this._setPicture();
+    });
+
     this.menuMainScoreClose.addEventListener('click', () => {
       this.menuMainScore.classList.add('visually-hidden');
     });
@@ -291,15 +302,27 @@ class Box {
         elem.classList.add('chip');
         elem.setAttribute('draggable', 'true');
 
+        //console.log(elem.style);
+
         elem.style.gridRowStart = i + 1;
         elem.style.gridColumnStart = j + 1;
 
-        fragment.append(elem);
+        if (this.isPicture) {
+          const step = 100 / (quantity - 1);
+          const bgPositionX = j * step;
+          const bgPositionY = i * step;
+          const chipSizeRem = getComputedStyle(this.body).getPropertyValue('--chip-size');
+          const remStr = getComputedStyle(this.body).getPropertyValue('font-size');
 
-        if (this.dimension === 3) {
-          elem.style.width = '5rem';
-          elem.style.height = '5rem';
+          const chipSize = this._stringToNumber(chipSizeRem, 3);
+          const fontSize = this._stringToNumber(remStr, 2);
+
+          elem.style.backgroundImage = this.bgImageURL || 'none';
+          elem.style.backgroundSize = `${chipSize * quantity}rem`;
+          elem.style.backgroundPosition = `left ${bgPositionX}% top ${bgPositionY}%`;
         }
+
+        fragment.append(elem);
 
         if (i * this.dimension + j + 1 !== this.dimension ** 2) {
           let number = i * this.dimension + j + 1;
@@ -526,6 +549,18 @@ class Box {
 
   _reDrow() {
     switch (this.dimension) {
+      case 3:
+        const chipSize = 5;
+        this.body.style.setProperty('--title-font-size', '2rem');
+        this.body.style.setProperty('--nav-btn-width', '5.25rem');
+        this.body.style.setProperty('--score-width', '17rem');
+        this.body.style.setProperty('--nav-btn-font-size', '1rem');
+        this.body.style.setProperty('--stat-font-size', '1rem');
+        //this.body.style.setProperty('--box-size', `${chipSize * this.dimension}rem`);
+        this.body.style.setProperty('--chip-size', `${chipSize}rem`);
+        this.body.style.setProperty('--chip-font-size', '2.5rem');
+        this.body.style.setProperty('--popup-font-size', '1rem');
+        break;
       case 5:
       case 6:
         this.body.style.setProperty('--title-font-size', '3rem');
@@ -727,6 +762,19 @@ class Box {
     }
 
     return fragment;
+  }
+
+  _setPicture() {
+    const randomImg = Math.round(Math.random() * 10) + 1;
+    const randomURL = `url("./assets/img/vl_00${randomImg}.jpg")`;
+    this._reNew(this.chips);
+    return randomURL;
+  }
+
+  _stringToNumber(str, lengthForDel) {
+    const temp = str.split('');
+    temp.length = str.length - lengthForDel;
+    return parseFloat(temp.join(''));
   }
 }
 

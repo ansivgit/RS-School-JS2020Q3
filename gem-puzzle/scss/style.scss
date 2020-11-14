@@ -8,6 +8,9 @@ $secondary-font: cursive;
 
 $primary-color: darkolivegreen;
 $secondary-color: darkgreen;
+$chip-color: black;
+
+$chip-text-stroke-color: none;//rgb(92, 91, 91);
 
 $primary-bg-color:  rgb(142, 205, 145);
 $secondary-bg-color: rgba(85, 107, 47, 0.6);
@@ -36,6 +39,7 @@ body {
   --score-width: 17rem;
   --nav-btn-font-size: 1rem;
   --stat-font-size: 1rem;
+  //--box-size: 1rem;
   --chip-size: 3.75rem;
   --chip-font-size: 2.5rem;
   --popup-font-size: 1rem;
@@ -264,6 +268,8 @@ button {
   font-family: $primary-font;
   font-size: var(--chip-font-size);
   cursor: pointer;
+  color: $chip-color;
+  -webkit-text-stroke: 1px $chip-text-stroke-color;
 
   &:hover {
     background-color: $secondary-bg-color;
