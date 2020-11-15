@@ -88,6 +88,11 @@ body {
   --chip-size: 3.75rem;
   --chip-font-size: 2.5rem;
   --popup-font-size: 1rem;
+  --chip-color: black;
+  --chip-text-stroke-color: none;
+  --box-gap: 2px;
+  --chip-border: 2px solid darkgreen;
+  --chip-border-radius: 4px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -339,7 +344,7 @@ button:active, button:focus {
       grid-template-columns: 1fr 1fr;
   -ms-grid-rows: 1fr 1fr;
       grid-template-rows: 1fr 1fr;
-  gap: 2px;
+  gap: var(--box-gap);
   padding: 4px;
   border: 10px solid darkolivegreen;
 }
@@ -356,13 +361,13 @@ button:active, button:focus {
           align-items: center;
   height: var(--chip-size);
   width: var(--chip-size);
-  border: 2px solid darkgreen;
-  border-radius: 4px;
+  border: var(--chip-border);
+  border-radius: var(--chip-border-radius);
   font-family: "Luckiest Guy", cursive;
   font-size: var(--chip-font-size);
   cursor: pointer;
-  color: black;
-  -webkit-text-stroke: 1px none;
+  color: var(--chip-color);
+  -webkit-text-stroke: 1px var(--chip-text-stroke-color);
 }
 
 .chip:hover {
@@ -431,6 +436,10 @@ button:active, button:focus {
   margin-bottom: 10px;
   font-family: "Luckiest Guy", cursive;
   font-size: calc(var(--popup-font-size) * 1.1);
+}
+
+.popup__author--link {
+  margin-bottom: 1.6em;
 }
 
 .popup__btn {

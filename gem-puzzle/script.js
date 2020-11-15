@@ -130,6 +130,8 @@ class Box {
       event.preventDefault();
     });
 
+    this.bgImageURL = this._setPicture();
+
     this.footer = document.createElement('div');
     this.footer.classList.add('footer');
 
@@ -139,6 +141,13 @@ class Box {
     this.popupText = document.createElement('div');
     this.popupText.classList.add('popup__text');
     this.popupText.textContent = 'Congratulations! You\u00A0won!';
+    this.popupAuthor = document.createElement('div');
+    this.popupAuthor.classList.add('popup__author');
+    this.popupAuthor.textContent = 'Painting by Vasya Lozhkin';
+    this.popupLinkAuthor = document.createElement('a');
+    this.popupLinkAuthor.classList.add('popup__author--link');
+    this.popupLinkAuthor.setAttribute('href', 'http://vasya-lozhkin.ru/');
+    this.popupLinkAuthor.textContent = 'vasya-lozhkin.ru';
     this.popupTime = document.createElement('div');
     this.popupTime.classList.add('popup__time');
     this.popupMoves = document.createElement('div');
@@ -197,10 +206,15 @@ class Box {
     this.container.append(this.footer);
     this.container.append(this.popup);
     this.popup.append(this.popupText);
+    if (this.isPicture) {
+      this.popup.append(this.popupAuthor);
+      this.popup.append(this.popupLinkAuthor);
+    }
     this.popup.append(this.popupTime);
     this.popup.append(this.popupMoves);
     this.popup.append(this.popupClose);
     this.body.append(this.audio);
+
 
     document.querySelectorAll('button').forEach(button => {
       button.setAttribute('type', 'button');
@@ -276,7 +290,11 @@ class Box {
 
     this.menuMainPicture.addEventListener('click', () => {
       this.isPicture = !this.isPicture;
-      this.bgImageURL = this._setPicture();
+      this.body.innerHTML = '';
+      this._clear();
+      this.init();
+      this._reDrow();
+      this.menuMainContainer.classList.add('visually-hidden');
     });
 
     this.menuMainScoreClose.addEventListener('click', () => {
@@ -288,7 +306,6 @@ class Box {
         this._changeField(elem);
       });
     });
-
   }
 
   _createChips(quantity) {
@@ -308,6 +325,7 @@ class Box {
         elem.style.gridColumnStart = j + 1;
 
         if (this.isPicture) {
+          this._setPicture();
           const step = 100 / (quantity - 1);
           const bgPositionX = j * step;
           const bgPositionY = i * step;
@@ -536,11 +554,6 @@ class Box {
         }
 
         fragment.append(elem);
-
-        if (array.length === 3) {
-          elem.style.width = '5rem';
-          elem.style.height = '5rem';
-        }
       }
     this.isShuffle = false;
     this._reDrow();
@@ -548,6 +561,14 @@ class Box {
   }
 
   _reDrow() {
+    if (this.isPicture) {
+      this.body.style.setProperty('--chip-color', 'transparent');
+      this.body.style.setProperty('--chip-text-stroke-color', 'rgb(92, 91, 91)');
+    } else {
+      this.body.style.setProperty('--chip-color', 'black');
+      this.body.style.setProperty('--chip-text-stroke-color', 'none');
+    }
+
     switch (this.dimension) {
       case 3:
         const chipSize = 5;
@@ -556,11 +577,11 @@ class Box {
         this.body.style.setProperty('--score-width', '17rem');
         this.body.style.setProperty('--nav-btn-font-size', '1rem');
         this.body.style.setProperty('--stat-font-size', '1rem');
-        //this.body.style.setProperty('--box-size', `${chipSize * this.dimension}rem`);
         this.body.style.setProperty('--chip-size', `${chipSize}rem`);
         this.body.style.setProperty('--chip-font-size', '2.5rem');
         this.body.style.setProperty('--popup-font-size', '1rem');
         break;
+
       case 5:
       case 6:
         this.body.style.setProperty('--title-font-size', '3rem');
@@ -768,6 +789,32 @@ class Box {
     const randomImg = Math.round(Math.random() * 10) + 1;
     const randomURL = `url("./assets/img/vl_00${randomImg}.jpg")`;
     this._reNew(this.chips);
+    // console.log(this.chips.flat());
+
+    // this.chips.flat().forEach((elem) => {
+    //   console.log(elem);
+    //   const step = 100 / (this.dimension - 1);
+    //   const bgPositionX = elem.x * step;
+    //   const bgPositionY = elem.y * step;
+    //   const chipSizeRem = getComputedStyle(this.body).getPropertyValue('--chip-size');
+    //   const remStr = getComputedStyle(this.body).getPropertyValue('font-size');
+    //   const chips = document.querySelectorAll('.chip');
+    //   chips.forEach((cell) => {
+    //     if (!cell.classList.contains('chip--empty')) {
+    //       console.log(cell);//(`[data-code='${keyCode}']`)
+
+    //     }
+    //   })
+
+    //   const chipSize = this._stringToNumber(chipSizeRem, 3);
+    //   const fontSize = this._stringToNumber(remStr, 2);
+
+    //   elem.style.backgroundImage = this.bgImageURL || 'none';
+    //   elem.style.backgroundSize = `${chipSize * this.dimension}rem`;
+    //   elem.style.backgroundPosition = `left ${bgPositionX}% top ${bgPositionY}%`;
+   // })
+
+
     return randomURL;
   }
 

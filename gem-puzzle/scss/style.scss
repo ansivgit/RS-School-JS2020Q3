@@ -8,9 +8,6 @@ $secondary-font: cursive;
 
 $primary-color: darkolivegreen;
 $secondary-color: darkgreen;
-$chip-color: black;
-
-$chip-text-stroke-color: none;//rgb(92, 91, 91);
 
 $primary-bg-color:  rgb(142, 205, 145);
 $secondary-bg-color: rgba(85, 107, 47, 0.6);
@@ -39,11 +36,16 @@ body {
   --score-width: 17rem;
   --nav-btn-font-size: 1rem;
   --stat-font-size: 1rem;
-  //--box-size: 1rem;
   --chip-size: 3.75rem;
   --chip-font-size: 2.5rem;
   --popup-font-size: 1rem;
 
+  --chip-color: black;
+  --chip-text-stroke-color: none;//rgb(92, 91, 91);
+
+  --box-gap: 2px;
+  --chip-border: 2px solid darkgreen;
+  --chip-border-radius: 4px;
 
   display: flex;
   justify-content: center;
@@ -251,10 +253,9 @@ button {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 2px;
+  gap: var(--box-gap);
   padding: 4px;
   border: $max-border-line solid $primary-color;
-
 }
 
 .chip {
@@ -263,13 +264,13 @@ button {
   align-items: center;
   height: var(--chip-size);
   width: var(--chip-size);
-  border: $primary-border-line solid $secondary-color;
-  border-radius: $primary-border-radius;
+  border: var(--chip-border);
+  border-radius: var(--chip-border-radius);
   font-family: $primary-font;
   font-size: var(--chip-font-size);
   cursor: pointer;
-  color: $chip-color;
-  -webkit-text-stroke: 1px $chip-text-stroke-color;
+  color: var(--chip-color);
+  -webkit-text-stroke: 1px var(--chip-text-stroke-color);
 
   &:hover {
     background-color: $secondary-bg-color;
@@ -326,6 +327,10 @@ button {
     margin-bottom: 10px;
     font-family: $primary-font;
     font-size: calc(var(--popup-font-size) * 1.1);
+  }
+
+  &__author--link {
+    margin-bottom: 1.6em;
   }
 
   &__btn {
