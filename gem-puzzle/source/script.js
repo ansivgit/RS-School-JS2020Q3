@@ -247,8 +247,6 @@ class Box {
       this.sound
         ? this.menuSound.classList.remove('menu__sound--mute')
         : this.menuSound.classList.add('menu__sound--mute');
-    console.log('dim: ', this.dimension, 'isShuffle: ', this.isShuffle, 'time&moves: ', this.time, this.moves, 'res: ', this.result, 'bestScore: ', this.bestScore, 'playing: ', this.playing);
-
     });
 
     this.menuShuffle.addEventListener('click', () => {
@@ -256,7 +254,18 @@ class Box {
       this.playing = false;
       this.statTimeValue.textContent = this.time;
 
-      this._shuffle(5);
+      let numShuffling;
+
+      switch (this.dimension) {
+        case 3: numShuffling = 50; break;
+        case 5: numShuffling = 600; break;
+        case 6: numShuffling = 3000; break;
+        case 7: numShuffling = 8000; break;
+        case 8: numShuffling = 18000; break;
+        default: numShuffling = 150; break;
+      }
+
+      this._shuffle(numShuffling);
     });
 
     this.menuMainBtn.addEventListener('click', () => {
@@ -322,8 +331,6 @@ class Box {
         const elem = document.createElement('div');
         elem.classList.add('chip');
         elem.setAttribute('draggable', 'true');
-
-        //console.log(elem.style);
 
         elem.style.gridRowStart = i + 1;
         elem.style.gridColumnStart = j + 1;
@@ -444,17 +451,6 @@ class Box {
 
         chip.style.gridRowStart = currentChip.y + 1;
         chip.style.gridColumnStart = currentChip.x + 1;
-
-        // const emptyHTMLelement = document.querySelector('.chip--empty');
-        // emptyHTMLelement.classList.remove('chip--empty');
-        // emptyHTMLelement.setAttribute('draggable', 'true');
-        // emptyHTMLelement.setAttribute('data-cell', `${currentChip.cell}`);
-        // emptyHTMLelement.textContent = currentChip.cell;
-
-
-        // chip.classList.add('chip--empty');
-        // chip.setAttribute('draggable', 'false');
-        // chip.textContent = '';
 
         this._sounds(chip);
 
@@ -699,7 +695,6 @@ class Box {
     this.box.append(this._reNew(this.chips));
 
     const container = document.querySelector('.container');
-    //TODO слушатели дублируются из инит. Как то поправить?
     container.querySelectorAll('.chip').forEach(elem => {
       elem.addEventListener('click', () => {
         this.playing = true;
@@ -738,7 +733,6 @@ class Box {
       if (length > 10) {
         this.bestScore[this.dimension].splice(-1, 1);
       }
-      console.log(111);
 
       localStorage.setItem('bestScore', JSON.stringify(this.bestScore));
     }
@@ -793,33 +787,7 @@ class Box {
     const bgImages = getBgPathes('img/');
     const randomImg = Math.round(Math.random() * 9);
     const randomURL = `url("${bgImages[randomImg]}.jpg")`;
-    console.log(randomURL);
     this._reNew(this.chips);
-    // console.log(this.chips.flat());
-
-    // this.chips.flat().forEach((elem) => {
-    //   console.log(elem);
-    //   const step = 100 / (this.dimension - 1);
-    //   const bgPositionX = elem.x * step;
-    //   const bgPositionY = elem.y * step;
-    //   const chipSizeRem = getComputedStyle(this.body).getPropertyValue('--chip-size');
-    //   const remStr = getComputedStyle(this.body).getPropertyValue('font-size');
-    //   const chips = document.querySelectorAll('.chip');
-    //   chips.forEach((cell) => {
-    //     if (!cell.classList.contains('chip--empty')) {
-    //       console.log(cell);//(`[data-code='${keyCode}']`)
-
-    //     }
-    //   })
-
-    //   const chipSize = this._stringToNumber(chipSizeRem, 3);
-    //   const fontSize = this._stringToNumber(remStr, 2);
-
-    //   elem.style.backgroundImage = this.bgImageURL || 'none';
-    //   elem.style.backgroundSize = `${chipSize * this.dimension}rem`;
-    //   elem.style.backgroundPosition = `left ${bgPositionX}% top ${bgPositionY}%`;
-   // })
-
 
     return randomURL;
   }

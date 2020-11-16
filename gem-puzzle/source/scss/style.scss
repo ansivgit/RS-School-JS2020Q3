@@ -1,6 +1,17 @@
 @import './_fonts.scss';
 @import './_global.scss';
 
+:root {
+  font-size: 16px;
+
+  @media (max-width: 500px) {
+    font-size: 14px;
+  }
+  @media (max-width: 380px) {
+    font-size: 11.5px;
+  }
+}
+
 //* variables
 
 $primary-font: 'Luckiest Guy', cursive;
@@ -41,7 +52,7 @@ body {
   --popup-font-size: 1rem;
 
   --chip-color: black;
-  --chip-text-stroke-color: none;//rgb(92, 91, 91);
+  --chip-text-stroke-color: none;
 
   --box-gap: 2px;
   --chip-border: 2px solid darkgreen;
@@ -74,11 +85,9 @@ button {
 
 .container {
   position: relative;
-  //height: 70vh;
   margin: 1.4rem auto;
   border-radius: $secondary-border-radius $secondary-border-radius 0 0;
   background-color: $primary-bg-color;
-  //transition: all 5s ease-in-out;
 }
 
 .header {
@@ -134,7 +143,6 @@ button {
       @include buttons;
       height: var(--nav-height);
       min-width: var(--nav-btn-width);
-      //margin-left: 10px;
       padding: 0 10px;
       border-color: $primary-color;
       font-size: var(--nav-btn-font-size);
@@ -154,7 +162,6 @@ button {
     &__container {
       position: absolute;
       top: 40px;
-      //right: 10px;
       display: flex;
       flex-direction: column;
       width: 150px;
@@ -294,6 +301,8 @@ button {
   &__btn {
     @include buttons;
     width: 100%;
+    font-size: 1rem;
+    padding: 1px 3px;
     border-radius: 0 0 $secondary-border-radius $secondary-border-radius;
 
     &:focus,
