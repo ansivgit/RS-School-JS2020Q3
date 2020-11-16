@@ -10,6 +10,9 @@
   @media (max-width: 380px) {
     font-size: 11.5px;
   }
+  @media (min-width: 1600px) {
+    font-size: 24px;
+  }
 }
 
 //* variables
@@ -170,6 +173,8 @@ button {
     &__item {
       @include buttons;
       margin: 2px 5px;
+      padding: 0 10px;
+      font-size: 1rem;
       background-color: rgb(142,205,145);
 
       &:hover,

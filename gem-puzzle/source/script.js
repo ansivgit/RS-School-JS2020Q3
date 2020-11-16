@@ -14,7 +14,7 @@ class Box {
     this.time = 0;
     this.moves = 0;
     this.isShuffle = false;
-    this.isPicture = true;
+    this.isPicture = false;
     this.bgImageURL = null;
     this.result = {};
     this.bestScore = {
@@ -93,7 +93,7 @@ class Box {
     this.menuMainPicture = document.createElement('button');
     this.menuMainPicture.classList.add('menu__main__item');
     this.menuMainPicture.classList.add('menu__main__item--picture');
-    this.menuMainPicture.textContent = 'Set Image';
+    this.menuMainPicture.textContent = (this.isPicture) ? 'Remove Image (new game)' : 'Set Image (new game)';
     this.menuMainScore = document.createElement('div');
     this.menuMainScore.classList.add('menu__main__score');
     this.menuMainScore.classList.add('visually-hidden');
@@ -289,10 +289,12 @@ class Box {
 
     this.menuMainSave.addEventListener('click', () => {
       this._saveGame();
+      this.menuMainContainer.classList.add('visually-hidden');
     });
 
     this.menuMainRestore.addEventListener('click', () => {
       this._restoreGame();
+      this.menuMainContainer.classList.add('visually-hidden');
     });
 
     this.menuMainBestScore.addEventListener('click', () => {
@@ -303,6 +305,8 @@ class Box {
 
     this.menuMainPicture.addEventListener('click', () => {
       this.isPicture = !this.isPicture;
+      this.menuMainPicture.textContent = (this.isPicture) ? 'No Image (new game)' : 'Set Image (new game)';
+
       this.body.innerHTML = '';
       this._clear();
       this.init();
@@ -341,10 +345,10 @@ class Box {
           const bgPositionX = j * step;
           const bgPositionY = i * step;
           const chipSizeRem = getComputedStyle(this.body).getPropertyValue('--chip-size');
-          const remStr = getComputedStyle(this.body).getPropertyValue('font-size');
+          //const remStr = getComputedStyle(this.body).getPropertyValue('font-size');
 
           const chipSize = this._stringToNumber(chipSizeRem, 3);
-          const fontSize = this._stringToNumber(remStr, 2);
+          //const fontSize = this._stringToNumber(remStr, 2);
 
           elem.style.backgroundImage = this.bgImageURL || 'none';
           elem.style.backgroundSize = `${chipSize * quantity}rem`;
@@ -674,14 +678,21 @@ class Box {
     localStorage.setItem('time', this.time);
     localStorage.setItem('moves', this.moves);
     localStorage.setItem('dimension', this.dimension);
+    //localStorage.setItem('isPicture', this.isPicture);
+    //localStorage.setItem('bgImageURL', this.bgImageURL);
   }
 
   _restoreGame() {
+    this.body.style.setProperty('--chip-color', 'black');
+    this.body.style.setProperty('--chip-text-stroke-color', 'none');
     this.chips = JSON.parse(localStorage.getItem('saveGame'));
     this.time = parseInt(localStorage.getItem('time'));
     this.moves = parseInt(localStorage.getItem('moves'));
     this.dimension = localStorage.getItem('dimension');
+    //this.isPicture = localStorage.getItem('isPicture');
+    //this.bgImageURL = localStorage.getItem('bgImageURL');
     this.playing = false;
+    this.isPicture = false;
     this._timer();
 
     this.statMovesValue.textContent = this.moves;
@@ -693,6 +704,7 @@ class Box {
     restoreFooterBtn.classList.add('footer__btn--active');
 
     this.box.append(this._reNew(this.chips));
+    this.isShuffle = true;
 
     const container = document.querySelector('.container');
     container.querySelectorAll('.chip').forEach(elem => {
@@ -711,6 +723,7 @@ class Box {
         this._move(elem);
       });
     });
+    this._timer();
   }
 
   _scoreSet() {
@@ -788,6 +801,21 @@ class Box {
     const randomImg = Math.round(Math.random() * 9);
     const randomURL = `url("${bgImages[randomImg]}.jpg")`;
     this._reNew(this.chips);
+
+    if (this.isPicture) {
+      const step = 100 / (this.dimension - 1);
+      const chipSizeRem = getComputedStyle(this.body).getPropertyValue('--chip-size');
+      const chipSize = this._stringToNumber(chipSizeRem, 3);
+
+      this.box.querySelectorAll('.chips').forEach((elem) => {
+        const bgPositionX = (elem.style.gridColumnStart - 1) * step;
+        const bgPositionY = (elem.style.gridRowStart - 1) * step;
+
+        elem.style.backgroundImage = this.bgImageURL || 'none';
+        elem.style.backgroundSize = `${chipSize * this.dimension}rem`;
+        elem.style.backgroundPosition = `left ${bgPositionX}% top ${bgPositionY}%`;
+      })
+    }
 
     return randomURL;
   }
