@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); 7
 const CopyWebpackPlugin = require('copy-webpack-plugin'); // для копирования сторонних файлов или целых папок в папку сборки
+//const ESLintPlugin = require('eslint-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development'; // устанавливает значение разработка/продакшн
 const isProd = !isDev;
@@ -35,6 +36,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     // применять изменения только при горячей перезагрузке
     new webpack.HotModuleReplacementPlugin(),
+    //new ESLintPlugin(),
     new CopyWebpackPlugin({
       patterns: [
         {
@@ -49,13 +51,6 @@ module.exports = {
           from: path.resolve(__dirname, 'source/assets/img/'),
           to: path.resolve(__dirname, 'dist/img/'),
         },
-        // {
-        //   from: path.resolve(__dirname, 'source/assets/*.mp3'),
-        //   to: path.resolve(__dirname, 'dist'),
-        // },
-        // {
-        //   to: path.resolve(__dirname, 'dist/img/'),
-        // },
       ]
     }),
   ],
@@ -78,11 +73,6 @@ module.exports = {
       {
         test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
         type: 'asset/inline',
-        // options: {
-        //   outputPath: 'fonts',
-        //   //publicPath: 'fonts',
-        //   name: '[name].[ext]',
-        // }
       },
       // CSS, PostCSS, Sass
       {
