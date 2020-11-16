@@ -1,3 +1,7 @@
+import { getBgPathes } from './images';
+
+import './scss/style.scss';
+
 const FIELD_DIMENSION = 4;
 let intervalId;
 
@@ -42,7 +46,7 @@ class Box {
     this.container.classList.add('container');
 
     this.audio = document.createElement('audio');
-    this.audio.setAttribute('src', './assets/keys2.mp3');
+    this.audio.setAttribute('src', 'sound_move.mp3');
     this.audio.setAttribute('data-audio', 'keys');
 
     this.header = document.createElement('div');
@@ -786,8 +790,10 @@ class Box {
   }
 
   _setPicture() {
-    const randomImg = Math.round(Math.random() * 10) + 1;
-    const randomURL = `url("./assets/img/vl_00${randomImg}.jpg")`;
+    const bgImages = getBgPathes('img/');
+    const randomImg = Math.round(Math.random() * 9);
+    const randomURL = `url("${bgImages[randomImg]}.jpg")`;
+    console.log(randomURL);
     this._reNew(this.chips);
     // console.log(this.chips.flat());
 
