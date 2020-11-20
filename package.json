@@ -1,0 +1,28 @@
+{
+  "name": "ansivgit-js2020q3",
+  "version": "1.0.0",
+  "description": "RS School projects",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.12.1",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rolling-scopes-school/ansivgit-JS2020Q3.git"
+  },
+  "keywords": [
+    "rsschool"
+  ],
+  "author": "Anna ZAS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rolling-scopes-school/ansivgit-JS2020Q3/issues"
+  },
+  "homepage": "https://github.com/rolling-scopes-school/ansivgit-JS2020Q3#readme"
+}
