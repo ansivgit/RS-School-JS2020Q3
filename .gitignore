@@ -104,12 +104,8 @@ dist
 .tern-port
 
 
-rsschool_repo.code-workspace
 .gitignore
 shelter/pages-in-jpg
 .eslintrc.json
 package-lock.json
-package.json
-virtual-keyboard/script0.js
-momentum/script0.js
 
