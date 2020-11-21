@@ -108,4 +108,5 @@ dist
 shelter/pages-in-jpg
 .eslintrc.json
 package-lock.json
+development/
 
