@@ -1,9 +1,87 @@
-p {
-  color: green;
+@import './_fonts.scss';
+@import './_global.scss';
+
+:root {
+  font-size: 16px;
+
+  // @media (max-width: 500px) {
+  //   font-size: 14px;
+  // }
+  // @media (max-width: 380px) {
+  //   font-size: 11.5px;
+  // }
+  // @media (min-width: 1600px) {
+  //   font-size: 24px;
+  // }
 }
 
-.image {
-  height: 300px;
-  width: 600px;
-  background-image: url('./../img/winner.jpg');
+//* variables
+
+$primary-font: 'Josefin Sans', sans-serif;
+$secondary-font: 'Gochi Hand', cursive;
+
+// $primary-color: darkolivegreen;
+// $secondary-color: darkgreen;
+
+// $primary-bg-color:  rgb(142, 205, 145);
+// $secondary-bg-color: rgba(85, 107, 47, 0.6);
+
+// $primary-border-line: 2px;
+// $secondary-border-line: 1px;
+// $max-border-line: 10px;
+
+// $primary-border-radius: 4px;
+// $secondary-border-radius: 10px;
+
+// $animation-time: 0.3s;
+// $animation-function: ease-in;
+
+// @mixin buttons {
+//   border: $primary-border-line solid $secondary-color;
+//   border-radius: $secondary-border-radius;
+//   font-family: $secondary-font;
+//   cursor: pointer;
+// }
+
+body {
+  // --title-font-size: 2rem;
+  // --nav-height: 2.2rem;
+  // --nav-btn-width: 5.25rem;
+  // --score-width: 17rem;
+  // --nav-btn-font-size: 1rem;
+  // --stat-font-size: 1rem;
+  // --chip-size: 3.75rem;
+  // --chip-font-size: 2.5rem;
+  // --popup-font-size: 1rem;
+
+  // --chip-color: black;
+  // --chip-text-stroke-color: none;
+
+  // --box-gap: 2px;
+  // --chip-border: 2px solid darkgreen;
+  // --chip-border-radius: 4px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: $primary-font;
+}
+
+button {
+  &:active,
+  &:focus {
+    outline: none;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0 0 0 0);
 }

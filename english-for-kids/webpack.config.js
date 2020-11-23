@@ -48,7 +48,8 @@ module.exports = {
   },
   mode: 'development',
   // resolve: {
-  //   extensions: ['.js', '.json', '.pug', '.scss', 'css'], // определяет расширения по умолчанию, если они опущены
+  //   // определяет расширения по умолчанию, если они опущены
+  //   extensions: ['.js', '.json', '.pug', '.scss', 'css'],
   //   alias: {
   //     '@': path.resolve(__dirname, 'source'),  // для упрощения указания путей
   //     '@blocks': path.resolve(__dirname, 'source/blocks'),
