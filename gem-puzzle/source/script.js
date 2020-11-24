@@ -67,7 +67,9 @@ class Box {
 
     this.menuSound = document.createElement('button');
     this.menuSound.classList.add('menu__sound');
-    !this.sound ? this.menuSound.classList.add('menu__sound--mute') : '';
+    if (!this.sound) {
+      this.menuSound.classList.add('menu__sound--mute');
+    }
 
     this.menuMain = document.createElement('div');
     this.menuMain.classList.add('menu__main');
@@ -130,6 +132,7 @@ class Box {
 
     this.box = document.createElement('div');
     this.box.classList.add('box');
+
     this.box.addEventListener('dragover', (event) => {
       event.preventDefault();
     });
@@ -160,12 +163,12 @@ class Box {
     this.popupClose.classList.add('popup__btn');
     this.popupClose.textContent = 'Close';
 
+    const isActive = this.dimension - 3;
+
     for (let i = 0; i < 6; i += 1) {
       this.footerBtn = document.createElement('button');
       this.footerBtn.classList.add('footer__btn');
       this.footerBtn.setAttribute('data-field', `${i + 3}`);
-
-      const isActive = this.dimension - 3;
 
       if (i === isActive) {
         this.footerBtn.setAttribute('active', 'true');
@@ -232,12 +235,16 @@ class Box {
       button.setAttribute('type', 'button');
     });
 
-    this.container.querySelectorAll('.chip').forEach((elem) => {
-      elem.addEventListener('click', () => {
-        this.playing = true;
-        this._move(elem);
-      });
+    this.container.addEventListener('click', (event) => {
+      const targetChip = event.target.closest('.chip');
 
+      if (targetChip) {
+        this.playing = true;
+        this._move(targetChip);
+      }
+    });
+
+    this.container.querySelectorAll('.chip').forEach((elem) => {
       elem.addEventListener('dragend', () => {
         this.playing = true;
         this._move(elem);
@@ -321,10 +328,7 @@ class Box {
       this.isPicture = !this.isPicture;
       this.menuMainPicture.textContent = (this.isPicture) ? 'No Image (new game)' : 'Set Image (new game)';
 
-      this.body.innerHTML = '';
-      this._clear();
-      this.init();
-      this._reDrow();
+      this._backgroundRenew();
       this.menuMainContainer.classList.add('visually-hidden');
     });
 
@@ -341,6 +345,7 @@ class Box {
 
   _createChips(quantity) {
     const fragment = document.createDocumentFragment();
+    const lastCellPosition = this.dimension ** 2;
 
     for (let i = 0; i < quantity; i += 1) {
       const row = [];
@@ -348,8 +353,7 @@ class Box {
       for (let j = 0; j < quantity; j += 1) {
         const elem = document.createElement('div');
 
-        elem.classList.add('chip');
-        elem.setAttribute('draggable', 'true');
+        this._setDraggable(elem, 'chip');
         elem.style.gridRowStart = i + 1;
         elem.style.gridColumnStart = j + 1;
 
@@ -371,7 +375,6 @@ class Box {
         fragment.append(elem);
 
         const cellPosition = i * this.dimension + j + 1;
-        const lastCellPosition = this.dimension ** 2;
 
         if (cellPosition !== lastCellPosition) {
           elem.setAttribute('data-cell', cellPosition);
@@ -383,8 +386,7 @@ class Box {
             cell: cellPosition,
           });
         } else {
-          elem.classList.add('chip--empty');
-          elem.setAttribute('draggable', 'false');
+          this._setDraggable(elem, 'empty');
 
           elem.addEventListener('dragover', (event) => {
             event.preventDefault();
@@ -400,6 +402,16 @@ class Box {
     this.completed = this.chips.slice();
 
     return fragment;
+  }
+
+  _setDraggable(element, cellType) {
+    if (cellType === 'chip') {
+      element.classList.add('chip');
+      element.setAttribute('draggable', 'true');
+    } else {
+      element.classList.add('chip--empty');
+      element.setAttribute('draggable', 'false');
+    }
   }
 
   _getFreeChips() {
@@ -453,21 +465,14 @@ class Box {
         let moveDirection = '';
 
         if (currentChip.x === this.empty.x) {
-          if (currentChip.y > this.empty.y) {
-            moveDirection = 'top';
-          } else {
-            moveDirection = 'bottom';
-          }
+          moveDirection = (currentChip.y > this.empty.y) ? 'top' : 'bottom';
         } else {
-          if (currentChip.x > this.empty.x) {
-            moveDirection = 'left';
-          } else {
-            moveDirection = 'right';
-          }
+          moveDirection = (currentChip.x > this.empty.x) ? 'left' : 'right';
         }
 
         const animation = (elem, direction) => {
           elem.classList.add(`move-${direction}`);
+
           elem.addEventListener('animationend', () => {
             elem.classList.remove(`move-${direction}`);
           });
@@ -542,7 +547,6 @@ class Box {
       const seconds = (data.getSeconds() > 9) ? data.getSeconds() : `0${data.getSeconds()}`;
 
       this.result.data = `${data.getDate()}.${data.getMonth() + 1}.${data.getFullYear() - 2000}, ${data.getHours()}:${minutes}:${seconds}`;
-
       this.result.time = this.time;
       this.result.moves = this.moves;
 
@@ -571,9 +575,8 @@ class Box {
     for (let i = 0; i < length; i += 1) {
       const elem = document.createElement('div');
 
-      elem.classList.add('chip');
+      this._setDraggable(elem, 'chip');
       elem.classList.add('playing');
-      elem.setAttribute('draggable', 'true');
       elem.style.gridRowStart = sortArray[i].y + 1;
       elem.style.gridColumnStart = sortArray[i].x + 1;
       elem.setAttribute('data-cell', sortArray[i].cell);
@@ -581,9 +584,9 @@ class Box {
 
       if (sortArray[i].cell === 'empty') {
         this.empty = sortArray[i];
-        elem.classList.add('chip--empty');
+        this._setDraggable(elem, 'empty');
+
         elem.classList.remove('playing');
-        elem.setAttribute('draggable', 'false');
         elem.textContent = '';
 
         elem.addEventListener('dragover', (event) => {
@@ -678,15 +681,19 @@ class Box {
     return `${min} m ${sec} s`;
   }
 
-  _changeField(btn) {
-    const newDimension = btn.getAttribute('data-field');
-
-    this.dimension = parseInt(newDimension);
+  _backgroundRenew() {
     this.body.innerHTML = '';
 
     this._clear();
     this.init();
     this._reDrow();
+  }
+
+  _changeField(btn) {
+    const newDimension = btn.getAttribute('data-field');
+
+    this.dimension = parseInt(newDimension);
+    this._backgroundRenew();
   }
 
   _sounds(chip) {
@@ -747,11 +754,6 @@ class Box {
     const container = document.querySelector('.container');
 
     container.querySelectorAll('.chip').forEach((elem) => {
-      elem.addEventListener('click', () => {
-        this.playing = true;
-        this._move(elem);
-      });
-
       elem.addEventListener('dragend', () => {
         this.playing = true;
         this._move(elem);
