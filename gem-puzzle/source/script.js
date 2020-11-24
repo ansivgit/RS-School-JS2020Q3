@@ -3,6 +3,7 @@ import { getBgPathes } from './images';
 import './scss/style.scss';
 
 const FIELD_DIMENSION = 4;
+const BEST_SCORE = 'bestScore';
 let intervalId;
 
 class Box {
@@ -160,13 +161,14 @@ class Box {
     this.popupClose.classList.add('popup__btn');
     this.popupClose.textContent = 'Close';
 
-
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 6; i += 1) {
       this.footerBtn = document.createElement('button');
       this.footerBtn.classList.add('footer__btn');
       this.footerBtn.setAttribute('data-field', `${i + 3}`);
 
-      if (i === this.dimension - 3) {
+      const isActive = this.dimension - 3;
+
+      if (i === isActive) {
         this.footerBtn.setAttribute('active', 'true');
         this.footerBtn.classList.add('footer__btn--active');
       }
@@ -183,8 +185,9 @@ class Box {
 
     this.body.append(this.container);
     this.container.append(this.header);
-    this.header.append(this.title);
     this.container.append(this.menu);
+    this.header.append(this.title);
+
     this.menu.append(this.menuShuffle);
     this.menu.append(this.menuSound);
     this.menu.append(this.menuMain);
@@ -198,6 +201,7 @@ class Box {
     this.menuMainContainer.append(this.menuMainRestore);
     this.menuMainContainer.append(this.menuMainBestScore);
     this.menuMainContainer.append(this.menuMainPicture);
+
     this.container.append(this.statistic);
     this.statistic.append(this.statTime);
     this.statTime.append(this.statTimeTitle);
@@ -205,20 +209,25 @@ class Box {
     this.statistic.append(this.statMoves);
     this.statMoves.append(this.statMovesTitle);
     this.statMoves.append(this.statMovesValue);
+
     this.container.append(this.box);
     this.box.append(this._createChips(this.dimension));
+
     this.container.append(this.footer);
+
     this.container.append(this.popup);
     this.popup.append(this.popupText);
+
     if (this.isPicture) {
       this.popup.append(this.popupAuthor);
       this.popup.append(this.popupLinkAuthor);
     }
+
     this.popup.append(this.popupTime);
     this.popup.append(this.popupMoves);
     this.popup.append(this.popupClose);
-    this.body.append(this.audio);
 
+    this.body.append(this.audio);
 
     document.querySelectorAll('button').forEach(button => {
       button.setAttribute('type', 'button');
@@ -230,14 +239,8 @@ class Box {
         this._move(elem);
       });
 
-      elem.addEventListener('dragstart', (event) => {
-        //event.target.classList.add('selected');
-      });
-
-      elem.addEventListener('dragend', (event) => {
-        //event.target.classList.remove('selected');
+      elem.addEventListener('dragend', () => {
         this.playing = true;
-
         this._move(elem);
       });
     });
@@ -254,15 +257,27 @@ class Box {
       this.playing = false;
       this.statTimeValue.textContent = this.time;
 
-      let numShuffling;
+      let numShuffling = 0;
 
       switch (this.dimension) {
-        case 3: numShuffling = 50; break;
-        case 5: numShuffling = 600; break;
-        case 6: numShuffling = 3000; break;
-        case 7: numShuffling = 8000; break;
-        case 8: numShuffling = 18000; break;
-        default: numShuffling = 150; break;
+        case 3:
+          numShuffling = 50;
+          break;
+        case 5:
+          numShuffling = 600;
+          break;
+        case 6:
+          numShuffling = 3000;
+          break;
+        case 7:
+          numShuffling = 8000;
+          break;
+        case 8:
+          numShuffling = 18000;
+          break;
+        default:
+          numShuffling = 150;
+          break;
       }
 
       this._shuffle(numShuffling);
@@ -328,27 +343,26 @@ class Box {
   _createChips(quantity) {
     const fragment = document.createDocumentFragment();
 
-    for (let i = 0; i < quantity; i++) {
+    for (let i = 0; i < quantity; i += 1) {
       let row = [];
 
-      for (let j = 0; j < quantity; j++) {
+      for (let j = 0; j < quantity; j += 1) {
         const elem = document.createElement('div');
+
         elem.classList.add('chip');
         elem.setAttribute('draggable', 'true');
-
         elem.style.gridRowStart = i + 1;
         elem.style.gridColumnStart = j + 1;
 
         if (this.isPicture) {
           this._setPicture();
+
           const step = 100 / (quantity - 1);
           const bgPositionX = j * step;
           const bgPositionY = i * step;
-          const chipSizeRem = getComputedStyle(this.body).getPropertyValue('--chip-size');
-          //const remStr = getComputedStyle(this.body).getPropertyValue('font-size');
 
+          const chipSizeRem = getComputedStyle(this.body).getPropertyValue('--chip-size');
           const chipSize = this._stringToNumber(chipSizeRem, 3);
-          //const fontSize = this._stringToNumber(remStr, 2);
 
           elem.style.backgroundImage = this.bgImageURL || 'none';
           elem.style.backgroundSize = `${chipSize * quantity}rem`;
@@ -357,12 +371,18 @@ class Box {
 
         fragment.append(elem);
 
-        if (i * this.dimension + j + 1 !== this.dimension ** 2) {
-          let number = i * this.dimension + j + 1;
-          elem.setAttribute('data-cell', number);
-          elem.textContent = number;
+        const cellPosition = i * this.dimension + j + 1;
+        const lastCellPosition = this.dimension ** 2;
 
-          row.push({ x: j, y: i, 'cell': number });
+        if (cellPosition !== lastCellPosition) {
+          elem.setAttribute('data-cell', cellPosition);
+          elem.textContent = cellPosition;
+
+          row.push({
+            x: j,
+            y: i,
+            'cell': cellPosition,
+          });
 
         } else {
           elem.classList.add('chip--empty');
@@ -378,6 +398,7 @@ class Box {
 
       this.chips.push(row);
     }
+
     this.completed = this.chips.slice();
 
     return fragment;
@@ -387,15 +408,29 @@ class Box {
     const freeChips = [];
 
     switch (this.empty.x) {
-      case 0: freeChips.push(this.chips[this.empty.y][this.empty.x + 1]); break;
-      case (this.dimension - 1): freeChips.push(this.chips[this.empty.y][this.empty.x - 1]); break;
-      default: freeChips.push(this.chips[this.empty.y][this.empty.x - 1], this.chips[this.empty.y][this.empty.x + 1]); break;
+      case 0:
+        freeChips.push(this.chips[this.empty.y][this.empty.x + 1]);
+        break;
+      case (this.dimension - 1):
+        freeChips.push(this.chips[this.empty.y][this.empty.x - 1]);
+        break;
+      default:
+        freeChips.push(this.chips[this.empty.y][this.empty.x - 1],
+                       this.chips[this.empty.y][this.empty.x + 1]);
+        break;
     }
 
     switch (this.empty.y) {
-      case 0: freeChips.push(this.chips[this.empty.y + 1][this.empty.x]); break;
-      case (this.dimension - 1): freeChips.push(this.chips[this.empty.y - 1][this.empty.x]); break;
-      default: freeChips.push(this.chips[this.empty.y - 1][this.empty.x], this.chips[this.empty.y + 1][this.empty.x]); break;
+      case 0:
+        freeChips.push(this.chips[this.empty.y + 1][this.empty.x]);
+        break;
+      case (this.dimension - 1):
+        freeChips.push(this.chips[this.empty.y - 1][this.empty.x]);
+        break;
+      default:
+        freeChips.push(this.chips[this.empty.y - 1][this.empty.x],
+                       this.chips[this.empty.y + 1][this.empty.x]);
+        break;
     }
 
     return freeChips;
@@ -416,10 +451,10 @@ class Box {
     const closest = this._getFreeChips();
 
     for (let item of closest) {
-
       if (item.cell === currentChip.cell) {
         //*animation
         let moveDirection = '';
+
         if (currentChip.x === this.empty.x) {
           if (currentChip.y > this.empty.y) {
             moveDirection = 'top';
@@ -440,14 +475,17 @@ class Box {
             elem.classList.remove(`move-${direction}`);
           });
         }
+
         animation(chip, moveDirection);
 
-
         //*change position in array
-        let temp = { x: this.empty.x, y: this.empty.y, cell: currentChip.cell };
+        let temp = {
+          x: this.empty.x,
+          y: this.empty.y,
+          cell: currentChip.cell
+        };
 
         this.chips[this.empty.y][this.empty.x].cell = currentChip.cell;
-
         this.chips[currentChip.y][currentChip.x].cell = 'empty';
 
         this.empty = this.chips[currentChip.y][currentChip.x];
@@ -464,6 +502,7 @@ class Box {
         if (this.playing && intervalId === undefined && this.isShuffle) {
           this._timer();
         }
+
         (this.isShuffle && this.playing) ? this._isComplete() : '';
       }
     }
@@ -472,7 +511,7 @@ class Box {
   _shuffle(iteration) {
     this.isShuffle = true;
 
-    for (let i = 0; i < iteration; i++) {
+    for (let i = 0; i < iteration; i += 1) {
       const closest = this._getFreeChips();
       const randIndex = Math.round(Math.random() * (closest.length - 1));
       const chip = closest[randIndex];
@@ -491,18 +530,18 @@ class Box {
   }
 
   _isComplete() {
+    const chipsArr = this.chips.flat();
+    const length = chipsArr.length;
     let count = 0;
-    const length = this.chips.flat().length;
 
-    for (let i = 0; i < length - 1; i++) {
-      if (this.chips.flat()[i].cell === i + 1) {
-        count++;
+    for (let i = 0; i < length - 1; i += 1) {
+      if (chipsArr[i].cell === i + 1) {
+        count += 1;
       }
     }
 
     if (count === length - 1 && this.playing) {
       const data = new Date();
-
       const minutes = (data.getMinutes() > 9) ? data.getMinutes() : `0${data.getMinutes()}`;
       const seconds = (data.getSeconds() > 9) ? data.getSeconds() : `0${data.getSeconds()}`;
 
@@ -530,37 +569,38 @@ class Box {
     this.box.innerHTML = '';
 
     const fragment = document.createDocumentFragment();
-
     let sortArray = array.flat().sort((prev, next) => parseInt(prev.cell) - parseInt(next.cell));
     const length = sortArray.length;
 
-    for (let i = 0; i < length; i++) {
-        const elem = document.createElement('div');
-        elem.classList.add('chip');
-        elem.classList.add('playing');
-        elem.setAttribute('draggable', 'true');
+    for (let i = 0; i < length; i += 1) {
+      const elem = document.createElement('div');
 
-        elem.style.gridRowStart = sortArray[i].y + 1;
-        elem.style.gridColumnStart = sortArray[i].x + 1;
-        elem.setAttribute('data-cell', sortArray[i].cell);
-        elem.textContent = sortArray[i].cell;
+      elem.classList.add('chip');
+      elem.classList.add('playing');
+      elem.setAttribute('draggable', 'true');
+      elem.style.gridRowStart = sortArray[i].y + 1;
+      elem.style.gridColumnStart = sortArray[i].x + 1;
+      elem.setAttribute('data-cell', sortArray[i].cell);
+      elem.textContent = sortArray[i].cell;
 
-        if (sortArray[i].cell === 'empty') {
-          this.empty = sortArray[i];
-          elem.classList.add('chip--empty');
-          elem.classList.remove('playing');
-          elem.setAttribute('draggable', 'false');
-          elem.textContent = '';
+      if (sortArray[i].cell === 'empty') {
+        this.empty = sortArray[i];
+        elem.classList.add('chip--empty');
+        elem.classList.remove('playing');
+        elem.setAttribute('draggable', 'false');
+        elem.textContent = '';
 
-          elem.addEventListener('dragover', (event) => {
-            event.preventDefault();
-          });
-        }
-
-        fragment.append(elem);
+        elem.addEventListener('dragover', (event) => {
+          event.preventDefault();
+        });
       }
+
+      fragment.append(elem);
+    }
+
     this.isShuffle = false;
     this._reDrow();
+
     return fragment;
   }
 
@@ -575,13 +615,12 @@ class Box {
 
     switch (this.dimension) {
       case 3:
-        const chipSize = 5;
         this.body.style.setProperty('--title-font-size', '2rem');
         this.body.style.setProperty('--nav-btn-width', '5.25rem');
         this.body.style.setProperty('--score-width', '17rem');
         this.body.style.setProperty('--nav-btn-font-size', '1rem');
         this.body.style.setProperty('--stat-font-size', '1rem');
-        this.body.style.setProperty('--chip-size', `${chipSize}rem`);
+        this.body.style.setProperty('--chip-size', '5rem');
         this.body.style.setProperty('--chip-font-size', '2.5rem');
         this.body.style.setProperty('--popup-font-size', '1rem');
         break;
@@ -619,6 +658,7 @@ class Box {
         this.body.style.setProperty('--chip-size', '3.75rem');
         this.body.style.setProperty('--chip-font-size', '2.5rem');
         this.body.style.setProperty('--popup-font-size', '1rem');
+        break;
     }
   }
 
@@ -644,9 +684,10 @@ class Box {
 
   _changeField(btn) {
     const newDimension = btn.getAttribute('data-field');
-    this.dimension = parseInt(newDimension);
 
+    this.dimension = parseInt(newDimension);
     this.body.innerHTML = '';
+
     this._clear();
     this.init();
     this._reDrow();
@@ -655,8 +696,9 @@ class Box {
   _sounds(chip) {
     const audio = document.querySelector('audio');
 
-    if (!audio) return;
-    if (!this.sound) return;
+    if (!audio || !this.sound) {
+      return;
+    }
 
     chip.classList.add('playing');
 
@@ -669,7 +711,10 @@ class Box {
   }
 
   _removeTransition(event) {
-    if (event.propertyName !== 'transform') return;
+    if (event.propertyName !== 'transform') {
+      return;
+    }
+
     event.target.classList.remove('playing');
   }
 
@@ -678,19 +723,16 @@ class Box {
     localStorage.setItem('time', this.time);
     localStorage.setItem('moves', this.moves);
     localStorage.setItem('dimension', this.dimension);
-    //localStorage.setItem('isPicture', this.isPicture);
-    //localStorage.setItem('bgImageURL', this.bgImageURL);
   }
 
   _restoreGame() {
     this.body.style.setProperty('--chip-color', 'black');
     this.body.style.setProperty('--chip-text-stroke-color', 'none');
+
     this.chips = JSON.parse(localStorage.getItem('saveGame'));
     this.time = parseInt(localStorage.getItem('time'));
     this.moves = parseInt(localStorage.getItem('moves'));
     this.dimension = localStorage.getItem('dimension');
-    //this.isPicture = localStorage.getItem('isPicture');
-    //this.bgImageURL = localStorage.getItem('bgImageURL');
     this.playing = false;
     this.isPicture = false;
     this._timer();
@@ -707,39 +749,37 @@ class Box {
     this.isShuffle = true;
 
     const container = document.querySelector('.container');
+
     container.querySelectorAll('.chip').forEach(elem => {
       elem.addEventListener('click', () => {
         this.playing = true;
         this._move(elem);
       });
 
-      elem.addEventListener('dragstart', (event) => {
-        //event.target.classList.add('selected');
-      });
-
       elem.addEventListener('dragend', (event) => {
-        //event.target.classList.remove('selected');
         this.playing = true;
         this._move(elem);
       });
     });
+
     this._timer();
   }
 
   _scoreSet() {
-    if (!this.result.time) return;
+    if (!this.result.time) {
+      return;
+    }
 
-    if (localStorage.getItem('bestScore') !== null) {
-      this.bestScore = JSON.parse(localStorage.getItem('bestScore'));
+        if (localStorage.getItem(BEST_SCORE) !== null) {
+      this.bestScore = JSON.parse(localStorage.getItem(BEST_SCORE));
     }
 
     const length = this.bestScore[this.dimension].length;
 
     if (length === 0) {
       this.bestScore[this.dimension].push(this.result);
-      localStorage.setItem('bestScore', JSON.stringify(this.bestScore));
+      localStorage.setItem(BEST_SCORE, JSON.stringify(this.bestScore));
     } else {
-
       this.bestScore[this.dimension].push(this.result);
       this.bestScore[this.dimension].sort((prev, last) => prev.time - last.time)
 
@@ -747,42 +787,49 @@ class Box {
         this.bestScore[this.dimension].splice(-1, 1);
       }
 
-      localStorage.setItem('bestScore', JSON.stringify(this.bestScore));
+      localStorage.setItem(BEST_SCORE, JSON.stringify(this.bestScore));
     }
   }
 
   _scoreTableGen() {
-    if (localStorage.getItem('bestScore') !== null) {
-      this.bestScore = JSON.parse(localStorage.getItem('bestScore'));
+    if (localStorage.getItem(BEST_SCORE) !== null) {
+      this.bestScore = JSON.parse(localStorage.getItem(BEST_SCORE));
     }
 
     const length = this.bestScore[this.dimension].length;
 
-    if (length === 0 || localStorage.getItem('bestScore') === null) {
+    if (length === 0 || localStorage.getItem(BEST_SCORE) === null) {
       this.menuMainScoreTitle.textContent = `There is no Best Score for ${this.dimension}×${this.dimension}`;
       return '';
     }
 
     const fragment = document.createDocumentFragment();
 
-    for (let i = 0; i < length + 1; i++) {
-      let row = [];
-
-      for (let j = 0; j < 4; j++) {
+    for (let i = 0; i < length + 1; i += 1) {
+      for (let j = 0; j < 4; j += 1) {
         const elem = document.createElement('div');
 
         if (i === 0) {
           const arrTitles = ['#', 'Data', 'Time', 'Moves',];
+
           elem.classList.add('menu__main__score__table--head');
           elem.textContent = arrTitles[j];
         } else {
           elem.classList.add('menu__main__score__table--cell');
 
           switch (j) {
-            case 0: elem.textContent = i; break;
-            case 1: elem.textContent = this.bestScore[this.dimension][i - 1].data; break;
-            case 2: elem.textContent = this._timeConvert(this.bestScore[this.dimension][i - 1].time); break;
-            default: elem.textContent = this.bestScore[this.dimension][i - 1].moves; break;
+            case 0:
+              elem.textContent = i;
+              break;
+            case 1:
+              elem.textContent = this.bestScore[this.dimension][i - 1].data;
+              break;
+            case 2:
+              elem.textContent = this._timeConvert(this.bestScore[this.dimension][i - 1].time);
+              break;
+            default:
+              elem.textContent = this.bestScore[this.dimension][i - 1].moves;
+              break;
           }
         }
 
@@ -800,6 +847,7 @@ class Box {
     const bgImages = getBgPathes('img/');
     const randomImg = Math.round(Math.random() * 9);
     const randomURL = `url("${bgImages[randomImg]}.jpg")`;
+
     this._reNew(this.chips);
 
     if (this.isPicture) {
@@ -822,7 +870,9 @@ class Box {
 
   _stringToNumber(str, lengthForDel) {
     const temp = str.split('');
+
     temp.length = str.length - lengthForDel;
+
     return parseFloat(temp.join(''));
   }
 }
