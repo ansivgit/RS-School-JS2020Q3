@@ -128,7 +128,6 @@ class Box {
     this.statMovesValue.classList.add('statistic__moves--value');
     this.statMovesValue.textContent = this.moves;
 
-
     this.box = document.createElement('div');
     this.box.classList.add('box');
     this.box.addEventListener('dragover', (event) => {
@@ -229,11 +228,11 @@ class Box {
 
     this.body.append(this.audio);
 
-    document.querySelectorAll('button').forEach(button => {
+    document.querySelectorAll('button').forEach((button) => {
       button.setAttribute('type', 'button');
     });
 
-    this.container.querySelectorAll('.chip').forEach(elem => {
+    this.container.querySelectorAll('.chip').forEach((elem) => {
       elem.addEventListener('click', () => {
         this.playing = true;
         this._move(elem);
@@ -344,7 +343,7 @@ class Box {
     const fragment = document.createDocumentFragment();
 
     for (let i = 0; i < quantity; i += 1) {
-      let row = [];
+      const row = [];
 
       for (let j = 0; j < quantity; j += 1) {
         const elem = document.createElement('div');
@@ -381,9 +380,8 @@ class Box {
           row.push({
             x: j,
             y: i,
-            'cell': cellPosition,
+            cell: cellPosition,
           });
-
         } else {
           elem.classList.add('chip--empty');
           elem.setAttribute('draggable', 'false');
@@ -416,7 +414,7 @@ class Box {
         break;
       default:
         freeChips.push(this.chips[this.empty.y][this.empty.x - 1],
-                       this.chips[this.empty.y][this.empty.x + 1]);
+          this.chips[this.empty.y][this.empty.x + 1]);
         break;
     }
 
@@ -429,7 +427,7 @@ class Box {
         break;
       default:
         freeChips.push(this.chips[this.empty.y - 1][this.empty.x],
-                       this.chips[this.empty.y + 1][this.empty.x]);
+          this.chips[this.empty.y + 1][this.empty.x]);
         break;
     }
 
@@ -452,7 +450,6 @@ class Box {
 
     for (let item of closest) {
       if (item.cell === currentChip.cell) {
-        //*animation
         let moveDirection = '';
 
         if (currentChip.x === this.empty.x) {
@@ -474,15 +471,14 @@ class Box {
           elem.addEventListener('animationend', () => {
             elem.classList.remove(`move-${direction}`);
           });
-        }
+        };
 
         animation(chip, moveDirection);
 
-        //*change position in array
-        let temp = {
+        const temp = {
           x: this.empty.x,
           y: this.empty.y,
-          cell: currentChip.cell
+          cell: currentChip.cell,
         };
 
         this.chips[this.empty.y][this.empty.x].cell = currentChip.cell;
@@ -569,7 +565,7 @@ class Box {
     this.box.innerHTML = '';
 
     const fragment = document.createDocumentFragment();
-    let sortArray = array.flat().sort((prev, next) => parseInt(prev.cell) - parseInt(next.cell));
+    const sortArray = array.flat().sort((prev, next) => parseInt(prev.cell) - parseInt(next.cell));
     const length = sortArray.length;
 
     for (let i = 0; i < length; i += 1) {
@@ -677,8 +673,8 @@ class Box {
   }
 
   _timeConvert(time) {
-    let min = Math.floor(time / 60);
-    let sec = time % 60;
+    const min = Math.floor(time / 60);
+    const sec = time % 60;
     return `${min} m ${sec} s`;
   }
 
@@ -750,13 +746,13 @@ class Box {
 
     const container = document.querySelector('.container');
 
-    container.querySelectorAll('.chip').forEach(elem => {
+    container.querySelectorAll('.chip').forEach((elem) => {
       elem.addEventListener('click', () => {
         this.playing = true;
         this._move(elem);
       });
 
-      elem.addEventListener('dragend', (event) => {
+      elem.addEventListener('dragend', () => {
         this.playing = true;
         this._move(elem);
       });
@@ -770,7 +766,7 @@ class Box {
       return;
     }
 
-        if (localStorage.getItem(BEST_SCORE) !== null) {
+    if (localStorage.getItem(BEST_SCORE) !== null) {
       this.bestScore = JSON.parse(localStorage.getItem(BEST_SCORE));
     }
 
@@ -781,7 +777,7 @@ class Box {
       localStorage.setItem(BEST_SCORE, JSON.stringify(this.bestScore));
     } else {
       this.bestScore[this.dimension].push(this.result);
-      this.bestScore[this.dimension].sort((prev, last) => prev.time - last.time)
+      this.bestScore[this.dimension].sort((prev, last) => prev.time - last.time);
 
       if (length > 10) {
         this.bestScore[this.dimension].splice(-1, 1);
@@ -810,7 +806,7 @@ class Box {
         const elem = document.createElement('div');
 
         if (i === 0) {
-          const arrTitles = ['#', 'Data', 'Time', 'Moves',];
+          const arrTitles = ['#', 'Data', 'Time', 'Moves'];
 
           elem.classList.add('menu__main__score__table--head');
           elem.textContent = arrTitles[j];
@@ -862,7 +858,7 @@ class Box {
         elem.style.backgroundImage = this.bgImageURL || 'none';
         elem.style.backgroundSize = `${chipSize * this.dimension}rem`;
         elem.style.backgroundPosition = `left ${bgPositionX}% top ${bgPositionY}%`;
-      })
+      });
     }
 
     return randomURL;
@@ -879,6 +875,6 @@ class Box {
 
 const box = new Box(FIELD_DIMENSION);
 
-window.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('DOMContentLoaded', () => {
   box.init();
 });
