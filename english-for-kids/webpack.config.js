@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-// const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // обработка файлов css
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
@@ -81,6 +81,19 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: filename('css'),
     }),
+
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'source/assets/sounds/'),
+          to: path.resolve(__dirname, 'dist/sounds'),
+        },
+        {
+          from: path.resolve(__dirname, 'source/assets/img/'),
+          to: path.resolve(__dirname, 'dist/img/'),
+        },
+      ],
+    }),
   ],
 
   module: {
@@ -92,16 +105,16 @@ module.exports = {
         use: ['babel-loader'],
       },
       // изображения
-      {
-        test: /\.(?:png|jpe?g|gif|svg)$/i,
-        exclude: /fonts/,
-        type: 'asset/resource',
-        generator: {
-          filename: isDev
-            ? 'assets/img/[name][ext]'
-            : 'assets/img/[name][contenthash:8][ext]',
-        },
-      },
+      // {
+      //   test: /\.(?:png|jpe?g|gif|svg)$/i,
+      //   exclude: /fonts/,
+      //   type: 'asset/resource',
+      //   generator: {
+      //     filename: isDev
+      //       ? 'assets/img/[name][ext]'
+      //       : 'assets/img/[name][contenthash:8][ext]',
+      //   },
+      // },
       // шрифты
       {
         test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
