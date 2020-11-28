@@ -17,14 +17,23 @@
 
 //* variables
 
-$primary-font: 'Josefin Sans', sans-serif;
-$secondary-font: 'Gochi Hand', cursive;
+//$primary-font: "Josefin Sans", sans-serif;
+$primary-font: "Varela Round", sans-serif;
+$secondary-font: "Gochi Hand", cursive;
 
-// $primary-color: darkolivegreen;
+$primary-theme-color: #158cba;
+$secondary-theme-color: #FF851B;
+$menu-theme-color: #28B62C;
+
+$primary-color:  #102585;
 // $secondary-color: darkgreen;
 
-// $primary-bg-color:  rgb(142, 205, 145);
+$primary-bg-color:  rgb(255, 255, 255);
 // $secondary-bg-color: rgba(85, 107, 47, 0.6);
+
+$card-width: 17rem;
+$card-height: $card-width;
+$card-image-height: 11.7rem;
 
 // $primary-border-line: 2px;
 // $secondary-border-line: 1px;
@@ -61,11 +70,10 @@ body {
   // --chip-border: 2px solid darkgreen;
   // --chip-border-radius: 4px;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  height: 100%;
   font-family: $primary-font;
+  font-style: normal;
+  background-color: $primary-theme-color;
 }
 
 button {
@@ -84,4 +92,168 @@ button {
   overflow: hidden;
   border: 0;
   clip: rect(0 0 0 0);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  &--main {
+    font-family: $secondary-font;
+    font-size: 5rem;
+    color: #FFFFFF;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: inherit;
+    text-shadow: 3px 3px 4px $primary-color;
+    transition: 0.3s ease-out;
+
+    &:hover {
+      text-shadow: 7px 7px 7px $primary-color;
+    }
+  }
+}
+
+.modes {
+  display: flex;
+}
+
+.toggle {
+  width: 10rem;
+  height: 2.6rem;
+  background: $menu-theme-color;
+  margin: 20px auto;
+  position: relative;
+  border-radius: 50px;
+  box-shadow: inset 0px 1px 1px  rgb(11,25,87,0.5), 0px 1px 0px rgba(255,255,255,0.5);
+
+  &:after,
+  &:before {
+    color: $primary-color;
+    position: absolute;
+    z-index: 0;
+    line-height: 2.9rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  &:after {
+    content: 'TRAIN';
+    right: 10px;
+    text-shadow: 1px 1px 0px rgba(255,255,255,.15);
+  }
+
+  &:before {
+    content: 'PLAY';
+    left: 10px;
+  }
+
+  &__label {
+    display: block;
+    width: 70px;
+    height: 2.3rem;
+    cursor: pointer;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    z-index: 1;
+    background: #fcfff4;
+    background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    border-radius: 50px;
+    transition: all 0.4s ease;
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+  }
+
+  &__checkbox {
+    visibility: hidden;
+
+    &:checked + label {
+      left: 87px;
+    }
+  }
+}
+
+.main__title {
+  font-family: $secondary-font;
+  font-size: 3rem;
+  margin-top: 20px;
+  text-align: center;
+  color: $primary-color;
+  text-shadow: 2px 2px 2px $primary-bg-color;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  list-style: none;
+  background-color: $primary-theme-color;
+
+  &__item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: $card-width;
+    height: $card-height;
+    margin: 1.3rem;
+    padding: 10px;
+    background-color: $primary-bg-color;
+    border-radius: 2rem;
+    box-shadow: inset -11px -11px 22px #9c9c9c,
+            inset 11px 11px 22px #ffffff;
+    //outline: 1px solid red;
+    transition: 0.5s ease;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: -11px -11px 12px #0b4c64,
+                  11px 11px 12px #1fccff;
+      transform: translateY(-5px) scale(1.005) translateZ(0);
+    }
+
+    &__img {
+      width: 100%;
+      height: $card-image-height;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      //outline: 1px solid green;
+
+      &--color {
+        width: 75%;
+        margin-top: 10px;
+        border-radius: 50%;
+      }
+    }
+
+    &__title {
+      margin-top: 10px;
+      font-size: 2rem;
+      text-transform: uppercase;
+      text-align: center;
+      color: $primary-color;
+    }
+
+    &__btn {
+      position: absolute;
+      bottom: 45px;
+      left: 14px;
+      width: 40px;
+      height: 20px;
+      border: none;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: transparent;
+      cursor: pointer;
+    }
+  }
 }
