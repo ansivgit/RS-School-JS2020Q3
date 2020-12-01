@@ -1,4 +1,4 @@
-function wordCardEvt(card) {
+function wordCardEvent(card) {
   // const activeCategory = cardCategory.getAttribute('data-category');
   // let currentCategory = {};
 
