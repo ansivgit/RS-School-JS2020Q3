@@ -1,6 +1,7 @@
 import CONSTANTS from '../constants';
 
 function cardCategoryCreate(categoryObj) {
+  const id = categoryObj['category-id'];
   const name = categoryObj['category-name'];
   const imageSrc = categoryObj['category-img'];
 
@@ -8,7 +9,7 @@ function cardCategoryCreate(categoryObj) {
 
   card.className = CONSTANTS.card;
   card.classList.add(CONSTANTS.cardCategory);
-  card.setAttribute(CONSTANTS.dataCategory, name);
+  card.setAttribute(CONSTANTS.dataCategory, id);
 
   card.innerHTML = `
     <div class="cards__item__img"></div>

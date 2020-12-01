@@ -3,6 +3,7 @@ import CONSTANTS from '../constants';
 import cardCategoryCreate from '../creations/cardCategoryCreate';
 import cardWordsCreate from '../creations/cardWordsCreate';
 import toggleMode from '../handlers/toggleMode';
+import startGame from '../handlers/startGame';
 
 class App {
   constructor(lang) {
@@ -68,6 +69,11 @@ class App {
       const newCards = toggleMode(this.currentCategory, this.isPlay);
       this.clear();
       this.cards.append(newCards);
+    });
+
+    this.playBtn.addEventListener('click', () => {
+      startGame(this.currentCategory);
+      this.playBtn.removeEventListener('click', startGame);
     });
   }
 

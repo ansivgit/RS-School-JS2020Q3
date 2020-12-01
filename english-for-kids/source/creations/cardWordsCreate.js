@@ -10,14 +10,14 @@ function cardWordsCreate(categoryObj, isPlay) {
 
   words.forEach((wordObj) => {
     const {
-      word, translation, image, audioSrc,
+      id, word, translation, image, audioSrc,
     } = wordObj;
 
     const card = document.createElement('li');
 
     card.className = CONSTANTS.card;
     card.classList.add(CONSTANTS.cardWord);
-    card.setAttribute(CONSTANTS.dataWord, word);
+    card.setAttribute(CONSTANTS.dataWord, id);
 
     if (isPlay === false) {
       card.innerHTML = `
@@ -25,7 +25,7 @@ function cardWordsCreate(categoryObj, isPlay) {
           <div class="cards__item__img"></div>
           <div class="cards__item__title">${word}</div>
           <button class="cards__item__btn" type="button"></button>
-          <audio src="./sounds/${categoryName}/${audioSrc}" data-sound="${word}"></audio>
+          <audio src="./sounds/${categoryName}/${audioSrc}" data-sound="${id}"></audio>
         </div>
         <div class="cards__item--back">
           <div class="cards__item__img"></div>
