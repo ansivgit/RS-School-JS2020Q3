@@ -121,16 +121,21 @@ button {
 
 .modes {
   display: flex;
+  align-items: center;
 }
 
 .toggle {
   width: 10rem;
   height: 2.6rem;
-  background: $menu-theme-color;
+  background-color: $menu-theme-color;
   margin: 20px auto;
   position: relative;
   border-radius: 50px;
   box-shadow: inset 0px 1px 1px  rgb(11,25,87,0.5), 0px 1px 0px rgba(255,255,255,0.5);
+
+  &--play {
+    background-color: $secondary-theme-color;
+  }
 
   &:after,
   &:before {
@@ -178,13 +183,66 @@ button {
   }
 }
 
-.main__title {
+.stats,
+.play-mode {
+  height: 2.58rem;
+  margin: 0 15px;
+  padding: 8px 10px 5px 10px;
+  border: none;
+  border-radius: 50px;
+  font-family: $primary-font;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: $secondary-theme-color;
+  background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  color: $primary-color;
+  cursor: pointer;
+}
+
+.main__content {
+  position: relative;
+  overflow-x: hidden;
+}
+
+.title--category {
   font-family: $secondary-font;
   font-size: 3rem;
   margin-top: 20px;
   text-align: center;
   color: $primary-color;
   text-shadow: 2px 2px 2px $primary-bg-color;
+}
+
+.play-mode {
+  position: absolute;
+  top: 30px;
+  right: -180px;
+  background: #FF851B;
+  box-shadow: inset -4px -4px 8px #d97117,
+              inset 4px 4px 8px #ff991f;
+  //background: linear-gradient(to bottom, #ff851b 0%, #ba6028 100%);
+  transition: all 0.4s ease;
+
+  &:hover {
+    box-shadow: 4px 4px 8px #0b4c64,
+                -4px -4px 8px #1fccff;
+  }
+
+  &:disabled {
+    background: #FF851B;
+    opacity: 0.5;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+
+
+  &--train {
+  }
+
+  &--play {
+    right: 0;
+  }
 }
 
 .cards {
@@ -235,7 +293,7 @@ button {
       backface-visibility: hidden;
       width: $card-width;
       height: $card-height;
-      padding: 10px;
+      padding: 20px 10px;
       background-color: $primary-bg-color;
       border-radius: 2rem;
       box-shadow: inset -11px -11px 22px #9c9c9c,
@@ -273,6 +331,11 @@ button {
         width: 75%;
         margin-top: 10px;
         border-radius: 50%;
+      }
+
+      &--play {
+        justify-content: center;
+        height: 100%;
       }
     }
 

@@ -1,9 +1,9 @@
 import CONSTANTS from '../constants';
 
-function cardWordsCreate(categoryObj) {
+function cardWordsCreate(categoryObj, isPlay) {
   const words = categoryObj['category-data'];
   const categoryName = categoryObj['category-name'];
-  const title = document.querySelector('.main__title');
+  const title = document.querySelector(`.${CONSTANTS.titleCategory}`);
   const fragment = document.createDocumentFragment();
 
   title.textContent = categoryName;
@@ -19,18 +19,29 @@ function cardWordsCreate(categoryObj) {
     card.classList.add(CONSTANTS.cardWord);
     card.setAttribute(CONSTANTS.dataWord, word);
 
-    card.innerHTML = `
-      <div class="cards__item--front">
-        <div class="cards__item__img"></div>
-        <div class="cards__item__title">${word}</div>
-        <button class="cards__item__btn" type="button"></button>
-        <audio src="./sounds/${categoryName}/${audioSrc}" data-sound="${word}"></audio>
-      </div>
-      <div class="cards__item--back">
-        <div class="cards__item__img"></div>
-        <div class="cards__item__title">${translation}</div>
-      </div>
-    `;
+    if (isPlay === false) {
+      card.innerHTML = `
+        <div class="cards__item--front">
+          <div class="cards__item__img"></div>
+          <div class="cards__item__title">${word}</div>
+          <button class="cards__item__btn" type="button"></button>
+          <audio src="./sounds/${categoryName}/${audioSrc}" data-sound="${word}"></audio>
+        </div>
+        <div class="cards__item--back">
+          <div class="cards__item__img"></div>
+          <div class="cards__item__title">${translation}</div>
+        </div>
+      `;
+
+      const btnRotate = card.querySelector(`.${CONSTANTS.cardBtn}`);
+      btnRotate.style.backgroundImage = 'url(./img/icons/rotate.png)';
+    } else {
+      card.innerHTML = `
+        <div class="cards__item--front">
+          <div class="cards__item__img cards__item__img--play"></div>
+        </div>
+      `;
+    }
 
     const cardImages = card.querySelectorAll(`.${CONSTANTS.cardImage}`);
 
@@ -44,9 +55,6 @@ function cardWordsCreate(categoryObj) {
         currentImage.style.backgroundColor = word;
       }
     });
-
-    const btnRotate = card.querySelector(`.${CONSTANTS.cardBtn}`);
-    btnRotate.style.backgroundImage = 'url(./img/icons/rotate.png)';
 
     fragment.append(card);
   });

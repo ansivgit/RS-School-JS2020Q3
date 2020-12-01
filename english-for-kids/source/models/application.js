@@ -2,17 +2,21 @@ import dataEn from '../assets/data-en';
 import CONSTANTS from '../constants';
 import cardCategoryCreate from '../creations/cardCategoryCreate';
 import cardWordsCreate from '../creations/cardWordsCreate';
+import toggleMode from '../handlers/toggleMode';
 
 class App {
   constructor(lang) {
     this.lang = lang;
     this.data = dataEn;
-    this.categoryNames = [];
     this.cards = null;
+    this.isPlay = false;
+    this.currentCategory = null;
   }
 
   init() {
     this.cards = document.querySelector(`.${CONSTANTS.cardsContainer}`);
+    this.toggleHandler = document.querySelector(`.${CONSTANTS.toggleHandler}`);
+    this.playBtn = document.querySelector(`.${CONSTANTS.playBtn}`);
 
     this.data.forEach((category) => {
       const card = cardCategoryCreate(category);
@@ -24,17 +28,20 @@ class App {
       const cardCategory = event.target.closest(`.${CONSTANTS.cardCategory}`);
       const cardWord = event.target.closest(`.${CONSTANTS.cardWord}`);
       const cardBtn = event.target.closest(`.${CONSTANTS.cardBtn}`);
+      const isActive = cardWord ? cardWord.classList.contains(CONSTANTS.cardActive) : false;
 
       if (cardCategory) {
         const activeCategory = cardCategory.getAttribute('data-category');
-        const currentCategory = this.data.find((obj) => obj['category-name'] === activeCategory);
-        const categoryWords = cardWordsCreate(currentCategory);
+        this.currentCategory = this.data.find((obj) => obj['category-name'] === activeCategory);
 
+        const categoryWords = cardWordsCreate(this.currentCategory, this.isPlay);
+
+        this.playBtn.disabled = false;
         this.clear();
         this.cards.append(categoryWords);
       }
 
-      if (cardWord && !cardBtn && !cardWord.classList.contains(CONSTANTS.cardActive)) {
+      if (cardWord && !cardBtn && !isActive && this.isPlay !== true) {
         const activeCard = cardWord.getAttribute('data-word');
         const audio = cardWord.querySelector(`audio[data-sound='${activeCard}']`);
 
@@ -54,6 +61,13 @@ class App {
           cardWord.classList.remove(CONSTANTS.cardActive);
         });
       }
+    });
+
+    this.toggleHandler.addEventListener('click', () => {
+      this.isPlay = !this.isPlay;
+      const newCards = toggleMode(this.currentCategory, this.isPlay);
+      this.clear();
+      this.cards.append(newCards);
     });
   }
 
