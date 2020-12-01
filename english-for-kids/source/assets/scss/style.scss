@@ -193,7 +193,6 @@ button {
   justify-content: space-evenly;
   align-items: center;
   list-style: none;
-  background-color: $primary-theme-color;
 
   &__item {
     position: relative;
@@ -205,18 +204,62 @@ button {
     height: $card-height;
     margin: 1.3rem;
     padding: 10px;
-    background-color: $primary-bg-color;
     border-radius: 2rem;
-    box-shadow: inset -11px -11px 22px #9c9c9c,
-            inset 11px 11px 22px #ffffff;
-    //outline: 1px solid red;
     transition: 0.5s ease;
     cursor: pointer;
+    perspective: 1000px;
 
-    &:hover {
+
+    &--category {
+      background-color: $primary-bg-color;
+      box-shadow: inset -11px -11px 22px #9c9c9c,
+      inset 11px 11px 22px #ffffff;
+
+      &:hover {
+        box-shadow: -11px -11px 12px #0b4c64,
+                    11px 11px 12px #1fccff;
+        transform: translateY(-5px) scale(1.005) translateZ(0);
+      }
+    }
+
+    &--front,
+    &--back {
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      transition: 1s;
+      backface-visibility: hidden;
+      width: $card-width;
+      height: $card-height;
+      padding: 10px;
+      background-color: $primary-bg-color;
+      border-radius: 2rem;
+      box-shadow: inset -11px -11px 22px #9c9c9c,
+                  inset 11px 11px 22px #ffffff;
+
+      &:hover {
+        box-shadow: -11px -11px 12px #0b4c64,
+                    11px 11px 12px #1fccff;
+        transform: translateY(-5px) scale(1.005) translateZ(0);
+      }
+    }
+
+    &--back {
+      transform: rotateY(180deg);
       box-shadow: -11px -11px 12px #0b4c64,
                   11px 11px 12px #1fccff;
-      transform: translateY(-5px) scale(1.005) translateZ(0);
+    }
+
+    &--active .cards__item--front {
+      transform: rotateY(180deg);
+    }
+
+    &--active .cards__item--back {
+      transform: rotateY(360deg);
     }
 
     &__img {
@@ -225,7 +268,6 @@ button {
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
-      //outline: 1px solid green;
 
       &--color {
         width: 75%;
