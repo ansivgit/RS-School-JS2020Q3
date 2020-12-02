@@ -2,6 +2,7 @@ import CONSTANTS from '../constants';
 
 function cardWordsCreate(categoryObj, isPlay) {
   const words = categoryObj['category-data'];
+  const categoryId = categoryObj['category-id'];
   const categoryName = categoryObj['category-name'];
   const title = document.querySelector(`.${CONSTANTS.titleCategory}`);
   const fragment = document.createDocumentFragment();
@@ -25,7 +26,7 @@ function cardWordsCreate(categoryObj, isPlay) {
           <div class="cards__item__img"></div>
           <div class="cards__item__title">${word}</div>
           <button class="cards__item__btn" type="button"></button>
-          <audio src="./sounds/${categoryName}/${audioSrc}" data-sound="${id}"></audio>
+          <audio src="./sounds/${categoryId}/${audioSrc}" data-sound="${id}"></audio>
         </div>
         <div class="cards__item--back">
           <div class="cards__item__img"></div>
@@ -49,7 +50,7 @@ function cardWordsCreate(categoryObj, isPlay) {
       const currentImage = item;
 
       if (categoryName !== 'colors') {
-        currentImage.style.backgroundImage = `url(./img/${categoryName}/${image})`;
+        currentImage.style.backgroundImage = `url(./img/${categoryId}/${image})`;
       } else {
         currentImage.classList.add(`${CONSTANTS.cardImage}--color`);
         currentImage.style.backgroundColor = word;

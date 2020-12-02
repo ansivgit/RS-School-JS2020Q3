@@ -1,4 +1,5 @@
 const CONSTANTS = {
+  mainRating: 'main__rating',
   titleCategory: 'title--category',
   toggle: 'toggle',
   toggleHandler: 'toggle__label',

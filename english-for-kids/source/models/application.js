@@ -3,7 +3,7 @@ import CONSTANTS from '../constants';
 import cardCategoryCreate from '../creations/cardCategoryCreate';
 import cardWordsCreate from '../creations/cardWordsCreate';
 import toggleMode from '../handlers/toggleMode';
-import startGame from '../handlers/startGame';
+import gaming from '../handlers/gaming';
 
 class App {
   constructor(lang) {
@@ -11,6 +11,7 @@ class App {
     this.data = dataEn;
     this.cards = null;
     this.isPlay = false;
+    this.isPlayContinue = false;
     this.currentCategory = null;
   }
 
@@ -32,8 +33,8 @@ class App {
       const isActive = cardWord ? cardWord.classList.contains(CONSTANTS.cardActive) : false;
 
       if (cardCategory) {
-        const activeCategory = cardCategory.getAttribute('data-category');
-        this.currentCategory = this.data.find((obj) => obj['category-name'] === activeCategory);
+        const activeCategory = cardCategory.getAttribute(CONSTANTS.dataCategory);
+        this.currentCategory = this.data.find((obj) => obj['category-id'] === activeCategory);
 
         const categoryWords = cardWordsCreate(this.currentCategory, this.isPlay);
 
@@ -43,7 +44,7 @@ class App {
       }
 
       if (cardWord && !cardBtn && !isActive && this.isPlay !== true) {
-        const activeCard = cardWord.getAttribute('data-word');
+        const activeCard = cardWord.getAttribute(CONSTANTS.dataWord);
         const audio = cardWord.querySelector(`audio[data-sound='${activeCard}']`);
 
         if (!audio) {
@@ -72,8 +73,12 @@ class App {
     });
 
     this.playBtn.addEventListener('click', () => {
-      startGame(this.currentCategory);
-      this.playBtn.removeEventListener('click', startGame);
+      if (!this.isPlayContinue) {
+        this.isPlayContinue = true;
+        gaming(this.currentCategory);
+        console.log('again');
+        this.playBtn.removeEventListener('click', gaming);
+      }
     });
   }
 

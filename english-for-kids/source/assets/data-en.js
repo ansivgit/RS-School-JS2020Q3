@@ -434,7 +434,7 @@ const dataEn = [
     ],
   },
   {
-    'category-id': 'human body',
+    'category-id': 'human-body',
     'category-name': 'human body',
     'category-img': './img/food/food-category.svg',
     'category-data': [
