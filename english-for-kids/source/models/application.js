@@ -76,7 +76,6 @@ class App {
       if (!this.isPlayContinue) {
         this.isPlayContinue = true;
         gaming(this.currentCategory);
-        console.log('again');
         this.playBtn.removeEventListener('click', gaming);
       }
     });

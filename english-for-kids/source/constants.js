@@ -1,5 +1,6 @@
 const CONSTANTS = {
   mainRating: 'main__rating',
+  mainRatingStar: 'main__rating__star',
   titleCategory: 'title--category',
   toggle: 'toggle',
   toggleHandler: 'toggle__label',
@@ -18,4 +19,12 @@ const CONSTANTS = {
   cardBtn: 'cards__item__btn',
 };
 
+const WIDTH = {
+  windowWidth: document.documentElement.clientWidth,
+  buttonWhole: 176,
+  ratingMargins: 20,
+  starBlock: 40,
+};
+
 export default CONSTANTS;
+export { WIDTH };

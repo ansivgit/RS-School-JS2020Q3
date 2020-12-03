@@ -209,11 +209,15 @@ button {
 
 .main__rating {
   display: flex;
+  flex-grow: 0;
   height: $rating-star-size;
+  max-width: 720px;
+  margin-top: 10px;
   padding: 0 10px;
 
   &__star {
     display: block;
+    flex-shrink: 0;
     width: $rating-star-size;
     height: auto;
     background-size: contain;
@@ -240,7 +244,7 @@ button {
 
 .play-mode {
   position: absolute;
-  top: 30px;
+  top: 10px;
   right: -180px;
   background: $secondary-theme-color;
   box-shadow: inset -4px -4px 8px #d97117,
