@@ -587,6 +587,27 @@ const dataEn = [
       },
     ],
   },
+  {
+    'category-id': 'test',
+    'category-name': 'test-test',
+    'category-img': './img/food/food-category.svg',
+    'category-data': [
+      {
+        id: 'rainbow',
+        word: 'rainbow',
+        translation: 'радуга',
+        image: 'rainbow.svg',
+        audioSrc: 'rainbow.mp3',
+      },
+      {
+        id: 'sea',
+        word: 'sea',
+        translation: 'море',
+        image: 'sea.svg',
+        audioSrc: 'sea.mp3',
+      },
+    ],
+  },
 ];
 
 export default dataEn;
