@@ -1,47 +1,32 @@
-import CONSTANTS from '../constants';
+import CONSTANTS, { TAGS } from '../constants';
+import getCardWordTrain from '../templates/getCardWordTrain';
+import getCardWordPlay from '../templates/getCardWordPlay';
 
 function cardWordsCreate(categoryObj, isPlay) {
-  const words = categoryObj['category-data'];
-  const categoryId = categoryObj['category-id'];
-  const categoryName = categoryObj['category-name'];
+  const words = categoryObj.categoryData;
+  const { categoryId, categoryName } = categoryObj;
   const title = document.querySelector(`.${CONSTANTS.titleCategory}`);
   const fragment = document.createDocumentFragment();
 
   title.textContent = categoryName;
 
   words.forEach((wordObj) => {
-    const {
-      id, word, translation, image, audioSrc,
-    } = wordObj;
+    const { id, word, image } = wordObj;
 
-    const card = document.createElement('li');
+    const card = document.createElement(TAGS.li);
 
     card.className = CONSTANTS.card;
     card.classList.add(CONSTANTS.cardWord);
     card.setAttribute(CONSTANTS.dataWord, id);
 
     if (isPlay === false) {
-      card.innerHTML = `
-        <div class="cards__item--front">
-          <div class="cards__item__img"></div>
-          <div class="cards__item__title">${word}</div>
-          <button class="cards__item__btn" type="button"></button>
-          <audio src="./sounds/${categoryId}/${audioSrc}" data-sound="${id}"></audio>
-        </div>
-        <div class="cards__item--back">
-          <div class="cards__item__img"></div>
-          <div class="cards__item__title">${translation}</div>
-        </div>
-      `;
+      card.innerHTML = getCardWordTrain(categoryId, wordObj);
 
       const btnRotate = card.querySelector(`.${CONSTANTS.cardBtn}`);
+
       btnRotate.style.backgroundImage = 'url(./img/icons/rotate.png)';
     } else {
-      card.innerHTML = `
-        <div class="cards__item--front">
-          <div class="cards__item__img cards__item__img--play"></div>
-        </div>
-      `;
+      card.innerHTML = getCardWordPlay();
     }
 
     const cardImages = card.querySelectorAll(`.${CONSTANTS.cardImage}`);

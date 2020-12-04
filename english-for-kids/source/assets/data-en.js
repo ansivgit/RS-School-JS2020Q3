@@ -1,9 +1,9 @@
 const dataEn = [
   {
-    'category-id': 'family',
-    'category-name': 'family',
-    'category-img': './img/food/food-category.svg',
-    'category-data': [
+    categoryId: 'family',
+    categoryName: 'family',
+    categoryImg: './img/food/food-category.svg',
+    categoryData: [
       {
         id: 'baby',
         word: 'baby',
@@ -63,10 +63,10 @@ const dataEn = [
     ],
   },
   {
-    'category-id': 'home',
-    'category-name': 'home',
-    'category-img': './img/food/food-category.svg',
-    'category-data': [
+    categoryId: 'home',
+    categoryName: 'home',
+    categoryImg: './img/food/food-category.svg',
+    categoryData: [
       {
         id: 'armchair',
         word: 'armchair',
@@ -126,10 +126,10 @@ const dataEn = [
     ],
   },
   {
-    'category-id': 'animals',
-    'category-name': 'animals',
-    'category-img': './img/food/food-category.svg',
-    'category-data': [
+    categoryId: 'animals',
+    categoryName: 'animals',
+    categoryImg: './img/food/food-category.svg',
+    categoryData: [
       {
         id: 'cat',
         word: 'cat',
@@ -217,10 +217,10 @@ const dataEn = [
     ],
   },
   {
-    'category-id': 'clothes',
-    'category-name': 'clothes',
-    'category-img': './img/food/food-category.svg',
-    'category-data': [
+    categoryId: 'clothes',
+    categoryName: 'clothes',
+    categoryImg: './img/food/food-category.svg',
+    categoryData: [
       {
         id: 'baseball-cap',
         word: 'baseball cap',
@@ -280,10 +280,10 @@ const dataEn = [
     ],
   },
   {
-    'category-id': 'food',
-    'category-name': 'food',
-    'category-img': './img/food/food-category.svg',
-    'category-data': [
+    categoryId: 'food',
+    categoryName: 'food',
+    categoryImg: './img/food/food-category.svg',
+    categoryData: [
       {
         id: 'apple',
         word: 'apple',
@@ -371,10 +371,10 @@ const dataEn = [
     ],
   },
   {
-    'category-id': 'colors',
-    'category-name': 'colors',
-    'category-img': './img/food/food-category.svg',
-    'category-data': [
+    categoryId: 'colors',
+    categoryName: 'colors',
+    categoryImg: './img/food/food-category.svg',
+    categoryData: [
       {
         id: 'red',
         word: 'red',
@@ -434,10 +434,10 @@ const dataEn = [
     ],
   },
   {
-    'category-id': 'human-body',
-    'category-name': 'human body',
-    'category-img': './img/food/food-category.svg',
-    'category-data': [
+    categoryId: 'human-body',
+    categoryName: 'human body',
+    categoryImg: './img/food/food-category.svg',
+    categoryData: [
       {
         id: 'arm',
         word: 'arm',
@@ -497,10 +497,10 @@ const dataEn = [
     ],
   },
   {
-    'category-id': 'nature',
-    'category-name': 'nature',
-    'category-img': './img/food/food-category.svg',
-    'category-data': [
+    categoryId: 'nature',
+    categoryName: 'nature',
+    categoryImg: './img/food/food-category.svg',
+    categoryData: [
       {
         id: 'mountain',
         word: 'mountain',
@@ -588,10 +588,10 @@ const dataEn = [
     ],
   },
   {
-    'category-id': 'test',
-    'category-name': 'test-test',
-    'category-img': './img/food/food-category.svg',
-    'category-data': [
+    categoryId: 'test',
+    categoryName: 'test-test',
+    categoryImg: './img/food/food-category.svg',
+    categoryData: [
       {
         id: 'rainbow',
         word: 'rainbow',

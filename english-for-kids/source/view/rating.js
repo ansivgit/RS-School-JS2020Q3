@@ -1,20 +1,19 @@
-import CONSTANTS, { WIDTH } from '../constants';
+import CONSTANTS, { WIDTH, TAGS } from '../constants';
 
 function rating(boolean) {
   const ratingBox = document.querySelector(`.${CONSTANTS.mainRating}`);
-  const span = document.createElement('span');
+  const span = document.createElement(TAGS.span);
   const ratingBlockWidth = WIDTH.windowWidth - WIDTH.buttonWhole - WIDTH.ratingMargins;
   const starsValue = Math.floor(ratingBlockWidth / WIDTH.starBlock);
   const spansArr = ratingBox.querySelectorAll(`.${CONSTANTS.mainRatingStar}`);
   const arrLength = spansArr.length;
 
-  span.classList.add('main__rating__star');
+  const secondClassName = (boolean === true)
+    ? `${CONSTANTS.mainRatingStar}--true`
+    : `${CONSTANTS.mainRatingStar}--false`;
 
-  if (boolean === true) {
-    span.classList.add('main__rating__star--true');
-  } else {
-    span.classList.add('main__rating__star--false');
-  }
+  span.classList.add(CONSTANTS.mainRatingStar);
+  span.classList.add(secondClassName);
 
   if (arrLength === starsValue) {
     const firstStar = ratingBox.firstChild;

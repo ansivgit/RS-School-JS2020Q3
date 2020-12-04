@@ -3,6 +3,7 @@ const CONSTANTS = {
   mainRatingStar: 'main__rating__star',
   titleCategory: 'title--category',
   toggle: 'toggle',
+  togglePlay: 'toggle--play',
   toggleHandler: 'toggle__label',
   toggleCheckbox: 'toggle__checkbox',
   playBtn: 'play-mode',
@@ -13,10 +14,13 @@ const CONSTANTS = {
   cardCategory: 'cards__item--category',
   cardWord: 'cards__item--word',
   cardActive: 'cards__item--active',
+  cardUnactive: 'cards__item--unactive',
   dataCategory: 'data-category',
   dataWord: 'data-word',
   cardImage: 'cards__item__img',
   cardBtn: 'cards__item__btn',
+  gameOver: 'game-over',
+  visuallyHidden: 'visually-hidden',
 };
 
 const WIDTH = {
@@ -26,5 +30,11 @@ const WIDTH = {
   starBlock: 40,
 };
 
+const TAGS = {
+  div: 'div',
+  li: 'li',
+  span: 'span',
+};
+
 export default CONSTANTS;
-export { WIDTH };
+export { WIDTH, TAGS };

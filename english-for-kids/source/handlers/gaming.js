@@ -1,18 +1,16 @@
 import CONSTANTS from '../constants';
-import randomGenerate from '../creations/randomGenerate';
+import randomGenerate from '../view/randomGenerate';
 import gameEnd from './gameEnd';
-import rating from '../creations/rating';
+import rating from '../view/rating';
 
 function gaming(categoryObj) {
   const cards = document.querySelector(`.${CONSTANTS.cardsContainer}`);
   const playBtn = document.querySelector(`.${CONSTANTS.playBtn}`);
-  const categoryName = categoryObj['category-id'];
-  const words = categoryObj['category-data'];
+  const categoryName = categoryObj.categoryId;
+  const words = categoryObj.categoryData;
   const soundsArr = [];
   let currentWord = {};
   let count = 0;
-  // const currentWordId = currentWord.id;
-  // const currentWordAudio = currentWord.audioSrc;
 
   playBtn.textContent = 'Repeat';
   playBtn.classList.add(CONSTANTS.playBtnRepeat);
@@ -45,20 +43,22 @@ function gaming(categoryObj) {
 
     if (cardWord) {
       const activeCard = cardWord.getAttribute(CONSTANTS.dataWord);
+      let result;
 
       if (activeCard === currentWord.id) {
         audioIsTrue.play();
-        cardWord.classList.add('cards__item--unactive');
+        cardWord.classList.add(CONSTANTS.cardUnactive);
         rating(true);
+        count += 1;
 
-        if (count < suffleArr.length - 1) {
-          count += 1;
+        if (count < suffleArr.length) {
           currentWord = suffleArr[count];
 
           audio = new Audio(`./sounds/${categoryName}/${currentWord.audioSrc}`);
           setTimeout(() => audio.play(), 2000);
         } else {
-          gameEnd();
+          result = (count === words.length) ? 'win' : 'lose';
+          gameEnd(result);
         }
       } else {
         audioIsFalse.play();

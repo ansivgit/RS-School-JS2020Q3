@@ -1,7 +1,7 @@
 import dataEn from '../assets/data-en';
 import CONSTANTS from '../constants';
-import cardCategoryCreate from '../creations/cardCategoryCreate';
-import cardWordsCreate from '../creations/cardWordsCreate';
+import cardCategoryCreate from '../view/cardCategoryCreate';
+import cardWordsCreate from '../view/cardWordsCreate';
 import toggleMode from '../handlers/toggleMode';
 import gaming from '../handlers/gaming';
 
@@ -34,7 +34,7 @@ class App {
 
       if (cardCategory) {
         const activeCategory = cardCategory.getAttribute(CONSTANTS.dataCategory);
-        this.currentCategory = this.data.find((obj) => obj['category-id'] === activeCategory);
+        this.currentCategory = this.data.find((obj) => obj.categoryId === activeCategory);
 
         const categoryWords = cardWordsCreate(this.currentCategory, this.isPlay);
 

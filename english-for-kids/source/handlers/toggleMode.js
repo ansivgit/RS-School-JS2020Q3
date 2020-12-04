@@ -1,15 +1,15 @@
 import CONSTANTS from '../constants';
-import cardWordsCreate from '../creations/cardWordsCreate';
+import cardWordsCreate from '../view/cardWordsCreate';
 
 function toggleMode(categoryObj, isPlay) {
   const toggle = document.querySelector(`.${CONSTANTS.toggle}`);
   const playBtn = document.querySelector(`.${CONSTANTS.playBtn}`);
 
   if (isPlay) {
-    toggle.classList.add('toggle--play');
+    toggle.classList.add(CONSTANTS.togglePlay);
     playBtn.classList.add(`${CONSTANTS.playBtnPlay}`);
   } else {
-    toggle.classList.remove('toggle--play');
+    toggle.classList.remove(CONSTANTS.togglePlay);
     playBtn.classList.remove(`${CONSTANTS.playBtnPlay}`);
   }
 
