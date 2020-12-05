@@ -2,6 +2,8 @@ import dataEn from '../assets/data-en';
 import CONSTANTS from '../constants';
 import cardCategoryCreate from '../view/cardCategoryCreate';
 import cardWordsCreate from '../view/cardWordsCreate';
+import mainNavCreate from '../view/mainNavCreate';
+import toggleMenu from '../handlers/toggleMenu';
 import toggleMode from '../handlers/toggleMode';
 import gaming from '../handlers/gaming';
 
@@ -10,6 +12,7 @@ class App {
     this.lang = lang;
     this.data = dataEn;
     this.cards = null;
+    this.categories = [];
     this.isPlay = false;
     this.isPlayContinue = false;
     this.currentCategory = null;
@@ -17,10 +20,13 @@ class App {
 
   init() {
     this.cards = document.querySelector(`.${CONSTANTS.cardsContainer}`);
+    this.menuBtn = document.querySelector(`.${CONSTANTS.mainNavBtn}`);
     this.toggleHandler = document.querySelector(`.${CONSTANTS.toggleHandler}`);
     this.playBtn = document.querySelector(`.${CONSTANTS.playBtn}`);
+    this.statBtn = document.querySelector(`.${CONSTANTS.statBtn}`);
 
     this.data.forEach((category) => {
+      this.categories.push(category.categoryName);
       const card = cardCategoryCreate(category);
       this.cards.append(card);
     });
@@ -65,6 +71,12 @@ class App {
       }
     });
 
+    mainNavCreate(this.categories);
+
+    this.menuBtn.addEventListener('click', () => {
+      toggleMenu(this.currentCategory);
+    });
+
     this.toggleHandler.addEventListener('click', () => {
       this.isPlay = !this.isPlay;
       const newCards = toggleMode(this.currentCategory, this.isPlay);
@@ -78,10 +90,21 @@ class App {
     this.playBtn.addEventListener('click', () => {
       if (!this.isPlayContinue) {
         this.isPlayContinue = true;
-        gaming(this.currentCategory);
+        gaming(this.currentCategory, () => {
+          this.renewApp();
+          console.log('the end');
+        });
         this.playBtn.removeEventListener('click', gaming);
       }
     });
+
+    this.statBtn.addEventListener('click', () => {
+      console.log(this.isPlayContinue, this.isPlay);
+    });
+  }
+
+  renewApp() {
+    console.log('renewed');
   }
 
   clear() {

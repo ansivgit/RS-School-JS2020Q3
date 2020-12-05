@@ -9,21 +9,23 @@
   <div class="wrapper--main">
     <header class="header">
       <nav class="main-nav">
-        <button class="main-nav__button">
+        <div class="main-nav__container"></div>
+        <button class="main-nav__btn" type="button">
+          <span class="main-nav__decorate"></span>
         </button>
         <div class="main-nav__container">
         </div>
       </nav>
-      <h1 class="title--main">
-        <a class="title__link" href = "#">Funny English</a>
-      </h1>
+        <button class="title__btn" type="button">
+          <h1 class="title--main">Funny English</h1>
+        </button>
       <div class="modes">
         <div class="toggle">
 
             <input class="toggle__checkbox" type="checkbox" id="mode">
           <label for="mode" class="toggle__label"></label>
         </div>
-        <button class="stats">Stats</button>
+        <button class="stats__btn" type="button">Stats</button>
       </div>
     </header>
 
@@ -31,7 +33,7 @@
       <div class="main__header">
         <div class="main__rating"></div>
         <h2 class="title--category">categories</h2>
-        <button class="play-mode">Start game</button>
+        <button class="play-mode" type="button">Start game</button>
       </div>
       <ul class="cards">
 

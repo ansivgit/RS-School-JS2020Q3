@@ -37,6 +37,8 @@ $card-image-height: 11.7rem;
 
 $rating-star-size: 2.5rem;
 
+$main-nav-width: 19rem;
+
 // $primary-border-line: 2px;
 // $secondary-border-line: 1px;
 // $max-border-line: 10px;
@@ -86,26 +88,132 @@ button {
 
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
 
-.title {
-  &--main {
-    font-family: $secondary-font;
-    font-size: 5rem;
-    color: #FFFFFF;
+.main-nav {
+  position: fixed;
+  left: -$main-nav-width;
+  z-index: 100;
+  align-self: stretch;
+  height: 100%;
+  width: $main-nav-width;
+  background-color: $menu-theme-color;
+  transition: all 0.6s;
+
+  &--active {
+    left: 0;
   }
 
-  &__link {
-    text-decoration: none;
-    color: inherit;
+  &__container {
+    width: 70%;
+    margin: 5rem 0 1rem 2rem;
+    font-family: $secondary-font;
+    color: $primary-color;
+    font-size: 2.2rem;
+  }
+
+  &__item {
+    margin: 0.5rem 0;
+    cursor: pointer;
+
+    &--active {
+      background-color: red;
+    }
+  }
+
+  &__btn {
+    position: absolute;
+    height: 3rem;
+    width: 4rem;
+    top: 1.3rem;
+    right: -6rem;
+    margin: 0 1rem;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+
+    &--active {
+      right: 0;
+      transition: all 0.5s;
+    }
+
+    &:hover > .main-nav__decorate,
+    &:hover > .main-nav__decorate::before,
+    &:hover > .main-nav__decorate::after{
+      box-shadow: 6px 6px 5px rgba(11,25,87,0.8);
+    }
+  }
+
+  &__decorate,
+  &__decorate::before,
+  &__decorate::after {
+    display: block;
+    width: 100%;
+    height: 0.4rem;
+    border-radius: 0.4rem;
+    background: $primary-bg-color;
+    transition: all 0.3s;
+    box-shadow: inset 0px 1px 1px rgba(11,25,87,0.5), 0px 1px 0px rgba(255,255,255,0.5);
+  }
+
+  &__decorate {
+    position: relative;
+    box-shadow: inset 0px 1px 1px rgba(11,25,87,0.8), 0px 1px 0px rgba(21,140,186,0.7);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -17px;
+      background-color: $secondary-theme-color;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      top: 17px;
+      background-color: $menu-theme-color;
+    }
+  }
+
+  &__btn--active > .main-nav__decorate {
+    transform: rotate(45deg);
+  }
+  &__btn--active > .main-nav__decorate::before {
+    transform: rotate(-90deg);
+    top: 0;
+  }
+  &__btn--active > .main-nav__decorate::after {
+    transform: rotate(-90deg);
+    top: 0;
+    z-index: -1;
+  }
+
+  &__btn--active:hover > .main-nav__decorate::before,
+  &__btn--active:hover > .main-nav__decorate::after{
+    box-shadow: -5px 6px 5px rgba(11,25,87,0.5);
+  }
+}
+
+.title {
+  &__btn {
+    margin: 0 auto;
+    border: none;
+    background-color: transparent;
     text-shadow: 3px 3px 4px $primary-color;
     transition: 0.3s ease-out;
+    cursor: pointer;
 
     &:hover {
       text-shadow: 7px 7px 7px $primary-color;
     }
+  }
+
+  &--main {
+    margin: 0 auto;
+    font-family: $secondary-font;
+    font-size: 5rem;
+    color: $primary-bg-color;
   }
 }
 
@@ -121,7 +229,7 @@ button {
   margin: 20px auto;
   position: relative;
   border-radius: 50px;
-  box-shadow: inset 0px 1px 1px  rgb(11,25,87,0.5), 0px 1px 0px rgba(255,255,255,0.5);
+  box-shadow: inset 0px 1px 1px rgb(11,25,87,0.5), 0px 1px 0px rgba(255,255,255,0.5);
 
   &--play {
     background-color: $secondary-theme-color;
@@ -173,7 +281,7 @@ button {
   }
 }
 
-.stats,
+.stats__btn,
 .play-mode {
   height: 2.58rem;
   margin: 0 15px;

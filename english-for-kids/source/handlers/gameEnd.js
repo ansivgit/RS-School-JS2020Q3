@@ -1,7 +1,6 @@
 import CONSTANTS from '../constants';
-import renewApp from './renewApp';
 
-function gameEnd(result, mistakes) {
+function gameEnd(result, mistakes, onEnd) {
   const cards = document.querySelector(`.${CONSTANTS.cardsContainer}`);
   const gameOver = document.querySelector(`.${CONSTANTS.gameOver}`);
   const image = gameOver.querySelector(`.${CONSTANTS.gameOverImg}`);
@@ -26,7 +25,7 @@ function gameEnd(result, mistakes) {
 
   setTimeout(() => {
     gameOver.classList.add(CONSTANTS.visuallyHidden);
-    renewApp();
+    onEnd();
   }, 4000);
 }
 

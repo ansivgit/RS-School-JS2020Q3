@@ -1,5 +1,5 @@
 import CONSTANTS from '../constants';
-import App from '../models/application';
+//import App from '../models/application';
 import cardCategoryCreate from '../view/cardCategoryCreate';
 
 function renewApp() {

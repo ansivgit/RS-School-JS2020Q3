@@ -3,7 +3,7 @@ import randomGenerate from '../view/randomGenerate';
 import gameEnd from './gameEnd';
 import rating from '../view/rating';
 
-function gaming(categoryObj) {
+function gaming(categoryObj, onEnd) {
   const cards = document.querySelector(`.${CONSTANTS.cardsContainer}`);
   const playBtn = document.querySelector(`.${CONSTANTS.playBtn}`);
   const categoryName = categoryObj.categoryId;
@@ -54,7 +54,7 @@ function gaming(categoryObj) {
           setTimeout(() => audio.play(), 1500);
         } else {
           result = (mistakes === 0) ? 'win' : 'lose';
-          gameEnd(result, mistakes);
+          gameEnd(result, mistakes, onEnd);
         }
       } else {
         mistakes += 1;
