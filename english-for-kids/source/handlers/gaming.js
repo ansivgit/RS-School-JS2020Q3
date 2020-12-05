@@ -10,7 +10,8 @@ function gaming(categoryObj) {
   const words = categoryObj.categoryData;
   const soundsArr = [];
   let currentWord = {};
-  let count = 0;
+  let countWin = 0;
+  let mistakes = 0;
 
   playBtn.textContent = 'Repeat';
   playBtn.classList.add(CONSTANTS.playBtnRepeat);
@@ -21,14 +22,9 @@ function gaming(categoryObj) {
 
   const suffleArr = randomGenerate(soundsArr);
   // eslint-disable-next-line prefer-destructuring
-  currentWord = suffleArr[count];
+  currentWord = suffleArr[countWin];
 
   let audio = new Audio(`./sounds/${categoryName}/${currentWord.audioSrc}`);
-
-  // if (!audio) {
-  //   // eslint-disable-next-line no-alert
-  //   return alert('something went wrong :( try again!');
-  // }
 
   audio.play();
 
@@ -49,18 +45,19 @@ function gaming(categoryObj) {
         audioIsTrue.play();
         cardWord.classList.add(CONSTANTS.cardUnactive);
         rating(true);
-        count += 1;
+        countWin += 1;
 
-        if (count < suffleArr.length) {
-          currentWord = suffleArr[count];
+        if (countWin < suffleArr.length) {
+          currentWord = suffleArr[countWin];
 
           audio = new Audio(`./sounds/${categoryName}/${currentWord.audioSrc}`);
-          setTimeout(() => audio.play(), 2000);
+          setTimeout(() => audio.play(), 1500);
         } else {
-          result = (count === words.length) ? 'win' : 'lose';
-          gameEnd(result);
+          result = (mistakes === 0) ? 'win' : 'lose';
+          gameEnd(result, mistakes);
         }
       } else {
+        mistakes += 1;
         audioIsFalse.play();
         rating(false);
       }

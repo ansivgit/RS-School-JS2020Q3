@@ -20,6 +20,8 @@ const CONSTANTS = {
   cardImage: 'cards__item__img',
   cardBtn: 'cards__item__btn',
   gameOver: 'game-over',
+  gameOverImg: 'game-over__img',
+  gameOverText: 'game-over__text',
   visuallyHidden: 'visually-hidden',
 };
 

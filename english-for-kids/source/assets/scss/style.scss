@@ -7,7 +7,7 @@
   // @media (max-width: 500px) {
   //   font-size: 14px;
   // }
-  // @media (max-width: 380px) {
+  // @media (max-width: 280px) {
   //   font-size: 11.5px;
   // }
   // @media (min-width: 1600px) {
@@ -55,27 +55,11 @@ $rating-star-size: 2.5rem;
 // }
 
 body {
-  // --title-font-size: 2rem;
-  // --nav-height: 2.2rem;
-  // --nav-btn-width: 5.25rem;
-  // --score-width: 17rem;
-  // --nav-btn-font-size: 1rem;
-  // --stat-font-size: 1rem;
-  // --chip-size: 3.75rem;
-  // --chip-font-size: 2.5rem;
-  // --popup-font-size: 1rem;
-
-  // --chip-color: black;
-  // --chip-text-stroke-color: none;
-
-  // --box-gap: 2px;
-  // --chip-border: 2px solid darkgreen;
-  // --chip-border-radius: 4px;
-
   height: 100%;
   font-family: $primary-font;
   font-style: normal;
   background-color: $primary-theme-color;
+  overflow-x: hidden;
 }
 
 button {
@@ -94,6 +78,10 @@ button {
   overflow: hidden;
   border: 0;
   clip: rect(0 0 0 0);
+}
+
+.wrapper--main {
+  min-height: 100vh;
 }
 
 .header {
@@ -202,9 +190,18 @@ button {
   cursor: pointer;
 }
 
-.main__content {
+.main__container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100%;
+}
+
+.main__header {
   position: relative;
   overflow-x: hidden;
+  flex-grow: 0;
+  //height: 100%;
 }
 
 .main__rating {
@@ -236,7 +233,7 @@ button {
 .title--category {
   font-family: $secondary-font;
   font-size: 3rem;
-  margin-top: 20px;
+  margin-top: 1.25rem;
   text-align: center;
   color: $primary-color;
   text-shadow: 2px 2px 2px $primary-bg-color;
@@ -413,5 +410,30 @@ button {
       background-color: transparent;
       cursor: pointer;
     }
+  }
+}
+
+.game-over {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 2;
+  margin-top: 2rem;
+
+  &__img {
+    width: 12rem;
+    height: 12rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  &__text {
+    font-family: $secondary-font;
+    font-size: 4rem;
+    margin-top: 1.5rem;
+    text-align: center;
+    color: $primary-bg-color;
+    text-shadow: 3px 3px 3px $primary-color;
   }
 }

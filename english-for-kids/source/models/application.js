@@ -68,8 +68,11 @@ class App {
     this.toggleHandler.addEventListener('click', () => {
       this.isPlay = !this.isPlay;
       const newCards = toggleMode(this.currentCategory, this.isPlay);
-      this.clear();
-      this.cards.append(newCards);
+
+      if (this.currentCategory) {
+        this.clear();
+        this.cards.append(newCards);
+      }
     });
 
     this.playBtn.addEventListener('click', () => {
