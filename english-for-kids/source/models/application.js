@@ -19,17 +19,19 @@ class App {
   }
 
   init() {
+    this.titleLogo = document.querySelector(`.${CONSTANTS.titleLogo}`);
+    this.title = document.querySelector(`.${CONSTANTS.titleCategory}`);
     this.cards = document.querySelector(`.${CONSTANTS.cardsContainer}`);
+    this.menuMain = document.querySelector(`.${CONSTANTS.mainNav}`);
     this.menuBtn = document.querySelector(`.${CONSTANTS.mainNavBtn}`);
     this.toggleHandler = document.querySelector(`.${CONSTANTS.toggleHandler}`);
+    this.toggleCheckbox = document.querySelector(`.${CONSTANTS.toggleCheckbox}`);
+    this.ratingBox = document.querySelector(`.${CONSTANTS.mainRating}`);
     this.playBtn = document.querySelector(`.${CONSTANTS.playBtn}`);
     this.statBtn = document.querySelector(`.${CONSTANTS.statBtn}`);
 
-    this.data.forEach((category) => {
-      this.categories.push(category.categoryName);
-      const card = cardCategoryCreate(category);
-      this.cards.append(card);
-    });
+    this.startPageCreate(this.data);
+    mainNavCreate(this.categories);
 
     // eslint-disable-next-line consistent-return
     this.cards.addEventListener('click', (event) => {
@@ -39,14 +41,7 @@ class App {
       const isActive = cardWord ? cardWord.classList.contains(CONSTANTS.cardActive) : false;
 
       if (cardCategory) {
-        const activeCategory = cardCategory.getAttribute(CONSTANTS.dataCategory);
-        this.currentCategory = this.data.find((obj) => obj.categoryId === activeCategory);
-
-        const categoryWords = cardWordsCreate(this.currentCategory, this.isPlay);
-
-        this.playBtn.disabled = false;
-        this.clear();
-        this.cards.append(categoryWords);
+        this.getCategoryObj(cardCategory);
       }
 
       if (cardWord && !cardBtn && !isActive && this.isPlay !== true) {
@@ -71,10 +66,32 @@ class App {
       }
     });
 
-    mainNavCreate(this.categories);
+    this.titleLogo.addEventListener('click', () => {
+      document.location.reload();
+    });
 
-    this.menuBtn.addEventListener('click', () => {
-      toggleMenu(this.currentCategory);
+    this.menuMain.addEventListener('click', (event) => {
+      const { target } = event;
+      const button = target.closest(`.${CONSTANTS.mainNavBtn}`);
+      const menuItem = target.closest(`.${CONSTANTS.mainNavItem}`);
+
+      if (button) {
+        toggleMenu(this.currentCategory);
+      }
+
+      if (menuItem) {
+        const newCategory = target.closest(`.${CONSTANTS.mainNavItem}`);
+        const mainItem = this.menuMain.querySelector(`[${CONSTANTS.dataCategory}='main']`);
+        const prevItem = this.menuMain.querySelector(`.${CONSTANTS.mainNavItemActive}`);
+
+        prevItem.classList.remove(CONSTANTS.mainNavItemActive);
+        newCategory.classList.add(CONSTANTS.mainNavItemActive);
+
+        // eslint-disable-next-line no-unused-expressions
+        (newCategory === mainItem)
+          ? this.startPageCreate(this.data)
+          : this.getCategoryObj(newCategory);
+      }
     });
 
     this.toggleHandler.addEventListener('click', () => {
@@ -90,21 +107,53 @@ class App {
     this.playBtn.addEventListener('click', () => {
       if (!this.isPlayContinue) {
         this.isPlayContinue = true;
-        gaming(this.currentCategory, () => {
+        gaming(this.currentCategory, this.isPlay, () => {
           this.renewApp();
-          console.log('the end');
         });
         this.playBtn.removeEventListener('click', gaming);
       }
     });
 
     this.statBtn.addEventListener('click', () => {
+      //console.log(this.toggleCheckbox.checked);
       console.log(this.isPlayContinue, this.isPlay);
     });
   }
 
   renewApp() {
-    console.log('renewed');
+    this.isPlay = false;
+    this.isPlayContinue = false;
+    this.toggleCheckbox.checked = false;
+    this.ratingBox.innerHTML = '';
+    this.playBtn.textContent = 'Start game';
+
+    this.startPageCreate(this.data);
+    toggleMode(this.currentCategory, this.isPlay);
+    //gaming(this.currentCategory, false, () => { });
+  }
+
+  startPageCreate(data) {
+    this.currentCategory = null;
+    this.title.textContent = 'categories';
+    this.clear();
+
+    data.forEach((category) => {
+      const card = cardCategoryCreate(category);
+
+      this.categories.push(category.categoryId);
+      this.cards.append(card);
+    });
+  }
+
+  getCategoryObj(categoryElem) {
+    const activeCategory = categoryElem.getAttribute(CONSTANTS.dataCategory);
+    this.currentCategory = this.data.find((obj) => obj.categoryId === activeCategory);
+
+    const categoryWords = cardWordsCreate(this.currentCategory, this.isPlay);
+
+    this.playBtn.disabled = false;
+    this.clear();
+    this.cards.append(categoryWords);
   }
 
   clear() {

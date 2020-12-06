@@ -115,11 +115,25 @@ button {
   }
 
   &__item {
-    margin: 0.5rem 0;
+    margin: 0.7rem 0;
+    border-radius: 16px;
+    text-align: center;
+    text-shadow: 1px 1px 2px white;
     cursor: pointer;
 
     &--active {
-      background-color: red;
+      background-color: $secondary-theme-color;
+      box-shadow:  5px 5px 12px #66350b,
+                  -5px -5px 12px #ffd52b;
+    }
+
+    &:first-child {
+      color: $primary-bg-color;
+    }
+
+    &:hover {
+      box-shadow:  6px 6px 12px #104912,
+                  -6px -6px 12px #40ff46;
     }
   }
 

@@ -6,11 +6,12 @@ function mainNavCreate(categories) {
   const categoriesArray = ['main', ...categories];
 
   categoriesArray.forEach((category) => {
-    const elem = getMenuItem(category);
+    const title = category.split('-').join(' ');
+    const elem = getMenuItem(title);
     const menuItem = document.createElement(TAGS.div);
 
     menuItem.className = CONSTANTS.mainNavItem;
-    menuItem.setAttribute(CONSTANTS.dataMenu, category);
+    menuItem.setAttribute(CONSTANTS.dataCategory, category);
     menuItem.innerHTML = elem;
 
     menuContainer.append(menuItem);
