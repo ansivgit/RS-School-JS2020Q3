@@ -10,6 +10,7 @@ const dataEn = [
         translation: 'малыш',
         image: 'baby.svg',
         audioSrc: 'baby.mp3',
+        categoryId: 'family',
       },
       {
         id: 'brother',
@@ -17,6 +18,7 @@ const dataEn = [
         translation: 'брат',
         image: 'brother.svg',
         audioSrc: 'brother.mp3',
+        categoryId: 'family',
       },
       {
         id: 'dad',
@@ -24,6 +26,7 @@ const dataEn = [
         translation: 'папа',
         image: 'dad.svg',
         audioSrc: 'dad.mp3',
+        categoryId: 'family',
       },
       {
         id: 'grandfather',
@@ -31,6 +34,7 @@ const dataEn = [
         translation: 'дедушка',
         image: 'grandfather.svg',
         audioSrc: 'grandfather.mp3',
+        categoryId: 'family',
       },
       {
         id: 'grandmother',
@@ -38,6 +42,7 @@ const dataEn = [
         translation: 'бабушка',
         image: 'grandmother.svg',
         audioSrc: 'grandmother.mp3',
+        categoryId: 'family',
       },
       {
         id: 'mom',
@@ -45,6 +50,7 @@ const dataEn = [
         translation: 'мама',
         image: 'mom.svg',
         audioSrc: 'mom.mp3',
+        categoryId: 'family',
       },
       {
         id: 'sister',
@@ -52,6 +58,7 @@ const dataEn = [
         translation: 'сестра',
         image: 'sister.svg',
         audioSrc: 'sister.mp3',
+        categoryId: 'family',
       },
       {
         id: 'uncle',
@@ -59,6 +66,7 @@ const dataEn = [
         translation: 'дядя',
         image: 'uncle.svg',
         audioSrc: 'uncle.mp3',
+        categoryId: 'family',
       },
     ],
   },
@@ -73,6 +81,7 @@ const dataEn = [
         translation: 'кресло',
         image: 'armchair.svg',
         audioSrc: 'armchair.mp3',
+        categoryId: 'home',
       },
       {
         id: 'bed',
@@ -80,6 +89,7 @@ const dataEn = [
         translation: 'кровать',
         image: 'bed.svg',
         audioSrc: 'bed.mp3',
+        categoryId: 'home',
       },
       {
         id: 'chair',
@@ -87,6 +97,7 @@ const dataEn = [
         translation: 'стул',
         image: 'chair.svg',
         audioSrc: 'chair.mp3',
+        categoryId: 'home',
       },
       {
         id: 'door',
@@ -94,6 +105,7 @@ const dataEn = [
         translation: 'дверь',
         image: 'door.svg',
         audioSrc: 'door.mp3',
+        categoryId: 'home',
       },
       {
         id: 'lamp',
@@ -101,6 +113,7 @@ const dataEn = [
         translation: 'лампа',
         image: 'lamp.svg',
         audioSrc: 'lamp.mp3',
+        categoryId: 'home',
       },
       {
         id: 'sofa',
@@ -108,6 +121,7 @@ const dataEn = [
         translation: 'диван',
         image: 'sofa.svg',
         audioSrc: 'sofa.mp3',
+        categoryId: 'home',
       },
       {
         id: 'tv',
@@ -115,6 +129,7 @@ const dataEn = [
         translation: 'телевизор',
         image: 'tv.svg',
         audioSrc: 'tv.mp3',
+        categoryId: 'home',
       },
       {
         id: 'window',
@@ -122,6 +137,7 @@ const dataEn = [
         translation: 'окно',
         image: 'window.svg',
         audioSrc: 'window.mp3',
+        categoryId: 'home',
       },
     ],
   },
@@ -136,6 +152,7 @@ const dataEn = [
         translation: 'кошка',
         image: 'cat.svg',
         audioSrc: 'cat.mp3',
+        categoryId: 'animals',
       },
       {
         id: 'deer',
@@ -143,6 +160,7 @@ const dataEn = [
         translation: 'олень',
         image: 'deer.svg',
         audioSrc: 'deer.mp3',
+        categoryId: 'animals',
       },
       {
         id: 'dog',
@@ -150,6 +168,7 @@ const dataEn = [
         translation: 'собака',
         image: 'dog.svg',
         audioSrc: 'dog.mp3',
+        categoryId: 'animals',
       },
       {
         id: 'duck',
@@ -157,6 +176,7 @@ const dataEn = [
         translation: 'утка',
         image: 'duck.svg',
         audioSrc: 'duck.mp3',
+        categoryId: 'animals',
       },
       {
         id: 'frog',
@@ -164,6 +184,7 @@ const dataEn = [
         translation: 'лягушка',
         image: 'frog.svg',
         audioSrc: 'frog.mp3',
+        categoryId: 'animals',
       },
       {
         id: 'giraffe',
@@ -171,6 +192,7 @@ const dataEn = [
         translation: 'жираф',
         image: 'giraffe.svg',
         audioSrc: 'giraffe.mp3',
+        categoryId: 'animals',
       },
       {
         id: 'horse',
@@ -178,6 +200,7 @@ const dataEn = [
         translation: 'лошадь',
         image: 'horse.svg',
         audioSrc: 'horse.mp3',
+        categoryId: 'animals',
       },
       {
         id: 'monkey',
@@ -185,6 +208,7 @@ const dataEn = [
         translation: 'обезьяна',
         image: 'monkey.svg',
         audioSrc: 'monkey.mp3',
+        categoryId: 'animals',
       },
       {
         id: 'panda',
@@ -192,6 +216,7 @@ const dataEn = [
         translation: 'панда',
         image: 'panda.svg',
         audioSrc: 'panda.mp3',
+        categoryId: 'animals',
       },
       {
         id: 'penguin',
@@ -199,6 +224,7 @@ const dataEn = [
         translation: 'пингвин',
         image: 'penguin.svg',
         audioSrc: 'penguin.mp3',
+        categoryId: 'animals',
       },
       {
         id: 'pig',
@@ -206,6 +232,7 @@ const dataEn = [
         translation: 'свинья',
         image: 'pig.svg',
         audioSrc: 'pig.mp3',
+        categoryId: 'animals',
       },
       {
         id: 'squirrel',
@@ -213,6 +240,7 @@ const dataEn = [
         translation: 'белка',
         image: 'squirrel.svg',
         audioSrc: 'squirrel.mp3',
+        categoryId: 'animals',
       },
     ],
   },
@@ -227,6 +255,7 @@ const dataEn = [
         translation: 'бейсболка',
         image: 'baseball-cap.svg',
         audioSrc: 'baseball-cap.mp3',
+        categoryId: 'clothes',
       },
       {
         id: 'coat',
@@ -234,6 +263,7 @@ const dataEn = [
         translation: 'пальто',
         image: 'coat.svg',
         audioSrc: 'coat.mp3',
+        categoryId: 'clothes',
       },
       {
         id: 'dress',
@@ -241,6 +271,7 @@ const dataEn = [
         translation: 'платье',
         image: 'dress.svg',
         audioSrc: 'dress.mp3',
+        categoryId: 'clothes',
       },
       {
         id: 'hoodie',
@@ -248,6 +279,7 @@ const dataEn = [
         translation: 'худи',
         image: 'hoodie.svg',
         audioSrc: 'hoodie.mp3',
+        categoryId: 'clothes',
       },
       {
         id: 'jacket',
@@ -255,6 +287,7 @@ const dataEn = [
         translation: 'куртка',
         image: 'jacket.svg',
         audioSrc: 'jacket.mp3',
+        categoryId: 'clothes',
       },
       {
         id: 'shirt',
@@ -262,6 +295,7 @@ const dataEn = [
         translation: 'рубашка',
         image: 'shirt.svg',
         audioSrc: 'shirt.mp3',
+        categoryId: 'clothes',
       },
       {
         id: 'shoe',
@@ -269,6 +303,7 @@ const dataEn = [
         translation: 'ботинок',
         image: 'shoe.svg',
         audioSrc: 'shoe.mp3',
+        categoryId: 'clothes',
       },
       {
         id: 'pants',
@@ -276,6 +311,7 @@ const dataEn = [
         translation: 'брюки',
         image: 'pants.svg',
         audioSrc: 'pants.mp3',
+        categoryId: 'clothes',
       },
     ],
   },
@@ -290,6 +326,7 @@ const dataEn = [
         translation: 'яблоко',
         image: 'apple.svg',
         audioSrc: 'apple.mp3',
+        categoryId: 'food',
       },
       {
         id: 'banana',
@@ -297,6 +334,7 @@ const dataEn = [
         translation: 'банан',
         image: 'banana.svg',
         audioSrc: 'banana.mp3',
+        categoryId: 'food',
       },
       {
         id: 'bread',
@@ -304,6 +342,7 @@ const dataEn = [
         translation: 'хлеб',
         image: 'bread.svg',
         audioSrc: 'bread.mp3',
+        categoryId: 'food',
       },
       {
         id: 'carrot',
@@ -311,6 +350,7 @@ const dataEn = [
         translation: 'морковь',
         image: 'carrot.svg',
         audioSrc: 'carrot.mp3',
+        categoryId: 'food',
       },
       {
         id: 'cheese',
@@ -318,6 +358,7 @@ const dataEn = [
         translation: 'сыр',
         image: 'cheese.svg',
         audioSrc: 'cheese.mp3',
+        categoryId: 'food',
       },
       {
         id: 'cherry',
@@ -325,6 +366,7 @@ const dataEn = [
         translation: 'вишня',
         image: 'cherry.svg',
         audioSrc: 'cherry.mp3',
+        categoryId: 'food',
       },
       {
         id: 'cookie',
@@ -332,6 +374,7 @@ const dataEn = [
         translation: 'печенье',
         image: 'cookie.svg',
         audioSrc: 'cookie.mp3',
+        categoryId: 'food',
       },
       {
         id: 'ice-cream',
@@ -339,6 +382,7 @@ const dataEn = [
         translation: 'мороженое',
         image: 'ice-cream.svg',
         audioSrc: 'ice-cream.mp3',
+        categoryId: 'food',
       },
       {
         id: 'pumpkin',
@@ -346,6 +390,7 @@ const dataEn = [
         translation: 'тыква',
         image: 'pumpkin.svg',
         audioSrc: 'pumpkin.mp3',
+        categoryId: 'food',
       },
       {
         id: 'strawberry',
@@ -353,6 +398,7 @@ const dataEn = [
         translation: 'клубника',
         image: 'strawberry.svg',
         audioSrc: 'strawberry.mp3',
+        categoryId: 'food',
       },
       {
         id: 'tomato',
@@ -360,6 +406,7 @@ const dataEn = [
         translation: 'помидор',
         image: 'tomato.svg',
         audioSrc: 'tomato.mp3',
+        categoryId: 'food',
       },
       {
         id: 'watermelon',
@@ -367,6 +414,7 @@ const dataEn = [
         translation: 'арбуз',
         image: 'watermelon.svg',
         audioSrc: 'watermelon.mp3',
+        categoryId: 'food',
       },
     ],
   },
@@ -381,6 +429,7 @@ const dataEn = [
         translation: 'красный',
         image: 'red.svg',
         audioSrc: 'red.mp3',
+        categoryId: 'colors',
       },
       {
         id: 'blue',
@@ -388,6 +437,7 @@ const dataEn = [
         translation: 'синий',
         image: 'blue.svg',
         audioSrc: 'blue.mp3',
+        categoryId: 'colors',
       },
       {
         id: 'orange',
@@ -395,6 +445,7 @@ const dataEn = [
         translation: 'оранжевый',
         image: 'orange.svg',
         audioSrc: 'orange.mp3',
+        categoryId: 'colors',
       },
       {
         id: 'black',
@@ -402,6 +453,7 @@ const dataEn = [
         translation: 'черный',
         image: 'black.svg',
         audioSrc: 'black.mp3',
+        categoryId: 'colors',
       },
       {
         id: 'violet',
@@ -409,6 +461,7 @@ const dataEn = [
         translation: 'фиолетовый',
         image: 'violet.svg',
         audioSrc: 'violet.mp3',
+        categoryId: 'colors',
       },
       {
         id: 'green',
@@ -416,6 +469,7 @@ const dataEn = [
         translation: 'зеленый',
         image: 'green.svg',
         audioSrc: 'green.mp3',
+        categoryId: 'colors',
       },
       {
         id: 'yellow',
@@ -423,6 +477,7 @@ const dataEn = [
         translation: 'желтый',
         image: 'yellow.svg',
         audioSrc: 'yellow.mp3',
+        categoryId: 'colors',
       },
       {
         id: 'brown',
@@ -430,6 +485,7 @@ const dataEn = [
         translation: 'коричневый',
         image: 'brown.svg',
         audioSrc: 'brown.mp3',
+        categoryId: 'colors',
       },
     ],
   },
@@ -444,6 +500,7 @@ const dataEn = [
         translation: 'рука',
         image: 'arm.svg',
         audioSrc: 'arm.mp3',
+        categoryId: 'human-body',
       },
       {
         id: 'ear',
@@ -451,6 +508,7 @@ const dataEn = [
         translation: 'ухо',
         image: 'ear.svg',
         audioSrc: 'ear.mp3',
+        categoryId: 'human-body',
       },
       {
         id: 'finger',
@@ -458,6 +516,7 @@ const dataEn = [
         translation: 'палец',
         image: 'finger.svg',
         audioSrc: 'finger.mp3',
+        categoryId: 'human-body',
       },
       {
         id: 'foot',
@@ -465,6 +524,7 @@ const dataEn = [
         translation: 'ступня',
         image: 'foot.svg',
         audioSrc: 'foot.mp3',
+        categoryId: 'human-body',
       },
       {
         id: 'hand',
@@ -472,6 +532,7 @@ const dataEn = [
         translation: 'кисть',
         image: 'hand.svg',
         audioSrc: 'hand.mp3',
+        categoryId: 'human-body',
       },
       {
         id: 'head',
@@ -479,6 +540,7 @@ const dataEn = [
         translation: 'голова',
         image: 'head.svg',
         audioSrc: 'head.mp3',
+        categoryId: 'human-body',
       },
       {
         id: 'leg',
@@ -486,6 +548,7 @@ const dataEn = [
         translation: 'нога',
         image: 'leg.svg',
         audioSrc: 'leg.mp3',
+        categoryId: 'human-body',
       },
       {
         id: 'nose',
@@ -493,6 +556,7 @@ const dataEn = [
         translation: 'нос',
         image: 'nose.svg',
         audioSrc: 'nose.mp3',
+        categoryId: 'human-body',
       },
     ],
   },
@@ -507,6 +571,7 @@ const dataEn = [
         translation: 'гора',
         image: 'mountain.svg',
         audioSrc: 'mountain.mp3',
+        categoryId: 'nature',
       },
       {
         id: 'rain',
@@ -514,6 +579,7 @@ const dataEn = [
         translation: 'дождь',
         image: 'rain.svg',
         audioSrc: 'rain.mp3',
+        categoryId: 'nature',
       },
       {
         id: 'rainbow',
@@ -521,6 +587,7 @@ const dataEn = [
         translation: 'радуга',
         image: 'rainbow.svg',
         audioSrc: 'rainbow.mp3',
+        categoryId: 'nature',
       },
       {
         id: 'river',
@@ -528,6 +595,7 @@ const dataEn = [
         translation: 'река',
         image: 'river.svg',
         audioSrc: 'river.mp3',
+        categoryId: 'nature',
       },
       {
         id: 'sea',
@@ -535,6 +603,7 @@ const dataEn = [
         translation: 'море',
         image: 'sea.svg',
         audioSrc: 'sea.mp3',
+        categoryId: 'nature',
       },
       {
         id: 'snow',
@@ -542,6 +611,7 @@ const dataEn = [
         translation: 'снег',
         image: 'snow.svg',
         audioSrc: 'snow.mp3',
+        categoryId: 'nature',
       },
       {
         id: 'storm',
@@ -549,6 +619,7 @@ const dataEn = [
         translation: 'гроза',
         image: 'storm.svg',
         audioSrc: 'storm.mp3',
+        categoryId: 'nature',
       },
       {
         id: 'sun',
@@ -556,6 +627,7 @@ const dataEn = [
         translation: 'солнце',
         image: 'sun.svg',
         audioSrc: 'sun.mp3',
+        categoryId: 'nature',
       },
       {
         id: 'tree',
@@ -563,6 +635,7 @@ const dataEn = [
         translation: 'дерево',
         image: 'tree.svg',
         audioSrc: 'tree.mp3',
+        categoryId: 'nature',
       },
       {
         id: 'volcano',
@@ -570,6 +643,7 @@ const dataEn = [
         translation: 'вулкан',
         image: 'volcano.svg',
         audioSrc: 'volcano.mp3',
+        categoryId: 'nature',
       },
       {
         id: 'wave',
@@ -577,6 +651,7 @@ const dataEn = [
         translation: 'волна',
         image: 'wave.svg',
         audioSrc: 'wave.mp3',
+        categoryId: 'nature',
       },
       {
         id: 'wind',
@@ -584,6 +659,7 @@ const dataEn = [
         translation: 'ветер',
         image: 'wind.svg',
         audioSrc: 'wind.mp3',
+        categoryId: 'nature',
       },
     ],
   },
@@ -598,6 +674,7 @@ const dataEn = [
         translation: 'радуга',
         image: 'rainbow.svg',
         audioSrc: 'rainbow.mp3',
+        categoryId: 'test',
       },
       {
         id: 'sea',
@@ -605,6 +682,7 @@ const dataEn = [
         translation: 'море',
         image: 'sea.svg',
         audioSrc: 'sea.mp3',
+        categoryId: 'test',
       },
     ],
   },

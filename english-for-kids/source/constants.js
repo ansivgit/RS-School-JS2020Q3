@@ -1,5 +1,6 @@
 const CONSTANTS = {
   mainNav: 'main-nav',
+  blackout: 'blackout',
   mainNavActive: 'main-nav--active',
   mainNavContainer: 'main-nav__container',
   mainNavItem: 'main-nav__item',
@@ -46,6 +47,7 @@ const TAGS = {
   div: 'div',
   li: 'li',
   span: 'span',
+  tr: 'tr',
 };
 
 export default CONSTANTS;

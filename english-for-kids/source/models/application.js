@@ -6,6 +6,8 @@ import mainNavCreate from '../view/mainNavCreate';
 import toggleMenu from '../handlers/toggleMenu';
 import toggleMode from '../handlers/toggleMode';
 import gaming from '../handlers/gaming';
+import statTableCreate from '../view/statTableCreate';
+import Statistic from './statistic';
 
 class App {
   constructor(lang) {
@@ -16,6 +18,7 @@ class App {
     this.isPlay = false;
     this.isPlayContinue = false;
     this.currentCategory = null;
+    this.statistic = {};
   }
 
   init() {
@@ -32,6 +35,8 @@ class App {
 
     this.startPageCreate(this.data);
     mainNavCreate(this.categories);
+    this.newStatistic = new Statistic(this.data);
+    this.newStatistic.create();
 
     // eslint-disable-next-line consistent-return
     this.cards.addEventListener('click', (event) => {
@@ -47,6 +52,13 @@ class App {
       if (cardWord && !cardBtn && !isActive && this.isPlay !== true) {
         const activeCard = cardWord.getAttribute(CONSTANTS.dataWord);
         const audio = cardWord.querySelector(`audio[data-sound='${activeCard}']`);
+        if (!this.statistic[activeCard]) {
+          this.statistic[activeCard] = { trainValue: 0 };
+        }
+
+        this.statistic[activeCard].trainValue = 1;
+        console.log(this.statistic);
+        this.newStatistic.setStat(this.statistic, 'train');
 
         if (!audio) {
           // eslint-disable-next-line no-alert
@@ -74,8 +86,9 @@ class App {
       const { target } = event;
       const button = target.closest(`.${CONSTANTS.mainNavBtn}`);
       const menuItem = target.closest(`.${CONSTANTS.mainNavItem}`);
+      const blackout = target.closest(`.${CONSTANTS.blackout}`);
 
-      if (button) {
+      if (button || blackout) {
         toggleMenu(this.currentCategory);
       }
 
@@ -107,7 +120,7 @@ class App {
     this.playBtn.addEventListener('click', () => {
       if (!this.isPlayContinue) {
         this.isPlayContinue = true;
-        gaming(this.currentCategory, this.isPlay, () => {
+        gaming(this.currentCategory, this.statistic, () => {
           this.renewApp();
         });
         this.playBtn.removeEventListener('click', gaming);
@@ -115,8 +128,7 @@ class App {
     });
 
     this.statBtn.addEventListener('click', () => {
-      // console.log(this.toggleCheckbox.checked);
-      console.log(this.isPlayContinue, this.isPlay);
+      statTableCreate();
     });
   }
 
@@ -129,7 +141,6 @@ class App {
 
     this.startPageCreate(this.data);
     toggleMode(this.currentCategory, this.isPlay);
-    // gaming(this.currentCategory, false, () => { });
   }
 
   startPageCreate(data) {
