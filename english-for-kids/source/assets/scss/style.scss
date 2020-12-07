@@ -3,32 +3,22 @@
 
 :root {
   font-size: 16px;
-
-  // @media (max-width: 500px) {
-  //   font-size: 14px;
-  // }
-  // @media (max-width: 280px) {
-  //   font-size: 11.5px;
-  // }
-  // @media (min-width: 1600px) {
-  //   font-size: 24px;
-  // }
 }
 
 //* variables
 
 //$primary-font: "Josefin Sans", sans-serif;
-$primary-font: "Varela Round", sans-serif;
-$secondary-font: "Gochi Hand", cursive;
+$primary-font: 'Varela Round', 'Montserrat', sans-serif;
+$secondary-font: 'Gochi Hand', cursive;
 
 $primary-theme-color: #158cba;
-$secondary-theme-color: #FF851B;
-$menu-theme-color: #28B62C;
+$secondary-theme-color: #ff851b;
+$menu-theme-color: #28b62c;
 
-$primary-color:  #102585;
+$primary-color: #102585;
 // $secondary-color: darkgreen;
 
-$primary-bg-color:  rgb(255, 255, 255);
+$primary-bg-color: rgb(255, 255, 255);
 // $secondary-bg-color: rgba(85, 107, 47, 0.6);
 
 $card-width: 17rem;
@@ -86,10 +76,25 @@ button {
   min-height: 100vh;
 }
 
+.blackout {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(41, 41, 41, 0.6);
+  transform: translateX($main-nav-width);
+  transition: all 0.6s;
+}
+
 .header {
+  position: fixed;
+  top: 0;
+  z-index: 10;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  width: 100%;
+  background-color: $primary-theme-color;
 }
 
 .main-nav {
@@ -123,8 +128,7 @@ button {
 
     &--active {
       background-color: $secondary-theme-color;
-      box-shadow:  5px 5px 12px #66350b,
-                  -5px -5px 12px #ffd52b;
+      box-shadow: 5px 5px 12px #66350b, -5px -5px 12px #ffd52b;
     }
 
     &:first-child {
@@ -132,8 +136,7 @@ button {
     }
 
     &:hover {
-      box-shadow:  6px 6px 12px #104912,
-                  -6px -6px 12px #40ff46;
+      box-shadow: 6px 6px 12px #104912, -6px -6px 12px #40ff46;
     }
   }
 
@@ -155,8 +158,8 @@ button {
 
     &:hover > .main-nav__decorate,
     &:hover > .main-nav__decorate::before,
-    &:hover > .main-nav__decorate::after{
-      box-shadow: 6px 6px 5px rgba(11,25,87,0.8);
+    &:hover > .main-nav__decorate::after {
+      box-shadow: 6px 6px 5px rgba(11, 25, 87, 0.8);
     }
   }
 
@@ -169,12 +172,12 @@ button {
     border-radius: 0.4rem;
     background: $primary-bg-color;
     transition: all 0.3s;
-    box-shadow: inset 0px 1px 1px rgba(11,25,87,0.5), 0px 1px 0px rgba(255,255,255,0.5);
+    box-shadow: inset 0px 1px 1px rgba(11, 25, 87, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.5);
   }
 
   &__decorate {
     position: relative;
-    box-shadow: inset 0px 1px 1px rgba(11,25,87,0.8), 0px 1px 0px rgba(21,140,186,0.7);
+    box-shadow: inset 0px 1px 1px rgba(11, 25, 87, 0.8), 0px 1px 0px rgba(21, 140, 186, 0.7);
 
     &::before {
       content: '';
@@ -204,8 +207,8 @@ button {
   }
 
   &__btn--active:hover > .main-nav__decorate::before,
-  &__btn--active:hover > .main-nav__decorate::after{
-    box-shadow: -5px 6px 5px rgba(11,25,87,0.5);
+  &__btn--active:hover > .main-nav__decorate::after {
+    box-shadow: -5px 6px 5px rgba(11, 25, 87, 0.5);
   }
 }
 
@@ -243,7 +246,7 @@ button {
   margin: 20px auto;
   position: relative;
   border-radius: 50px;
-  box-shadow: inset 0px 1px 1px rgb(11,25,87,0.5), 0px 1px 0px rgba(255,255,255,0.5);
+  box-shadow: inset 0px 1px 1px rgb(11, 25, 87, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.5);
 
   &--play {
     background-color: $secondary-theme-color;
@@ -262,7 +265,7 @@ button {
   &:after {
     content: 'TRAIN';
     right: 10px;
-    text-shadow: 1px 1px 0px rgba(255,255,255,.15);
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.15);
   }
 
   &:before {
@@ -283,7 +286,7 @@ button {
     background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
     border-radius: 50px;
     transition: all 0.4s ease;
-    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
   }
 
   &__checkbox {
@@ -310,6 +313,10 @@ button {
   background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
   color: $primary-color;
   cursor: pointer;
+}
+
+.stats__btn:hover {
+  box-shadow: 6px 6px 5px rgba(11, 25, 87, 0.8);
 }
 
 .main__container {
@@ -355,7 +362,7 @@ button {
 .title--category {
   font-family: $secondary-font;
   font-size: 3rem;
-  margin-top: 1.25rem;
+  margin-top: 7.25rem;
   text-align: center;
   color: $primary-color;
   text-shadow: 2px 2px 2px $primary-bg-color;
@@ -366,18 +373,16 @@ button {
   top: 10px;
   right: -180px;
   background: $secondary-theme-color;
-  box-shadow: inset -4px -4px 8px #d97117,
-              inset 4px 4px 8px #ff991f;
+  box-shadow: inset -4px -4px 8px #d97117, inset 4px 4px 8px #ff991f;
   //background: linear-gradient(to bottom, #ff851b 0%, #ba6028 100%);
   transition: all 0.4s ease;
 
   &:hover {
-    box-shadow: 4px 4px 8px #0b4c64,
-                -4px -4px 8px #1fccff;
+    box-shadow: 4px 4px 8px #0b4c64, -4px -4px 8px #1fccff;
   }
 
   &:disabled {
-    background: #FF851B;
+    background: #ff851b;
     opacity: 0.5;
     box-shadow: none;
     cursor: not-allowed;
@@ -391,8 +396,7 @@ button {
     width: 146px;
     padding-left: 1.5rem;
     background: $menu-theme-color;
-    box-shadow: inset -4px -4px 8px #229b25,
-                inset 4px 4px 8px #2ed133;
+    box-shadow: inset -4px -4px 8px #229b25, inset 4px 4px 8px #2ed133;
 
     &::before {
       content: '';
@@ -434,12 +438,10 @@ button {
     &--category {
       padding: 20px 10px;
       background-color: $primary-bg-color;
-      box-shadow: inset -11px -11px 22px #9c9c9c,
-      inset 11px 11px 22px #ffffff;
+      box-shadow: inset -11px -11px 22px #9c9c9c, inset 11px 11px 22px #ffffff;
 
       &:hover {
-        box-shadow: -11px -11px 12px #0b4c64,
-                    11px 11px 12px #1fccff;
+        box-shadow: -11px -11px 12px #0b4c64, 11px 11px 12px #1fccff;
         transform: translateY(-5px) scale(1.005) translateZ(0);
       }
     }
@@ -460,20 +462,17 @@ button {
       padding: 20px 10px;
       background-color: $primary-bg-color;
       border-radius: 2rem;
-      box-shadow: inset -11px -11px 22px #9c9c9c,
-                  inset 11px 11px 22px #ffffff;
+      box-shadow: inset -11px -11px 22px #9c9c9c, inset 11px 11px 22px #ffffff;
 
       &:hover {
-        box-shadow: -11px -11px 12px #0b4c64,
-                    11px 11px 12px #1fccff;
+        box-shadow: -11px -11px 12px #0b4c64, 11px 11px 12px #1fccff;
         transform: translateY(-5px) scale(1.005) translateZ(0);
       }
     }
 
     &--back {
       transform: rotateY(180deg);
-      box-shadow: -11px -11px 12px #0b4c64,
-                  11px 11px 12px #1fccff;
+      box-shadow: -11px -11px 12px #0b4c64, 11px 11px 12px #1fccff;
     }
 
     &--active .cards__item--front {
@@ -557,5 +556,106 @@ button {
     text-align: center;
     color: $primary-bg-color;
     text-shadow: 3px 3px 3px $primary-color;
+  }
+}
+
+.statistic {
+  position: absolute;
+  top: 6.3rem;
+  z-index: 100;
+  min-height: 100%;
+  min-width: 100%;
+  background-color: $primary-bg-color;
+  color: $primary-color;
+
+  &__header {
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 30px 0;
+    background-color: $primary-theme-color;
+  }
+
+  &__title {
+    display: block;
+    width: 100%;
+    margin: 2rem 1rem;
+    text-align: left;
+    font-family: $secondary-font;
+    font-size: 2rem;
+    box-sizing: border-box;
+  }
+
+  &__content {
+    min-height: 100%;
+    min-width: 100%;
+    border-collapse: collapse;
+
+    &__row {
+      //border-bottom: 1px solid rgba(16,37,133,0.2);
+      text-align: center;
+
+      &--header {
+        margin: 1rem 0.5rem;
+        border-bottom: 3px solid rgba(16, 37, 133, 0.6);
+      }
+    }
+  }
+}
+
+th {
+  padding: 0.75rem 3px;
+}
+
+td {
+  border-bottom: 1px solid rgba(16, 37, 133, 0.2);
+  padding: 0.5rem 0;
+}
+
+td:first-child {
+  padding-left: 1rem;
+  text-align: left;
+}
+
+.footer__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  box-shadow: inset 7px 7px 13px #12779e,
+              inset -7px -7px 13px #18a1d6;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+
+  :hover {
+    border-radius: 1.25rem;
+    box-shadow: 7px 7px 13px #08384a,
+    -7px -7px 13px #22e0ff;
+  }
+
+  &__gh-link {
+    display: flex;
+    align-items: center;
+    padding-left: 0.5rem;
+    font-weight: bold;
+    color: $primary-color;
+    text-decoration: none;
+
+    & > svg {
+      height: 2.3rem;
+      margin-left: 0.5rem;
+    }
+  }
+}
+
+.RSS-logo {
+  &> svg {
+    height: 2rem;
   }
 }
