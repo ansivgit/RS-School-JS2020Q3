@@ -32,7 +32,7 @@ function gaming(categoryObj, onEnd) {
     audio.play();
   });
 
-  cards.addEventListener('click', (event) => {
+  const handler = (event) => {
     const cardWord = event.target.closest(`.${CONSTANTS.cardWord}`);
     const audioIsTrue = new Audio('./sounds/isTrue.mp3');
     const audioIsFalse = new Audio('./sounds/isFalse.mp3');
@@ -65,7 +65,8 @@ function gaming(categoryObj, onEnd) {
       // audio.currentTime = 0;
       // audio.play();
     }
-  });
+  };
+  cards.addEventListener('click', (event) => handler(event));
 }
 
 export default gaming;

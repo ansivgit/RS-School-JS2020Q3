@@ -115,7 +115,7 @@ class App {
     });
 
     this.statBtn.addEventListener('click', () => {
-      //console.log(this.toggleCheckbox.checked);
+      // console.log(this.toggleCheckbox.checked);
       console.log(this.isPlayContinue, this.isPlay);
     });
   }
@@ -129,7 +129,7 @@ class App {
 
     this.startPageCreate(this.data);
     toggleMode(this.currentCategory, this.isPlay);
-    //gaming(this.currentCategory, false, () => { });
+    // gaming(this.currentCategory, false, () => { });
   }
 
   startPageCreate(data) {

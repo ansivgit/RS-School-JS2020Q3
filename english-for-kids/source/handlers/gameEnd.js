@@ -26,7 +26,7 @@ function gameEnd(result, mistakes, onEnd) {
   setTimeout(() => {
     gameOver.classList.add(CONSTANTS.visuallyHidden);
     document.location.reload();
-    onEnd();
+    // onEnd();
   }, 4000);
 }
 
