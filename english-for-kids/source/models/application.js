@@ -57,7 +57,6 @@ class App {
         }
 
         this.statistic[activeCard].trainValue = 1;
-        console.log(this.statistic);
         this.newStatistic.setStat(this.statistic, 'train');
 
         if (!audio) {
