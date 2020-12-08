@@ -23,11 +23,13 @@ $rating-star-size: 2.5rem;
 
 $main-nav-width: 19rem;
 
-$media-midW: 1023px; // переключаемся на планшетную версию
-$media-minW: 767px; // переключаемся на мобильную версию
+$media-midW: 1023px;
+$media-minW: 767px;s
 
 :root {
   font-size: 16px;
+  width: 100%;
+  background-color: $primary-theme-color;
 }
 
 body {
@@ -75,9 +77,9 @@ button {
 }
 
 .header {
-  position: fixed;
-  top: 0;
-  z-index: 10;
+  //position: fixed;
+  //top: 0;
+  //z-index: 10;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -229,7 +231,7 @@ button {
 .modes {
   display: flex;
   align-items: center;
-  padding-right: 15px;
+  padding-right: 1rem;
 
   @media (max-width: $media-minW) {
     flex-direction: column-reverse;
@@ -241,7 +243,7 @@ button {
 .toggle {
   width: 10rem;
   height: 2.6rem;
-  margin: 20px 15px;
+  margin: 20px 1rem;
   background-color: $menu-theme-color;
   position: relative;
   border-radius: 50px;
@@ -303,6 +305,7 @@ button {
 
 .stats__btn,
 .play-mode {
+  //z-index: 1000;
   height: 2.58rem;
   padding: 8px 10px 5px 10px;
   border: none;
@@ -332,7 +335,6 @@ button {
   position: relative;
   overflow-x: hidden;
   flex-grow: 0;
-  //height: 100%;
 }
 
 .main__rating {
@@ -364,7 +366,7 @@ button {
 .title--category {
   font-family: $secondary-font;
   font-size: 3rem;
-  margin-top: 7.25rem;
+  margin-top: 1.25rem;
   text-align: center;
   color: $primary-color;
   text-shadow: 2px 2px 2px $primary-bg-color;
@@ -374,6 +376,7 @@ button {
   position: absolute;
   top: 10px;
   right: -180px;
+  margin-right: 1rem;
   background: $secondary-theme-color;
   box-shadow: inset -4px -4px 8px #d97117, inset 4px 4px 8px #ff991f;
   //background: linear-gradient(to bottom, #ff851b 0%, #ba6028 100%);
@@ -577,7 +580,7 @@ button {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: 30px 15px;
+    padding: 30px 1rem;
     background-color: $primary-theme-color;
   }
 
