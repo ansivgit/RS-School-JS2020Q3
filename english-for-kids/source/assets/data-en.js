@@ -663,29 +663,29 @@ const dataEn = [
       },
     ],
   },
-  {
-    categoryId: 'test',
-    categoryName: 'test-test',
-    categoryImg: './img/test/test-category.svg',
-    categoryData: [
-      {
-        id: 'rainbow',
-        word: 'rainbow',
-        translation: 'радуга',
-        image: 'rainbow.svg',
-        audioSrc: 'rainbow.mp3',
-        categoryId: 'test',
-      },
-      {
-        id: 'sea',
-        word: 'sea',
-        translation: 'море',
-        image: 'sea.svg',
-        audioSrc: 'sea.mp3',
-        categoryId: 'test',
-      },
-    ],
-  },
+  // {
+  //   categoryId: 'test',
+  //   categoryName: 'test-test',
+  //   categoryImg: './img/test/test-category.svg',
+  //   categoryData: [
+  //     {
+  //       id: 'rainbow',
+  //       word: 'rainbow',
+  //       translation: 'радуга',
+  //       image: 'rainbow.svg',
+  //       audioSrc: 'rainbow.mp3',
+  //       categoryId: 'test',
+  //     },
+  //     {
+  //       id: 'sea',
+  //       word: 'sea',
+  //       translation: 'море',
+  //       image: 'sea.svg',
+  //       audioSrc: 'sea.mp3',
+  //       categoryId: 'test',
+  //     },
+  //   ],
+  // },
 ];
 
 export default dataEn;

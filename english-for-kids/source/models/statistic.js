@@ -1,5 +1,3 @@
-import CONSTANTS from '../constants';
-
 class Statistic {
   constructor(data) {
     this.data = data;
@@ -51,9 +49,8 @@ class Statistic {
       } else {
         findWord.playValue += wordsArr[word].playValue;
         findWord.mistakesValue += wordsArr[word].mistakesValue;
+        findWord.proportion = `${(findWord.playValue / (findWord.playValue + findWord.mistakesValue)) * 100}%`;
       }
-
-      findWord.proportion = `${(findWord.playValue / (findWord.playValue + findWord.mistakesValue)) * 100}%`;
     });
     this.save(this.stat);
 
@@ -74,7 +71,6 @@ class Statistic {
     //   rainbow: { playValue: 1, mistakesValue: 3 },
     //   sea: { playValue: 1, mistakesValue: 0 }
     // }
-
   }
 
   getStat() {

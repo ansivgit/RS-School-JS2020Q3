@@ -29,6 +29,7 @@ $media-minW: 767px;s
 :root {
   font-size: 16px;
   width: 100%;
+  height: 100%;
   background-color: $primary-theme-color;
 }
 
@@ -81,7 +82,7 @@ button {
   //top: 0;
   //z-index: 10;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   background-color: $primary-theme-color;
@@ -204,7 +205,6 @@ button {
 
 .title {
   &__btn {
-    margin: 0 auto;
     border: none;
     background-color: transparent;
     text-shadow: 3px 3px 4px $primary-color;
@@ -217,12 +217,16 @@ button {
   }
 
   &--main {
-    margin: 0 auto;
+    margin-left: 7rem;
     font-family: $secondary-font;
     font-size: 5rem;
     color: $primary-bg-color;
 
     @media (max-width: $media-midW) {
+      font-size: 3rem;
+    }
+
+    @media (max-width: $media-minW) {
       font-size: 0;
     }
   }
@@ -568,7 +572,7 @@ button {
   position: absolute;
   top: 6.3rem;
   z-index: 100;
-  min-height: 100%;
+  //min-height: 100%;
   min-width: 100%;
   background-color: $primary-bg-color;
   color: $primary-color;

@@ -1,5 +1,4 @@
 import CONSTANTS, { TAGS } from '../constants';
-import Statistic from '../models/statistic';
 import getTableRow from '../templates/getTableRow';
 
 function statTableCreate() {
@@ -7,13 +6,21 @@ function statTableCreate() {
   const statisticBlock = document.querySelector('.statistic');
   const statisticTable = document.querySelector('.statistic__body');
   const statisticBtnClose = document.querySelector('.stats__btn--close');
+  let tableRow = document.createElement(TAGS.tr);
+
+  statisticTable.innerHTML = '';
 
   if (!statistic) {
     return;
   }
 
+  tableRow.className = 'statistic__content__row';
+  tableRow.classList.add('statistic__content__row--header');
+  tableRow.innerHTML = getTableRow({}, 'head');
+  statisticTable.append(tableRow);
+
   statistic.forEach((word) => {
-    const tableRow = document.createElement(TAGS.tr);
+    tableRow = document.createElement(TAGS.tr);
     tableRow.innerHTML = getTableRow(word);
     statisticTable.append(tableRow);
   });
