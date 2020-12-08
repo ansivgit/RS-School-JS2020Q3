@@ -2,7 +2,7 @@ const dataEn = [
   {
     categoryId: 'family',
     categoryName: 'family',
-    categoryImg: './img/food/food-category.svg',
+    categoryImg: './img/family/family-category.svg',
     categoryData: [
       {
         id: 'baby',
@@ -73,7 +73,7 @@ const dataEn = [
   {
     categoryId: 'home',
     categoryName: 'home',
-    categoryImg: './img/food/food-category.svg',
+    categoryImg: './img/home/home-category.svg',
     categoryData: [
       {
         id: 'armchair',
@@ -144,7 +144,7 @@ const dataEn = [
   {
     categoryId: 'animals',
     categoryName: 'animals',
-    categoryImg: './img/food/food-category.svg',
+    categoryImg: './img/animals/animals-category.svg',
     categoryData: [
       {
         id: 'cat',
@@ -247,7 +247,7 @@ const dataEn = [
   {
     categoryId: 'clothes',
     categoryName: 'clothes',
-    categoryImg: './img/food/food-category.svg',
+    categoryImg: './img/clothes/clothes-category.svg',
     categoryData: [
       {
         id: 'baseball-cap',
@@ -421,7 +421,7 @@ const dataEn = [
   {
     categoryId: 'colors',
     categoryName: 'colors',
-    categoryImg: './img/food/food-category.svg',
+    categoryImg: './img/colors/colors-category.svg',
     categoryData: [
       {
         id: 'red',
@@ -492,7 +492,7 @@ const dataEn = [
   {
     categoryId: 'human-body',
     categoryName: 'human body',
-    categoryImg: './img/food/food-category.svg',
+    categoryImg: './img/human-body/human-body-category.svg',
     categoryData: [
       {
         id: 'arm',
@@ -563,7 +563,7 @@ const dataEn = [
   {
     categoryId: 'nature',
     categoryName: 'nature',
-    categoryImg: './img/food/food-category.svg',
+    categoryImg: './img/nature/nature-category.svg',
     categoryData: [
       {
         id: 'mountain',
@@ -666,7 +666,7 @@ const dataEn = [
   {
     categoryId: 'test',
     categoryName: 'test-test',
-    categoryImg: './img/food/food-category.svg',
+    categoryImg: './img/test/test-category.svg',
     categoryData: [
       {
         id: 'rainbow',
