@@ -103,10 +103,8 @@ dist
 # TernJS port file
 .tern-port
 
-.gitignore
-shelter/pages-in-jpg
-shelter/assets/images/clear_images/
+
+*/source/development/
 .eslintrc.json
 package-lock.json
-package.json
 .gitignore
