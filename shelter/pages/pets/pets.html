@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en, ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our pets</title>
+    <link href="./pets.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="wrapper--main wrapper--main--light wrapper--main--sticky">
+      <div class="container-content">
+        <header class="header--desktop header--desktop--regular">
+          <div class="logo logo-desktop">
+            <a href="../main/main.html" class="logo__title logo__title--regular">Cozy House</a>
+            <span class="logo__subtitle logo__subtitle--regular">Shelter for pets in Boston</span>
+          </div>
+          <div class="blackout hide"></div>
+          <button class="menu-mobile__btn">
+            <span class="menu-mobile__decorate menu-mobile__decorate--light"></span>
+          </button>
+          <nav class="main-nav">
+            <div class="logo logo--mobile hide">
+              <a href="../main/main.html" class="logo__title">Cozy House</a>
+              <span class="logo__subtitle">Shelter for pets in Boston</span>
+            </div>
+            <ul class="main-menu">
+              <li class="main-menu__item">
+                <a class="main-menu__link main-menu__link--regular" href="../main/main.html" role="menuitem">About the shelter</a>
+              </li>
+              <li class="main-menu__item">
+                <a class="main-menu__link main-menu__link--regular main-menu__link--regular--active" href="../pets/pets.html" role="menuitem">Our pets</a>
+              </li>
+              <li class="main-menu__item">
+                <a class="main-menu__link main-menu__link--regular main-menu__link--regular--disabled" href="/some-address/change-me" role="menuitem">Help the shelter</a>
+              </li>
+              <li class="main-menu__item">
+                <a class="main-menu__link main-menu__link--regular main-menu__link--regular--disabled" href="/some-address/change-me" role="menuitem">Contacts</a>
+              </li>
+            </ul>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <main class="main-content">
+      <div class="wrapper--main wrapper--main--color">
+        <h1 class="h1-hide">Pets shelter</h1>
+        <section class="container-content cards">
+          <h3 class="cards__title">Our friends who are&nbsp;looking for a house</h3>
+          <div class="cards__wrapper">
+            <ul class="cards__list__container">
+              <!-- <li class="cards__item">
+                <img class="cards__item__img" src="../../assets/images/slider_photo01.png" alt="Сat Katrine" />
+                <h4 class="cards__item__name">Katrine</h4>
+                <a class="btn btn--secondary" href="/some-address/change-me" target="_blanc">Learn more</a>
+              </li>
+              <li class="cards__item">
+                <img class="cards__item__img" src="../../assets/images/slider_photo02.png" alt="Puppy Jennifer" />
+                <h4 class="cards__item__name">Jennifer</h4>
+                <a class="btn btn--secondary" href="/some-address/change-me" target="_blanc">Learn more</a>
+              </li>
+              <li class="cards__item">
+                <img class="cards__item__img" src="../../assets/images/slider_photo03.png" alt="Dog Woody" />
+                <h4 class="cards__item__name">Woody</h4>
+                <a class="btn btn--secondary" href="/some-address/change-me" target="_blanc">Learn more</a>
+              </li>
+              <li class="cards__item">
+                <img class="cards__item__img" src="../../assets/images/looking_04.png" alt="Puppy Sophia" />
+                <h4 class="cards__item__name">Sophia</h4>
+                <a class="btn btn--secondary" href="/some-address/change-me" target="_blanc">Learn more</a>
+              </li>
+              <li class="cards__item">
+                <img class="cards__item__img" src="../../assets/images/looking_05.png" alt="Cat Timmy" />
+                <h4 class="cards__item__name">Timmy</h4>
+                <a class="btn btn--secondary" href="/some-address/change-me" target="_blanc">Learn more</a>
+              </li>
+              <li class="cards__item">
+                <img class="cards__item__img" src="../../assets/images/looking_06.png" alt="Dog Charly" />
+                <h4 class="cards__item__name">Charly</h4>
+                <a class="btn btn--secondary" href="/some-address/change-me" target="_blanc">Learn more</a>
+              </li>
+              <li class="cards__item">
+                <img class="cards__item__img" src="../../assets/images/looking_07.png" alt="Puppy Scarlett" />
+                <h4 class="cards__item__name">Scarlett</h4>
+                <a class="btn btn--secondary" href="/some-address/change-me" target="_blanc">Learn more</a>
+              </li>
+              <li class="cards__item">
+                <img class="cards__item__img" src="../../assets/images/looking_08.png" alt="Cat Freddie" />
+                <h4 class="cards__item__name">Freddie</h4>
+                <a class="btn btn--secondary" href="/some-address/change-me" target="_blanc">Learn more</a>
+              </li> -->
+            </ul>
+            <div class="cards__btn__container">
+              <button
+                class="btn btn--secondary btn--secondary--arrow btn--secondary--arrow--back btn--secondary--arrow--switch--dbl"
+                value="first-page" disabled
+              ></button>
+              <button
+                class="btn btn--secondary btn--secondary--arrow btn--secondary--arrow--back btn--secondary--arrow--switch"
+                value="prev-page" disabled
+              ></button>
+              <button
+                class="btn btn--secondary btn--secondary--arrow btn--secondary--arrow btn--secondary--arrow--active" value="current-page">1</button>
+              <button
+                class="btn btn--secondary btn--secondary--arrow btn--secondary--arrow--forward  btn--secondary--arrow--switch"
+                value="next-page"
+              ></button>
+              <button
+                class="btn btn--secondary btn--secondary--arrow btn--secondary--arrow--forward btn--secondary--arrow--switch--dbl"
+                value="last-page"
+              ></button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="modal hide">
+        <div class="modal__content">
+          <button class="btn btn--secondary btn--secondary--arrow btn--secondary--arrow--cross"></button>
+          <div class="img-wrapper modal__img-wrapper">
+            <img class="modal__img" src="../../assets/images/slider_photo02.png" alt="Pets photo" />
+          </div>
+          <div class="modal__description">
+            <h3 class="modal__description__name"><!--pet's name--></h3>
+            <h4 class="modal__description__breed"><!--pet's breed--></h4>
+            <p class="head5 modal__description__content"><!--pet's description--></p>
+            <ul class="head5 modal__description__list">
+              <li class="modal__description__list__item">
+                <span class="modal__description__list__item--title">Age: </span>
+                <span class="modal__description__list__item--content" data-age></span>
+              </li>
+              <li class="modal__description__list__item">
+                <span class="modal__description__list__item--title">Inoculations: </span>
+                <span class="modal__description__list__item--content" data-inoculations></span>
+              </li>
+              <li class="modal__description__list__item">
+                <span class="modal__description__list__item--title">Diseases: </span>
+                <span class="modal__description__list__item--content" data-diseases></span>
+              </li>
+              <li class="modal__description__list__item">
+                <span class="modal__description__list__item--title">Parasites: </span>
+                <span class="modal__description__list__item--content" data-parasites></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="wrapper--main wrapper--main--footer">
+      <div class="container-content">
+        <footer class="footer--desktop">
+          <div class="footer__content">
+            <div class="footer__content__block">
+              <h3 class="footer__content__title">For questions and suggestions</h3>
+              <a
+                class="head4 footer__content__contacts footer__content__contacts--email"
+                href="mailto:email@shelter.com"
+                >email@shelter.com</a
+              >
+              <a class="head4 footer__content__contacts footer__content__contacts--phone" href="tel:+136745677554"
+                >+13 674 567 75 54</a
+              >
+            </div>
+            <div class="footer__content__block">
+              <h3 class="footer__content__title">We are waiting for your visit</h3>
+              <a
+                class="head4 footer__content__contacts footer__content__contacts--address footer__content__contacts--address--1"
+                href="https://maps.google.com?saddr=Current+Location&daddr=42.358584,-71.054756"
+                data-type="biz"
+                target="_blanc"
+              >
+                1 Central Street, Boston (entrance from the store)
+              </a>
+              <a
+                class="head4 footer__content__contacts footer__content__contacts--address footer__content__contacts--address--2"
+                href="https://maps.google.com?saddr=Current+Location&daddr=51.420422,-0.200137"
+                data-type="biz"
+                target="_blanc"
+              >
+                18 South Park, London
+              </a>
+            </div>
+            <div class="img-wrapper footer__img-wrapper">
+              <img class="footer__img" src="../../assets/images/footer-puppy.png" alt="Puppy licked goodbye" />
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <script src="./pets.js"></script>
+  </body>
+</html>
