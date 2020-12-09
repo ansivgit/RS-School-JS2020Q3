@@ -104,7 +104,7 @@ dist
 .tern-port
 
 
-rsschool_repo.code-workspace
+*/source/development/
+.eslintrc.json
+package-lock.json
 .gitignore
-shelter/pages-in-jpg
-calculator/00script.js
