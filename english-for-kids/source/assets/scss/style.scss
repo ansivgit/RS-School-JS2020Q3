@@ -78,9 +78,6 @@ button {
 }
 
 .header {
-  //position: fixed;
-  //top: 0;
-  //z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -309,7 +306,6 @@ button {
 
 .stats__btn,
 .play-mode {
-  //z-index: 1000;
   height: 2.58rem;
   padding: 8px 10px 5px 10px;
   border: none;
@@ -383,7 +379,6 @@ button {
   margin-right: 1rem;
   background: $secondary-theme-color;
   box-shadow: inset -4px -4px 8px #d97117, inset 4px 4px 8px #ff991f;
-  //background: linear-gradient(to bottom, #ff851b 0%, #ba6028 100%);
   transition: all 0.4s ease;
 
   &:hover {
@@ -572,7 +567,6 @@ button {
   position: absolute;
   top: 6.3rem;
   z-index: 100;
-  //min-height: 100%;
   min-width: 100%;
   background-color: $primary-bg-color;
   color: $primary-color;
@@ -604,7 +598,6 @@ button {
     border-collapse: collapse;
 
     &__row {
-      //border-bottom: 1px solid rgba(16,37,133,0.2);
       text-align: center;
 
       &--header {

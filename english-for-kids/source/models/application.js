@@ -52,6 +52,7 @@ class App {
       if (cardWord && !cardBtn && !isActive && this.isPlay !== true) {
         const activeCard = cardWord.getAttribute(CONSTANTS.dataWord);
         const audio = cardWord.querySelector(`audio[data-sound='${activeCard}']`);
+
         if (!this.statistic[activeCard]) {
           this.statistic[activeCard] = { trainValue: 0 };
         }

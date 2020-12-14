@@ -53,24 +53,6 @@ class Statistic {
       }
     });
     this.save(this.stat);
-
-    // this.stat
-    // [{ "id": "baby",
-    //   "word": "baby",
-    //   "translation": "малыш",
-    //   "categoryId": "family",
-    //   "trainValue": 0,
-    //   "playValue": 0,
-    //   "mistakesValue": 0,
-    //   "proportion": 0
-    // },
-    //   .......]
-
-    // wordsArr
-    // {
-    //   rainbow: { playValue: 1, mistakesValue: 3 },
-    //   sea: { playValue: 1, mistakesValue: 0 }
-    // }
   }
 
   getStat() {

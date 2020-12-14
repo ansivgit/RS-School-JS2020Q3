@@ -3,16 +3,16 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // обработка файлов css
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
-const isDev = process.env.NODE_ENV === 'development'; // устанавливает значение разработка/продакшн
+const isDev = process.env.NODE_ENV === 'development';
 const isProd = !isDev;
 
 const optimization = () => {
   const config = {
     splitChunks: {
-      chunks: 'all', // ищет одинаковый код и выносит его в отдельные файлы (напр., jQuery)
+      chunks: 'all',
     },
   };
 
@@ -37,7 +37,7 @@ const optimization = () => {
 const filename = (ext) => (isDev === true ? `[name].${ext}` : `[name].[contenthash:8].${ext}`);
 
 module.exports = {
-  context: path.resolve(__dirname, 'source'), // определяет "рабочую среду", относительно которой будем писать пути
+  context: path.resolve(__dirname, 'source'),
   entry: {
     main: './script.js',
   },
@@ -47,15 +47,6 @@ module.exports = {
     publicPath: './',
   },
   mode: 'development',
-  // resolve: {
-  //   // определяет расширения по умолчанию, если они опущены
-  //   extensions: ['.js', '.json', '.pug', '.scss', 'css'],
-  //   alias: {
-  //     '@': path.resolve(__dirname, 'source'),  // для упрощения указания путей
-  //     '@blocks': path.resolve(__dirname, 'source/blocks'),
-  //     '@pages': path.resolve(__dirname, 'source/pages'),
-  //   },
-  // },
   optimization: optimization(),
   devServer: {
     historyApiFallback: true,
@@ -70,12 +61,10 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'index.html',
-      filename: 'index.html', // название выходного файла
+      filename: 'index.html',
       favicon: './assets/favicon.ico',
-      // ? chunks: ['index'],
     }),
     new CleanWebpackPlugin(),
-    // применять изменения только при горячей перезагрузке
     new webpack.HotModuleReplacementPlugin(),
 
     new MiniCssExtractPlugin({
@@ -98,30 +87,16 @@ module.exports = {
 
   module: {
     rules: [
-      // JavaScript
       {
         test: /\.js$/,
         exclude: /node_modules/,
         use: ['babel-loader'],
       },
-      // изображения
-      // {
-      //   test: /\.(?:png|jpe?g|gif|svg)$/i,
-      //   exclude: /fonts/,
-      //   type: 'asset/resource',
-      //   generator: {
-      //     filename: isDev
-      //       ? 'assets/img/[name][ext]'
-      //       : 'assets/img/[name][contenthash:8][ext]',
-      //   },
-      // },
-      // шрифты
       {
         test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
         include: /fonts/,
         type: 'asset/inline',
       },
-      // CSS, PostCSS, Sass
       {
         test: /\.(scss|css)$/,
         use: [

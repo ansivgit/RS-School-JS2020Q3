@@ -17,6 +17,7 @@ function toggleMenu(currentCategory) {
     const currentItem = mainNav.querySelector(`[${CONSTANTS.dataCategory}=${currentCategory.categoryName}]`);
     activeCategory = currentItem;
   }
+
   activeCategory.classList.add(CONSTANTS.mainNavItemActive);
 
   if (isActive) {
