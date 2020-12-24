@@ -8,9 +8,7 @@ import Map from '../map/Map';
 import Table from '../table/Table';
 import Graph from '../graph/Graph';
 import Footer from '../footer/Footer';
-import geo from '../../js/geo/geo';
-import graphDrow from '../../js/graphDrow';
-// import geo from '../../js/geo/geo';
+import graphDraw from '../../js/graphDraw';
 
 class View extends Element {
   constructor(parent) {
@@ -28,6 +26,10 @@ class View extends Element {
     this.table = new Table();
     this.graph = new Graph();
     this.footer = new Footer();
+
+    this.keyboardContainer = Element.createDOM({
+      className: 'simple-keyboard',
+    });
 
     this.dataBlocks = [
       this.header,
@@ -50,17 +52,22 @@ class View extends Element {
       this.header.element,
       mainWrapper,
       this.footer.element,
+      this.keyboardContainer,
     );
 
     parent.insertAdjacentElement('afterbegin', this.element);
+    this.size = this.graph.getSize();
   }
 
   init(params) {
     this.loadingScreen.setLoaded();
     this.update(params);
-    geo(params.data);
-    graphDrow(params.data, params.state);
-    // geo(params.data);
+
+    this.graphResizeBtn = this.graph.fullscreenButton;
+    this.graphResizeBtn.addEventListener('click', () => {
+      this.size = this.graph.getSize();
+      graphDraw(params.data, params.state, this.size);
+    });
   }
 
   /**
@@ -74,6 +81,7 @@ class View extends Element {
     this.dataBlocks.forEach((block) => {
       block.update(params);
     });
+    graphDraw(params.data, params.state, this.size);
   }
 }
 

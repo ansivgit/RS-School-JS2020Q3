@@ -5,11 +5,6 @@
   grid-column: 2 / 3;
   display: flex; // потом убрать
   flex-direction: column;
-  //justify-content: space-between;
-  // grid-area: map;
-  // height: 100%;
-  //width: 50%;
-  //outline: 2px solid tomato;
 
   &__block {
     flex: 10 10 auto;
@@ -19,4 +14,50 @@
   .tabs-container {
     margin-top: auto;
   }
+}
+
+.map-wrapper {
+  position: relative;
+  height: 100%;
+}
+
+.map-container {
+  min-height: 300px;
+  height: 100%;
+  z-index: 1
+}
+
+.map__toggles {
+  position: absolute;
+  z-index: 2;
+  bottom: 5px;
+  left: 5px;
+
+  display: flex;
+  flex-wrap: wrap;
+  width: 10rem;
+  justify-content: space-between;
+
+  .toggles {
+    width: 100%;
+  }
+
+  .toggles:first-child {
+    margin-bottom: 3px;
+  }
+}
+
+.leaflet-control-attribution {
+  max-width: 70%;
+}
+
+.leaflet-control-zoom {
+  border: none !important;
+  border-radius: 1100px !important;
+  background-color: transparent;
+}
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  border-radius: 100% !important;
 }

@@ -20,9 +20,7 @@ $s-light-theme-color: #ff523c;
 // $secondary-gradient__half-opacity: linear-gradient(180deg, rgba(111, 207, 151, 0.5) 0%, rgba(102, 210, 234, 0.5) 100%);
 
 //* types
-$primary-type: RobotoCondensed,
-Arial,
-sans-serif;
+$primary-type: RobotoCondensed, Arial, sans-serif;
 
 //* borders
 // $border-depth: 1px;
@@ -43,7 +41,7 @@ $font-h3: 18rem;
 
 //* брейкпоинты
 // $media-maxW: 1223px; // уменьшается только второстепенный шрифт и высота строки в футере
-// $media-midW: 1023px; // уменьшается весь шрифт, мобильное меню и футер
+$media-midW: 1023px; // уменьшается весь шрифт, мобильное меню и футер
 // $media-minW: 760px; // убираем бриф справа, центрируем карточку
 // $media-sMinW: 560px; // убираем логотип
 // $media-uMinW: 410px; // под узкие мобильные экраны - сужаем карточку
