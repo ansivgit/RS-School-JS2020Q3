@@ -1,0 +1,434 @@
+@import '../../../assets/common_scss/_common.scss';
+
+.promo {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 60px;
+  gap: 3.5%;
+
+  @media (max-width: $media-midW) {
+    flex-direction: column;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    width: 460px;
+    margin-top: 164px;
+
+    @media (max-width: $media-midW) {
+      margin: 1px auto 100px auto;
+    }
+    @media (max-width: $media-minW) {
+      width: 100%;
+      margin-bottom: 105px;
+    }
+
+    a.btn {
+      @media (max-width: $media-midW) {
+        display: block;
+        width: fit-content;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  &__title {
+    width: 310px;
+    margin-bottom: 2.7rem;
+    line-height: 130%;
+    color: #ffffff;
+
+    @media (max-width: $media-minW) {
+      max-width: 230px;
+      align-self: center;
+    }
+  }
+
+  &__description {
+    margin-bottom: calc(2.8rem - 1px);
+    line-height: 160%;
+    color: $light-theme-color;
+
+    @media (max-width: $media-midW) {
+      margin-bottom: 2.8rem;
+    }
+    @media (max-width: $media-minW) {
+      margin-bottom: 2.8rem;
+      text-align: center;
+    }
+  }
+
+  &__img-wrapper {
+    @media (max-width: $media-midW) {
+      align-self: flex-end;
+      height: 593px;
+    }
+    @media (max-width: $media-minW) {
+      height: 272px;
+    }
+  }
+}
+
+.about {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 930px;
+  padding-top: 5.33rem;
+  padding-bottom: 6.67rem;
+  gap: 8rem;
+
+  @media (max-width: $media-midW) {
+    flex-direction: column-reverse;
+    align-items: center;
+    padding-top: 5.4rem;
+    padding-bottom: 6.67rem;
+    gap: 5.4rem;
+  }
+  @media (max-width: $media-minW) {
+    padding-top: 2.8rem;
+    padding-bottom: 2.8rem;
+    gap: 2.7rem;
+    text-align: justify;
+  }
+
+  &__img-wrapper {
+    max-height: 408px;
+
+    @media (max-width: $media-minW) {
+      height: 353.6px;
+    }
+  }
+
+  &__content {
+    width: 430px;
+
+    @media (max-width: $media-minW) {
+      width: 100%;
+      padding: 0 15px;
+    }
+
+    &__title {
+      margin-bottom: 1.6rem;
+
+      @media (max-width: $media-minW) {
+        max-width: 230px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    &__description {
+      margin-bottom: 1.6rem;
+      line-height: 160%;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.pets {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5.4rem 0 6.67rem 0;
+
+  @media (max-width: $media-minW) {
+    padding-top: 2.8rem;
+    padding-bottom: 2.8rem;
+  }
+
+  &__title {
+    max-width: 400px;
+    text-align: center;
+
+    @media (max-width: $media-minW) {
+      max-width: 300px;
+    }
+  }
+}
+
+.slider {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  margin: 4rem 0;
+  padding: 0 2.5%;
+
+  @media (max-width: $media-midW) {
+    padding: 0 2.6%;
+  }
+  @media (max-width: $media-minW) {
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 2.8rem;
+    margin-bottom: 2.9rem;
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-around;
+    width: 1080px;
+    list-style: none;
+
+    @media (max-width: $media-midW) {
+      justify-content: space-between;
+      width: 580px;
+    }
+    @media (max-width: $media-minW) {
+      order: -2;
+      justify-content: center;
+      width: 100%;
+      margin-bottom: 1.33rem;
+    }
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 2rem;
+    background-color: $lightest-color;
+    border-radius: 9px;
+
+    &:last-child {
+      @media (max-width: $media-midW) {
+        display: none;
+      }
+    }
+
+    &:nth-child(n + 2) {
+      @media (max-width: $media-minW) {
+        display: none;
+      }
+    }
+
+    &:hover {
+      background-color: #ffffff;
+      box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
+    }
+
+    &__img {
+      height: 270px;
+      width: auto;
+      margin: 0 auto;
+      line-height: 100%;
+      overflow: hidden;
+    }
+
+    &__name {
+      margin: 2rem 0;
+    }
+  }
+
+  .btn--secondary--arrow {
+    @media (max-width: $media-minW) {
+      margin: 0 20px;
+    }
+  }
+}
+
+.help {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5.4rem;
+  padding-bottom: 6.8rem;
+
+  @media (max-width: $media-minW) {
+    padding-top: 2.8rem;
+    padding-bottom: 2.75rem;
+  }
+
+  &__title {
+    max-width: 310px;
+    text-align: center;
+
+    @media (max-width: $media-minW) {
+      max-width: 230px;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 3.77rem;
+    margin-top: 4rem;
+    list-style: none;
+
+    @media (max-width: $media-minW) {
+      justify-content: space-between;
+      gap: 2rem;
+      margin-top: 2.8rem;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+
+    &__item {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      height: 7.4rem;
+      margin: 0 4rem;
+      word-wrap: normal;
+
+      @media (max-width: $media-midW) {
+        width: 170px;
+        margin: 0 2rem;
+      }
+      @media (max-width: $media-minW) {
+        width: 130px;
+        height: 87px;
+        margin: 0;
+      }
+    }
+
+    &__icon {
+      width: 4rem;
+      height: 4rem;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+
+      @media (max-width: $media-minW) {
+        width: 3.33rem;
+        height: 3.33rem;
+      }
+
+      &--food {
+        background-image: url(../../assets/icons/help_icons_food.svg);
+      }
+      &--transportation {
+        background-image: url(../../assets/icons/help_icon_transportation.svg);
+      }
+      &--toys {
+        background-image: url(../../assets/icons/help_icon_toys.svg);
+      }
+      &--bowls {
+        background-image: url(../../assets/icons/help_icon_bowls-and-cups.svg);
+      }
+      &--shampoos {
+        background-image: url(../../assets/icons/help_icon_shampoos.svg);
+      }
+      &--vitamins {
+        background-image: url(../../assets/icons/help_icon_vitamins.svg);
+      }
+      &--medicines {
+        background-image: url(../../assets/icons/help_icon_medicines.svg);
+      }
+      &--collars {
+        background-image: url(../../assets/icons/help_icon_collars-leashes.svg);
+      }
+      &--sleeping {
+        background-image: url(../../assets/icons/help_icon_sleeping-area.svg);
+      }
+    }
+
+    &__title {
+      @media (max-width: $media-minW) {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+.donation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 995px;
+  margin: 0 auto;
+  padding-top: 5.4rem;
+  padding-bottom: 6.75rem;
+  column-gap: 2rem;
+
+  @media (max-width: $media-midW) {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 4rem;
+  }
+  @media (max-width: $media-minW) {
+    padding-top: 2.8rem;
+    padding-bottom: 2.8rem;
+    gap: 2.8rem;
+  }
+
+  &__img-wrapper {
+    max-height: 260px;
+
+    @media (max-width: $media-minW) {
+      height: 135.2px;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.34rem;
+    max-width: 380px;
+
+    @media (max-width: $media-minW) {
+      align-items: center;
+      row-gap: 1.6rem;
+      padding-left: 0.67rem;
+      padding-right: 0.67rem;
+    }
+
+    &__title {
+      width: 20rem;
+
+      @media (max-width: $media-minW) {
+        max-width: 225px;
+      }
+    }
+
+    &__subtitle {
+      @media (max-width: $media-minW) {
+        @include regular;
+        text-align: center;
+        letter-spacing: normal;
+        color: $secondary-color;
+      }
+    }
+
+    &__card-number {
+      position: relative;
+      padding: 0.7rem 0.95rem 0.7rem 4rem;
+      width: fit-content;
+      word-wrap: normal;
+      background-color: $primary-theme-color;
+      border-radius: 9px;
+
+      &:hover {
+        background-color: $secondary-theme-color;
+      }
+
+      @media (max-width: $media-minW) {
+        padding: 0.85rem 1.1rem 0.9rem 3.8rem;
+        font-size: 1rem;
+      }
+
+      &::before {
+        content: url(../../assets/icons/credit-card.svg);
+        position: absolute;
+        left: 0.9rem;
+        top: 0.66rem;
+      }
+    }
+
+    &__legal-info {
+      @include pLight;
+
+      @media (max-width: $media-minW) {
+        margin-top: -4px;
+        text-align: justify;
+      }
+    }
+  }
+}

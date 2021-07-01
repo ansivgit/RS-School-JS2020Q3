@@ -1,0 +1,156 @@
+//- colors
+
+//! DELETE
+$red: 1px solid red;
+$blue: 1px solid blue;
+$green: 1px solid green;
+
+//* text, borders, etc
+$primary-color: #4C4C4C;
+$secondary-color: #545454;
+$dark-color: #292929;
+$light-color: #B2B2B2;
+$lightest-color: #FAFAFA;
+
+//* theme colors
+$primary-theme-color: #F1CDB3;
+$secondary-theme-color: #FDDCC4;
+$light-theme-color: #CDCDCD;
+
+//* types
+$primary-type: Arial, sans-serif;
+$secondary-type: Georgia, "Times New Roman", serif;
+
+//* gradients
+$header-background: radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%),
+                    linear-gradient(0deg, #211F20, #211F20);
+$footer-background: radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%),
+                    linear-gradient(0deg, #211F20, #211F20);
+
+
+//* базовые размеры шрифтов
+$font-body: 15;
+$font-h1: 32;
+$font-h2: 44;
+$font-h2mob: 25;
+$font-h3: 35;
+$font-h3mob: 25;
+$font-h4: 20;
+$font-h5: 15;
+$font-button: 17;
+$font-s: 12;
+
+//* брейкпоинты
+//$media-maxW: 1223px; // уменьшается только второстепенный шрифт и высота строки в футере
+$media-midW: 1023px; // переключаемся на планшетную версию
+$media-minW: 767px; // переключаемся на мобильную версию
+//$media-sMinW: 560px; // убираем логотип
+//$media-uMinW: 410px; // под узкие мобильные экраны - сужаем карточку
+
+@mixin head {
+  font-family: $secondary-type;
+  font-style: normal;
+  font-weight: normal;
+  color: $secondary-color;
+}
+
+h1,
+.head1 {
+  @include head;
+}
+
+@mixin head2 {
+  @include head;
+  font-size: #{$font-h2/$font-body}rem;
+}
+
+h2,
+.head2 {
+  @include head2;
+
+  @media (max-width: $media-minW) {
+    font-size: #{$font-h2mob/$font-body}rem;
+    text-align: center;
+    letter-spacing: 0.06em;
+  }
+}
+
+@mixin head3 {
+  @include head;
+  font-size: #{$font-h3/$font-body}rem;
+  line-height: 130%;
+  letter-spacing: 0.06em;
+
+  @media (max-width: $media-minW) {
+    font-size: #{$font-h3mob/$font-body}rem;
+    text-align: center;
+  }
+}
+
+h3,
+.head3 {
+  @include head3;
+}
+
+@mixin head4 {
+  @include head;
+  font-size: #{$font-h4/$font-body}rem;
+  letter-spacing: 0.06em;
+}
+
+h4,
+.head4 {
+  @include head4;
+}
+
+@mixin head5 {
+  @include head;
+  font-size: #{$font-h5/$font-body}rem;
+  line-height: 110%;
+  letter-spacing: 0.06em;
+}
+
+h5,
+.head5 {
+  @include head5;
+}
+
+@mixin regular {
+  font-family: $primary-type;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  color: $primary-color;
+}
+
+body {
+  @include regular;
+}
+
+@mixin buttonTitle {
+  font-family: $secondary-type;
+  font-style: normal;
+  font-weight: normal;
+  font-size: #{$font-button/$font-body}rem;
+  line-height: 130%;
+  letter-spacing: 0.06em;
+  color: $dark-color;
+}
+
+@mixin pLight {
+  font-family: $primary-type;
+  font-style: italic;
+  font-weight: normal;
+  font-size: #{$font-s/$font-body}rem;
+  line-height: 150%;
+  color: $light-color;
+}
+
+@mixin links {
+  font-family: $primary-type;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 160%;
+  color: $light-theme-color;
+}
