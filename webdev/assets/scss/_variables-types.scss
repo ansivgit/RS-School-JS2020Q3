@@ -1,0 +1,74 @@
+// main type-family Roboto
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+//- colors
+
+//* text, borders, etc
+$primary-color: #4e4e4e;
+$secondary-color: #373737;
+$accent-color: #fff;
+
+//* theme colors
+$primary-theme-color: #00afdb;
+$secondary-theme-color: #009cc2;
+
+//* types
+$primary-type: 'Roboto', Arial, sans-serif;
+
+//* базовые размеры шрифтов
+$font-body: 14rem;
+$font-h1: 32rem;
+$font-h2: 24rem;
+$font-h3: 16rem;
+
+@mixin head1 {
+  font-family: $primary-type;
+}
+
+h1,
+.head1 {
+  @include head1;
+}
+
+@mixin head2 {
+  font-family: $primary-type;
+  font-style: normal;
+  font-weight: bold;
+  font-size: #{$font-h2/$font-body}rem;
+  line-height: 28px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: $secondary-color;
+}
+
+h2,
+.head2 {
+  @include head2;
+}
+
+@mixin head3 {
+  font-family: $primary-type;
+  font-style: normal;
+  font-weight: 500;
+  font-size: #{$font-h3/$font-body}rem;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  color: $secondary-color;
+}
+
+h3,
+.head3 {
+  @include head3;
+}
+
+@mixin regular {
+  font-family: $primary-type;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  color: $primary-color;
+}
+
+body {
+  @include regular;
+}
