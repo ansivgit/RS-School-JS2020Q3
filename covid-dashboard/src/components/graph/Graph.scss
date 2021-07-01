@@ -1,0 +1,29 @@
+@import "./../../scss/variables";
+
+.graph {
+  display: flex;
+  flex-direction: column;
+  grid-row: 2 / 3;
+  grid-column: 3 / 4;
+
+  &__block {
+    @media (max-width: $media-midW) {
+      width: 432px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+rect {
+  fill: $s-dark-theme-color;
+}
+
+.tick line {
+  stroke: $secondary-text-color;
+  opacity: 0.5;
+}
+
+.tabs-container {
+  margin-top: auto;
+}

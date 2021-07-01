@@ -1,0 +1,51 @@
+@import "./../../scss/variables";
+
+.search {
+  display: flex;
+  flex-direction: column;
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+
+  &__title {
+    margin-bottom: 10px;
+  }
+
+  &__list {
+    list-style: none;
+    overflow-y: scroll;
+    flex: 1 0 1px;
+
+    @media (max-width: $media-midW) {
+      flex: 0 0 auto;
+      max-height: 50vh;
+    }
+
+    &::-webkit-scrollbar {
+      width: 10px;
+      background-color: rgb(187, 93, 93);
+      border-radius: 100px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: brown;
+      border-radius: 100px;
+    }
+  }
+}
+
+.fullscreen--active .search__list {
+  max-height: 70vh;
+}
+
+.simple-keyboard {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 30;
+  color: $p-dark-theme-color;
+
+  &--active {
+    display: block;
+  }
+}

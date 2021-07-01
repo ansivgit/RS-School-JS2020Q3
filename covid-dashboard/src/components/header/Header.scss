@@ -1,0 +1,32 @@
+@import "./../../scss/variables";
+
+.header {
+  width: 100%;
+  background-color: $p-dark-theme-color;
+
+  .content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+  }
+
+  &__info {
+    color: $secondary-text-color;
+  }
+
+  &__button {
+    justify-self: end;
+    border: none;
+    background-color: $p-light-theme-color;
+    color: $primary-text-color;
+    padding: 10px;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: $primary-theme-color;
+    }
+  }
+}

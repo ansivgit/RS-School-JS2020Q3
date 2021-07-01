@@ -1,0 +1,41 @@
+@import "./../../scss/variables";
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  background-color: $p-dark-theme-color;
+
+  .content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+  }
+
+  &__RSS-logo {
+    background-color: #ffffff;
+  }
+
+  &__authors {
+    color: $secondary-text-color;
+
+    &--pers {
+      color: #ffffff;
+      text-decoration: none;
+
+      &:hover {
+        color: $primary-text-color;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.rss-logo__img {
+  height: 2rem;
+  width: auto;
+}
